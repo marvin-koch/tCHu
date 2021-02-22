@@ -25,19 +25,32 @@ public enum Card {
     public static final int COUNT = ALL.size();
     public static final List<Card> CARS = ALL.subList(0, 7);
 
+    /**
+     * Constructeur de Card
+     * @param color
+     */
     private Card(Color color){
         this.color = color;
     }
 
+    /**
+     * Retourne la Carte a laquel correspond la couleur
+     * @param color
+     * @return la carte
+     */
     public static Card of(Color color){
         for(int i = 0; i < COUNT; i++){
-            if (color == ALL.get(i).color()){
+            if (color.equals(ALL.get(i).color())){
                 return ALL.get(i);
             }
         }
         return null;
     }
 
+    /**
+     * Retourne la couleur
+     * @return la couleur
+     */
     public Color color(){
         return color;
     }
