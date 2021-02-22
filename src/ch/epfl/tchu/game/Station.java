@@ -8,7 +8,7 @@ import ch.epfl.tchu.Preconditions;
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
  */
-public class Station {
+public final class Station {
     private final String name;
     private final int id; // entre 0 et 50
 

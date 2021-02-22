@@ -22,10 +22,5 @@ public final class Preconditions{
         }
     }
 
-    public static void checkNull(boolean shouldBeTrue){
-        if(!shouldBeTrue){
-            throw new NullPointerException();
-        }
-    }
 
 }
