@@ -1,9 +1,34 @@
 package ch.epfl.tchu.game;
-
+/**
+ * Class Station
+ *
+ * @author Shangeeth Poobalasingam (329307)
+ * @author Marvin Koch (324448)
+ */
 public class Station {
-    public Station(int id, String name){
+    private final String name;
+    private final int id; // entre 0 et 50
 
+    public Station(int id, String name){
+        if(id < 0 || id >50){ // je sais pas si le > 50 je dois le mettre
+            throw new IllegalArgumentException();
+        }
+        this.name = name;
+        this.id = id;
     }
 
+    public int id(){
+        return id;
+    }
 
+    public String name(){
+        return name;
+    }
+
+    @Override
+    public String toString(){
+        return name;
+    }
 }
+
+
