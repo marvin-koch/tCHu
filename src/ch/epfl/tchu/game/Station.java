@@ -12,24 +12,39 @@ public final class Station {
     private final String name;
     private final int id; // entre 0 et 50
 
+
+    /**
+     *
+     * @param id numéro d'identification de la gare
+     * @param name nom de la gare
+     * @throws IllegalArgumentException
+     */
     public Station(int id, String name){
-        /*
-        if(id < 0 || id >50){ // je sais pas si le > 50 je dois le mettre
-            throw new IllegalArgumentException();
-        }*/
-        Preconditions.checkArgument(id >= 0 && id <=50);
+        Preconditions.checkArgument(id >= 0);
         this.name = name;
         this.id = id;
     }
 
+    /**
+     * Retourne id
+     * @return id
+     */
     public int id(){
         return id;
     }
 
+    /**
+     * Retourne name
+     * @return name
+     */
     public String name(){
         return name;
     }
 
+    /**
+     * Retourne name
+     * @return name
+     */
     @Override
     public String toString(){
         return name;
