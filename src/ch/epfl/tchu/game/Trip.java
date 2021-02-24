@@ -42,7 +42,7 @@ public final class Trip {
      * points n'est pas strictement positif
      * @return liste contenant tout les trajets possibles
      */
-    public List<Trip> all(List<Station> from, List<Station> to, int points){
+    public static List<Trip> all(List<Station> from, List<Station> to, int points){
         List<Trip> trip = new ArrayList<>();
         Preconditions.checkArgument(!from.isEmpty());
         Preconditions.checkArgument(!to.isEmpty());
@@ -86,7 +86,7 @@ public final class Trip {
      * @param connectivity
      * @return le nombre de points
      */
-    public int point(StationConnectivity connectivity){
+    public int points(StationConnectivity connectivity){
         if(connectivity.connected(from,to)){
             return points;
         }else{

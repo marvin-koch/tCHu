@@ -17,41 +17,91 @@ public final class Ticket implements Comparable<Ticket>{
     private final List<Trip> trips;
     private final String text;
 
+    /**
+     * Contructeur primaire de Ticket
+     * @param trips liste de trips du billet
+     * @throws IllegalArgumentException si la liste de trips est vide
+     */
     Ticket(List<Trip> trips){
         Preconditions.checkArgument(!trips.isEmpty());
         boolean samefrom = true;
-        for (Trip trip: trips) {// trop de trip ?
-            Preconditions.checkArgument(trip.from().equals(trips.get(0).from()));
+        for (Trip trip: trips) {
+            Preconditions.checkArgument(trip
+                    .from()
+                    .name()
+                    .equals(trips.get(0).from().name()));
         }
         this.trips = new ArrayList<>(trips);
         text = computeText(trips);
     }
 
+    /**
+     * Constructeur secondaire de Ticket, utilisé s'il contient qu'un trajet
+     * @param from station de départ trajet
+     * @param to station d'arrivée trajet
+     * @param points nombre de points du trajet
+     */
     Ticket(Station from, Station to, int points){
         this(List.of(new Trip(from, to, points)));
     }
 
     @Override
     public int compareTo(Ticket that) {
-        return this.text().compareTo(that.text());
+        return this
+                .text()
+                .compareTo(that.text());
     }
 
+    /**
+     * Retourne la représentation textuelle
+     * @return text représentation textuelle
+     */
     public String text() {
         return text;
     }
 
-
+    /**
+     * Calcule et la représentation textuelle du billet
+     * @param trips liste des trajets
+     * @return le string qui représentent le billet
+     */
     private static String computeText(List<Trip> trips){
         if(trips.size() == 1){
             return trips.get(0).from() +" - "+ trips.get(0).to() +" ("+trips.get(0).points() +")";
         }else{
             TreeSet<String> tree = new TreeSet<>();
             for(Trip trip : trips){
-                tree.add(trip.to().name()+"("+trip.points()+")");
+                tree.add(trip.to().name()+" ("+trip.points()+")");
             }
             return String.format("%s - {%s}", trips.get(0).from().name(),
                     String.join(", ", tree));
         }
     }
 
+    /**
+     * Calcule et retourne le nombre de points du billet
+     * @param connectivity
+     * @return le nombre de points
+     */
+    public int points(StationConnectivity connectivity) {
+        int maximum = trips.get(0).points();
+        int minimum = Integer.MAX_VALUE;
+        boolean connected = false;
+        for (Trip trip : trips) {
+            if (trip.points(connectivity) > maximum) {
+                maximum = trip.points(connectivity);
+            }
+            if (trip.points() < minimum){
+                minimum = trip.points();
+            }
+            if (connectivity.connected(trip.from(), trip.to())){
+                connected = true;
+            }
+        }
+        if(connected){
+            return maximum;
+        }else{
+            return -minimum;
+        }
+    }
 }
