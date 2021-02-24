@@ -22,7 +22,7 @@ public final class Ticket implements Comparable<Ticket>{
      * @param trips liste de trips du billet
      * @throws IllegalArgumentException si la liste de trips est vide
      */
-    Ticket(List<Trip> trips){
+    public Ticket(List<Trip> trips){
         Preconditions.checkArgument(!trips.isEmpty());
         boolean samefrom = true;
         for (Trip trip: trips) {
@@ -41,7 +41,7 @@ public final class Ticket implements Comparable<Ticket>{
      * @param to station d'arrivée trajet
      * @param points nombre de points du trajet
      */
-    Ticket(Station from, Station to, int points){
+    public Ticket(Station from, Station to, int points){
         this(List.of(new Trip(from, to, points)));
     }
 
