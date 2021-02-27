@@ -47,10 +47,8 @@ public final class Trip {
         Preconditions.checkArgument(!from.isEmpty());
         Preconditions.checkArgument(!to.isEmpty());
         Preconditions.checkArgument(points>0);
-        for (Station stationfrom : from)
-        {
-            for (Station stationto : to)
-            {
+        for (Station stationfrom : from) {
+            for (Station stationto : to) {
                 trip.add(new Trip(stationfrom,stationto,points));
             }
         }

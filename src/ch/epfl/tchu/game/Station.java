@@ -42,7 +42,7 @@ public final class Station {
     }
 
     /**
-     * Retourne name
+     * Méthode to string qui retourne le nom quand la méthode print est invoquée
      * @return name
      */
     @Override
