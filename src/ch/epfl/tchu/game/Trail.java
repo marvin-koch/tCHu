@@ -28,23 +28,42 @@ public final class Trail {
     }
 
     public Trail longest(List<Route> routes){
-        List<Trail> trails = new ArrayList<>();
+        Trail longestTrail = null;
+        int longestLength = 0;
+        List<Trail> cs = new ArrayList<>();
         for(Route route : routes){
-            trails.add(new Trail(route.station1(), route.station2(), List.of(route)));
+            cs.add(new Trail(route.station1(), route.station2(), List.of(route)));
         }
-        List<Route> cs = new ArrayList(routes);
         if(routes.isEmpty()){
             return new Trail(null,null, null);
         }else{
             while(!cs.isEmpty()){
-                List<Route> routesVide = new ArrayList<>();
-                for(Trail trail : trails){
-
+                List<Trail> listeVide = new ArrayList<>();
+                for(Trail trail : cs) {
+                    for (Route route : routes) {
+                        if ((trail.station2.equals(route.station1()) || trail.station2.equals(route.station2())) && !trail.routes.contains(route)) {
+                            List<Route> newRoute = new ArrayList(trail.routes);
+                            newRoute.add(route);
+                            if(trail.station2.equals(route.station1())){
+                                listeVide.add(new Trail(trail.station1, route.station2(), newRoute));
+                            }else{
+                                listeVide.add(new Trail(trail.station1, route.station1(), newRoute));
+                            }
+                        }
+                    }
                 }
+               for(Trail trail : listeVide) {
+                   if(trail.length() > longestLength){
+                       longestTrail = trail;
+                       longestLength = trail.length();
+                   }
+               }
+               cs = new ArrayList<>(listeVide);
             }
         }
+        return longestTrail;
     }
-    
+
     public int length(){
         return length;
     }
