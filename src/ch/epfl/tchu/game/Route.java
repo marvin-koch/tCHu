@@ -76,8 +76,13 @@ public final class Route {
         }
     }
 
+    /**
+     * Retourne la liste de tous les ensemble de cartes qui pourraient étre joués pour (tenter de) s'emparer de la route,
+     * trié par ordre croissant de nombre de carte locomotive, puis par couleur
+     * @return
+     */
     public List<SortedBag<Card>> possibleClaimCard(){
-       List<SortedBag<Card>> list = new ArrayList<>();
+        List<SortedBag<Card>> list = new ArrayList<>();
         if(color == null){
             for(Card card : Card.CARS){
                 list.add(SortedBag.of(length, card));
@@ -88,16 +93,17 @@ public final class Route {
 
         if(level == Level.UNDERGROUND){
             if(color == null){
-                for(int i = 1; i <= length; i++){
+                for(int i = 1; i < length; i++){
                     for(Card card : Card.CARS){
                         list.add(SortedBag.of(length - i, card, i, Card.LOCOMOTIVE));
                     }
                 }
             }else{
-                for(int i = 1; i <= length; i++){
+                for(int i = 1; i < length; i++){
                     list.add(SortedBag.of(length - i, Card.of(color), i, Card.LOCOMOTIVE));
                 }
             }
+            list.add(SortedBag.of(2, Card.LOCOMOTIVE));
         }
         return list;
     }
@@ -108,8 +114,8 @@ public final class Route {
         if(claimCards.countOf(Card.LOCOMOTIVE) == claimCards.size() ){
             return drawnCards.countOf(Card.LOCOMOTIVE);
         }else{
-            Color claimColor;
-            for(int i = 1; i<= claimCards.size();i++){
+            Color claimColor = null;
+            for(int i = 0; i< claimCards.size();i++){
                 if(claimCards.get(i) != Card.LOCOMOTIVE){
                     claimColor = claimCards.get(i).color();
                 }

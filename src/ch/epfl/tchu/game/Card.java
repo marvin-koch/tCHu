@@ -23,7 +23,10 @@ public enum Card {
     private final Color color;
     public static final List<Card> ALL = List.of(Card.values());
     public static final int COUNT = ALL.size();
-    public static final List<Card> CARS = ALL.subList(0, 7);
+    /**
+     * Retourne une liste de toutes les cartes sauf Locomotive
+     */
+    public static final List<Card> CARS = List.of(BLACK, VIOLET, BLUE, GREEN, YELLOW, ORANGE, RED, WHITE);
 
     /**
      * Constructeur de Card

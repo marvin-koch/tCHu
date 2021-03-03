@@ -21,18 +21,24 @@ public final class Trail {
         this.station2 = station2;
         this.routes = routes;
         int lengthBuilder = 0;
-        for(int i = 0; i<= routes.size(); i++){
+        for(int i = 0; i < routes.size(); i++){
             lengthBuilder += routes.get(i).length();
         }
         length = lengthBuilder;
     }
 
-    public Trail longest(List<Route> routes){
+    /**
+     * Retourne le plus long chemin du réseau constitué des routes données
+     * @param routes
+     * @return le plus long Trail
+     */
+    public static Trail longest(List<Route> routes){
         Trail longestTrail = null;
         int longestLength = 0;
         List<Trail> cs = new ArrayList<>();
         for(Route route : routes){
             cs.add(new Trail(route.station1(), route.station2(), List.of(route)));
+            cs.add(new Trail(route.station2(), route.station1(), List.of(route)));
         }
         if(routes.isEmpty()){
             return new Trail(null,null, null);
@@ -42,7 +48,7 @@ public final class Trail {
                 for(Trail trail : cs) {
                     for (Route route : routes) {
                         if ((trail.station2.equals(route.station1()) || trail.station2.equals(route.station2())) && !trail.routes.contains(route)) {
-                            List<Route> newRoute = new ArrayList(trail.routes);
+                            List<Route> newRoute = new ArrayList<>(trail.routes);
                             newRoute.add(route);
                             if(trail.station2.equals(route.station1())){
                                 listeVide.add(new Trail(trail.station1, route.station2(), newRoute));
@@ -88,11 +94,19 @@ public final class Trail {
     public String toString() {
         //return station1.toString()+" - "+ station2.toString();
         String string = station1.toString();
-        for(int i = 0; i<= routes.size(); i++){
+        Station actualStation = station1;
+        for(int i = 0; i < routes.size(); i++){
             string += " - ";
-            string += routes.get(i).station2().toString();
+            if(routes.get(i).station1().equals(actualStation)){
+                string += routes.get(i).station2().toString();
+                actualStation = routes.get(i).station2();
+            }else{
+                string += routes.get(i).station1().toString();
+                actualStation = routes.get(i).station1();
+            }
+
         }
-        string+= " ("+length+")";
+        string+= " (" + length + ")";
         return string;
 
     }
