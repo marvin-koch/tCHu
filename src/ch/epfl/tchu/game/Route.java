@@ -81,7 +81,7 @@ public final class Route {
      * trié par ordre croissant de nombre de carte locomotive, puis par couleur
      * @return
      */
-    public List<SortedBag<Card>> possibleClaimCard(){
+    public List<SortedBag<Card>> possibleClaimCards(){
         List<SortedBag<Card>> list = new ArrayList<>();
         if(color == null){
             for(Card card : Card.CARS){

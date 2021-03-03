@@ -66,7 +66,7 @@ public class RouteTest {
             builder2.add(Card.LOCOMOTIVE);
             expected.add(builder2.build());
         }
-        assertEquals(expected, ChMap.routes().get(41).possibleClaimCard());
+        assertEquals(expected, ChMap.routes().get(41).possibleClaimCards());
     }
 
     @Test
@@ -75,14 +75,14 @@ public class RouteTest {
         expected.add(SortedBag.of(2, Card.BLACK));
         expected.add(SortedBag.of(1, Card.BLACK, 1, Card.LOCOMOTIVE));
         expected.add(SortedBag.of(2, Card.LOCOMOTIVE));
-        assertEquals(expected, ChMap.routes().get(38).possibleClaimCard());
+        assertEquals(expected, ChMap.routes().get(38).possibleClaimCards());
     }
 
     @Test
     void testPossibleClaimCardOvergroundGREEN4(){
         List<SortedBag<Card>> expected = new ArrayList<>();
         expected.add(SortedBag.of(4, Card.GREEN));
-        assertEquals(expected, ChMap.routes().get(65).possibleClaimCard());
+        assertEquals(expected, ChMap.routes().get(65).possibleClaimCards());
     }
 
 
