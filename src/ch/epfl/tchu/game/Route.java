@@ -103,7 +103,7 @@ public final class Route {
                     list.add(SortedBag.of(length - i, Card.of(color), i, Card.LOCOMOTIVE));
                 }
             }
-            list.add(SortedBag.of(2, Card.LOCOMOTIVE));
+            list.add(SortedBag.of(length, Card.LOCOMOTIVE));
         }
         return list;
     }

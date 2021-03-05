@@ -47,6 +47,12 @@ public class RouteTest {
     }
 
     @Test
+    void testColorNull(){
+        Route route = new Route("test",ChMap.routes().get(0).station1(),ChMap.routes().get(0).station2(),ChMap.routes().get(0).length(), Route.Level.OVERGROUND,null);
+        assertNull(route.color());
+    }
+
+    @Test
     void testStationOpposite(){
         assertThrows(IllegalArgumentException.class,() -> {
             route.stationOpposite(gare);

@@ -1,6 +1,7 @@
 package ch.epfl.tchu.game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -20,11 +21,13 @@ public final class Trail {
         this.station1 = station1;
         this.station2 = station2;
         this.routes = routes;
-        int lengthBuilder = 0;
-        for(int i = 0; i < routes.size(); i++){
-            lengthBuilder += routes.get(i).length();
+        int length = 0;
+        if(!routes.isEmpty()){
+            for (Route route : routes) {
+                length += route.length();
+            }
         }
-        length = lengthBuilder;
+        this.length = length;
     }
 
     /**
@@ -41,7 +44,7 @@ public final class Trail {
             cs.add(new Trail(route.station2(), route.station1(), List.of(route)));
         }
         if(routes.isEmpty()){
-            return new Trail(null,null, null);
+            return new Trail(null,null, new ArrayList<Route>());
         }else{
             while(!cs.isEmpty()){
                 List<Trail> listeVide = new ArrayList<>();
@@ -75,41 +78,31 @@ public final class Trail {
     }
 
     public Station station1(){
-        if(length == 0){
-            return null;
-        }else {
-            return station1;
-        }
+        return length == 0 ? null : station1;
     }
     public Station station2(){
-        if(length == 0){
-            return null;
-        }else {
-            return station2;
-        }
+        return length == 0 ? null : station2;
     }
 
 
     @Override
     public String toString() {
-        //return station1.toString()+" - "+ station2.toString();
-        String string = station1.toString();
-        Station actualStation = station1;
-        for(int i = 0; i < routes.size(); i++){
-            string += " - ";
-            if(routes.get(i).station1().equals(actualStation)){
-                string += routes.get(i).station2().toString();
-                actualStation = routes.get(i).station2();
-            }else{
-                string += routes.get(i).station1().toString();
-                actualStation = routes.get(i).station1();
+        String string = "Empty Trail";
+        if(!routes.isEmpty()){
+            string = station1.toString();
+            Station actualStation = station1;
+            for(Route route : routes){
+                string += " - ";
+                if(route.station1().equals(actualStation)){
+                    string += route.station2().toString();
+                    actualStation = route.station2();
+                }else{
+                    string += route.station1().toString();
+                    actualStation = route.station1();
+                }
             }
-
         }
-        string+= " (" + length + ")";
+        string += " (" + length + ")";
         return string;
-
     }
-
-
 }
