@@ -17,6 +17,13 @@ public final class Trail {
     private final Station station2;
     private final List<Route> routes;
 
+
+    /**
+     * Constructeur privée de Trail
+     * @param station1
+     * @param station2
+     * @param routes
+     */
     private Trail(Station station1, Station station2, List<Route> routes) {
         this.station1 = station1;
         this.station2 = station2;
@@ -73,18 +80,34 @@ public final class Trail {
         return longestTrail;
     }
 
+    /**
+     * Retourne la longueur du chemin
+     * @return length
+     */
     public int length(){
         return length;
     }
 
+    /**
+     * Retourne la première gare du chemian, ou null ssi le chemin est de longueur zéro
+     * @return station 2
+     */
     public Station station1(){
         return length == 0 ? null : station1;
     }
+
+    /**
+     * Retourne la deuxième gare du chemin, ou null ssi le chemin est de longueur zéro
+     * @return station 1
+     */
     public Station station2(){
         return length == 0 ? null : station2;
     }
 
-
+    /**
+     * Retourne la représentation textuelle du chemin
+     * @return String de la représentation textuelle
+     */
     @Override
     public String toString() {
         String string = "Empty Trail";

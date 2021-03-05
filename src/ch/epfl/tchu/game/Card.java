@@ -21,7 +21,13 @@ public enum Card {
     LOCOMOTIVE(null);
 
     private final Color color;
+    /**
+     * Retourne une liste de toutes les cartes
+     */
     public static final List<Card> ALL = List.of(Card.values());
+    /**
+     * Retourne le nombre de carte
+     */
     public static final int COUNT = ALL.size();
     /**
      * Retourne une liste de toutes les cartes sauf Locomotive
