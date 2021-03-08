@@ -26,7 +26,7 @@ public final class Route {
      */
     public enum Level{
         OVERGROUND,
-        UNDERGROUND;
+        UNDERGROUND
     }
 
     /**
@@ -162,11 +162,11 @@ public final class Route {
      * @param claimCards cartes posé initialement par le joueur
      * @param drawnCards les trois cartes tirées du sommet de la pioche
      * @throws IllegalArgumentException si la route à la route à llaquelle on l'applique n'est pass un tunnel,
-     * ou si drwanCards ne contient pas exactement 3 cartes
+     * ou si drawnCards ne contient pas exactement 3 cartes
      * @return les nombre de cartes additionnelles
      */
     public int additionalClaimCardsCount(SortedBag<Card> claimCards, SortedBag<Card> drawnCards){
-        Preconditions.checkArgument(drawnCards.size()==3);
+        Preconditions.checkArgument(drawnCards.size()==Constants.ADDITIONAL_TUNNEL_CARDS);
         Preconditions.checkArgument(this.level() == Level.UNDERGROUND);
         if(claimCards.countOf(Card.LOCOMOTIVE) == claimCards.size() ){
             return drawnCards.countOf(Card.LOCOMOTIVE);
