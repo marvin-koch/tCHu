@@ -61,7 +61,7 @@ public final class Info {
      * @param points
      * @return String
      */
-    public String draw(List<String> playerNames, int points){
+    public static String draw(List<String> playerNames, int points){
         return String.format(DRAW, playerNames.get(0)+ AND_SEPARATOR +playerNames.get(1),points );
     }
 
