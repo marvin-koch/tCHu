@@ -35,5 +35,15 @@ public class DeckTest {
         assertEquals(cards, deck.withoutTopCards(3).topCards(2));
     }
 
+    @Test
+    void withoutTopCardsthrowsIA(){
+       assertThrows(IllegalArgumentException.class, () ->{
+           deck.withoutTopCards(7);
+       });
+        assertThrows(IllegalArgumentException.class, () ->{
+            deck.withoutTopCards(-1);
+        });
+    }
+
 
 }

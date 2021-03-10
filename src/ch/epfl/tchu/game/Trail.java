@@ -43,12 +43,17 @@ public final class Trail {
      * @return le plus long Trail
      */
     public static Trail longest(List<Route> routes){
-        Trail longestTrail = null;
+        Trail longestTrail = new Trail(null,null, new ArrayList<Route>());
         int longestLength = 0;
         List<Trail> cs = new ArrayList<>();
         for(Route route : routes){
             cs.add(new Trail(route.station1(), route.station2(), List.of(route)));
             cs.add(new Trail(route.station2(), route.station1(), List.of(route)));
+        }
+        for(Trail trail : cs){
+           if(longestTrail.length() < trail.length()){
+               longestTrail = trail;
+           }
         }
         if(routes.isEmpty()){
             return new Trail(null,null, new ArrayList<Route>());

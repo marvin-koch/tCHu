@@ -43,15 +43,16 @@ public final class CardState extends PublicCardState{
 
 
     /**
-     * Retourne un ensemble de cartes identique au récepteur (this), si ce n'est que la carte face visible d'index slot a été remplacée par celle se trouvant au sommet de la pioche, qui en est du même coup retirée 
+     * Retourne un ensemble de cartes identique au récepteur (this), si ce n'est que la carte face visible d'index slot a été remplacée par celle se trouvant au sommet de la pioche, qui en est du même coup retirée.
      * @param slot
      * @return CardState
      */
     public CardState withDrawnFaceUpCard(int slot){
         Objects.checkIndex(slot,Constants.FACE_UP_CARDS_COUNT);
         Preconditions.checkArgument(!pioche.isEmpty());
-        faceUpCards().set(slot,pioche.topCard());
-        return new CardState(faceUpCards(),pioche.withoutTopCard(),discards);
+        List<Card> faceUp = faceUpCards();
+        faceUp.set(slot,pioche.topCard());
+        return new CardState(faceUp,pioche.withoutTopCard(),discards);
     }
 
     /**
@@ -70,7 +71,7 @@ public final class CardState extends PublicCardState{
      */
     public CardState withoutTopDeckCard(){
         Preconditions.checkArgument(!pioche.isEmpty());
-        return new CardState(faceUpCards(),pioche.withoutTopCard(),SortedBag.of());
+        return new CardState(faceUpCards(),pioche.withoutTopCard(),discards);
 
     }
 
