@@ -17,7 +17,7 @@ public class InfoTest {
         build.add(1, Card.LOCOMOTIVE);
         SortedBag<Card> bag = build.build();
         Info info = new Info("Marvin");
-        assertEquals(String.format(StringsFr.CLAIMED_ROUTE,"Marvin","Martigny - Sion","2 vertes et 1 locomotive"), info.claimedRoute(ChMap.routes().get(64),bag));
+        assertEquals(String.format(StringsFr.CLAIMED_ROUTE,"Marvin","Martigny – Sion","2 vertes et 1 locomotive"), info.claimedRoute(ChMap.routes().get(64),bag));
     }
 
 
