@@ -6,11 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PublicCardStateTest {
-    List<Card> Cards_5 = new ArrayList<>();
-    Cards_5.
-
     @Test
     void testConstructeur(){
+        List<Card> cards5= new ArrayList<>();
+        cards5.add(Card.BLACK);
+        cards5.add(Card.BLACK);
+        cards5.add(Card.LOCOMOTIVE);
+        cards5.add(Card.BLACK);
+        cards5.add(Card.BLUE);
+
 
     }
 
