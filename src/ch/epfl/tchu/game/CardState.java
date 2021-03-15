@@ -24,7 +24,7 @@ public final class CardState extends PublicCardState{
      * @param pioche
      * @param discards
      */
-    private CardState(List<Card> faceUpCards, Deck<Card> pioche , SortedBag<Card> discards){
+     private CardState(List<Card> faceUpCards, Deck<Card> pioche , SortedBag<Card> discards){
         super(faceUpCards,pioche.size(), discards.size());
         this.pioche = pioche;
         this.discards = discards;

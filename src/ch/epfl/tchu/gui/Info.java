@@ -18,7 +18,7 @@ import static ch.epfl.tchu.gui.StringsFr.*;
  * @author Marvin Koch (324448)
  */
 public final class Info {
-    final String playerName;
+    private final String playerName;
     public Info(String playerName){
         this.playerName = playerName;
     }
