@@ -35,7 +35,7 @@ public final class PlayerState extends PublicPlayerState{
      */
     public static PlayerState initial(SortedBag<Card> initialCards){
         Preconditions.checkArgument(initialCards.size() == 4);
-        return  new PlayerState(SortedBag.of(),initialCards, Collections.EMPTY_LIST);
+        return  new PlayerState(SortedBag.of(),initialCards, Collections.emptyList());
     }
 
     /**
@@ -89,13 +89,29 @@ public final class PlayerState extends PublicPlayerState{
      */
     public boolean canClaimRoute(Route route){
         if(route.length()> carCount()) {return false;}
-
         for (SortedBag<Card> bag : route.possibleClaimCards()) {
-            if(routes().contains(bag)){
+            if(cards().contains(bag)){
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * retourne la liste de tous les ensembles de cartes que le joueur pourrait utiliser pour prendre possession de la route donnée,
+     * @param route
+     * @throws IllegalArgumentException si le joueur n'a pas assez de wagons pour s'emparer de la route
+     * @return List
+     */
+    public List<SortedBag<Card>> possibleClaimCards(Route route){
+        Preconditions.checkArgument(carCount()>= route.length());// pas sûr de ça
+        List<SortedBag<Card>> sortedBagList = new ArrayList<>();
+        for (SortedBag<Card> bag : route.possibleClaimCards()) {
+            if(cards().contains(bag)){
+                sortedBagList.add(bag);
+            }
+        }
+        return sortedBagList;
     }
 
 
@@ -113,17 +129,17 @@ public final class PlayerState extends PublicPlayerState{
     public List<SortedBag<Card>> possibleAdditionalCards(int additionalCardsCount, SortedBag<Card> initialCards, SortedBag<Card> drawnCards){
         Preconditions.checkArgument(1<= additionalCardsCount && additionalCardsCount <= 3);
         Preconditions.checkArgument(!initialCards.isEmpty());
-        int differentCard = 0;
+        int nbrOfDifferentColor = 0;
         Color claimColor = null;
         for (Card card: Card.ALL) {
             if(initialCards.contains(card)){
-                differentCard++;
+                nbrOfDifferentColor++;
             }
             if(card.color() != null){
                 claimColor = card.color();
             }
         }
-        Preconditions.checkArgument(differentCard <=2);
+        Preconditions.checkArgument(nbrOfDifferentColor <=2);
         Preconditions.checkArgument(drawnCards.size() == Constants.ADDITIONAL_TUNNEL_CARDS);
 
         SortedBag<Card> cardsWithoutInitialCards = cards().difference(initialCards);
