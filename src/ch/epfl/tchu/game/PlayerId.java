@@ -1,0 +1,37 @@
+package ch.epfl.tchu.game;
+
+import java.util.List;
+
+/**
+ * Type énuméré PlayerId
+ *
+ * @author Shangeeth Poobalasingam (329307)
+ * @author Marvin Koch (324448)
+ */
+public enum PlayerId {
+    PLAYER_1,
+    PLAYER_2;
+
+    /**
+     * Retourne une liste de tout les joueurs
+     */
+    public static final List<PlayerId> ALL = List.of(PlayerId.values());
+    /**
+     * Retourne le nombre de joueur
+     */
+    public static final int COUNT = ALL.size();
+
+
+    /**
+     * retourne l'identité du joueur qui suit celui auquel on l'applique, c-à-d PLAYER_2 pour PLAYER_1, et PLAYER_1 pour PLAYER_2
+     * @return PlayerId
+     */
+    public PlayerId next(){
+        if(this.equals(PLAYER_1)){
+            return PLAYER_2
+        }else {
+            return PLAYER_1
+        }
+    }
+}
+

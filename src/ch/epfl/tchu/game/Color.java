@@ -20,11 +20,11 @@ public enum Color {
     WHITE;
 
     /**
-     * Retourne une liste de toutee les couleurs
+     * Retourne une liste de toutes les couleurs
      */
     public static final List<Color> ALL = List.of(Color.values());
     /**
-     * Retourne le bombre de couleurs
+     * Retourne le nombre de couleurs
      */
     public static final int COUNT = ALL.size();
 
