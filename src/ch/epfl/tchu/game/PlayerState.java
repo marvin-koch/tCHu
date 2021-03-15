@@ -101,11 +101,13 @@ public final class PlayerState extends PublicPlayerState{
 
 
     /**
-     * retourne la liste de tous les ensembles de cartes que le joueur pourrait utiliser pour s'emparer d'un tunnel, trié par ordre croissant du nombre de cartes locomotives, sachant qu'il a initialement posé les cartes initialCards, que les 3 cartes tirées du sommet de la pioche sont drawnCards, et que ces dernières forcent le joueur à poser encore additionalCardsCount cartes
-     * @param additionalCardsCount
-     * @param initialCards
-     * @param drawnCards
-     * @throws IllegalArgumentException si le nombre de cartes additionnelles n'est pas compris entre 1 et 3 (inclus), si l'ensemble des cartes initiales est vide ou contient plus de 2 types de cartes différents, ou si l'ensemble des cartes tirées ne contient pas exactement 3 cartes
+     * Retourne la liste de tous les ensembles de cartes que le joueur pourrait utiliser pour s'emparer d'un tunnel,
+     * trié par ordre croissant du nombre de cartes locomotives.
+     * @param additionalCardsCount nombres de cartes à jouer en plus
+     * @param initialCards cartes jouer par le joueur
+     * @param drawnCards cartes tirées du sommet
+     * @throws IllegalArgumentException si le nombre de cartes additionnelles n'est pas compris entre 1 et 3 (inclus), si l'ensemble des cartes initiales est vide ou contient plus de 2 types de cartes différents,
+     * ou si l'ensemble des cartes tirées ne contient pas exactement 3 cartes
      * @return
      */
     public List<SortedBag<Card>> possibleAdditionalCards(int additionalCardsCount, SortedBag<Card> initialCards, SortedBag<Card> drawnCards){

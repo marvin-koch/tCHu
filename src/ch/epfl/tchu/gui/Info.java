@@ -19,9 +19,21 @@ import static ch.epfl.tchu.gui.StringsFr.*;
  */
 public final class Info {
     private final String playerName;
+
+    /**
+     * Constructeur de Info
+     * @param playerName
+     */
     public Info(String playerName){
         this.playerName = playerName;
     }
+
+    /**
+     * Retourne le nom de la carte en sachant la carte et ça multiplicté
+     * @param card
+     * @param count
+     * @return nom de la carte en string
+     */
     public static String cardName(Card card, int count){
         String name;
         switch(card){

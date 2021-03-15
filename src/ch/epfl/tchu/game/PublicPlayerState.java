@@ -23,7 +23,7 @@ public class PublicPlayerState {
      * @throws IllegalArgumentException si le nombre de billets ou le nombre de cartes est strictement négatif (< 0)
      */
     public PublicPlayerState(int ticketCount, int cardCount, List<Route> routes){
-        Preconditions.checkArgument(ticketCount>= 0 &cardCount >= 0);
+        Preconditions.checkArgument(ticketCount>= 0 && cardCount >= 0);
         this.ticketCount = ticketCount;
         this.cardCount = cardCount;
         this.routes = routes;

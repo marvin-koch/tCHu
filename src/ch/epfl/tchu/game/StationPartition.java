@@ -50,19 +50,35 @@ public final class StationPartition implements StationConnectivity {
      */
     public final static class Builder{
         private int[] gares;
+
+        /**
+         * Constructeur du Bâtisseur
+         * @param stationCount
+         * @throws IllegalArgumentException si stationCount est négatif
+         */
        public Builder(int stationCount){
            Preconditions.checkArgument(stationCount >= 0) ;
            gares = new int[stationCount - 1];
            for(int i = 0; i < gares.length; ++i){
                gares[i] = i;
            }
-
        }
+
+        /**
+         * Méthode qui joint 2 stations dans la partition en choissiant l'un des deux représentants comme représentant du sous-ensemble joint
+         * @param s1
+         * @param s2
+         * @return la même instance de Builder
+         */
        public Builder connect(Station s1, Station s2){
            gares[representative(s1.id())] = s2.id();
            return this;
        }
 
+        /**
+         * Construit la partition aplatie a partir de la partition profonde
+         * @return StationPartition
+         */
        public StationPartition build(){
            for(int i = 0; i < gares.length; ++i){
                gares[i] = representative(gares[i]);
@@ -70,6 +86,11 @@ public final class StationPartition implements StationConnectivity {
            return new StationPartition(gares);
        }
 
+        /**
+         * Calcule le représentant de la partition d'une station
+         * @param id
+         * @return id du représentant
+         */
        private int representative(int id){
             while(id != gares[id]){
                 id = gares[id];
