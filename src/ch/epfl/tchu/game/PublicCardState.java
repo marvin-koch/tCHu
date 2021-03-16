@@ -3,7 +3,6 @@ package ch.epfl.tchu.game;
 import ch.epfl.tchu.Preconditions;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -55,7 +54,7 @@ public class PublicCardState {
 
     /**
      * Retourne la carte face visible à l'index donné
-     * @param slot
+     * @param slot index
      * @throws IndexOutOfBoundsException si cet index n'est pas compris entre 0 (inclus) et 5 (exclus)
      * @return Card
      */

@@ -3,7 +3,7 @@ package ch.epfl.tchu.game;
 import ch.epfl.tchu.Preconditions;
 import ch.epfl.tchu.SortedBag;
 
-import java.util.Collections;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -20,9 +20,9 @@ public final class CardState extends PublicCardState{
 
     /**
      * Constructeur privé de CardState
-     * @param faceUpCards
-     * @param pioche
-     * @param discards
+     * @param faceUpCards carte visible
+     * @param pioche pioche
+     * @param discards défausse
      */
      private CardState(List<Card> faceUpCards, Deck<Card> pioche , SortedBag<Card> discards){
         super(faceUpCards,pioche.size(), discards.size());
@@ -32,7 +32,7 @@ public final class CardState extends PublicCardState{
 
     /**
      * Retourne un état dans lequel les 5 cartes disposées faces visibles sont les 5 premières du tas donné, la pioche est constituée des cartes du tas restantes, et la défausse est vide
-     * @param deck
+     * @param deck tas de carte
      * @throws IllegalArgumentException si le tas donné contient moins de 5 cartes
      * @return CardState
      */
@@ -44,7 +44,7 @@ public final class CardState extends PublicCardState{
 
     /**
      * Retourne un ensemble de cartes identique au récepteur (this), si ce n'est que la carte face visible d'index slot a été remplacée par celle se trouvant au sommet de la pioche, qui en est du même coup retirée.
-     * @param slot
+     * @param slot emplacement
      * @return CardState
      */
     public CardState withDrawnFaceUpCard(int slot){
@@ -78,7 +78,7 @@ public final class CardState extends PublicCardState{
 
     /**
      * Retourne un ensemble de cartes identique au récepteur (this), si ce n'est que les cartes de la défausse ont été mélangées au moyen du générateur aléatoire donné afin de constituer la nouvelle pioche
-     * @param rng
+     * @param rng instance de la classe Random
      * @throws IllegalArgumentException si la pioche du récepteur n'est pas vide
      * @return CardState
      */
@@ -90,7 +90,7 @@ public final class CardState extends PublicCardState{
 
     /**
      * Retourne un ensemble de cartes identique au récepteur (this), mais avec les cartes données ajoutées à la défausse
-     * @param additionalDiscards
+     * @param additionalDiscards carte à ajouter à la défausse
      * @return CardState
      */
     public CardState withMoreDiscardedCards(SortedBag<Card> additionalDiscards){

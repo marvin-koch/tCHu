@@ -1,7 +1,6 @@
 package ch.epfl.tchu.game;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -20,9 +19,9 @@ public final class Trail {
 
     /**
      * Constructeur privée de Trail
-     * @param station1
-     * @param station2
-     * @param routes
+     * @param station1 station 1
+     * @param station2 station 2
+     * @param routes liste de route
      */
     private Trail(Station station1, Station station2, List<Route> routes) {
         this.station1 = station1;
@@ -39,7 +38,7 @@ public final class Trail {
 
     /**
      * Retourne le plus long chemin du réseau constitué des routes données
-     * @param routes
+     * @param routes liste de route
      * @return le plus long Trail
      */
     public static Trail longest(List<Route> routes){
@@ -115,22 +114,27 @@ public final class Trail {
      */
     @Override
     public String toString() {
-        String string = "Empty Trail";
+        StringBuilder string = new StringBuilder();
         if(!routes.isEmpty()){
-            string = station1.toString();
+            string.append(station1.toString());
             Station actualStation = station1;
             for(Route route : routes){
-                string += " - ";
+                string.append(" - ");
                 if(route.station1().equals(actualStation)){
-                    string += route.station2().toString();
+                    string.append(route.station2().toString());
                     actualStation = route.station2();
                 }else{
-                    string += route.station1().toString();
+                    string.append(route.station1().toString());
                     actualStation = route.station1();
                 }
             }
+        }else{
+            string.append("Empty Trail");
         }
-        string += " (" + length + ")";
-        return string;
+        string.append(" (")
+                .append(length)
+                .append(")");
+
+        return string.toString();
     }
 }

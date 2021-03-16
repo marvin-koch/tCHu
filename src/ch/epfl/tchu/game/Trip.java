@@ -22,7 +22,7 @@ public final class Trip {
      * Construit un trajet d'un point de départ au point d?arivée
      * @param from list des gares de départ
      * @param to list des gares d'arrivées
-     * @param points
+     * @param points points
      * @throws IllegalArgumentException si le nombre de points est négatif
      * @throws NullPointerException si la liste est null
      */
@@ -37,7 +37,7 @@ public final class Trip {
      * Retourne liste de tout les trajets possibles entre les gares de départ et d'arrivée.
      * @param from list des gares de départ
      * @param to list des gares d'arrivées
-     * @param points
+     * @param points points
      * @throws IllegalArgumentException si les listes from ou to sont vides ou le nombre de
      * points n'est pas strictement positif
      * @return liste contenant tout les trajets possibles
@@ -81,7 +81,7 @@ public final class Trip {
 
     /**
      * Retourne le nombre de points du trajet pour la connectivité donnée
-     * @param connectivity
+     * @param connectivity instance qui implement StationConnectivity
      * @return le nombre de points
      */
     public int points(StationConnectivity connectivity){

@@ -23,7 +23,6 @@ public final class Ticket implements Comparable<Ticket>{
      */
     public Ticket(List<Trip> trips){
         Preconditions.checkArgument(!trips.isEmpty());
-        boolean samefrom = true;
         for (Trip trip: trips) {
             Preconditions.checkArgument(trip
                     .from()
@@ -85,7 +84,7 @@ public final class Ticket implements Comparable<Ticket>{
 
     /**
      * Calcule et retourne le nombre de points du ticket
-     * @param connectivity
+     * @param connectivity instance qui implemente StationConnectivity
      * @return le nombre de points
      */
     public int points(StationConnectivity connectivity){

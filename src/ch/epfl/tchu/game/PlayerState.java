@@ -17,9 +17,9 @@ public final class PlayerState extends PublicPlayerState{
 
     /**
      * Construit l'état d'un joueur possédant les billets, cartes et routes donnés
-     * @param tickets
-     * @param cards
-     * @param routes
+     * @param tickets billets
+     * @param cards cartes
+     * @param routes routes
      */
     public PlayerState(SortedBag<Ticket> tickets, SortedBag<Card> cards, List<Route> routes){
         super(tickets.size(),cards.size(),routes);
@@ -29,7 +29,7 @@ public final class PlayerState extends PublicPlayerState{
 
     /**
      * Retourne l'état initial d'un joueur auquel les cartes initiales données ont été distribuées ; dans cet état initial, le joueur ne possède encore aucun billet, et ne s'est emparé d'aucune route
-     * @param initialCards
+     * @param initialCards tas initial
      * @throws IllegalArgumentException si le nombre de cartes initiales ne vaut pas 4
      * @return PlayerState
      */
@@ -48,7 +48,7 @@ public final class PlayerState extends PublicPlayerState{
 
     /**
      * Retourne un état identique au récepteur, si ce n'est que le joueur possède en plus les billets donnés
-     * @param newTickets
+     * @param newTickets nouveau billets
      * @return PlayerState
      */
     public PlayerState withAddedTickets(SortedBag<Ticket> newTickets){
@@ -57,7 +57,7 @@ public final class PlayerState extends PublicPlayerState{
 
     /**
      * Retourne les cartes wagon/locomotive du joueur
-     * @return
+     * @return cards
      */
     public SortedBag<Card> cards(){
         return cards;
@@ -65,7 +65,7 @@ public final class PlayerState extends PublicPlayerState{
 
     /**
      * Retourne un état identique au récepteur, si ce n'est que le joueur possède en plus la carte donnée
-     * @param card
+     * @param card carte
      * @return PlayerState
      */
     public PlayerState withAddedCard(Card card){
@@ -74,17 +74,16 @@ public final class PlayerState extends PublicPlayerState{
 
     /**
      * Retourne un état identique au récepteur, si ce n'est que le joueur possède en plus les cartes données
-     * @param additionalCards
+     * @param additionalCards carte additional
      * @return PlayerState
      */
     public PlayerState withAddedCards(SortedBag<Card> additionalCards){
         return new PlayerState(tickets(), cards().union(additionalCards),routes());
     }
 
-
     /**
      * Retourne un état identique au récepteur, si ce n'est que le joueur possède en plus les cartes données
-     * @param route
+     * @param route route
      * @return boolean
      */
     public boolean canClaimRoute(Route route){
@@ -99,7 +98,7 @@ public final class PlayerState extends PublicPlayerState{
 
     /**
      * retourne la liste de tous les ensembles de cartes que le joueur pourrait utiliser pour prendre possession de la route donnée,
-     * @param route
+     * @param route route
      * @throws IllegalArgumentException si le joueur n'a pas assez de wagons pour s'emparer de la route
      * @return List
      */
@@ -114,8 +113,6 @@ public final class PlayerState extends PublicPlayerState{
         return sortedBagList;
     }
 
-
-
     /**
      * Retourne la liste de tous les ensembles de cartes que le joueur pourrait utiliser pour s'emparer d'un tunnel,
      * trié par ordre croissant du nombre de cartes locomotives.
@@ -124,28 +121,23 @@ public final class PlayerState extends PublicPlayerState{
      * @param drawnCards cartes tirées du sommet
      * @throws IllegalArgumentException si le nombre de cartes additionnelles n'est pas compris entre 1 et 3 (inclus), si l'ensemble des cartes initiales est vide ou contient plus de 2 types de cartes différents,
      * ou si l'ensemble des cartes tirées ne contient pas exactement 3 cartes
-     * @return
+     * @return List<SortedBag<Card>>
      */
     public List<SortedBag<Card>> possibleAdditionalCards(int additionalCardsCount, SortedBag<Card> initialCards, SortedBag<Card> drawnCards){
         Preconditions.checkArgument(1<= additionalCardsCount && additionalCardsCount <= 3);
         Preconditions.checkArgument(!initialCards.isEmpty());
-        int nbrOfDifferentColor = 0;
+        Preconditions.checkArgument(initialCards.toSet().size() <=2);
+        Preconditions.checkArgument(drawnCards.size() == Constants.ADDITIONAL_TUNNEL_CARDS);
         Color claimColor = null;
         for (Card card: Card.ALL) {
-            if(initialCards.contains(card)){
-                nbrOfDifferentColor++;
-            }
             if(card.color() != null){
                 claimColor = card.color();
             }
         }
-        Preconditions.checkArgument(nbrOfDifferentColor <=2);
-        Preconditions.checkArgument(drawnCards.size() == Constants.ADDITIONAL_TUNNEL_CARDS);
-
         SortedBag<Card> cardsWithoutInitialCards = cards().difference(initialCards);
         SortedBag<Card> usableCards;
         if (claimColor == null){
-            usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.of(claimColor)),Card.of(claimColor));
+            usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.of(null)),Card.of(null));
         }else{
             usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.of(claimColor)),Card.of(claimColor),
                     cardsWithoutInitialCards.countOf(null),Card.of(null));
@@ -156,14 +148,13 @@ public final class PlayerState extends PublicPlayerState{
                 Comparator.comparingInt(cs -> cs.countOf(Card.LOCOMOTIVE)));
 
         return options;
-
     }
 
 
     /**
      * Retourne un état identique au récepteur, si ce n'est que le joueur s'est de plus emparé de la route donnée au moyen des cartes données
-     * @param route
-     * @param claimCards
+     * @param route route
+     * @param claimCards cartes jouées
      */
     public PlayerState withClaimedRoute(Route route, SortedBag<Card> claimCards){
         List<Route> newRoutes = routes();
@@ -202,9 +193,6 @@ public final class PlayerState extends PublicPlayerState{
      * retourne la totalité des points obtenus par le joueur à la fin de la partie, à savoir la somme des points retournés par les méthodes claimPoints et ticketPoints
      * @return int
      */
-    public int finalPoints(){
-        return ticketPoints() + claimPoints();
-
-    }
+    public int finalPoints(){ return ticketPoints() + claimPoints();}
 
 }

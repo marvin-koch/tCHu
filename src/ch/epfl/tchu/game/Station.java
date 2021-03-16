@@ -17,7 +17,7 @@ public final class Station {
      *
      * @param id numéro d'identification de la gare
      * @param name nom de la gare
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException si le numéro d'identification de la gare est negatif
      */
     public Station(int id, String name){
         Preconditions.checkArgument(id >= 0);

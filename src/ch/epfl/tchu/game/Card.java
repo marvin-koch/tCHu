@@ -36,15 +36,15 @@ public enum Card {
 
     /**
      * Constructeur de Card
-     * @param color
+     * @param color couleur
      */
-    private Card(Color color){
+    Card(Color color){
         this.color = color;
     }
 
     /**
      * Retourne la Carte a laquel correspond la couleur
-     * @param color
+     * @param color couleur
      * @return la carte
      */
     public static Card of(Color color){

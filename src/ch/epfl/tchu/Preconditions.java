@@ -12,8 +12,8 @@ public final class Preconditions{
 
     /**
      * Vérifie si le boolean est True, s'il est False il lance une Exceptions
-     * @param shouldBeTrue
-     * @throws IllegalArgumentException
+     * @param shouldBeTrue boolean à verfier
+     * @throws IllegalArgumentException si shouldBeTrue est False
      */
     public static void checkArgument(boolean shouldBeTrue){
         if(!shouldBeTrue){

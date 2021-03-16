@@ -2,7 +2,6 @@ package ch.epfl.tchu.game;
 
 import ch.epfl.tchu.Preconditions;
 import ch.epfl.tchu.SortedBag;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -19,7 +18,7 @@ public final class Deck<C extends Comparable<C>> {
 
     /**
      * Constructeur privée
-     * @param cards
+     * @param cards cartes
      */
     private Deck(List<C> cards){
        deckList = cards;
@@ -82,8 +81,7 @@ public final class Deck<C extends Comparable<C>> {
      */
     public SortedBag<C> topCards(int count){
         Preconditions.checkArgument(count >= 0 && count <= deckList.size());
-        SortedBag<C> bag = SortedBag.of(deckList.subList(0,count));
-        return bag;
+        return SortedBag.of(deckList.subList(0,count));
     }
 
     /**
