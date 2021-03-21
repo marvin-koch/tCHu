@@ -129,20 +129,22 @@ public final class PlayerState extends PublicPlayerState{
         Preconditions.checkArgument(initialCards.toSet().size() <=2);
         Preconditions.checkArgument(drawnCards.size() == Constants.ADDITIONAL_TUNNEL_CARDS);
         Color claimColor = null;
-        for (Card card: Card.ALL) {
+        for (Card card: initialCards) {
             if(card.color() != null){
                 claimColor = card.color();
             }
         }
         SortedBag<Card> cardsWithoutInitialCards = cards().difference(initialCards);
-        SortedBag<Card> usableCards;
+        SortedBag<Card> usableCards = SortedBag.of();
         if (claimColor == null){
-            usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.of(null)),Card.of(null));
+            usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.LOCOMOTIVE),Card.LOCOMOTIVE);
         }else{
             usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.of(claimColor)),Card.of(claimColor),
-                    cardsWithoutInitialCards.countOf(null),Card.of(null));
+                    cardsWithoutInitialCards.countOf(Card.LOCOMOTIVE),Card.LOCOMOTIVE);
         }
-        Set<SortedBag<Card>> possibleCards = usableCards.subsetsOfSize(additionalCardsCount);
+        Set<SortedBag<Card>> possibleCards = new HashSet<>();
+        if(additionalCardsCount <= usableCards.size())
+            possibleCards = usableCards.subsetsOfSize(additionalCardsCount);
         List<SortedBag<Card>> options = new ArrayList<>(possibleCards);
         options.sort(
                 Comparator.comparingInt(cs -> cs.countOf(Card.LOCOMOTIVE)));

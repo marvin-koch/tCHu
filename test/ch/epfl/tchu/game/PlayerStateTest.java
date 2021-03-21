@@ -13,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PlayerStateTest {
+    static SortedBag<Ticket> t = SortedBag.of(3, ChMap.tickets().get(0), 4, ChMap.tickets().get(2));
+    static SortedBag<Card> s4 = SortedBag.of(2, Card.VIOLET, 3, Card.LOCOMOTIVE);
+    static PlayerState p4 = new PlayerState(t, s4, List.of());
     @Test
     void initialTest(){
         assertThrows(IllegalArgumentException.class, () -> {
@@ -58,6 +61,18 @@ public class PlayerStateTest {
         List<SortedBag<Card>> expected = List.of(SortedBag.of(2, Card.GREEN), SortedBag.of(1, Card.GREEN, 1, Card.LOCOMOTIVE), SortedBag.of(2, Card.LOCOMOTIVE));
 
         assertEquals(expected, playerState.possibleClaimCards(ChMap.routes().get(41)));
+    }
+    @Test
+    void possibleAdditionalCards() {
+        assertEquals(List.of(SortedBag.of(Card.LOCOMOTIVE)), p4.possibleAdditionalCards(1, SortedBag.of(Card.LOCOMOTIVE), SortedBag.of(1, Card.LOCOMOTIVE, 2, Card.BLACK)));
+        assertEquals(List.of(SortedBag.of(Card.VIOLET), SortedBag.of(Card.LOCOMOTIVE)), p4.possibleAdditionalCards(1, SortedBag.of(Card.VIOLET), SortedBag.of(1, Card.LOCOMOTIVE, 2, Card.BLACK)));
+        assertEquals(List.of(SortedBag.of(Card.VIOLET), SortedBag.of(Card.LOCOMOTIVE)), p4.possibleAdditionalCards(1, SortedBag.of(Card.VIOLET), SortedBag.of(1, Card.VIOLET, 2, Card.BLACK)));
+
+        assertEquals(List.of(SortedBag.of(2, Card.LOCOMOTIVE)), p4.possibleAdditionalCards(2, SortedBag.of(Card.LOCOMOTIVE), SortedBag.of(2, Card.LOCOMOTIVE, 1, Card.BLACK)));
+        assertEquals(List.of(SortedBag.of(1, Card.VIOLET, 1, Card.LOCOMOTIVE), SortedBag.of(2, Card.LOCOMOTIVE)), p4.possibleAdditionalCards(2, SortedBag.of(Card.VIOLET), SortedBag.of(2, Card.LOCOMOTIVE, 1, Card.BLACK)));
+        assertEquals(List.of(SortedBag.of(2, Card.LOCOMOTIVE)), p4.possibleAdditionalCards(2, SortedBag.of(2, Card.VIOLET), SortedBag.of(2, Card.VIOLET, 1, Card.BLACK)));
+
+        assertEquals(List.of(), p4.possibleAdditionalCards(3, SortedBag.of(2, Card.LOCOMOTIVE), SortedBag.of(3, Card.LOCOMOTIVE)));
     }
 
 }
