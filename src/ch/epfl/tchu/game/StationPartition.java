@@ -19,6 +19,7 @@ public final class StationPartition implements StationConnectivity {
         gares = array;
     }
 
+
     /**
      * Méthode indiquant si 2 stations dans la partition sont connectées.
      * Si une de leurs id est plus grande que la partition, alors elle retourne vrai si les 2 gares sont identiques.
@@ -44,6 +45,18 @@ public final class StationPartition implements StationConnectivity {
         private int[] gares;
 
         /**
+         * Calcule le représentant de la partition d'une station
+         * @param id id
+         * @return id du représentant
+         */
+        private int representative(int id){
+            while(id != gares[id]){
+                id = gares[id];
+            }
+            return id;
+        }
+
+        /**
          * Constructeur du Bâtisseur
          * @param stationCount
          * @throws IllegalArgumentException si stationCount est négatif
@@ -63,7 +76,9 @@ public final class StationPartition implements StationConnectivity {
          * @return la même instance de Builder
          */
        public Builder connect(Station s1, Station s2){
-           gares[representative(s1.id())] = s2.id();
+           if(s1.id() != gares[representative(s2.id())]){
+               gares[representative(s1.id())] = s2.id();
+           }
            return this;
        }
 
@@ -76,18 +91,6 @@ public final class StationPartition implements StationConnectivity {
                gares[i] = representative(gares[i]);
            }
            return new StationPartition(gares);
-       }
-
-        /**
-         * Calcule le représentant de la partition d'une station
-         * @param id id
-         * @return id du représentant
-         */
-       private int representative(int id){
-            while(id != gares[id]){
-                id = gares[id];
-            }
-           return id;
        }
     }
 }

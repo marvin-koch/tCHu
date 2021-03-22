@@ -41,15 +41,5 @@ public class StationPartitionTest {
         assertTrue(b.connected(ChMap.routes().get(62).station1(), ChMap.routes().get(62).station1()));
         assertFalse(b.connected(ChMap.routes().get(62).station2(),ChMap.routes().get(62).station1()));
     }
-    @Test
-    void connected() {
-        StationPartition.Builder builder = new StationPartition.Builder(ChMap.stations().size());
-        builder.connect(ChMap.stations().get(7), ChMap.stations().get(15));
-        builder.connect(ChMap.stations().get(9), ChMap.stations().get(12));
-        StationPartition p1 = builder.build();
-        assertTrue(p1.connected(ChMap.stations().get(7), ChMap.stations().get(15)));
-        assertTrue(p1.connected(ChMap.stations().get(9), ChMap.stations().get(12)));
-        assertFalse(p1.connected(ChMap.stations().get(8), ChMap.stations().get(4)));
-        assertFalse(p1.connected(ChMap.stations().get(8), ChMap.stations().get(7)));
-    }
+
 }

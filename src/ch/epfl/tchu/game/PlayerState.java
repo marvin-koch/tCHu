@@ -159,7 +159,7 @@ public final class PlayerState extends PublicPlayerState{
      * @param claimCards cartes jouées
      */
     public PlayerState withClaimedRoute(Route route, SortedBag<Card> claimCards){
-        List<Route> newRoutes = routes();
+        List<Route> newRoutes = new ArrayList<>(routes());
         newRoutes.add(route);
         return new PlayerState(tickets(),cards().difference(claimCards),newRoutes);
     }

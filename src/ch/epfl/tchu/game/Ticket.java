@@ -17,6 +17,24 @@ public final class Ticket implements Comparable<Ticket>{
     private final String text;
 
     /**
+     * Calcule et la représentation textuelle du ticket
+     * @param trips liste des trajets
+     * @return le string qui représentent le ticket
+     */
+    private static String computeText(List<Trip> trips){
+        if(trips.size() == 1){
+            return trips.get(0).from() +" - "+ trips.get(0).to() +" ("+trips.get(0).points() +")";
+        }else{
+            TreeSet<String> tree = new TreeSet<>();
+            for(Trip trip : trips){
+                tree.add(trip.to().name()+" ("+trip.points()+")");
+            }
+            return String.format("%s - {%s}", trips.get(0).from().name(),
+                    String.join(", ", tree));
+        }
+    }
+
+    /**
      * Contructeur primaire de Ticket
      * @param trips liste de trips du ticket
      * @throws IllegalArgumentException si la liste de trips est vide
@@ -65,24 +83,6 @@ public final class Ticket implements Comparable<Ticket>{
     }
 
     /**
-     * Calcule et la représentation textuelle du ticket
-     * @param trips liste des trajets
-     * @return le string qui représentent le ticket
-     */
-    private static String computeText(List<Trip> trips){
-        if(trips.size() == 1){
-            return trips.get(0).from() +" - "+ trips.get(0).to() +" ("+trips.get(0).points() +")";
-        }else{
-            TreeSet<String> tree = new TreeSet<>();
-            for(Trip trip : trips){
-                tree.add(trip.to().name()+" ("+trip.points()+")");
-            }
-            return String.format("%s - {%s}", trips.get(0).from().name(),
-                    String.join(", ", tree));
-        }
-    }
-
-    /**
      * Calcule et retourne le nombre de points du ticket
      * @param connectivity instance qui implemente StationConnectivity
      * @return le nombre de points
@@ -96,4 +96,5 @@ public final class Ticket implements Comparable<Ticket>{
         }
         return maximum;
     }
+
 }
