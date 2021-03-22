@@ -43,7 +43,7 @@ public final class GameState extends  PublicGameState{
     private Map<PlayerId, PlayerState> copyMap(PlayerId playerId, PlayerState state){
         Map<PlayerId, PlayerState> copy = new EnumMap<>(PlayerId.class);
         copy.put(playerId, state);
-        copy.put(playerId.next(), playerState.get(playerId.next()));
+        copy.put(playerId.next(), playerState(playerId.next()));
         return copy;
     }
 
@@ -81,7 +81,7 @@ public final class GameState extends  PublicGameState{
      */
     @Override
     public PlayerState currentPlayerState(){
-        return playerState.get(currentPlayerId());
+        return playerState(currentPlayerId());
     }
 
 
@@ -165,8 +165,8 @@ public final class GameState extends  PublicGameState{
      * @return GameState actualisé
      */
     public GameState withInitiallyChosenTickets(PlayerId playerId, SortedBag<Ticket> chosenTickets){
-        Preconditions.checkArgument(playerState.get(playerId).ticketCount() == 0);
-        PlayerState state = playerState.get(playerId).withAddedTickets(chosenTickets);
+        Preconditions.checkArgument(playerState(playerId).ticketCount() == 0);
+        PlayerState state = playerState(playerId).withAddedTickets(chosenTickets);
         return new GameState(tickets,cardState, currentPlayerId(),copyMap(playerId, state), lastPlayer());
     }
 
@@ -179,7 +179,7 @@ public final class GameState extends  PublicGameState{
      */
     public GameState withChosenAdditionalTickets(SortedBag<Ticket> drawnTickets, SortedBag<Ticket> chosenTickets){
         Preconditions.checkArgument(drawnTickets.contains(chosenTickets));
-        PlayerState state = playerState.get(currentPlayerId()).withAddedTickets(chosenTickets);
+        PlayerState state = currentPlayerState().withAddedTickets(chosenTickets);
 
         return new GameState(tickets.difference(drawnTickets),cardState, currentPlayerId(),copyMap(currentPlayerId() ,state) , lastPlayer());
     }
@@ -193,7 +193,7 @@ public final class GameState extends  PublicGameState{
      */
     public GameState withDrawnFaceUpCard(int slot){
         Preconditions.checkArgument(canDrawCards());
-        PlayerState state = playerState.get(currentPlayerId()).withAddedCards(SortedBag.of(cardState.faceUpCard(slot)));
+        PlayerState state = currentPlayerState().withAddedCards(SortedBag.of(cardState.faceUpCard(slot)));
         return new GameState(tickets,cardState.withDrawnFaceUpCard(slot), currentPlayerId(), copyMap(currentPlayerId(),state), lastPlayer());
     }
 
@@ -205,7 +205,7 @@ public final class GameState extends  PublicGameState{
      */
     public GameState withBlindlyDrawnCard(){
         Preconditions.checkArgument(canDrawCards());
-        PlayerState state = playerState.get(currentPlayerId()).withAddedCards(SortedBag.of(cardState.topDeckCard()));
+        PlayerState state = currentPlayerState().withAddedCards(SortedBag.of(cardState.topDeckCard()));
         return new GameState(tickets,cardState.withoutTopDeckCard(), currentPlayerId(), copyMap(currentPlayerId(),state), lastPlayer());
     }
 
@@ -217,7 +217,7 @@ public final class GameState extends  PublicGameState{
      * @return GameState actualisé
      */
     public GameState withClaimedRoute(Route route, SortedBag<Card> cards){
-        PlayerState state = playerState.get(currentPlayerId()).withClaimedRoute(route, cards);
+        PlayerState state = currentPlayerState().withClaimedRoute(route, cards);
         return new GameState(tickets, cardState.withMoreDiscardedCards(cards), currentPlayerId(), copyMap(currentPlayerId(), state), lastPlayer());
     }
 
@@ -227,7 +227,7 @@ public final class GameState extends  PublicGameState{
      * @return boolean
      */
     public boolean lastTurnBegins(){
-        return lastPlayer() == null && playerState.get(currentPlayerId()).carCount() <=2;
+        return lastPlayer() == null && currentPlayerState().carCount() <=2;
     }
 
 
