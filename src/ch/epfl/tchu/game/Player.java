@@ -95,7 +95,7 @@ public interface Player {
      * afin de savoir quelle(s) carte(s) il désire initialement utiliser pour cela,
      * @return cartes utilisées
      */
-     public SortedBag<Card> initalClaimCards();
+     public SortedBag<Card> initialClaimCards();
 
     /**
      * Appelée lorsque le joueur a décidé de tenter de s'emparer d'un tunnel et que des cartes additionnelles sont nécessaires,

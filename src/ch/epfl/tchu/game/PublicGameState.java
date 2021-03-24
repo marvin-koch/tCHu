@@ -32,7 +32,7 @@ public class PublicGameState {
      * @throws IllegalArgumentException si la taille de la pioche est strictement négative ou si playerState ne contient pas exactement deux paires clef/valeur,
      * @throws  NullPointerException si l'un des autres arguments (lastPlayer excepté!) est nul
      */
-    PublicGameState(int ticketsCount, PublicCardState cardState, PlayerId currentPlayerId, Map<PlayerId, PublicPlayerState> playerState, PlayerId lastPlayer){
+    public PublicGameState(int ticketsCount, PublicCardState cardState, PlayerId currentPlayerId, Map<PlayerId, PublicPlayerState> playerState, PlayerId lastPlayer){
         Preconditions.checkArgument(ticketsCount >= 0 && playerState.size() == 2);
         if(cardState == null || currentPlayerId == null){
             throw new NullPointerException();
@@ -107,7 +107,7 @@ public class PublicGameState {
      * @return liste
      */
     public List<Route> claimedRoutes(){
-        List<Route> routeList = new ArrayList<Route>(playerState(PlayerId.PLAYER_1).routes());
+        List<Route> routeList = new ArrayList<>(playerState(PlayerId.PLAYER_1).routes());
         routeList.addAll(playerState(PlayerId.PLAYER_2).routes());
         return routeList;
     }
