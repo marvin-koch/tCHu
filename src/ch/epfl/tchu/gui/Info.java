@@ -132,7 +132,7 @@ public final class Info {
     }
 
     /**
-     * Retourne le message déclarant que le joueur désire s'emparer de la route en tunnel donnée en utilisant initialement les cartes données
+     * Retourne le message déclarant que le joueur s'est emparé de la route donnée au moyen des cartes données
      * @param route
      * @param cards
      * @return String

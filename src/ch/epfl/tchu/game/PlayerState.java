@@ -82,7 +82,7 @@ public final class PlayerState extends PublicPlayerState{
     }
 
     /**
-     * Retourne un état identique au récepteur, si ce n'est que le joueur possède en plus les cartes données
+     * Retourne vrai ssi le joueur peut s'emparer de la route donnée, c-à-d s'il lui reste assez de wagons et s'il possède les cartes nécessaires,
      * @param route route
      * @return boolean
      */

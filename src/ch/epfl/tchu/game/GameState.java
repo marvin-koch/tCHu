@@ -15,7 +15,7 @@ import java.util.Random;
  * @author Marvin Koch (324448)
  */
 public final class GameState extends  PublicGameState{
-    private final SortedBag<Ticket> tickets;
+    private final Deck<Ticket> tickets;
     private final CardState cardState;
     private final Map<PlayerId, PlayerState> playerState;
 
@@ -27,7 +27,7 @@ public final class GameState extends  PublicGameState{
      * @param playerState
      * @param lastPlayer
      */
-    private GameState(SortedBag<Ticket> tickets, CardState cardState, PlayerId currentPlayerId, Map<PlayerId, PlayerState> playerState, PlayerId lastPlayer) {
+    private GameState(Deck<Ticket> tickets, CardState cardState, PlayerId currentPlayerId, Map<PlayerId, PlayerState> playerState, PlayerId lastPlayer) {
         super(tickets.size(), cardState, currentPlayerId, Map.copyOf(playerState), lastPlayer);
         this.tickets = tickets;
         this.cardState = cardState;
@@ -62,7 +62,7 @@ public final class GameState extends  PublicGameState{
         m.put(PlayerId.PLAYER_2,PlayerState.initial(pioche.topCards(nbrCartesInitial)));
         pioche = pioche.withoutTopCards(nbrCartesInitial);
 
-        return new GameState(tickets,CardState.of(pioche), PlayerId.ALL.get(rng.nextInt(2)),m,null);
+        return new GameState(Deck.of(tickets, rng),CardState.of(pioche), PlayerId.ALL.get(rng.nextInt(2)),m,null);
     }
 
     /**
@@ -93,11 +93,7 @@ public final class GameState extends  PublicGameState{
      */
     public SortedBag<Ticket> topTickets(int count){
         Preconditions.checkArgument(count >= 0 && count <= tickets.size());
-        SortedBag.Builder<Ticket> builder = new SortedBag.Builder<>();
-        for(int i = 0; i < count; ++i){
-           builder.add(tickets.get(i));
-        }
-        return builder.build();
+        return tickets.topCards(count);
     }
 
 
@@ -109,7 +105,7 @@ public final class GameState extends  PublicGameState{
      */
     public GameState withoutTopTickets(int count){
         Preconditions.checkArgument(count >= 0 && count <= tickets.size());
-        return new GameState(tickets.difference(topTickets(count)),cardState, currentPlayerId(), playerState, lastPlayer());
+        return new GameState(tickets.withoutTopCards(count),cardState, currentPlayerId(), playerState, lastPlayer());
     }
 
 
@@ -181,7 +177,7 @@ public final class GameState extends  PublicGameState{
         Preconditions.checkArgument(drawnTickets.contains(chosenTickets));
         PlayerState state = currentPlayerState().withAddedTickets(chosenTickets);
 
-        return new GameState(tickets.difference(drawnTickets),cardState, currentPlayerId(),copyMap(currentPlayerId() ,state) , lastPlayer());
+        return new GameState(tickets.withoutTopCards(drawnTickets.size()),cardState, currentPlayerId(),copyMap(currentPlayerId() ,state) , lastPlayer());
     }
 
 
