@@ -50,8 +50,10 @@ public final class StationPartition implements StationConnectivity {
          * @return id du représentant
          */
         private int representative(int id){
+            System.out.println(id);
             while(id != gares[id]){
                 id = gares[id];
+                //System.out.println(id);
             }
             return id;
         }
@@ -76,9 +78,14 @@ public final class StationPartition implements StationConnectivity {
          * @return la même instance de Builder
          */
        public Builder connect(Station s1, Station s2){
+           System.out.println("ici");
            if(s1.id() != gares[representative(s2.id())]){
+               System.out.println("par la");
+               System.out.println(gares[representative(s1.id())] );
+               System.out.println(s2.id());
                gares[representative(s1.id())] = s2.id();
            }
+           System.out.println("la");
            return this;
        }
 
@@ -89,6 +96,7 @@ public final class StationPartition implements StationConnectivity {
        public StationPartition build(){
            for(int i = 0; i < gares.length; ++i){
                gares[i] = representative(gares[i]);
+
            }
            return new StationPartition(gares);
        }

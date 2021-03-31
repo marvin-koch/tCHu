@@ -1,7 +1,10 @@
 package ch.epfl.tchu.game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Class Trail
@@ -29,9 +32,9 @@ public final class Trail {
         this.routes = routes;
         int length = 0;
         if(!routes.isEmpty()){
-            for (Route route : routes) {
-                length += route.length();
-            }
+            length = routes.stream()
+                    .map(route -> route.length())
+                    .reduce(0, Integer::sum);
         }
         this.length = length;
     }
@@ -44,16 +47,15 @@ public final class Trail {
     public static Trail longest(List<Route> routes){
         Trail longestTrail = new Trail(null,null, new ArrayList<Route>());
         int longestLength = 0;
-        List<Trail> cs = new ArrayList<>();
-        for(Route route : routes){
-            cs.add(new Trail(route.station1(), route.station2(), List.of(route)));
-            cs.add(new Trail(route.station2(), route.station1(), List.of(route)));
-        }
-        for(Trail trail : cs){
-           if(longestTrail.length() < trail.length()){
-               longestTrail = trail;
-           }
-        }
+
+        List<Trail> cs = routes.stream()
+                .flatMap(route -> Stream.of(new Trail(route.station1(), route.station2(), List.of(route)),
+                        new Trail(route.station2(), route.station1(), List.of(route))))
+                .collect(Collectors.toList());
+
+        if(!cs.isEmpty())
+        longestTrail = Collections.max(cs, (t1, t2) -> Integer.compare(t1.length, t2.length));
+
         if(routes.isEmpty()){
             return new Trail(null,null, new ArrayList<Route>());
         }else{
@@ -72,6 +74,7 @@ public final class Trail {
                         }
                     }
                 }
+
                for(Trail trail : listeVide) {
                    if(trail.length() > longestLength){
                        longestTrail = trail;

@@ -85,11 +85,7 @@ public final class Trip {
      * @return le nombre de points
      */
     public int points(StationConnectivity connectivity){
-        if(connectivity.connected(from,to)){
-            return points;
-        }else{
-            return -points;
-        }
+        return connectivity.connected(from, to) ? points : -points;
     }
 
 }

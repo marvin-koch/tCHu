@@ -27,14 +27,12 @@ public class PublicPlayerState {
         this.ticketCount = ticketCount;
         this.cardCount = cardCount;
         this.routes = routes;
-        int routesLength = 0;
-        int constPointBuilder = 0;
-        for (Route route :routes) {
-            routesLength += route.length();
-             constPointBuilder += route.claimPoints();
-        }
-        wagonCount = Constants.INITIAL_CAR_COUNT - routesLength;
-        claimPoint = constPointBuilder;
+        wagonCount = Constants.INITIAL_CAR_COUNT - routes.stream()
+                .map(route -> route.length())
+                .reduce(0, Integer::sum);
+        claimPoint = routes.stream()
+                .map(route -> route.claimPoints())
+                .reduce(0, Integer::sum);
     }
 
     /**

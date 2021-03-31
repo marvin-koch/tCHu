@@ -5,6 +5,7 @@ import ch.epfl.tchu.SortedBag;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Class Route
@@ -132,9 +133,9 @@ public final class Route {
     public List<SortedBag<Card>> possibleClaimCards(){
         List<SortedBag<Card>> list = new ArrayList<>();
         if(color == null){
-            for(Card card : Card.CARS){
-                list.add(SortedBag.of(length, card));
-            }
+            list = Card.CARS.stream()
+                    .map(card -> SortedBag.of(length, card))
+                    .collect(Collectors.toList());
         }else{
             list.add(SortedBag.of(length, Card.of(color)));
         }
@@ -142,9 +143,10 @@ public final class Route {
         if(level == Level.UNDERGROUND){
             if(color == null){
                 for(int i = 1; i < length; i++){
-                    for(Card card : Card.CARS){
-                        list.add(SortedBag.of(length - i, card, i, Card.LOCOMOTIVE));
-                    }
+                    int finalI = i;
+                    list.addAll(Card.CARS.stream()
+                            .map(card -> SortedBag.of(length - finalI, card, finalI, Card.LOCOMOTIVE))
+                            .collect(Collectors.toList()));
                 }
             }else{
                 for(int i = 1; i < length; i++){
@@ -172,9 +174,9 @@ public final class Route {
             return drawnCards.countOf(Card.LOCOMOTIVE);
         }else{
             Color claimColor = null;
-            for(int i = 0; i< claimCards.size();i++){
-                if(claimCards.get(i) != Card.LOCOMOTIVE){
-                    claimColor = claimCards.get(i).color();
+            for(Card card : claimCards){
+                if(card != Card.LOCOMOTIVE){
+                    claimColor = card.color();
                 }
             }
             return drawnCards.countOf(Card.of(claimColor)) + drawnCards.countOf(Card.LOCOMOTIVE);

@@ -2,9 +2,8 @@ package ch.epfl.tchu.game;
 
 import ch.epfl.tchu.Preconditions;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Class Ticket
@@ -26,6 +25,7 @@ public final class Ticket implements Comparable<Ticket>{
             return trips.get(0).from() +" - "+ trips.get(0).to() +" ("+trips.get(0).points() +")";
         }else{
             TreeSet<String> tree = new TreeSet<>();
+
             for(Trip trip : trips){
                 tree.add(trip.to().name()+" ("+trip.points()+")");
             }
@@ -89,11 +89,13 @@ public final class Ticket implements Comparable<Ticket>{
      */
     public int points(StationConnectivity connectivity){
         int maximum = trips.get(0).points(connectivity);
-        for(Trip trip : trips){
-            if(trip.points(connectivity) > maximum){
-                maximum = trip.points(connectivity);
-            }
-        }
+
+        if(!trips.isEmpty())
+        maximum = trips.stream()
+                .map(trip -> trip.points(connectivity))
+                .max(Integer::compare)
+                .get();
+
         return maximum;
     }
 

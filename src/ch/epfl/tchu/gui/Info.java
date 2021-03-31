@@ -8,6 +8,8 @@ import ch.epfl.tchu.game.Trail;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 import static ch.epfl.tchu.gui.StringsFr.*;
 
 
@@ -163,7 +165,7 @@ public final class Info {
     public String drewAdditionalCards(SortedBag<Card> drawnCards, int additionalCost){
         String string = "";
         string += String.format(ADDITIONAL_CARDS_ARE,cardsString(drawnCards));
-        if( additionalCost == 0){
+        if (additionalCost == 0){
             string += NO_ADDITIONAL_COST;
         }else{
             string += String.format(SOME_ADDITIONAL_COST, additionalCost,plural(additionalCost));
@@ -225,10 +227,9 @@ public final class Info {
      * @return String
      */
     private static String cardsString(SortedBag<Card> cards) {
-        List<String> strings = new ArrayList<>();
-        for (Card card : cards.toSet()) {
-            strings.add(String.format("%s %s", cards.countOf(card), cardName(card, cards.countOf(card))));
-        }
+        List<String> strings = cards.toSet().stream()
+                .map(card -> String.format("%s %s", cards.countOf(card), cardName(card, cards.countOf(card))))
+                .collect(Collectors.toList());
 
         if (strings.size() == 1) {
             return strings.get(0);

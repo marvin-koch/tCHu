@@ -4,6 +4,8 @@ import ch.epfl.tchu.Preconditions;
 import ch.epfl.tchu.SortedBag;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Class PlayerState
@@ -104,12 +106,9 @@ public final class PlayerState extends PublicPlayerState{
      */
     public List<SortedBag<Card>> possibleClaimCards(Route route){
         Preconditions.checkArgument(carCount()>= route.length());// pas sûr de ça
-        List<SortedBag<Card>> sortedBagList = new ArrayList<>();
-        for (SortedBag<Card> bag : route.possibleClaimCards()) {
-            if(cards().contains(bag)){
-                sortedBagList.add(bag);
-            }
-        }
+        List<SortedBag<Card>> sortedBagList = route.possibleClaimCards().stream()
+                .filter(bag -> cards().contains(bag))
+                .collect(Collectors.toList());
         return sortedBagList;
     }
 
@@ -170,25 +169,28 @@ public final class PlayerState extends PublicPlayerState{
      */
     public int ticketPoints(){
         int max = 0;
-        for(Route route : routes()){
-            if((route.station1().id() > max)){
-                max = route.station1().id();
-            }else if((route.station2().id() > max)){
-                max = route.station2().id();
-            }
-        }
+        System.out.println("test1");
+        if(!routes().isEmpty())
+        max = routes().stream()
+                .flatMap(route -> Stream.of(route.station1().id(), route.station2().id()))
+                .max(Integer::compare)
+                .get();
+
         StationPartition.Builder builder = new StationPartition.Builder(max + 1);
+        int i = 0;
+        System.out.println(routes().size());
         for(Route route : routes()){
+            System.out.println(route.station1().toString());
+            System.out.println(route.station2().toString());
             builder.connect(route.station1(), route.station2());
+            System.out.println("cas : "+ i);
+            i++;
         }
-        StationPartition partition = builder.build();
+        System.out.println("test2");
 
-        int ticketCount = 0;
-        for(Ticket billet : tickets()){
-            ticketCount += billet.points(partition);
-        }
-        return ticketCount;
-
+        return tickets().stream()
+                .map(billet -> billet.points(builder.build()))
+                .reduce(0, Integer::sum);
     }
 
     /**
