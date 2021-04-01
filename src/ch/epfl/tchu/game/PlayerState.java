@@ -169,7 +169,7 @@ public final class PlayerState extends PublicPlayerState{
      */
     public int ticketPoints(){
         int max = 0;
-        System.out.println("test1");
+
         if(!routes().isEmpty())
         max = routes().stream()
                 .flatMap(route -> Stream.of(route.station1().id(), route.station2().id()))
@@ -178,16 +178,9 @@ public final class PlayerState extends PublicPlayerState{
 
         StationPartition.Builder builder = new StationPartition.Builder(max + 1);
         int i = 0;
-        System.out.println(routes().size());
         for(Route route : routes()){
-            System.out.println(route.station1().toString());
-            System.out.println(route.station2().toString());
             builder.connect(route.station1(), route.station2());
-            System.out.println("cas : "+ i);
-            i++;
         }
-        System.out.println("test2");
-
         return tickets().stream()
                 .map(billet -> billet.points(builder.build()))
                 .reduce(0, Integer::sum);

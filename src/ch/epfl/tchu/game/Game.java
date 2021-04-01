@@ -55,13 +55,20 @@ public final class Game {
         }
 
         boolean gameHasEnded = false;
-
+        int tour = 1;//todo effacer ca
         while(!gameHasEnded){
-            //System.out.println(Card.COUNT);
-            System.out.println(gameState.playerState(PlayerId.PLAYER_1).cards().size() + gameState.playerState(PlayerId.PLAYER_2).cards().size());
-            System.out.println(gameState.cardState().deckSize());
-            System.out.println(gameState.cardState().discardsSize());
-            System.out.println(gameState.playerState(PlayerId.PLAYER_1).cards().size() + gameState.playerState(PlayerId.PLAYER_2).cards().size()+gameState.cardState().deckSize()+gameState.cardState().discardsSize());
+            System.out.println("Tour "+ tour);tour++;
+            System.out.println("main de marvin : "+(gameState.playerState(PlayerId.PLAYER_1).cards().size()));
+            System.out.println("main de Shangeeth :"+gameState.playerState(PlayerId.PLAYER_2).cards().size());
+            System.out.println("deck : "+gameState.cardState().deckSize());
+            System.out.println("defausse : "+gameState.cardState().discardsSize());
+            System.out.println("Total : "+(gameState.playerState(PlayerId.PLAYER_1).cards().size() + gameState.playerState(PlayerId.PLAYER_2).cards().size()+gameState.cardState().deckSize()+gameState.cardState().discardsSize()));
+            System.out.println("Point claim Marvin : "+ gameState.playerState(PlayerId.PLAYER_1).claimPoints());
+            System.out.println("Point claim Shangeeth : "+ gameState.playerState(PlayerId.PLAYER_2).claimPoints());
+            System.out.println("Point ticket Marvin : "+ gameState.playerState(PlayerId.PLAYER_1).ticketPoints());
+            System.out.println("Point ticket Shangeeth : "+ gameState.playerState(PlayerId.PLAYER_2).ticketPoints());
+            System.out.println("Point Marvin : "+ gameState.playerState(PlayerId.PLAYER_1).finalPoints());
+            System.out.println("Point Shangeeth : "+ gameState.playerState(PlayerId.PLAYER_2).finalPoints());
             Player currentPlayer = players.get(gameState.currentPlayerId());
             Info currentInfo = infos.get(gameState.currentPlayerId());
             Info nextInfo = infos.get(gameState.currentPlayerId().next());
@@ -81,7 +88,7 @@ public final class Game {
 
                 case DRAW_CARDS:
                     for(int i = 0; i<2; ++i){
-                        if(i==1) updateStateForPlayers(players,gameState);
+                        if(i==1) {updateStateForPlayers(players,gameState);}
                         gameState = gameState.withCardsDeckRecreatedIfNeeded(rng);
                         int slot = currentPlayer.drawSlot();
                         if(slot == Constants.DECK_SLOT){
@@ -139,20 +146,13 @@ public final class Game {
                     }
                     break;
             }
-            System.out.println(2);
             if(gameState.lastTurnBegins()){
                 receiveInfoAll(players, currentInfo.lastTurnBegins(currentPlayerState.carCount()));
             }
-            System.out.println(3);
             if(!(gameState.lastPlayer() == null) && (gameState.lastPlayer().equals(gameState.currentPlayerId()))){
-                System.out.println("marvin");
                 updateStateForPlayers(players,gameState);
-                System.out.println(currentPlayerState.claimPoints());
-                System.out.println(currentPlayerState.ticketPoints());
                 int currentPlayerPoints = currentPlayerState.finalPoints();
-                System.out.println(currentPlayerPoints);
                 int nextPlayerPoints = nextPlayerState.finalPoints();
-                System.out.println(nextPlayerPoints);
                 if(Trail.longest(currentPlayerState.routes()).length() > Trail.longest(nextPlayerState.routes()).length()){
                     currentPlayerPoints += Constants.LONGEST_TRAIL_BONUS_POINTS;
                     receiveInfoAll(players, currentInfo.getsLongestTrailBonus(Trail.longest(currentPlayerState.routes())));
@@ -165,7 +165,6 @@ public final class Game {
                     receiveInfoAll(players, currentInfo.getsLongestTrailBonus(Trail.longest(currentPlayerState.routes())));
                     receiveInfoAll(players, nextInfo.getsLongestTrailBonus(Trail.longest(nextPlayerState.routes())));
                 }
-                System.out.println("marvin 2");
 
                 if(currentPlayerPoints > nextPlayerPoints){
                     receiveInfoAll(players, currentInfo.won(currentPlayerPoints, nextPlayerPoints));
@@ -180,7 +179,6 @@ public final class Game {
 
             }
             gameState = gameState.forNextTurn();
-            System.out.println(1);
         }
     }
     private static void receiveInfoAll(Map<PlayerId, Player> players, String info){

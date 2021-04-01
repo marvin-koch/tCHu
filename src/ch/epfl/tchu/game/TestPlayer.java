@@ -2,10 +2,7 @@ package ch.epfl.tchu.game;
 
 import ch.epfl.tchu.SortedBag;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 final class TestPlayer implements Player {
     private static final int TURN_LIMIT = 1000;
@@ -16,7 +13,7 @@ final class TestPlayer implements Player {
 
     private int turnCounter;
     private PlayerState ownState;
-    private GameState gameState;
+    private PublicGameState gameState;
 
     // Lorsque nextTurn retourne CLAIM_ROUTE
     private Route routeToClaim;
@@ -43,13 +40,13 @@ final class TestPlayer implements Player {
 
     @Override
     public void updateState(PublicGameState newState, PlayerState ownState) {
-        this.gameState = gameState;
+        this.gameState = newState;
         this.ownState = ownState;
     }
 
     @Override
     public void setInitialTicketChoice(SortedBag<Ticket> tickets) {
-        System.out.println(tickets.size()+" billet distribué" );
+        System.out.println(tickets.size()+" billet distribué(s)" );
         initialTickets = tickets;
     }
 
@@ -72,8 +69,12 @@ final class TestPlayer implements Player {
          */
         List<Route> claimableRoutes = new ArrayList<>();
         for(Route route : allRoutes){
-            if(ownState.canClaimRoute(route) ){
-               claimableRoutes.add(route);
+            if(ownState.canClaimRoute(route)){
+                if(!gameState.claimedRoutes().contains(route)){
+                    claimableRoutes.add(route);
+
+                }
+
             }
         }
 
@@ -92,7 +93,10 @@ final class TestPlayer implements Player {
 
     @Override
     public SortedBag<Ticket> chooseTickets(SortedBag<Ticket> options) {
-        return options;
+        int r = rng.nextInt(options.size());
+        List <Ticket> tickets = options.toList();
+        Collections.shuffle(tickets);
+        return SortedBag.of(tickets.subList(0,r));
     }
 
     @Override
