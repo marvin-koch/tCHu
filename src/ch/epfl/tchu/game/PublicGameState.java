@@ -121,5 +121,4 @@ public class PublicGameState {
         return lastPlayer;
     }
 
-
 }

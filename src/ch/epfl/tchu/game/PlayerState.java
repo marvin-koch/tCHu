@@ -90,12 +90,8 @@ public final class PlayerState extends PublicPlayerState{
      */
     public boolean canClaimRoute(Route route){
         if(route.length()> carCount()) {return false;}
-        for (SortedBag<Card> bag : route.possibleClaimCards()) {
-            if(cards().contains(bag)){
-                return true;
-            }
-        }
-        return false;
+        return route.possibleClaimCards().stream()
+                .anyMatch(bag -> cards().contains(bag));
     }
 
     /**
@@ -106,10 +102,9 @@ public final class PlayerState extends PublicPlayerState{
      */
     public List<SortedBag<Card>> possibleClaimCards(Route route){
         Preconditions.checkArgument(carCount()>= route.length());// pas sûr de ça
-        List<SortedBag<Card>> sortedBagList = route.possibleClaimCards().stream()
+        return route.possibleClaimCards().stream()
                 .filter(bag -> cards().contains(bag))
                 .collect(Collectors.toList());
-        return sortedBagList;
     }
 
     /**
@@ -127,26 +122,28 @@ public final class PlayerState extends PublicPlayerState{
         Preconditions.checkArgument(!initialCards.isEmpty());
         Preconditions.checkArgument(initialCards.toSet().size() <=2);
         Preconditions.checkArgument(drawnCards.size() == Constants.ADDITIONAL_TUNNEL_CARDS);
-        Color claimColor = null;
-        for (Card card: initialCards) {
-            if(card.color() != null){
-                claimColor = card.color();
-            }
-        }
+
+        Color claimColor = initialCards.stream()
+                .map(Card::color)
+                .filter(Objects::nonNull)
+                .findAny()
+                .orElse(null);
         SortedBag<Card> cardsWithoutInitialCards = cards().difference(initialCards);
         SortedBag<Card> usableCards = SortedBag.of();
+
         if (claimColor == null){
             usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.LOCOMOTIVE),Card.LOCOMOTIVE);
         }else{
             usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.of(claimColor)),Card.of(claimColor),
                     cardsWithoutInitialCards.countOf(Card.LOCOMOTIVE),Card.LOCOMOTIVE);
         }
+
         Set<SortedBag<Card>> possibleCards = new HashSet<>();
         if(additionalCardsCount <= usableCards.size())
             possibleCards = usableCards.subsetsOfSize(additionalCardsCount);
+
         List<SortedBag<Card>> options = new ArrayList<>(possibleCards);
-        options.sort(
-                Comparator.comparingInt(cs -> cs.countOf(Card.LOCOMOTIVE)));
+        options.sort(Comparator.comparingInt(cs -> cs.countOf(Card.LOCOMOTIVE)));
 
         return options;
     }
@@ -169,18 +166,16 @@ public final class PlayerState extends PublicPlayerState{
      */
     public int ticketPoints(){
         int max = 0;
-
-        if(!routes().isEmpty())
-        max = routes().stream()
-                .flatMap(route -> Stream.of(route.station1().id(), route.station2().id()))
-                .max(Integer::compare)
-                .get();
+        if(!routes().isEmpty()){
+            max = routes().stream()
+                    .flatMap(route -> Stream.of(route.station1().id(), route.station2().id()))
+                    .max(Integer::compare)
+                    .get();
+        }
 
         StationPartition.Builder builder = new StationPartition.Builder(max + 1);
-        int i = 0;
-        for(Route route : routes()){
-            builder.connect(route.station1(), route.station2());
-        }
+        routes().forEach(route -> builder.connect(route.station1(), route.station2()));
+
         return tickets().stream()
                 .map(billet -> billet.points(builder.build()))
                 .reduce(0, Integer::sum);

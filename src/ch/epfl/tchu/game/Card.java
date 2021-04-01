@@ -48,12 +48,10 @@ public enum Card {
      * @return la carte
      */
     public static Card of(Color color){
-        for(int i = 0; i < COUNT; i++){
-            if (color.equals(ALL.get(i).color())){
-                return ALL.get(i);
-            }
-        }
-        return null;
+       return ALL.stream()
+               .filter(card -> color.equals(card.color()))
+               .findAny()
+               .orElse(null);
     }
 
     /**

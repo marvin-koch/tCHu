@@ -2,6 +2,7 @@ package ch.epfl.tchu.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,7 +34,7 @@ public final class Trail {
         int length = 0;
         if(!routes.isEmpty()){
             length = routes.stream()
-                    .map(route -> route.length())
+                    .map(Route::length)
                     .reduce(0, Integer::sum);
         }
         this.length = length;
@@ -45,7 +46,7 @@ public final class Trail {
      * @return le plus long Trail
      */
     public static Trail longest(List<Route> routes){
-        Trail longestTrail = new Trail(null,null, new ArrayList<Route>());
+        Trail longestTrail = new Trail(null,null, new ArrayList<>());
         int longestLength = 0;
 
         List<Trail> cs = routes.stream()
@@ -54,10 +55,10 @@ public final class Trail {
                 .collect(Collectors.toList());
 
         if(!cs.isEmpty())
-        longestTrail = Collections.max(cs, (t1, t2) -> Integer.compare(t1.length, t2.length));
+            longestTrail = Collections.max(cs, Comparator.comparingInt(t -> t.length));
 
         if(routes.isEmpty()){
-            return new Trail(null,null, new ArrayList<Route>());
+            return new Trail(null,null, new ArrayList<>());
         }else{
             while(!cs.isEmpty()){
                 List<Trail> listeVide = new ArrayList<>();

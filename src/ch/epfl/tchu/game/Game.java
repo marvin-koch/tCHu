@@ -14,7 +14,6 @@ import java.util.*;
  */
 public final class Game {
 
-
     /**
      * Fait jouer une partie de tCHu aux joueurs donnés, dont les noms figurent dans la table playerNames ; les billets disponibles pour cette partie sont ceux de tickets, et le générateur aléatoire rng est utilisé pour créer l'état initial du jeu et pour mélanger les cartes de la défausse pour en faire une nouvelle pioche quand cela est nécessaire 
      * @param players
@@ -27,21 +26,15 @@ public final class Game {
         Preconditions.checkArgument(playernames.size() == 2 && players.size() == 2);
         GameState gameState = GameState.initial(tickets, rng);
         Map<PlayerId, Info> infos = new EnumMap<>(PlayerId.class);
-        infos.put(PlayerId.PLAYER_1,new Info(playernames.get(PlayerId.PLAYER_1)));
-        infos.put(PlayerId.PLAYER_2,new Info(playernames.get(PlayerId.PLAYER_2)));
+        PlayerId.ALL.forEach(id -> infos.put(id,new Info(playernames.get(id))));
 
-        players.forEach((id, player) -> {
-            player.initPlayers(id, playernames);
-        });
-
+        players.forEach((id, player) -> player.initPlayers(id, playernames));
         receiveInfoAll(players, infos.get(gameState.currentPlayerId()).willPlayFirst());
 
-        GameState temp = gameState;
         for (PlayerId id: PlayerId.values() ) {
             SortedBag<Ticket> ticketSortedBag = SortedBag.of(gameState.topTickets(Constants.INITIAL_TICKETS_COUNT));
             gameState = gameState.withoutTopTickets(Constants.INITIAL_TICKETS_COUNT);
             players.get(id).setInitialTicketChoice(ticketSortedBag);
-            //temp = gameState.withInitiallyChosenTickets(id,ticketSortedBag);
         }
 
         updateStateForPlayers(players,gameState);
@@ -87,8 +80,10 @@ public final class Game {
                     break;
 
                 case DRAW_CARDS:
-                    for(int i = 0; i<2; ++i){
-                        if(i==1) {updateStateForPlayers(players,gameState);}
+                    for(int i = 0; i < 2; ++i){
+                        if(i == 1) {
+                            updateStateForPlayers(players,gameState);
+                        }
                         gameState = gameState.withCardsDeckRecreatedIfNeeded(rng);
                         int slot = currentPlayer.drawSlot();
                         if(slot == Constants.DECK_SLOT){
@@ -116,20 +111,23 @@ public final class Game {
                     }else{
                         receiveInfoAll(players,currentInfo.attemptsTunnelClaim(claimedRoute,initialCards));
                         SortedBag.Builder<Card> cardsBuilder = new SortedBag.Builder<>();
+
                         for(int i = 0; i < Constants.ADDITIONAL_TUNNEL_CARDS; i++){
                             gameState = gameState.withCardsDeckRecreatedIfNeeded(rng);
                             cardsBuilder.add(gameState.topCard());
                             gameState = gameState.withoutTopCard();
                         }
+
                         SortedBag<Card> cards = cardsBuilder.build();
                         int additionalCardsCount = claimedRoute.additionalClaimCardsCount(initialCards, cards);
                         receiveInfoAll(players,currentInfo.drewAdditionalCards(cards, additionalCardsCount));
+
                         if(additionalCardsCount== 0) {
                             gameState = gameState.withClaimedRoute(claimedRoute, initialCards);
                             receiveInfoAll(players, currentInfo.claimedRoute(claimedRoute, initialCards));
                         }else{
                             List<SortedBag<Card>> list = currentPlayerState.possibleAdditionalCards(additionalCardsCount,initialCards,cards);
-                            if (list.size()>0){
+                            if (list.size() > 0){
                                 SortedBag<Card> suite = currentPlayer.chooseAdditionalCards(list);
                                 if(!suite.isEmpty()){
                                     SortedBag<Card> union = suite.union(initialCards);
@@ -146,24 +144,31 @@ public final class Game {
                     }
                     break;
             }
+
             if(gameState.lastTurnBegins()){
                 receiveInfoAll(players, currentInfo.lastTurnBegins(currentPlayerState.carCount()));
             }
             if(!(gameState.lastPlayer() == null) && (gameState.lastPlayer().equals(gameState.currentPlayerId()))){
                 updateStateForPlayers(players,gameState);
+                int bonus = Constants.LONGEST_TRAIL_BONUS_POINTS;
                 int currentPlayerPoints = currentPlayerState.finalPoints();
                 int nextPlayerPoints = nextPlayerState.finalPoints();
-                if(Trail.longest(currentPlayerState.routes()).length() > Trail.longest(nextPlayerState.routes()).length()){
-                    currentPlayerPoints += Constants.LONGEST_TRAIL_BONUS_POINTS;
-                    receiveInfoAll(players, currentInfo.getsLongestTrailBonus(Trail.longest(currentPlayerState.routes())));
-                }else if(Trail.longest(currentPlayerState.routes()).length() < Trail.longest(nextPlayerState.routes()).length()){
-                    nextPlayerPoints += Constants.LONGEST_TRAIL_BONUS_POINTS;
-                    receiveInfoAll(players, nextInfo.getsLongestTrailBonus(Trail.longest(nextPlayerState.routes())));
+                Trail currentPlayerTrail = Trail.longest(currentPlayerState.routes());
+                Trail nextPlayerTrail = Trail.longest(nextPlayerState.routes());
+                String currentPlayerBonus = currentInfo.getsLongestTrailBonus(currentPlayerTrail);
+                String nextPlayerBonus = nextInfo.getsLongestTrailBonus(nextPlayerTrail);
+
+                if(currentPlayerTrail.length() > nextPlayerTrail.length()){
+                    currentPlayerPoints += bonus;
+                    receiveInfoAll(players, currentPlayerBonus);
+                }else if(currentPlayerTrail.length() < nextPlayerTrail.length()){
+                    nextPlayerPoints += bonus;
+                    receiveInfoAll(players, nextPlayerBonus);
                 }else{
-                    currentPlayerPoints += Constants.LONGEST_TRAIL_BONUS_POINTS;
-                    nextPlayerPoints += Constants.LONGEST_TRAIL_BONUS_POINTS;
-                    receiveInfoAll(players, currentInfo.getsLongestTrailBonus(Trail.longest(currentPlayerState.routes())));
-                    receiveInfoAll(players, nextInfo.getsLongestTrailBonus(Trail.longest(nextPlayerState.routes())));
+                    currentPlayerPoints += bonus;
+                    nextPlayerPoints += bonus;
+                    receiveInfoAll(players, currentPlayerBonus);
+                    receiveInfoAll(players, nextPlayerBonus);
                 }
 
                 if(currentPlayerPoints > nextPlayerPoints){
@@ -174,23 +179,29 @@ public final class Game {
                     receiveInfoAll(players, Info.draw(new ArrayList<>(playernames.values()), currentPlayerPoints));
 
                 }
-
                 gameHasEnded = true;
-
             }
             gameState = gameState.forNextTurn();
         }
     }
+
+    /**
+     * Communique une information a tout les joueurs
+     * @param players
+     * @param info
+     */
     private static void receiveInfoAll(Map<PlayerId, Player> players, String info){
-        for(PlayerId id : PlayerId.values()){
-            players.get(id).receiveInfo(info);
-        }
+        PlayerId.ALL.forEach(id -> players.get(id).receiveInfo(info));
 
     }
+
+    /**
+     * Mets à jour l'état de tout les joueurs
+     * @param players
+     * @param gameState
+     */
     private static void updateStateForPlayers(Map<PlayerId, Player> players,GameState gameState){
-        for(PlayerId id : PlayerId.values()){
-            players.get(id).updateState(gameState, gameState.playerState(id));
-        }
+        PlayerId.ALL.forEach(id -> players.get(id).updateState(gameState, gameState.playerState(id)));
     }
 
 }

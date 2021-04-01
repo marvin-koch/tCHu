@@ -51,7 +51,6 @@ public class PublicCardState {
 
     }
 
-
     /**
      * Retourne la carte face visible à l'index donné
      * @param slot index

@@ -3,7 +3,6 @@ package ch.epfl.tchu.game;
 import ch.epfl.tchu.Preconditions;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Class Ticket
@@ -41,12 +40,7 @@ public final class Ticket implements Comparable<Ticket>{
      */
     public Ticket(List<Trip> trips){
         Preconditions.checkArgument(!trips.isEmpty());
-        for (Trip trip: trips) {
-            Preconditions.checkArgument(trip
-                    .from()
-                    .name()
-                    .equals(trips.get(0).from().name()));
-        }
+        trips.forEach(trip -> Preconditions.checkArgument(trip.from().name().equals(trips.get(0).from().name())));
         this.trips = new ArrayList<>(trips);
         text = computeText(trips);
     }
@@ -90,11 +84,12 @@ public final class Ticket implements Comparable<Ticket>{
     public int points(StationConnectivity connectivity){
         int maximum = trips.get(0).points(connectivity);
 
-        if(!trips.isEmpty())
-        maximum = trips.stream()
-                .map(trip -> trip.points(connectivity))
-                .max(Integer::compare)
-                .get();
+        if(!trips.isEmpty()) {
+            maximum = trips.stream()
+                    .map(trip -> trip.points(connectivity))
+                    .max(Integer::compare)
+                    .get();
+        }
 
         return maximum;
     }

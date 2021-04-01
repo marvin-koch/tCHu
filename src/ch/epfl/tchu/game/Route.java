@@ -5,6 +5,7 @@ import ch.epfl.tchu.SortedBag;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -118,11 +119,7 @@ public final class Route {
      */
     public Station stationOpposite(Station station){
         Preconditions.checkArgument(station.equals(station1)||station.equals(station2));
-        if(station.equals(station1)){
-            return station2;
-        }else{
-            return station1;
-        }
+        return station.equals(station1) ? station2 : station1;
     }
 
     /**
@@ -173,12 +170,12 @@ public final class Route {
         if(claimCards.countOf(Card.LOCOMOTIVE) == claimCards.size() ){
             return drawnCards.countOf(Card.LOCOMOTIVE);
         }else{
-            Color claimColor = null;
-            for(Card card : claimCards){
-                if(card != Card.LOCOMOTIVE){
-                    claimColor = card.color();
-                }
-            }
+            Color claimColor = claimCards.stream()
+                    .map(Card::color)
+                    .filter(Objects::nonNull)
+                    .findAny()
+                    .orElse(null);
+
             return drawnCards.countOf(Card.of(claimColor)) + drawnCards.countOf(Card.LOCOMOTIVE);
         }
     }

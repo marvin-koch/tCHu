@@ -56,11 +56,11 @@ public final class GameState extends  PublicGameState{
     static public GameState initial(SortedBag<Ticket> tickets, Random rng){
         Deck<Card> pioche = Deck.of(Constants.ALL_CARDS,rng);
         Map<PlayerId, PlayerState> m = new EnumMap<>(PlayerId.class);
-        int nbrCartesInitial = Constants.INITIAL_CARDS_COUNT;
-        m.put(PlayerId.PLAYER_1,PlayerState.initial(pioche.topCards(nbrCartesInitial)));
-        pioche = pioche.withoutTopCards(nbrCartesInitial);
-        m.put(PlayerId.PLAYER_2,PlayerState.initial(pioche.topCards(nbrCartesInitial)));
-        pioche = pioche.withoutTopCards(nbrCartesInitial);
+
+        for(PlayerId id : PlayerId.values()){
+            m.put(id,PlayerState.initial(pioche.topCards(Constants.INITIAL_CARDS_COUNT)));
+            pioche = pioche.withoutTopCards(Constants.INITIAL_CARDS_COUNT);
+        }
 
         return new GameState(Deck.of(tickets, rng),CardState.of(pioche), PlayerId.ALL.get(rng.nextInt(2)),m,null);
     }
@@ -176,7 +176,6 @@ public final class GameState extends  PublicGameState{
     public GameState withChosenAdditionalTickets(SortedBag<Ticket> drawnTickets, SortedBag<Ticket> chosenTickets){
         Preconditions.checkArgument(drawnTickets.contains(chosenTickets));
         PlayerState state = currentPlayerState().withAddedTickets(chosenTickets);
-
         return new GameState(tickets.withoutTopCards(drawnTickets.size()),cardState, currentPlayerId(),copyMap(currentPlayerId() ,state) , lastPlayer());
     }
 
