@@ -5,8 +5,7 @@ import ch.epfl.tchu.Preconditions;
 import java.util.List;
 
 /**
- * Class PublicPlayerState
- *
+ * La classe PublicPlayerState publique et immuable, représente la partie publique de l'état d'un joueur
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
  */

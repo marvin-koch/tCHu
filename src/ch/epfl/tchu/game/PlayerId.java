@@ -3,7 +3,7 @@ package ch.epfl.tchu.game;
 import java.util.List;
 
 /**
- * Type énuméré PlayerId
+ * Le type énuméré PlayerId représente l'identité d'un joueur.
  *
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)

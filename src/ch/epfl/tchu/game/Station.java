@@ -3,7 +3,7 @@ package ch.epfl.tchu.game;
 import ch.epfl.tchu.Preconditions;
 
 /**
- * Class Station
+ * La classe Station publique, finale et immuable, représente une gare
  *
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
@@ -11,7 +11,6 @@ import ch.epfl.tchu.Preconditions;
 public final class Station {
     private final String name;
     private final int id; // entre 0 et 50
-
 
     /**
      *

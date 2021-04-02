@@ -3,7 +3,7 @@ package ch.epfl.tchu.game;
 import ch.epfl.tchu.Preconditions;
 
 /**
- * Class StationPartition
+ * La classe StationPartition publique, finale et immuable, représente une partition (aplatie) de gares
  *
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
@@ -29,15 +29,12 @@ public final class StationPartition implements StationConnectivity {
      */
     @Override
     public boolean connected(Station s1, Station s2) {
-        if((s1.id() >= gares.length) || (s2.id() >= gares.length)){
-           return (s1.id() == s2.id());
-        }else {
-            return (gares[s1.id()] == gares[s2.id()]);
-        }
+
+        return (s1.id() >= gares.length) || (s2.id() >= gares.length) ? s1.id() == s2.id() : gares[s1.id()] == gares[s2.id()];
     }
 
     /**
-     * StationPartition Builder
+     * La classe Builder imbriquée statiquement dans la classe StationPartition, publique et finale, représente un bâtisseur de partition de gare.
      * @author Shangeeth Poobalasingam (329307)
      * @author Marvin Koch (324448)
      */
@@ -50,8 +47,6 @@ public final class StationPartition implements StationConnectivity {
          * @return id du représentant
          */
         private int representative(int id){
-            int avant = id;
-            int apres = 0;
             while(id != gares[id]){
                 id = gares[id];
             }
@@ -60,7 +55,7 @@ public final class StationPartition implements StationConnectivity {
 
         /**
          * Constructeur du Bâtisseur
-         * @param stationCount
+         * @param stationCount nombres de stations
          * @throws IllegalArgumentException si stationCount est négatif
          */
        public Builder(int stationCount){
@@ -89,7 +84,6 @@ public final class StationPartition implements StationConnectivity {
        public StationPartition build(){
            for(int i = 0; i < gares.length; ++i){
                gares[i] = representative(gares[i]);
-
            }
            return new StationPartition(gares);
        }

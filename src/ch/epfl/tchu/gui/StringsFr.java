@@ -1,5 +1,8 @@
 package ch.epfl.tchu.gui;
 
+/**
+ * La classe StringsFr non instanciable, contient la totalité des chaînes de caractères utilisées dans le jeu, rédigées en français.
+ */
 public final class StringsFr {
     private StringsFr() {}
 

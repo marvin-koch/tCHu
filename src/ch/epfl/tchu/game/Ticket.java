@@ -3,9 +3,10 @@ package ch.epfl.tchu.game;
 import ch.epfl.tchu.Preconditions;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- * Class Ticket
+ * La classe Ticket publique, finale et immuable, représente un billet
  *
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
@@ -20,15 +21,15 @@ public final class Ticket implements Comparable<Ticket>{
      * @return le string qui représentent le ticket
      */
     private static String computeText(List<Trip> trips){
+        Trip firstTrip = trips.get(0);
         if(trips.size() == 1){
-            return trips.get(0).from() +" - "+ trips.get(0).to() +" ("+trips.get(0).points() +")";
+            return String.format("%s - %s (%s)", firstTrip.from(), firstTrip.to(), firstTrip.points());
         }else{
-            TreeSet<String> tree = new TreeSet<>();
+            TreeSet<String> tree = trips.stream()
+                    .map(trip -> trip.to().name() + " (" + trip.points() + ")")
+                    .collect(Collectors.toCollection(TreeSet::new));
 
-            for(Trip trip : trips){
-                tree.add(trip.to().name()+" ("+trip.points()+")");
-            }
-            return String.format("%s - {%s}", trips.get(0).from().name(),
+            return String.format("%s - {%s}", firstTrip.from().name(),
                     String.join(", ", tree));
         }
     }
@@ -56,25 +57,10 @@ public final class Ticket implements Comparable<Ticket>{
     }
 
     /**
-     * Méthode qui compare 2 tickets
-     * @param that le ticket auquel il compare
-     * @return retourne un entier négatif quelconque si la première vient avant la seconde dans l'ordre alphabétique,
-     * zéro si les deux sont égales, et un entier positif quelconque sinon.
-     */
-    @Override
-    public int compareTo(Ticket that) {
-        return this
-                .text()
-                .compareTo(that.text());
-    }
-
-    /**
      * Retourne la représentation textuelle
      * @return text représentation textuelle
      */
-    public String text() {
-        return text;
-    }
+    public String text() { return text; }
 
     /**
      * Calcule et retourne le nombre de points du ticket
@@ -82,16 +68,21 @@ public final class Ticket implements Comparable<Ticket>{
      * @return le nombre de points
      */
     public int points(StationConnectivity connectivity){
-        int maximum = trips.get(0).points(connectivity);
-
-        if(!trips.isEmpty()) {
-            maximum = trips.stream()
-                    .map(trip -> trip.points(connectivity))
-                    .max(Integer::compare)
-                    .get();
-        }
-
-        return maximum;
+        return trips.stream()
+                .map(trip -> trip.points(connectivity))
+                .max(Integer::compare)
+                .orElse(0);
     }
 
+    /**
+     * Méthode qui compare 2 tickets
+     * @param that le ticket auquel il compare
+     * @return retourne un entier négatif quelconque si la première vient avant la seconde dans l'ordre alphabétique,
+     * zéro si les deux sont égales, et un entier positif quelconque sinon.
+     */
+    @Override
+    public int compareTo(Ticket that) {
+        return this.text()
+                .compareTo(that.text());
+    }
 }

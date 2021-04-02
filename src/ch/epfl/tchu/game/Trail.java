@@ -1,14 +1,15 @@
 package ch.epfl.tchu.game;
 
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
+import static ch.epfl.tchu.gui.StringsFr.*;
 /**
- * Class Trail
+ * La classe Trail publique, finale et immuable, représente un chemin dans le réseau d'un joueurl
  *
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
@@ -31,13 +32,9 @@ public final class Trail {
         this.station1 = station1;
         this.station2 = station2;
         this.routes = routes;
-        int length = 0;
-        if(!routes.isEmpty()){
-            length = routes.stream()
-                    .map(Route::length)
-                    .reduce(0, Integer::sum);
-        }
-        this.length = length;
+        this.length = routes.stream()
+                .map(Route::length)
+                .reduce(0, Integer::sum);
     }
 
     /**
@@ -46,20 +43,15 @@ public final class Trail {
      * @return le plus long Trail
      */
     public static Trail longest(List<Route> routes){
-        Trail longestTrail = new Trail(null,null, new ArrayList<>());
-        int longestLength = 0;
-
-        List<Trail> cs = routes.stream()
-                .flatMap(route -> Stream.of(new Trail(route.station1(), route.station2(), List.of(route)),
-                        new Trail(route.station2(), route.station1(), List.of(route))))
-                .collect(Collectors.toList());
-
-        if(!cs.isEmpty())
-            longestTrail = Collections.max(cs, Comparator.comparingInt(t -> t.length));
-
         if(routes.isEmpty()){
             return new Trail(null,null, new ArrayList<>());
         }else{
+            List<Trail> cs = routes.stream()
+                    .flatMap(route -> Stream.of(new Trail(route.station1(), route.station2(), List.of(route)),
+                            new Trail(route.station2(), route.station1(), List.of(route))))
+                    .collect(Collectors.toList());
+            Trail longestTrail = Collections.max(cs, Comparator.comparingInt(t -> t.length));
+
             while(!cs.isEmpty()){
                 List<Trail> listeVide = new ArrayList<>();
                 for(Trail trail : cs) {
@@ -67,25 +59,21 @@ public final class Trail {
                         if ((trail.station2.equals(route.station1()) || trail.station2.equals(route.station2())) && !trail.routes.contains(route)) {
                             List<Route> newRoute = new ArrayList<>(trail.routes);
                             newRoute.add(route);
-                            if(trail.station2.equals(route.station1())){
-                                listeVide.add(new Trail(trail.station1, route.station2(), newRoute));
-                            }else{
-                                listeVide.add(new Trail(trail.station1, route.station1(), newRoute));
-                            }
+                            Station station = (trail.station2.equals(route.station1())) ? route.station2() : route.station1();
+                            listeVide.add(new Trail(trail.station1, station, newRoute));
                         }
                     }
                 }
+                Trail finalLongestTrail = longestTrail;
+                longestTrail = listeVide.stream()
+                        .filter(trail -> trail.length() > finalLongestTrail.length())
+                        .max(Comparator.comparingInt(Trail::length))
+                        .orElse(longestTrail);
 
-               for(Trail trail : listeVide) {
-                   if(trail.length() > longestLength){
-                       longestTrail = trail;
-                       longestLength = trail.length();
-                   }
-               }
-               cs = new ArrayList<>(listeVide);
+                cs = new ArrayList<>(listeVide);
             }
+            return longestTrail;
         }
-        return longestTrail;
     }
 
     /**
@@ -120,18 +108,11 @@ public final class Trail {
     public String toString() {
         StringBuilder string = new StringBuilder();
         if(!routes.isEmpty()){
-            string.append(station1.toString());
-            Station actualStation = station1;
-            for(Route route : routes){
-                string.append(" - ");
-                if(route.station1().equals(actualStation)){
-                    string.append(route.station2().toString());
-                    actualStation = route.station2();
-                }else{
-                    string.append(route.station1().toString());
-                    actualStation = route.station1();
-                }
-            }
+            string.append(station1.toString())
+                    .append(routes.stream()
+                            .map(route -> route.station1().equals(station1) ? route.station2() : route.station1())
+                            .map(Station::toString)
+                            .collect(Collectors.joining(EN_DASH_SEPARATOR)));
         }else{
             string.append("Empty Trail");
         }

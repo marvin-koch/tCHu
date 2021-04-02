@@ -7,19 +7,17 @@ import ch.epfl.tchu.gui.Info;
 import java.util.*;
 
 /**
- * Class Game
- *
+ * La classe Game publique, finale et non instanciable, représente une partie de tCHu.
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
  */
 public final class Game {
-
     /**
      * Fait jouer une partie de tCHu aux joueurs donnés, dont les noms figurent dans la table playerNames ; les billets disponibles pour cette partie sont ceux de tickets, et le générateur aléatoire rng est utilisé pour créer l'état initial du jeu et pour mélanger les cartes de la défausse pour en faire une nouvelle pioche quand cela est nécessaire 
-     * @param players
-     * @param playernames
-     * @param tickets
-     * @param rng
+     * @param players map des 2 players
+     * @param playernames map des 2 noms des joueurs
+     * @param tickets tas de billets
+     * @param rng une instance de Random
      * @throws IllegalArgumentException si l'une des deux tables associatives a une taille différente de 2
      */
     public static void play(Map<PlayerId, Player> players, Map<PlayerId, String> playernames, SortedBag<Ticket> tickets, Random rng) {
@@ -100,48 +98,59 @@ public final class Game {
                 case CLAIM_ROUTE:
                     Route claimedRoute = currentPlayer.claimedRoute();
                     SortedBag<Card> initialCards= currentPlayer.initialClaimCards();
-                    if(!currentPlayerState.canClaimRoute(claimedRoute)) {
+
+                    if(!currentPlayerState.canClaimRoute(claimedRoute)) { 
+                        //cas si le joueur ne peut pas claim la route
                         receiveInfoAll(players,currentInfo.didNotClaimRoute(claimedRoute));
-                        break;
-                    }
-                    if(claimedRoute.level().equals(Route.Level.OVERGROUND)){
-                        gameState = gameState.withClaimedRoute(claimedRoute, initialCards);
-                        receiveInfoAll(players, currentInfo.claimedRoute(claimedRoute, initialCards));
-
                     }else{
-                        receiveInfoAll(players,currentInfo.attemptsTunnelClaim(claimedRoute,initialCards));
-                        SortedBag.Builder<Card> cardsBuilder = new SortedBag.Builder<>();
-
-                        for(int i = 0; i < Constants.ADDITIONAL_TUNNEL_CARDS; i++){
-                            gameState = gameState.withCardsDeckRecreatedIfNeeded(rng);
-                            cardsBuilder.add(gameState.topCard());
-                            gameState = gameState.withoutTopCard();
-                        }
-
-                        SortedBag<Card> cards = cardsBuilder.build();
-                        int additionalCardsCount = claimedRoute.additionalClaimCardsCount(initialCards, cards);
-                        receiveInfoAll(players,currentInfo.drewAdditionalCards(cards, additionalCardsCount));
-
-                        if(additionalCardsCount== 0) {
+                        if(claimedRoute.level().equals(Route.Level.OVERGROUND)){
+                            // cas si la route est une route normal 
                             gameState = gameState.withClaimedRoute(claimedRoute, initialCards);
                             receiveInfoAll(players, currentInfo.claimedRoute(claimedRoute, initialCards));
-                        }else{
-                            List<SortedBag<Card>> list = currentPlayerState.possibleAdditionalCards(additionalCardsCount,initialCards,cards);
-                            if (list.size() > 0){
-                                SortedBag<Card> suite = currentPlayer.chooseAdditionalCards(list);
-                                if(!suite.isEmpty()){
-                                    SortedBag<Card> union = suite.union(initialCards);
-                                    gameState = gameState.withClaimedRoute(claimedRoute,union);
-                                    receiveInfoAll(players,currentInfo.claimedRoute(claimedRoute,union));
+
+                        }else{ 
+                            // cas si la route est un tunnel
+                            receiveInfoAll(players,currentInfo.attemptsTunnelClaim(claimedRoute,initialCards));
+                            SortedBag.Builder<Card> cardsBuilder = new SortedBag.Builder<>();
+
+                            for(int i = 0; i < Constants.ADDITIONAL_TUNNEL_CARDS; i++){
+                                gameState = gameState.withCardsDeckRecreatedIfNeeded(rng);
+                                cardsBuilder.add(gameState.topCard());
+                                gameState = gameState.withoutTopCard();
+                            }
+
+                            SortedBag<Card> cards = cardsBuilder.build();
+                            int additionalCardsCount = claimedRoute.additionalClaimCardsCount(initialCards, cards);
+                            receiveInfoAll(players,currentInfo.drewAdditionalCards(cards, additionalCardsCount));
+
+                            if(additionalCardsCount == 0) {
+                                // cas ou il y a aucune cartes additionnels
+                                gameState = gameState.withClaimedRoute(claimedRoute, initialCards);
+                                receiveInfoAll(players, currentInfo.claimedRoute(claimedRoute, initialCards));
+                            }else{
+                                // cas ou il y a des cartes additionnels
+                                List<SortedBag<Card>> list = currentPlayerState.possibleAdditionalCards(additionalCardsCount,initialCards,cards);
+                                if (list.size() > 0){
+                                    // cas ou il possede les cartes additionnels necessaires
+                                    SortedBag<Card> suite = currentPlayer.chooseAdditionalCards(list);
+                                    if(!suite.isEmpty()){
+                                        // cas ou il decide de jouer ses cartes additionnels
+                                        SortedBag<Card> union = suite.union(initialCards);
+                                        gameState = gameState.withClaimedRoute(claimedRoute,union);
+                                        receiveInfoAll(players,currentInfo.claimedRoute(claimedRoute,union));
+                                    }else{
+                                        // cas ou il decide de ne pas jouer ses cartes additionnels
+                                        receiveInfoAll(players,currentInfo.didNotClaimRoute(claimedRoute));
+                                    }
                                 }else{
+                                    // cas ou il ne possede pas les cartes additionnels necessaires
                                     receiveInfoAll(players,currentInfo.didNotClaimRoute(claimedRoute));
                                 }
-                            }else{
-                                receiveInfoAll(players,currentInfo.didNotClaimRoute(claimedRoute));
                             }
+                            gameState = gameState.withMoreDiscardedCards(cards);
                         }
-                        gameState = gameState.withMoreDiscardedCards(cards);
                     }
+
                     break;
             }
 
@@ -187,8 +196,8 @@ public final class Game {
 
     /**
      * Communique une information a tout les joueurs
-     * @param players
-     * @param info
+     * @param players map des 2 players
+     * @param info String à communiquer
      */
     private static void receiveInfoAll(Map<PlayerId, Player> players, String info){
         PlayerId.ALL.forEach(id -> players.get(id).receiveInfo(info));
@@ -197,8 +206,8 @@ public final class Game {
 
     /**
      * Mets à jour l'état de tout les joueurs
-     * @param players
-     * @param gameState
+     * @param players map des 2 players
+     * @param gameState l'etat du jeu
      */
     private static void updateStateForPlayers(Map<PlayerId, Player> players,GameState gameState){
         PlayerId.ALL.forEach(id -> players.get(id).updateState(gameState, gameState.playerState(id)));

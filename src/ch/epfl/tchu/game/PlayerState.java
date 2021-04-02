@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Class PlayerState
  *
+ * La classe PlayerState publique, finale et immuable, représente l'état complet d'un joueur.
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
  */
@@ -37,7 +37,7 @@ public final class PlayerState extends PublicPlayerState{
      */
     public static PlayerState initial(SortedBag<Card> initialCards){
         Preconditions.checkArgument(initialCards.size() == 4);
-        return  new PlayerState(SortedBag.of(),initialCards, Collections.emptyList());
+        return new PlayerState(SortedBag.of(),initialCards, Collections.emptyList());
     }
 
     /**
@@ -129,14 +129,9 @@ public final class PlayerState extends PublicPlayerState{
                 .findAny()
                 .orElse(null);
         SortedBag<Card> cardsWithoutInitialCards = cards().difference(initialCards);
-        SortedBag<Card> usableCards = SortedBag.of();
-
-        if (claimColor == null){
-            usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.LOCOMOTIVE),Card.LOCOMOTIVE);
-        }else{
-            usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.of(claimColor)),Card.of(claimColor),
-                    cardsWithoutInitialCards.countOf(Card.LOCOMOTIVE),Card.LOCOMOTIVE);
-        }
+        SortedBag<Card> usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.LOCOMOTIVE),Card.LOCOMOTIVE);
+        if (!(claimColor == null))
+            usableCards = usableCards.union(SortedBag.of(cardsWithoutInitialCards.countOf(Card.of(claimColor)),Card.of(claimColor)));
 
         Set<SortedBag<Card>> possibleCards = new HashSet<>();
         if(additionalCardsCount <= usableCards.size())
@@ -170,7 +165,7 @@ public final class PlayerState extends PublicPlayerState{
             max = routes().stream()
                     .flatMap(route -> Stream.of(route.station1().id(), route.station2().id()))
                     .max(Integer::compare)
-                    .get();
+                    .orElse(0);
         }
 
         StationPartition.Builder builder = new StationPartition.Builder(max + 1);

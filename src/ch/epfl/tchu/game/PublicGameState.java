@@ -1,16 +1,12 @@
 package ch.epfl.tchu.game;
 
 import ch.epfl.tchu.Preconditions;
-import ch.epfl.tchu.SortedBag;
-
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Class PublicGameState
- *
+ * La classe PublicGameState publique et immuable, représente la partie publique de l'état d'une partie de tCHu.
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
  */
@@ -87,7 +83,7 @@ public class PublicGameState {
 
     /**
      * Retourne la partie publique de l'état du joueur d'identité donnée
-     * @param playerId
+     * @param playerId id du joueurs
      * @return PublicPlayerState de playerId
      */
     public PublicPlayerState playerState(PlayerId playerId){

@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Class Deck
- *
+ * La classe Deck publique, finale et immuable, représente un tas de cartes.
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
  */
@@ -34,7 +33,7 @@ public final class Deck<C extends Comparable<C>> {
     public static <C extends Comparable<C>> Deck<C> of(SortedBag<C> cards, Random rng){
         List<C> cardsList = cards.toList();
         Collections.shuffle(cardsList, rng);
-        return new Deck<C>(cardsList);
+        return new Deck<>(cardsList);
     }
 
     /**

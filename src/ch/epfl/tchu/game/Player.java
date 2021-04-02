@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Interface Player
+ * L'interface Player représente un joueur de tCHu
  *
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
@@ -19,7 +19,7 @@ public interface Player {
      * @author Shangeeth Poobalasingam (329307)
      * @author Marvin Koch (324448)
      */
-    public enum TurnKind{
+    enum TurnKind{
         DRAW_TICKETS,
         DRAW_CARDS,
         CLAIM_ROUTE;
@@ -35,46 +35,46 @@ public interface Player {
      * @param ownId identité au joueur
      * @param playerNames noms des joueurs
      */
-     public void initPlayers(PlayerId ownId, Map<PlayerId, String> playerNames);
+     void initPlayers(PlayerId ownId, Map<PlayerId, String> playerNames);
 
     /**
      * Communique une information au joueur
      * @param info l'information à passée
      */
-     public void receiveInfo(String info);
+     void receiveInfo(String info);
 
     /**
      * Informe le joueur du nouveau état de jeu ainsi que son propre état
-     * @param newState
-     * @param ownState
+     * @param newState etat du jeu publique
+     * @param ownState etat du joueur
      */
-     public void updateState(PublicGameState newState, PlayerState ownState);
+     void updateState(PublicGameState newState, PlayerState ownState);
 
     /**
      * Communique au joueur les 5 billets qui lui ont été distribués au début de la partie
-     * @param tickets
+     * @param tickets tas de 5 billets
      */
-     public void setInitialTicketChoice(SortedBag<Ticket> tickets);
+     void setInitialTicketChoice(SortedBag<Ticket> tickets);
 
     /**
      * Demande au joueur au, début de la partie, quels billets il veut garder
      * @return SortedBag contenant les billets choisis
      */
-     public SortedBag<Ticket> chooseInitialTickets();
+     SortedBag<Ticket> chooseInitialTickets();
 
     /**
      * Demande au joueur au début du tour quel action il veut effectuer
      * @return l'action qu'il désire effectuer
      */
-     public TurnKind nextTurn();
+     TurnKind nextTurn();
 
     /**
      * Appelée lorsque le joueur a décidé de tirer des billets supplémentaires en cours de partie,
      * afin de lui communiquer les billets tirés et de savoir lesquels il garde
-     * @param options
+     * @param options tas de billets tirés
      * @return les billets tirés gardés
      */
-     public SortedBag<Ticket> chooseTickets(SortedBag<Ticket> options);
+     SortedBag<Ticket> chooseTickets(SortedBag<Ticket> options);
 
     /**
      * Appelée lorsque le joueur a décidé de tirer des cartes wagon/locomotive,
@@ -82,20 +82,20 @@ public interface Player {
      * @return S'il désire tirer d'un des emplacements contenant une carte face visible — la valeur retourne est comprise entre 0 et 4 inclus —,
      * s'il désire de tirer de la pioche - la valeur retournée vaut Constants.DECK_SLOT (c-à-d -1)
      */
-     public int drawSlot();
+     int drawSlot();
 
     /**
      * Appelée lorsque le joueur a décidé de (tenter de) s'emparer d'une route, afin de savoir de quelle route il s'agit
      * @return route emparée
      */
-     public Route claimedRoute();
+     Route claimedRoute();
 
     /**
      * Appelée lorsque le joueur a décidé de (tenter de) s'emparer d'une route,
      * afin de savoir quelle(s) carte(s) il désire initialement utiliser pour cela,
      * @return cartes utilisées
      */
-     public SortedBag<Card> initialClaimCards();
+     SortedBag<Card> initialClaimCards();
 
     /**
      * Appelée lorsque le joueur a décidé de tenter de s'emparer d'un tunnel et que des cartes additionnelles sont nécessaires,
@@ -104,6 +104,6 @@ public interface Player {
      * @return cartes utilisées, si le multiensemble retourné est vide,
      * cela signifie que le joueur ne désire pas (ou ne peut pas) choisir l'une de ces possibilités
      */
-     public SortedBag<Card> chooseAdditionalCards(List<SortedBag<Card>> options);
+     SortedBag<Card> chooseAdditionalCards(List<SortedBag<Card>> options);
 
 }

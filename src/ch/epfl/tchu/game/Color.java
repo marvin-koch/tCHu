@@ -3,7 +3,7 @@ package ch.epfl.tchu.game;
 import java.util.List;
 
 /**
- * Type énuméré Color
+ * Type énuméré Color, répresente les huits couleurs dans le jeu
  *
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)

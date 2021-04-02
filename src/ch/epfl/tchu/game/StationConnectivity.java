@@ -1,7 +1,6 @@
 package ch.epfl.tchu.game;
 /**
- * Interface StationConnectivity
- *
+ * L'interface StationConnectivity publique, représente ce que nous appellerons la «connectivité» du réseau d'un joueur,*
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
  */

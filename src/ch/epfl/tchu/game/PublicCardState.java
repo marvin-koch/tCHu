@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Class PublicCardState
+ * La classe PublicCardState publique et immuable, représente (une partie de) l'état des cartes wagon/locomotive qui ne sont pas en main des joueurs
  *
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)

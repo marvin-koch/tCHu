@@ -9,8 +9,7 @@ import java.util.Objects;
 import java.util.Random;
 
 /**
- * Class CardState
- *
+ * La classe CardState publique, finale et immuable, représente l'état des cartes wagon/locomotive qui ne sont pas en main des joueurs.
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
  */

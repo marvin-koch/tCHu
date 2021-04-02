@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * Class Route
+ * La classe Route du publique, finale et immuable, représente une route reliant deux villes voisinese
  *
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)

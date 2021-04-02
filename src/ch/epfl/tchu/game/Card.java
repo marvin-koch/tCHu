@@ -3,7 +3,7 @@ package ch.epfl.tchu.game;
 import java.util.List;
 
 /**
- * Type énuméré Card
+ * Type énuméré Card, représente les huits différents types de cartes du jeu
  *
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
