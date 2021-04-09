@@ -10,10 +10,10 @@ public class GameTest {
 
     @Test
     void testGame(){
-        Map<PlayerId,Player> players = new EnumMap<PlayerId, Player>(PlayerId.class);
-        players.put(PlayerId.PLAYER_1, new TestPlayer(1, ChMap.routes()));
-        players.put(PlayerId.PLAYER_2, new TestPlayer(2, ChMap.routes()));
-        Map<PlayerId,String> playernames = new EnumMap<PlayerId, String>(PlayerId.class);
+        Map<PlayerId,Player> players = new EnumMap<>(PlayerId.class);
+        players.put(PlayerId.PLAYER_1, new TestPlayer(21, ChMap.routes()));
+        players.put(PlayerId.PLAYER_2, new TestPlayer(21, ChMap.routes()));
+        Map<PlayerId,String> playernames = new EnumMap<>(PlayerId.class);
         playernames.put(PlayerId.PLAYER_1, "Marvin");
         playernames.put(PlayerId.PLAYER_2, "Shangeeth");
 
@@ -88,9 +88,7 @@ public class GameTest {
                 if(ownState.canClaimRoute(route)){
                     if(!gameState.claimedRoutes().contains(route)){
                         claimableRoutes.add(route);
-
                     }
-
                 }
             }
 
