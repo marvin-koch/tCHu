@@ -50,26 +50,7 @@ public final class Game {
         }
 
         boolean gameHasEnded = false;
-        /*
-        int tour = 1;//todo effacer ca
-
-         */
         while(!gameHasEnded){
-            /*
-            System.out.println("Tour "+ tour);tour++;
-            System.out.println("main de marvin : "+(gameState.playerState(PlayerId.PLAYER_1).cards().size()));
-            System.out.println("main de Shangeeth :"+gameState.playerState(PlayerId.PLAYER_2).cards().size());
-            System.out.println("deck : "+gameState.cardState().deckSize());
-            System.out.println("defausse : "+gameState.cardState().discardsSize());
-            System.out.println("Total : "+(gameState.playerState(PlayerId.PLAYER_1).cards().size() + gameState.playerState(PlayerId.PLAYER_2).cards().size()+gameState.cardState().deckSize()+gameState.cardState().discardsSize()));
-            System.out.println("Point claim Marvin : "+ gameState.playerState(PlayerId.PLAYER_1).claimPoints());
-            System.out.println("Point claim Shangeeth : "+ gameState.playerState(PlayerId.PLAYER_2).claimPoints());
-            System.out.println("Point ticket Marvin : "+ gameState.playerState(PlayerId.PLAYER_1).ticketPoints());
-            System.out.println("Point ticket Shangeeth : "+ gameState.playerState(PlayerId.PLAYER_2).ticketPoints());
-            System.out.println("Point Marvin : "+ gameState.playerState(PlayerId.PLAYER_1).finalPoints());
-            System.out.println("Point Shangeeth : "+ gameState.playerState(PlayerId.PLAYER_2).finalPoints());
-
-             */
             Player currentPlayer = players.get(gameState.currentPlayerId());
             Info currentInfo = infos.get(gameState.currentPlayerId());
             Info nextInfo = infos.get(gameState.currentPlayerId().next());
