@@ -118,5 +118,19 @@ public class SerdeTest {
         assertEquals(gs.lastPlayer(), PUBLIC_GAME_STATE_SERDE.deserialize("40:6,7,2,0,6;30;31:1:10;11;0,1:20;21;:").lastPlayer());
     }
 
+    @Test
+    void LISTBAGCARD_Test() {
+        List<SortedBag<Card>> lsbc = List.of(SortedBag.of( 1, Card.GREEN, 3, Card.ORANGE), SortedBag.of(5, Card.WHITE), SortedBag.of(2, Card.RED));
+        String s = "3,5,5,5;7,7,7,7,7;6,6";
+
+        assertEquals(s, LIST_SORTEDBAG_CARD_SERD.serialize(lsbc));
+        assertEquals(lsbc, LIST_SORTEDBAG_CARD_SERD.deserialize(s));
+
+        assertEquals("", LIST_SORTEDBAG_CARD_SERD.serialize(List.of(SortedBag.of())));
+        assertEquals(List.of(SortedBag.of()), LIST_SORTEDBAG_CARD_SERD.deserialize(""));
+    }
+
+
+
 
 }
