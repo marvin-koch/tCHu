@@ -17,7 +17,9 @@ import static ch.epfl.tchu.game.Constants.*;
 public final class Game {
     /**
      * Fait jouer une partie de tCHu aux joueurs donnés, dont les noms figurent dans la table playerNames,
-     * les billets disponibles pour cette partie sont ceux de tickets, et le générateur aléatoire rng est utilisé pour créer l'état initial du jeu et pour mélanger les cartes de la défausse pour en faire une nouvelle pioche quand cela est nécessaire
+     * les billets disponibles pour cette partie sont ceux de tickets,
+     * et le générateur aléatoire rng est utilisé pour créer l'état initial du jeu
+     * et pour mélanger les cartes de la défausse pour en faire une nouvelle pioche quand cela est nécessaire
      * @param players map des 2 players
      * @param playernames map des 2 noms des joueurs
      * @param tickets tas de billets
@@ -56,6 +58,7 @@ public final class Game {
             Info nextInfo = infos.get(gameState.currentPlayerId().next());
             PlayerState currentPlayerState = gameState.currentPlayerState();
             PlayerState nextPlayerState = gameState.playerState(gameState.currentPlayerId().next());
+
             updateStateForPlayers(players,gameState);
             Player.TurnKind turn = currentPlayer.nextTurn();
             receiveInfoAll(players, currentInfo.canPlay());

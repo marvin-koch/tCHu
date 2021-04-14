@@ -48,7 +48,9 @@ public final class GameState extends  PublicGameState{
     }
 
     /**
-     * Retourne l'état initial d'une partie de tCHu dans laquelle la pioche des billets contient les billets donnés et la pioche des cartes contient les cartes de Constants.ALL_CARDS, sans les 8 (2×4) du dessus, distribuées aux joueurs; ces pioches sont mélangées au moyen du générateur aléatoire donné, qui est aussi utilisé pour choisir au hasard l'identité du premier joueur.
+     * Retourne l'état initial d'une partie de tCHu dans laquelle la pioche des billets contient les billets donnés et la pioche des cartes contient les cartes de Constants.ALL_CARDS,
+     * sans les 8 (2×4) du dessus, distribuées aux joueurs;
+     * ces pioches sont mélangées au moyen du générateur aléatoire donné, qui est aussi utilisé pour choisir au hasard l'identité du premier joueur.
      * @param tickets billets
      * @param rng randomizer
      * @return Game State initialisée
@@ -141,7 +143,8 @@ public final class GameState extends  PublicGameState{
 
 
     /**
-     * Retourne un état identique au récepteur sauf si la pioche de cartes est vide, auquel cas elle est recréée à partir de la défausse, mélangée au moyen du générateur aléatoire donné
+     * Retourne un état identique au récepteur sauf si la pioche de cartes est vide,
+     * auquel cas elle est recréée à partir de la défausse, mélangée au moyen du générateur aléatoire donné
      * @param rng randomizer
      * @return GameState actualisé
      */
@@ -177,7 +180,8 @@ public final class GameState extends  PublicGameState{
 
 
     /**
-     * Retourne un état identique au récepteur si ce n'est que la carte face retournée à l'emplacement donné a été placée dans la main du joueur courant, et remplacée par celle au sommet de la pioche
+     * Retourne un état identique au récepteur si ce n'est que la carte face retournée à l'emplacement donné a été placée dans la main du joueur courant,
+     * et remplacée par celle au sommet de la pioche
      * @param slot le slot choisi par le joueur
      * @throws IllegalArgumentException s'il n'est pas possible de tirer des cartes, c-à-d si canDrawCards retourne faux
      * @return GameState actualisé
@@ -223,7 +227,8 @@ public final class GameState extends  PublicGameState{
 
 
     /**
-     * Retourne un état identique au récepteur si ce n'est que le joueur courant est celui qui suit le joueur courant actuel; de plus, si lastTurnBegins retourne vrai, le joueur courant actuel devient le dernier joueur
+     * Retourne un état identique au récepteur si ce n'est que le joueur courant est celui qui suit le joueur courant actuel;
+     * de plus, si lastTurnBegins retourne vrai, le joueur courant actuel devient le dernier joueur
      * @return GameState
      */
     public GameState forNextTurn(){

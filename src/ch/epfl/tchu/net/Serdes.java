@@ -80,7 +80,7 @@ public final class Serdes {
     /**
      * Serde d'une liste de SortedBag de Card
      */
-    public static final Serde<List<SortedBag<Card>>> LIST_SORTEBAG_CARD_SERD = Serde.listOf(SORTEDBAG_CARD_SERDE,";");
+    public static final Serde<List<SortedBag<Card>>> LIST_SORTEDBAG_CARD_SERD = Serde.listOf(SORTEDBAG_CARD_SERDE,";");
 
     /**
      *  Serde d'un PublicCardState

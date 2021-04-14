@@ -19,7 +19,10 @@ public class PublicGameState {
     final private PlayerId lastPlayer;
 
     /**
-     * Construit la partie publique de l'état d'une partie de tCHu dans laquelle la pioche de billets a une taille de ticketsCount, l'état public des cartes wagon/locomotive est cardState, le joueur courant est currentPlayerId, l'état public des joueurs est contenu dans playerState, et l'identité du dernier joueur est lastPlayer (qui peut être null si cette identité est encore inconnue)
+     * Construit la partie publique de l'état d'une partie de tCHu dans laquelle la pioche de billets a une taille de ticketsCount,
+     * l'état public des cartes wagon/locomotive est cardState, le joueur courant est currentPlayerId,
+     * l'état public des joueurs est contenu dans playerState,
+     * et l'identité du dernier joueur est lastPlayer (qui peut être null si cette identité est encore inconnue)
      * @param ticketsCount taille de la pioche
      * @param cardState  l'état public des cartes wagon/locomotive
      * @param currentPlayerId le joueur courant

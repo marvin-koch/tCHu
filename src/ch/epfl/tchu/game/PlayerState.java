@@ -30,7 +30,8 @@ public final class PlayerState extends PublicPlayerState{
     }
 
     /**
-     * Retourne l'état initial d'un joueur auquel les cartes initiales données ont été distribuées ; dans cet état initial, le joueur ne possède encore aucun billet, et ne s'est emparé d'aucune route
+     * Retourne l'état initial d'un joueur auquel les cartes initiales données ont été distribuées;
+     * dans cet état initial, le joueur ne possède encore aucun billet, et ne s'est emparé d'aucune route
      * @param initialCards tas initial
      * @throws IllegalArgumentException si le nombre de cartes initiales ne vaut pas 4
      * @return PlayerState
@@ -84,7 +85,8 @@ public final class PlayerState extends PublicPlayerState{
     }
 
     /**
-     * Retourne vrai ssi le joueur peut s'emparer de la route donnée, c-à-d s'il lui reste assez de wagons et s'il possède les cartes nécessaires,
+     * Retourne vrai ssi le joueur peut s'emparer de la route donnée,
+     * c-à-d s'il lui reste assez de wagons et s'il possède les cartes nécessaires,
      * @param route route
      * @return boolean
      */
@@ -113,7 +115,8 @@ public final class PlayerState extends PublicPlayerState{
      * @param additionalCardsCount nombres de cartes à jouer en plus
      * @param initialCards cartes jouer par le joueur
      * @param drawnCards cartes tirées du sommet
-     * @throws IllegalArgumentException si le nombre de cartes additionnelles n'est pas compris entre 1 et 3 (inclus), si l'ensemble des cartes initiales est vide ou contient plus de 2 types de cartes différents,
+     * @throws IllegalArgumentException si le nombre de cartes additionnelles n'est pas compris entre 1 et 3 (inclus),
+     * si l'ensemble des cartes initiales est vide ou contient plus de 2 types de cartes différents,
      * ou si l'ensemble des cartes tirées ne contient pas exactement 3 cartes
      * @return List<SortedBag<Card>>
      */
@@ -123,13 +126,14 @@ public final class PlayerState extends PublicPlayerState{
         Preconditions.checkArgument(initialCards.toSet().size() <=2);
         Preconditions.checkArgument(drawnCards.size() == Constants.ADDITIONAL_TUNNEL_CARDS);
 
+        SortedBag<Card> cardsWithoutInitialCards = cards().difference(initialCards);
+        SortedBag<Card> usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.LOCOMOTIVE),Card.LOCOMOTIVE);
         Color claimColor = initialCards.stream()
                 .map(Card::color)
                 .filter(Objects::nonNull)
                 .findAny()
                 .orElse(null);
-        SortedBag<Card> cardsWithoutInitialCards = cards().difference(initialCards);
-        SortedBag<Card> usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.LOCOMOTIVE),Card.LOCOMOTIVE);
+
         if (!(claimColor == null))
             usableCards = usableCards.union(SortedBag.of(cardsWithoutInitialCards.countOf(Card.of(claimColor)),Card.of(claimColor)));
 
@@ -139,7 +143,6 @@ public final class PlayerState extends PublicPlayerState{
 
         List<SortedBag<Card>> options = new ArrayList<>(possibleCards);
         options.sort(Comparator.comparingInt(cs -> cs.countOf(Card.LOCOMOTIVE)));
-
         return options;
     }
 

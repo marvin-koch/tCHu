@@ -26,9 +26,11 @@ public class PublicPlayerState {
         this.ticketCount = ticketCount;
         this.cardCount = cardCount;
         this.routes = routes;
+
         wagonCount = Constants.INITIAL_CAR_COUNT - routes.stream()
                 .map(Route::length)
                 .reduce(0, Integer::sum);
+
         claimPoint = routes.stream()
                 .map(Route::claimPoints)
                 .reduce(0, Integer::sum);
