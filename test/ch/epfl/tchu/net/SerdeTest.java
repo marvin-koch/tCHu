@@ -127,7 +127,10 @@ public class SerdeTest {
         assertEquals(lsbc, LIST_SORTEDBAG_CARD_SERD.deserialize(s));
 
         assertEquals("", LIST_SORTEDBAG_CARD_SERD.serialize(List.of(SortedBag.of())));
-        assertEquals(List.of(SortedBag.of()), LIST_SORTEDBAG_CARD_SERD.deserialize(""));
+        assertEquals(List.of(), LIST_SORTEDBAG_CARD_SERD.deserialize(""));//TODO Return List.of(), à la place de List.of(SortedBag.of())
+
+        assertEquals("3,5;", LIST_SORTEDBAG_CARD_SERD.serialize(List.of(SortedBag.of(1, Card.GREEN, 1, Card.ORANGE), SortedBag.of())));
+        assertEquals(List.of(SortedBag.of(1, Card.GREEN, 1, Card.ORANGE), SortedBag.of()), LIST_SORTEDBAG_CARD_SERD.deserialize("3,5;"));
     }
 
 

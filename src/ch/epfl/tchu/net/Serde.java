@@ -145,7 +145,6 @@ public interface Serde<T>{
                             .map(serde::deserialize)
                             .collect(Collectors.toList()));
                 }
-
             }
         };
     }
