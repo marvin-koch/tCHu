@@ -123,14 +123,14 @@ public class SerdeTest {
         List<SortedBag<Card>> lsbc = List.of(SortedBag.of( 1, Card.GREEN, 3, Card.ORANGE), SortedBag.of(5, Card.WHITE), SortedBag.of(2, Card.RED));
         String s = "3,5,5,5;7,7,7,7,7;6,6";
 
-        assertEquals(s, LIST_SORTEDBAG_CARD_SERD.serialize(lsbc));
-        assertEquals(lsbc, LIST_SORTEDBAG_CARD_SERD.deserialize(s));
+        assertEquals(s, LIST_SORTEDBAG_CARD_SERDE.serialize(lsbc));
+        assertEquals(lsbc, LIST_SORTEDBAG_CARD_SERDE.deserialize(s));
 
-        assertEquals("", LIST_SORTEDBAG_CARD_SERD.serialize(List.of(SortedBag.of())));
-        assertEquals(List.of(), LIST_SORTEDBAG_CARD_SERD.deserialize(""));//TODO Return List.of(), à la place de List.of(SortedBag.of())
+        assertEquals("", LIST_SORTEDBAG_CARD_SERDE.serialize(List.of(SortedBag.of())));
+        assertEquals(List.of(), LIST_SORTEDBAG_CARD_SERDE.deserialize(""));//TODO Return List.of(), à la place de List.of(SortedBag.of())
 
-        assertEquals("3,5;", LIST_SORTEDBAG_CARD_SERD.serialize(List.of(SortedBag.of(1, Card.GREEN, 1, Card.ORANGE), SortedBag.of())));
-        assertEquals(List.of(SortedBag.of(1, Card.GREEN, 1, Card.ORANGE), SortedBag.of()), LIST_SORTEDBAG_CARD_SERD.deserialize("3,5;"));
+        assertEquals("3,5;", LIST_SORTEDBAG_CARD_SERDE.serialize(List.of(SortedBag.of(1, Card.GREEN, 1, Card.ORANGE), SortedBag.of())));
+        assertEquals(List.of(SortedBag.of(1, Card.GREEN, 1, Card.ORANGE), SortedBag.of()), LIST_SORTEDBAG_CARD_SERDE.deserialize("3,5;"));
     }
 
 
