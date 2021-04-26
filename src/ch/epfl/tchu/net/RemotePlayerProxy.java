@@ -172,23 +172,6 @@ public final class RemotePlayerProxy implements Player {
     }
 
     private void write(MessageId id, String arguments){
-
-       /* try (socket;
-             BufferedWriter w =
-                     new BufferedWriter(
-                             new OutputStreamWriter(socket.getOutputStream(),
-                                     US_ASCII))) {
-        try{
-            w.write(id.name() + " " + arguments + " " + '\n');
-                        w.flush();
-        }catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }*/
-
         try{
             w.write(id.name() + " " + arguments);
             w.write('\n');
@@ -196,8 +179,6 @@ public final class RemotePlayerProxy implements Player {
         }catch (IOException e) {
             throw new UncheckedIOException(e);
         }
-
-
     }
 
     private void write(MessageId id){
@@ -205,34 +186,11 @@ public final class RemotePlayerProxy implements Player {
     }
 
     private String read(){
-
-/*
-        try (socket;
-             BufferedReader r =
-                     new BufferedReader(
-                             new InputStreamReader(socket.getInputStream(),
-                                     US_ASCII));){
-             String string = r.readLine();
-             //r.close();
-             System.out.println(string);
-             return string;
-
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-        */
-
-
-
         try{
             String string = r.readLine();
-            //r.close();
             return string;
-            //return string.replace(" ", "");
         }catch (IOException e) {
             throw new UncheckedIOException(e);
         }
-
-
     }
 }

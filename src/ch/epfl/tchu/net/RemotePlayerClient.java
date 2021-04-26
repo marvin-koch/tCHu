@@ -4,7 +4,6 @@ import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.game.*;
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.EnumMap;
 import java.util.List;
@@ -120,5 +119,4 @@ public final class RemotePlayerClient{
             throw new UncheckedIOException(e);
         }
     }
-
 }
