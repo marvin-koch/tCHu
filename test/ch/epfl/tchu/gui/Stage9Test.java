@@ -3,6 +3,7 @@ package ch.epfl.tchu.gui;
 import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.game.*;
 import javafx.application.Application;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -22,20 +23,18 @@ public final class Stage9Test extends Application {
     public void start(Stage primaryStage) {
         ObservableGameState gameState = new ObservableGameState(PLAYER_1);
 
-        /*
-        ObjectProperty<ClaimRouteHandler> claimRoute =
+        ObjectProperty<ActionHandlers.ClaimRouteHandler> claimRoute =
                 new SimpleObjectProperty<>(Stage9Test::claimRoute);
-        ObjectProperty<DrawTicketsHandler> drawTickets =
+        ObjectProperty<ActionHandlers.DrawTicketsHandler> drawTickets =
                 new SimpleObjectProperty<>(Stage9Test::drawTickets);
-        ObjectProperty<DrawCardHandler> drawCard =
+        ObjectProperty<ActionHandlers.DrawCardHandler> drawCard =
                 new SimpleObjectProperty<>(Stage9Test::drawCard);
 
-         */
 
         Node mapView = MapViewCreator
-                .createMapView(gameState/*, claimRoute, Stage9Test::chooseCards*/);
+                .createMapView(gameState, claimRoute, Stage9Test::chooseCards);
         Node cardsView = DecksViewCreator
-                .createCardsView(gameState/* drawTickets, drawCard*/);
+                .createCardsView(gameState, drawTickets, drawCard);
         Node handView = DecksViewCreator
                 .createHandView(gameState);
 
@@ -71,13 +70,11 @@ public final class Stage9Test extends Application {
                 route.station1(), route.station2(), cards);
     }
 
-    /*
     private static void chooseCards(List<SortedBag<Card>> options,
-                                    ChooseCardsHandler chooser) {
+                                    ActionHandlers.ChooseCardsHandler chooser) {
         chooser.onChooseCards(options.get(0));
     }
 
-     */
 
     private static void drawTickets() {
         System.out.println("Tirage de billets !");

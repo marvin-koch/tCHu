@@ -20,8 +20,8 @@ import static ch.epfl.tchu.net.Serdes.*;
  */
 public final class RemotePlayerProxy implements Player {
     private final Socket socket;
-    BufferedWriter w;
-    BufferedReader r;
+    private final BufferedWriter w;
+    private final BufferedReader r;
 
     /**
      * Constructeur de socket
