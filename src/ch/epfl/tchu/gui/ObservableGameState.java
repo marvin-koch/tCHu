@@ -14,35 +14,34 @@ import javafx.util.Pair;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ObservableGameState {
-    private PlayerId id;
+public final class ObservableGameState {
+    private final PlayerId id;
     private PublicGameState publicGameState;
     private PlayerState playerState;
 
     //Propriétés de PublicGameState
-    private IntegerProperty ticketPourcentage;
-    private IntegerProperty cartePourcentage;
-    private List<ObjectProperty<Card>> faceUpCards;
-    private Map<Route, ObjectProperty<PlayerId>> routesProperties = new HashMap<>();
+    private final IntegerProperty ticketPourcentage;
+    private final IntegerProperty cartePourcentage;
+    private final List<ObjectProperty<Card>> faceUpCards;
+    private final Map<Route, ObjectProperty<PlayerId>> routesProperties = new HashMap<>();
 
     //Propriétés publics des PlayerStates
-    private IntegerProperty player1TicketCount;
-    private IntegerProperty player2TicketCount;
-    private IntegerProperty player1CardCount;
-    private IntegerProperty player2CardCount;
-    private IntegerProperty player1WagonCount;
-    private IntegerProperty player2WagonCount;
-    private IntegerProperty player1PointsCount;
-    private IntegerProperty player2PointsCount;
+    private final IntegerProperty player1TicketCount;
+    private final IntegerProperty player2TicketCount;
+    private final IntegerProperty player1CardCount;
+    private final IntegerProperty player2CardCount;
+    private final IntegerProperty player1WagonCount;
+    private final IntegerProperty player2WagonCount;
+    private final IntegerProperty player1PointsCount;
+    private final IntegerProperty player2PointsCount;
 
     //Propriétés de privées de PlayerState
-    private ObservableList<String> playerTicketsList;
-    private Map<Card, IntegerProperty> cardsCountMap = new HashMap<>();
-    private Map<Route, BooleanProperty> routeStatusMap = new HashMap<>();
+    private final ObservableList<String> playerTicketsList;
+    private final Map<Card, IntegerProperty> cardsCountMap = new HashMap<>();
+    private final Map<Route, BooleanProperty> routeStatusMap = new HashMap<>();
 
     private static final Map<List<Station>,List<Route>> STATION_PAIRS = createPairs();
 
-    //TODO check immuabilité
     public ObservableGameState(PlayerId id) {
         this.id = id;
         publicGameState = null;
@@ -96,7 +95,9 @@ public class ObservableGameState {
         player2PointsCount.set(gs.playerState(id.next()).claimPoints());
 
         //TODO pas sur String ou List???
-        playerTicketsList.setAll(ps.tickets().stream().map(Ticket::text).collect(Collectors.toList()));
+        playerTicketsList.setAll(ps.tickets().stream()
+                .map(Ticket::text)
+                .collect(Collectors.toList()));
 
         for (Card card : Card.values()) {
             cardsCountMap.get(card).set(ps.cards().countOf(card));
@@ -105,15 +106,32 @@ public class ObservableGameState {
         for (Route route: routeStatusMap.keySet()) {
             if(id == publicGameState.currentPlayerId() && routesProperties.get(route).get() == null && ps.canClaimRoute(route)){
                 for(List<Station> list : STATION_PAIRS.keySet()){
+                    List<Route> voisinage = STATION_PAIRS.get(list);
                     if(list.get(0) == route.station1() && list.get(1) == route.station2()){
-                        if(STATION_PAIRS.get(list).size()== 1){
+                        /*
+                        boolean canBeTaken = true;
+                        for(Route routeVoisine : voisinage){
+                            if (routesProperties.get(routeVoisine).get() != null)
+                                canBeTaken = false;
+                        }
+                        routeStatusMap.get(route).set(canBeTaken);
+
+                         */
+
+                        routeStatusMap.get(route).set(voisinage.stream()
+                                .noneMatch(routeV -> routesProperties.get(routeV).get() != null));
+
+                        /*
+                        if(voisinage.size()== 1){
                             routeStatusMap.get(route).set(true);
                         }else{
-                            Preconditions.checkArgument(STATION_PAIRS.get(list).size() == 2);
-                            boolean bool = (routesProperties.get((STATION_PAIRS.get(list).get(0))).get() == null) && (routesProperties.get(STATION_PAIRS.get(list).get(1)).get() == null);
+                            Preconditions.checkArgument(voisinage.size() == 2);
+                            boolean bool = (routesProperties.get((voisinage.get(0))).get() == null) && (routesProperties.get(voisinage.get(1)).get() == null);
                             routeStatusMap.get(route).set(bool);
 
                         }
+
+                         */
                     }
                 }
             }else{
@@ -214,7 +232,7 @@ public class ObservableGameState {
         return publicGameState.canDrawTickets();
     }
     public List<SortedBag<Card>> possibleClaimCards(Route route){
-        return playerState.possibleClaimCards(route);
+        return List.copyOf(playerState.possibleClaimCards(route));
     }
 
 }

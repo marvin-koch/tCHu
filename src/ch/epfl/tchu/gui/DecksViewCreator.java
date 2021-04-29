@@ -34,9 +34,8 @@ class DecksViewCreator {
         HBox hBox = new HBox();
         hBox.getStylesheets().addAll("decks.css", "colors.css");
 
-        ListView<String> billets = new ListView<>();
+        ListView<String> billets = new ListView<>(observableGameState.getPlayerTicketsList());
         billets.setId("tickets");
-        billets.setItems(observableGameState.getPlayerTicketsList());
         HBox hBoxSon = new HBox();
         hBoxSon.setId("hand-pane");
 
@@ -59,7 +58,6 @@ class DecksViewCreator {
             hBoxSon.getChildren().add(carteAndCompteur);
 
         }
-
         return hBox;
     }
 
@@ -89,13 +87,13 @@ class DecksViewCreator {
         Group jaugeBillets = new Group(bgBillets, fgBillets);
         Group jaugeCartes = new Group(bgCartes, fgCartes);
 
-        Button piocheBillets = new Button();
+        Button piocheBillets = new Button("Billets");
         piocheBillets.getStyleClass().add("gauged");
         piocheBillets.setGraphic(jaugeBillets);
         piocheBillets.disableProperty().bind(drawTicket.isNull());
         piocheBillets.setOnMouseClicked(event -> drawTicket.get().onDrawTickets());
 
-        Button piocheCartes = new Button();
+        Button piocheCartes = new Button("Cartes");
         piocheCartes.getStyleClass().add("gauged");
         piocheCartes.setGraphic(jaugeCartes);
         piocheCartes.disableProperty().bind(drawCard.isNull());
@@ -105,16 +103,23 @@ class DecksViewCreator {
 
         for (int slot : Constants.FACE_UP_CARD_SLOTS) {
             ReadOnlyObjectProperty<Card> cardProperty = observableGameState.getFaceUpCards(slot);
+            StackPane cartePane = new StackPane();
+            cartePane.getStyleClass().addAll(null, "card");
+            if(!(cardProperty.get() == null)){
+                Card card = cardProperty.get();
+                String color = card.color() == null ? "NEUTRAL" : card.color().name();
+                cartePane.getStyleClass().set(0, color);
+            }
+            /*
             Card card = cardProperty.get() == null ? Card.BLACK : cardProperty.get();
-            StackPane carte = new StackPane();
-            String color = card.color() == null ? "NEUTRAL" : card.color().name();
-            carte.getStyleClass().addAll(color, "card");
 
-            carte.getChildren().addAll(createRectangles());
-            vBox.getChildren().add(carte);
+             */
 
-            cardProperty.addListener((l,oV, nV) -> carte.getStyleClass().set(0, nV.name()));
-            carte.setOnMouseClicked(event -> drawCard.get().onDrawCard(slot));
+            cartePane.getChildren().addAll(createRectangles());
+            vBox.getChildren().add(cartePane);
+
+            cardProperty.addListener((l,oV, nV) -> cartePane.getStyleClass().set(0, nV.name()));
+            cartePane.setOnMouseClicked(event -> drawCard.get().onDrawCard(slot));
         }
         vBox.getChildren().add(piocheCartes);
 
