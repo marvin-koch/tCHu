@@ -87,13 +87,13 @@ class DecksViewCreator {
         Group jaugeBillets = new Group(bgBillets, fgBillets);
         Group jaugeCartes = new Group(bgCartes, fgCartes);
 
-        Button piocheBillets = new Button("Billets");
+        Button piocheBillets = new Button(StringsFr.TICKETS);
         piocheBillets.getStyleClass().add("gauged");
         piocheBillets.setGraphic(jaugeBillets);
         piocheBillets.disableProperty().bind(drawTicket.isNull());
         piocheBillets.setOnMouseClicked(event -> drawTicket.get().onDrawTickets());
 
-        Button piocheCartes = new Button("Cartes");
+        Button piocheCartes = new Button(StringsFr.CARDS);
         piocheCartes.getStyleClass().add("gauged");
         piocheCartes.setGraphic(jaugeCartes);
         piocheCartes.disableProperty().bind(drawCard.isNull());
