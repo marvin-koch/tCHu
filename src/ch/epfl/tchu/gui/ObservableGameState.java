@@ -36,7 +36,7 @@ public final class ObservableGameState {
     private final IntegerProperty player2PointsCount;
 
     //Propriétés de privées de PlayerState
-    private final ObservableList<String> playerTicketsList;
+    private final ObservableList<Ticket> playerTicketsList;
     private final Map<Card, IntegerProperty> cardsCountMap = new HashMap<>();
     private final Map<Route, BooleanProperty> routeStatusMap = new HashMap<>();
 
@@ -95,9 +95,7 @@ public final class ObservableGameState {
         player2PointsCount.set(gs.playerState(id.next()).claimPoints());
 
         //TODO pas sur String ou List???
-        playerTicketsList.setAll(ps.tickets().stream()
-                .map(Ticket::text)
-                .collect(Collectors.toList()));
+        playerTicketsList.setAll(ps.tickets().toList());
 
         for (Card card : Card.values()) {
             cardsCountMap.get(card).set(ps.cards().countOf(card));
@@ -214,7 +212,7 @@ public final class ObservableGameState {
         return player2PointsCount;
     }
 
-    public ObservableList<String> getPlayerTicketsList() {
+    public ObservableList<Ticket> getPlayerTicketsList() {
         return playerTicketsList;
     }
 

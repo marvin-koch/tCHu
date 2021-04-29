@@ -34,7 +34,7 @@ class DecksViewCreator {
         HBox hBox = new HBox();
         hBox.getStylesheets().addAll("decks.css", "colors.css");
 
-        ListView<String> billets = new ListView<>(observableGameState.getPlayerTicketsList());
+        ListView<Ticket> billets = new ListView<>(observableGameState.getPlayerTicketsList());
         billets.setId("tickets");
         HBox hBoxSon = new HBox();
         hBoxSon.setId("hand-pane");

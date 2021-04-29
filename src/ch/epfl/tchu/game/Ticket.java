@@ -85,4 +85,13 @@ public final class Ticket implements Comparable<Ticket>{
         return this.text()
                 .compareTo(that.text());
     }
+
+    /**
+     * Rédefinition de toString()
+     * @return text
+     */
+    @Override
+    public String toString(){
+        return text;
+    }
 }
