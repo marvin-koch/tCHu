@@ -16,22 +16,31 @@ import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import javax.swing.*;
-import javax.swing.text.Element;
 import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
 
 import java.util.List;
 
-class MapViewCreator{
+/**
+ * La classe MapViewCreator, finale, représante la vue de la carte
+ *
+ * @author Shangeeth Poobalasingam (329307)
+ * @author Marvin Koch (324448)
+ */
+final class MapViewCreator{
+
+    /**
+     * Constructeur Privée
+     */
     private MapViewCreator(){}
 
-    @FunctionalInterface
-    interface CardChooser {
-        void chooseCards(List<SortedBag<Card>> options,
-                         ActionHandlers.ChooseCardsHandler handler);
-    }
-
+    /**
+     * Créee la view de la Map
+     * @param observableGameState gamestate observable
+     * @param claimRouteHandlerObjectProperty claimroute handler
+     * @param cardChooser card chooser
+     * @return Node mapview
+     */
     public static Node createMapView(ObservableGameState observableGameState,
                                      ObjectProperty<ActionHandlers.ClaimRouteHandler> claimRouteHandlerObjectProperty,
                                      CardChooser cardChooser){
@@ -80,21 +89,9 @@ class MapViewCreator{
                 case_Group.getChildren().addAll(voie,wagon);
                 wagon.getChildren().addAll(wagonRectangle,wagonCircle1,wagonCircle2);
             }
+
             observableGameState.getRoutePlayerIdProperty(route).addListener(
                     (l, oV, nV) -> routeGroup.getStyleClass().add(nV.name()));
-                    /*
-                    (l, oV, nV) -> mapPane.getChildren()
-                            .get(ChMap.routes().indexOf(route) + 1)
-                            .getStyleClass()
-                            .add(nV.toString()));
-
-                     */
-
-
-            /*Group routeGroupe = (Group) mapPane.getChildren()
-                    .get(ChMap.routes().indexOf(route) + 1);
-
-             */
 
             routeGroup.disableProperty().bind(claimRouteHandlerObjectProperty.isNull().or(observableGameState.getRouteBooleanProperty(route)).not());
 
@@ -110,7 +107,20 @@ class MapViewCreator{
             });
         }
         return mapPane;
+    }
 
+    /**
+     * Functional Interface CardChooser
+     */
+    @FunctionalInterface
+    public interface CardChooser {
+        /**
+         * Action de choisir des cartes
+         * @param options cartes à choix
+         * @param handler handler
+         */
+        void chooseCards(List<SortedBag<Card>> options,
+                         ActionHandlers.ChooseCardsHandler handler);
     }
 
 }

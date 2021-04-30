@@ -24,12 +24,69 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class DecksViewCreator {
+/**
+ * La classe DecksViewCreator, finale, représante la vue du Deck du joueur
+ *
+ * @author Shangeeth Poobalasingam (329307)
+ * @author Marvin Koch (324448)
+ */
+final class DecksViewCreator {
 
-
+    /**
+     * Constructeur privée
+     */
     private DecksViewCreator() {
     }
 
+    /**
+     * Crée les rectangles
+     * @return list de rectangles
+     */
+    private static List<Rectangle> createRectangles() {
+        int OUTSIDE_RECTANGLE_WIDTH = 60;
+        int OUTSIDE_RECTANGLE_HEIGHT = 90;
+        int INSIDE_RECTANGLE_WIDTH = 40;
+        int INSIDE_RECTANGLE_HEIGHT = 70;
+
+        Rectangle rectangle1 = new Rectangle(OUTSIDE_RECTANGLE_WIDTH, OUTSIDE_RECTANGLE_HEIGHT);
+        rectangle1.getStyleClass().add("outside");
+
+        Rectangle rectangle2 = new Rectangle(INSIDE_RECTANGLE_WIDTH, INSIDE_RECTANGLE_HEIGHT);
+        rectangle2.getStyleClass().addAll("filled", "inside");
+
+        Rectangle rectangle3 = new Rectangle(INSIDE_RECTANGLE_WIDTH, INSIDE_RECTANGLE_HEIGHT);
+        rectangle3.getStyleClass().add("train-image");
+
+        return List.of(rectangle1, rectangle2, rectangle3);
+    }
+
+    /**
+     * Crée un button
+     * @param observableGameState game state
+     * @param prct pourcentage
+     * @param string nom du button
+     * @return Button
+     */
+    private static Button createButton(ObservableGameState observableGameState, ReadOnlyIntegerProperty prct, String string){
+        int BUTTON_RECTANGLE_WIDTH = 50;
+        int BUTTON_RECTANGLE_HEIGHT = 5;
+        Rectangle fg = new Rectangle(BUTTON_RECTANGLE_WIDTH, BUTTON_RECTANGLE_HEIGHT);
+        Rectangle bg = new Rectangle(BUTTON_RECTANGLE_WIDTH, BUTTON_RECTANGLE_HEIGHT);
+        fg.getStyleClass().add("foreground");
+        bg.getStyleClass().add("background");
+        fg.widthProperty().bind(prct.multiply(50).divide(100));
+        Group jauge = new Group(bg, fg);
+        Button button = new Button(string);
+        button.getStyleClass().add("gauged");
+        button.setGraphic(jauge);
+        return button;
+    }
+
+    /**
+     * Crée la vue de la main
+     * @param observableGameState état du jeu observable
+     * @return Node
+     */
     public static Node createHandView(ObservableGameState observableGameState) {
         HBox hBox = new HBox();
         hBox.getStylesheets().addAll("decks.css", "colors.css");
@@ -61,6 +118,13 @@ class DecksViewCreator {
         return hBox;
     }
 
+    /**
+     * Crée la vue des FaceUpCards et les buttons
+     * @param observableGameState état du jeu observable
+     * @param drawTicket DrawTicketsHandler
+     * @param drawCard DrawCardHandler
+     * @return Node
+     */
     public static Node createCardsView(ObservableGameState observableGameState, ObjectProperty<ActionHandlers.DrawTicketsHandler> drawTicket,
                                        ObjectProperty<ActionHandlers.DrawCardHandler> drawCard) {
 
@@ -68,34 +132,11 @@ class DecksViewCreator {
         vBox.getStylesheets().addAll("decks.css", "colors.css");
         vBox.setId("card-pane");
 
-        int BUTTON_RECTANGLE_WIDTH = 50;
-        int BUTTON_RECTANGLE_HEIGHT = 5;
-        Rectangle fgBillets = new Rectangle(BUTTON_RECTANGLE_WIDTH, BUTTON_RECTANGLE_HEIGHT);
-        Rectangle bgBillets = new Rectangle(BUTTON_RECTANGLE_WIDTH, BUTTON_RECTANGLE_HEIGHT);
-        Rectangle fgCartes = new Rectangle(BUTTON_RECTANGLE_WIDTH, BUTTON_RECTANGLE_HEIGHT);
-        Rectangle bgCartes = new Rectangle(BUTTON_RECTANGLE_WIDTH, BUTTON_RECTANGLE_HEIGHT);
-        fgBillets.getStyleClass().add("foreground");
-        bgBillets.getStyleClass().add("background");
-        fgCartes.getStyleClass().add("foreground");
-        bgCartes.getStyleClass().add("background");
-        ReadOnlyIntegerProperty prctBillets = observableGameState.ticketPourcentageProperty();
-        fgBillets.widthProperty().bind(prctBillets.multiply(50).divide(100));
-        ReadOnlyIntegerProperty prctCartes = observableGameState.cartePourcentageProperty();
-        fgCartes.widthProperty().bind(prctCartes.multiply(50).divide(100));
-
-
-        Group jaugeBillets = new Group(bgBillets, fgBillets);
-        Group jaugeCartes = new Group(bgCartes, fgCartes);
-
-        Button piocheBillets = new Button(StringsFr.TICKETS);
-        piocheBillets.getStyleClass().add("gauged");
-        piocheBillets.setGraphic(jaugeBillets);
+        Button piocheBillets = createButton(observableGameState, observableGameState.ticketPourcentageProperty(), StringsFr.TICKETS);
         piocheBillets.disableProperty().bind(drawTicket.isNull());
         piocheBillets.setOnMouseClicked(event -> drawTicket.get().onDrawTickets());
 
-        Button piocheCartes = new Button(StringsFr.CARDS);
-        piocheCartes.getStyleClass().add("gauged");
-        piocheCartes.setGraphic(jaugeCartes);
+        Button piocheCartes = createButton(observableGameState, observableGameState.cartePourcentageProperty(), StringsFr.CARDS);
         piocheCartes.disableProperty().bind(drawCard.isNull());
         piocheCartes.setOnMouseClicked(event -> drawCard.get().onDrawCard(-1));
 
@@ -110,11 +151,6 @@ class DecksViewCreator {
                 String color = card.color() == null ? "NEUTRAL" : card.color().name();
                 cartePane.getStyleClass().set(0, color);
             }
-            /*
-            Card card = cardProperty.get() == null ? Card.BLACK : cardProperty.get();
-
-             */
-
             cartePane.getChildren().addAll(createRectangles());
             vBox.getChildren().add(cartePane);
 
@@ -122,25 +158,7 @@ class DecksViewCreator {
             cartePane.setOnMouseClicked(event -> drawCard.get().onDrawCard(slot));
         }
         vBox.getChildren().add(piocheCartes);
-
         return vBox;
     }
 
-    private static List<Rectangle> createRectangles() {
-        int OUTSIDE_RECTANGLE_WIDTH = 60;
-        int OUTSIDE_RECTANGLE_HEIGHT = 90;
-        int INSIDE_RECTANGLE_WIDTH = 40;
-        int INSIDE_RECTANGLE_HEIGHT = 70;
-
-        Rectangle rectangle1 = new Rectangle(OUTSIDE_RECTANGLE_WIDTH, OUTSIDE_RECTANGLE_HEIGHT);
-        rectangle1.getStyleClass().add("outside");
-
-        Rectangle rectangle2 = new Rectangle(INSIDE_RECTANGLE_WIDTH, INSIDE_RECTANGLE_HEIGHT);
-        rectangle2.getStyleClass().addAll("filled", "inside");
-
-        Rectangle rectangle3 = new Rectangle(INSIDE_RECTANGLE_WIDTH, INSIDE_RECTANGLE_HEIGHT);
-        rectangle3.getStyleClass().add("train-image");
-
-        return List.of(rectangle1, rectangle2, rectangle3);
-    }
 }
