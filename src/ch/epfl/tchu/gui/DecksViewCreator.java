@@ -154,6 +154,7 @@ final class DecksViewCreator {
             cartePane.getChildren().addAll(createRectangles());
             vBox.getChildren().add(cartePane);
 
+            cartePane.disableProperty().bind(drawCard.isNull());
             cardProperty.addListener((l,oV, nV) -> cartePane.getStyleClass().set(0, nV.name()));
             cartePane.setOnMouseClicked(event -> drawCard.get().onDrawCard(slot));
         }

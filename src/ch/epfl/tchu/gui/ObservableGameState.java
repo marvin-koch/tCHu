@@ -199,67 +199,40 @@ public final class ObservableGameState {
     }
 
     /**
-     * Retourne les nombres de billets de Player1
+     * Retourne les nombres de billets du PlayerId en argument
+     * @param id PlayerId
      * @return Integer Property
      */
-    public ReadOnlyIntegerProperty player1TicketCountProperty() {
-        return player1TicketCount;
+    public ReadOnlyIntegerProperty playerTicketCountProperty(PlayerId id){
+        return id == PlayerId.PLAYER_1 ? player1TicketCount : player2TicketCount;
     }
 
     /**
-     * Retourne les nombres de billets de Player2
+     * Retourne les nombres de cartes du PlayerId
+     * @param id PlayerId
      * @return Integer Property
      */
-    public ReadOnlyIntegerProperty player2TicketCountProperty() {
-        return player2TicketCount;
+
+    public ReadOnlyIntegerProperty playerCardCountProperty(PlayerId id){
+        return id == PlayerId.PLAYER_1 ? player1CardCount : player2CardCount;
     }
 
     /**
-     * Retourne les nombres de cartes de Player1
+     * Retourne les nombres de wagons du PlayerId en argument
+     * @param id PlayerId
      * @return Integer Property
      */
-    public ReadOnlyIntegerProperty player1CardCountProperty() {
-        return player1CardCount;
+    public ReadOnlyIntegerProperty playerWagonCountProperty(PlayerId id){
+        return id == PlayerId.PLAYER_1 ? player1WagonCount : player2WagonCount;
     }
 
     /**
-     * Retourne les nombres de cartes de Player2
+     * Retourne les nombres de points du PlayerId en argument
+     * @param id PlayerId
      * @return Integer Property
      */
-    public ReadOnlyIntegerProperty player2CardCountProperty() {
-        return player2CardCount;
-    }
-
-    /**
-     * Retourne les nombres de wagons de Player1
-     * @return Integer Property
-     */
-    public ReadOnlyIntegerProperty player1WagonCountProperty() {
-        return player1WagonCount;
-    }
-
-    /**
-     * Retourne les nombres de wagons de Player2
-     * @return Integer Property
-     */
-    public ReadOnlyIntegerProperty player2WagonCountProperty() {
-        return player2WagonCount;
-    }
-
-    /**
-     * Retourne les nombres de points de Player1
-     * @return Integer Property
-     */
-    public ReadOnlyIntegerProperty player1PointsCountProperty() {
-        return player1PointsCount;
-    }
-
-    /**
-     * Retourne les nombres de points de Player2
-     * @return Integer Property
-     */
-    public ReadOnlyIntegerProperty player2PointsCountProperty() {
-        return player2PointsCount;
+    public ReadOnlyIntegerProperty playerPointCountProperty(PlayerId id){
+       return id == PlayerId.PLAYER_1 ? player1PointsCount : player2PointsCount;
     }
 
     /**

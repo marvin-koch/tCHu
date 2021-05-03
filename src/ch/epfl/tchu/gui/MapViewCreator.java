@@ -99,6 +99,7 @@ final class MapViewCreator{
                 List<SortedBag<Card>> possibleClaimCards = observableGameState.possibleClaimCards(route);
                 ActionHandlers.ClaimRouteHandler claimRouteH = claimRouteHandlerObjectProperty.get();
                 if(possibleClaimCards.size() == 1){
+                    //TODO MIRCO ROUTE
                     claimRouteH.onClaimRoute(route,possibleClaimCards.get(0));
                 }else {
                     ActionHandlers.ChooseCardsHandler chooseCardsH = chosenCards -> claimRouteH.onClaimRoute(route, chosenCards);
