@@ -63,7 +63,6 @@ public final class GraphicalPlayer{
         observableGameState.setState(gs, ps);
     }
 
-    //TODO marche pas
     public void receiveInfo(String s){
         assert Platform.isFxApplicationThread();
         Preconditions.checkArgument(infos.size()<=5);
