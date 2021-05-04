@@ -31,7 +31,7 @@ final class InfoViewCreator {
 
         for (PlayerId playerId: List.of(id, id.next())) {
             TextFlow textFlow = new TextFlow();
-            textFlow.getStyleClass().add(id.name());
+            textFlow.getStyleClass().add(playerId.name());
             Circle circle = new Circle(5);
             circle.getStyleClass().add("filled");
 
