@@ -1,5 +1,6 @@
 package ch.epfl.tchu.gui;
 
+import ch.epfl.tchu.Preconditions;
 import ch.epfl.tchu.game.PlayerId;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
@@ -15,10 +16,32 @@ import javax.naming.Binding;
 import java.util.List;
 import java.util.Map;
 
+
+
+/**
+ * La classe InfoViewCreator, finale, représante la vue des informations
+ *
+ * @author Shangeeth Poobalasingam (329307)
+ * @author Marvin Koch (324448)
+ */
 final class InfoViewCreator {
+    /**
+     * Constructeur privée
+     */
     private InfoViewCreator(){}
 
+    /**
+     * La classe InfoViewCreator  non instanciable et package private (!),
+     * contient une unique méthode publique permettant de créer la vue des informations
+     * @param id l'identité du joueur auquel l'interface correspond
+     * @param namesMap la table associative des noms des joueurs
+     * @param observableGameState l'état de jeu observable
+     * @param observableList une liste (observable) contenant les informations sur le déroulement de la partie, sous la forme d'instances de Text
+     * @throws IllegalArgumentException si la liste d'infos est plus grande que 5
+     * @return Node vue des infos
+     */
     public static Node createInfoView(PlayerId id, Map<PlayerId , String> namesMap, ObservableGameState observableGameState, ObservableList<Text> observableList){
+        Preconditions.checkArgument(observableList.size() <=5 );
         VBox vBox = new VBox();
         vBox.getStylesheets().addAll("info.css", "colors.css");
         Separator separator = new Separator(Orientation.HORIZONTAL);

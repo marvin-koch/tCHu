@@ -27,19 +27,33 @@ import javafx.util.StringConverter;
 
 import static ch.epfl.tchu.gui.ActionHandlers.*;
 import static ch.epfl.tchu.gui.StringsFr.AND_SEPARATOR;
+import static javafx.application.Platform.isFxApplicationThread;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import javafx.application.Platform;
 
+/**
+ * La classe GraphicalPlayer, finale, représente l'interface graphique d'un joueur
+ *
+ * @author Shangeeth Poobalasingam (329307)
+ * @author Marvin Koch (324448)
+ */
 public final class GraphicalPlayer{
     private final ObservableList<Text> infos;
     private final ObservableGameState observableGameState;
     private final ObjectProperty<DrawTicketsHandler> drawTicketsHandlerProperty;
     private final ObjectProperty<DrawCardHandler> drawCardHandlerProperty;
     private final ObjectProperty<ClaimRouteHandler> drawClaimRouteHandlerProperty;
-    Stage mainStage;
+    private final Stage mainStage;
+
+    /**
+     * Constructeur de GraphicalPlayer
+     * @param id PlayerId
+     * @param namesMap noms des joueurs
+     */
     public GraphicalPlayer(PlayerId id, Map<PlayerId, String> namesMap){
-        assert Platform.isFxApplicationThread();
+        assert isFxApplicationThread();
         observableGameState = new ObservableGameState(id);
         infos = FXCollections.observableList(new ArrayList<>());
         drawTicketsHandlerProperty = new SimpleObjectProperty<>();
@@ -55,16 +69,27 @@ public final class GraphicalPlayer{
         Scene scene = new Scene(pane);
         mainStage.setScene(scene);
         mainStage.show();
-
     }
 
+    /**
+     * Méthode prenant les mêmes arguments que la méthode setState de ObservableGameState
+     * et ne faisant rien d'autre que d'appeler cette méthode sur l'état observable du joueur
+     * @param gs un PublicGameState
+     * @param ps un PlayerState
+     */
     public void setState(PublicGameState gs, PlayerState ps){
-        assert Platform.isFxApplicationThread();
+        assert isFxApplicationThread();
         observableGameState.setState(gs, ps);
     }
 
+    /**
+     * Méthode prenant un message - de type String —
+     * et l'ajoutant au bas des informations sur le déroulement de la partie,
+     * qui sont présentées dans la partie inférieure de la vue des informations
+     * @param s info
+     */
     public void receiveInfo(String s){
-        assert Platform.isFxApplicationThread();
+        assert isFxApplicationThread();
         Preconditions.checkArgument(infos.size()<=5);
         Text text = new Text(s);
         if(infos.size() == 5)
@@ -72,8 +97,16 @@ public final class GraphicalPlayer{
         infos.add(text);
     }
 
+    /**
+     * Méthode qui prend en arguments trois gestionnaires d'action,
+     * un par types d'actions que le joueur peut effectuer lors d'un tour,
+     * et qui permet au joueur d'en effectuer une
+     * @param ticketsHandler
+     * @param cardHandler
+     * @param routeHandler
+     */
     public void startTurn(DrawTicketsHandler ticketsHandler, DrawCardHandler cardHandler, ClaimRouteHandler routeHandler){
-        assert Platform.isFxApplicationThread();
+        assert isFxApplicationThread();
         if(observableGameState.canDrawTickets())
             drawTicketsHandlerProperty.set(() -> {
                 ticketsHandler.onDrawTickets();
@@ -90,8 +123,16 @@ public final class GraphicalPlayer{
         });
     }
 
-    public void chooseTickets(SortedBag<Ticket> bag, ActionHandlers.ChooseTicketsHandler handler){
-        assert Platform.isFxApplicationThread();
+    /**
+     * Ouvre une fenêtre permettant au joueur de faire son choix.
+     * Une fois celui-ci confirmé, le gestionnaire de choix est appelé avec ce choix en argument
+     * @param bag multiensemble de 5 ou 3 billets
+     * @param handler gestionnaire de tickets
+     * @throws IllegalArgumentException si le multiensemble n'est pas de taille 5 ou 3
+     * @throws AssertionError si le fil d'éxecution s'arrête
+     */
+    public void chooseTickets(SortedBag<Ticket> bag, ChooseTicketsHandler handler){
+        assert isFxApplicationThread();
         Preconditions.checkArgument(bag.size() == 5 || bag.size() == 3);
 
         Text text = new Text(String.format(StringsFr.CHOOSE_TICKETS, bag.size() - 2, StringsFr.plural(bag.size()-2)));
@@ -104,6 +145,7 @@ public final class GraphicalPlayer{
         button.disableProperty().bind(Bindings.size(listView.getSelectionModel().getSelectedItems()).lessThan((bag.size()-2)));
 
 
+        /*
         Scene scene = new Scene(new VBox(textFlow,
                 listView,
                 button));
@@ -116,14 +158,27 @@ public final class GraphicalPlayer{
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setOnCloseRequest(Event::consume);
 
+         */
+        Stage stage = createStage(StringsFr.TICKETS_CHOICE,
+                new VBox(textFlow, listView, button));
+
         button.setOnAction( c -> {
             stage.hide();
             handler.onChooseTickets(SortedBag.of(listView.getSelectionModel().getSelectedItems()));
         });
     }
 
+    /**
+     * Méthode qui autorise le joueur a choisir une carte wagon/locomotive,
+     * soit l'une des cinq dont la face est visible,
+     * soit celle du sommet de la pioche; une fois que le joueur a cliqué sur l'une de ces cartes,
+     * le gestionnaire est appelé avec le choix du joueur;
+     * cette méthode est destinée à être appelée lorsque le joueur a déjà tiré une première carte et doit maintenant tirer la seconde
+     * @param handler un gestionnaire de tirage
+     * @throws AssertionError si le fil d'execution est arrêtée
+     */
     public void drawCard(DrawCardHandler handler){
-        assert Platform.isFxApplicationThread();
+        assert isFxApplicationThread();
         //TODO
         drawCardHandlerProperty.set(slot -> {
             handler.onDrawCard(slot);
@@ -131,7 +186,15 @@ public final class GraphicalPlayer{
         });
     }
 
+    /**
+     * Ouvre une fenêtre permettant au joueur de faire son choix.
+     * Une fois celui-ci confirmé, le gestionnaire de choix est appelé avec ce choix en argument
+     * @param list list de multiensemble de cartes initiales pour s'emparer d'une route
+     * @param handler gestionnaire de cartes
+     * @throws AssertionError si le fil d'éxecution s'arrête
+     */
     public void chooseClaimCards(List<SortedBag<Card>> list, ChooseCardsHandler handler){
+        /*
         assert Platform.isFxApplicationThread();
         Text text = new Text(StringsFr.CHOOSE_CARDS);
         TextFlow textFlow = new TextFlow(text);
@@ -143,6 +206,7 @@ public final class GraphicalPlayer{
         Button button = new Button(StringsFr.CHOOSE);
         button.disableProperty().bind(Bindings.size(listView.getSelectionModel().getSelectedItems()).isEqualTo(0));
 
+        /*
         Scene scene = new Scene(new VBox(textFlow,
                 listView,
                 button));
@@ -155,14 +219,29 @@ public final class GraphicalPlayer{
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setOnCloseRequest(Event::consume);
 
+        Stage stage = createStage(StringsFr.CARDS_CHOICE,
+                new VBox(textFlow, listView, button));
+
         button.setOnAction( c -> {
             stage.hide();
             handler.onChooseCards(listView.getSelectionModel().getSelectedItem());
         });
+        */
+        createCardWindow(StringsFr.CHOOSE_CARDS, list, handler);
 
     }
 
+
+
+    /**
+     * Ouvre une fenêtre permettant au joueur de faire son choix.
+     * Une fois celui-ci confirmé, le gestionnaire de choix est appelé avec ce choix en argument
+     * @param list list de multiensemble de cartes
+     * @param handler gestionnaire de cartes
+     * @throws AssertionError si le fil d'éxecution s'arrête
+     */
     public void chooseAdditionalCards(List<SortedBag<Card>> list, ChooseCardsHandler handler){
+        /*
         assert Platform.isFxApplicationThread();
         Text text = new Text(StringsFr.CHOOSE_ADDITIONAL_CARDS);
         TextFlow textFlow = new TextFlow(text);
@@ -173,6 +252,7 @@ public final class GraphicalPlayer{
 
         Button button = new Button(StringsFr.CHOOSE);
 
+        /*
         Scene scene = new Scene(new VBox(textFlow,
                 listView,
                 button));
@@ -183,6 +263,8 @@ public final class GraphicalPlayer{
         stage.initOwner(mainStage);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setOnCloseRequest(Event::consume);
+        Stage stage = createStage(StringsFr.CARDS_CHOICE,
+                new VBox(textFlow, listView, button));
 
         button.setOnAction( c -> {
             stage.hide();
@@ -192,14 +274,92 @@ public final class GraphicalPlayer{
                 handler.onChooseCards(listView.getSelectionModel().getSelectedItem());
             }//todo test si faut vraiment mettre un if else
         });
+       */
+
+        createCardWindow(StringsFr.CHOOSE_ADDITIONAL_CARDS, list, handler);
 
     }
+
+    /**
+     * Crée le Stage
+     * @param title
+     * @param vbox
+     * @return Stage
+     */
+    private Stage createStage(String title, VBox vbox){
+        Scene scene = new Scene(vbox);
+        scene.getStylesheets().add("chooser.css");
+        Stage stage = new Stage(StageStyle.UTILITY);
+        stage.setTitle(title);
+        stage.initOwner(mainStage);
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setOnCloseRequest(Event::consume);
+        stage.setScene(scene);
+        return stage;
+    }
+
+    /**
+     * Crée la fenêtre pour choisir des cartes
+     * @param string
+     * @param list
+     * @param handler
+     */
+    private void createCardWindow(String string, List<SortedBag<Card>> list, ChooseCardsHandler handler){
+        assert isFxApplicationThread();
+        Text text = new Text(string);
+        TextFlow textFlow = new TextFlow(text);
+
+        ListView<SortedBag<Card>> listView = new ListView<>(FXCollections.observableList(list));
+        listView.setCellFactory(v -> new TextFieldListCell<>(new CardBagStringConverter()));
+
+        Button button = new Button(StringsFr.CHOOSE);
+        Stage stage = createStage(StringsFr.CARDS_CHOICE,
+                new VBox(textFlow, listView, button));
+
+        /*
+        if(string.equals(StringsFr.CHOOSE_ADDITIONAL_CARDS)){
+            button.setOnAction( c -> {
+                stage.hide();
+                if(listView.getSelectionModel().getSelectedItems().isEmpty()){
+                    handler.onChooseCards(SortedBag.of());
+                }else {
+                    handler.onChooseCards(listView.getSelectionModel().getSelectedItem());
+                }//todo test si faut vraiment mettre un if else
+            });
+        }else{
+            button.disableProperty().bind(Bindings.size(listView.getSelectionModel().getSelectedItems()).isEqualTo(0));
+            button.setOnAction( c -> {
+                stage.hide();
+                handler.onChooseCards(listView.getSelectionModel().getSelectedItem());
+            });
+        }
+
+         */
+        boolean stringContent = string.equals(StringsFr.CHOOSE_CARDS);
+        if (stringContent)
+            button.disableProperty().bind(Bindings.size(listView.getSelectionModel().getSelectedItems()).isEqualTo(0));
+
+        button.setOnAction( c -> {
+            stage.hide();
+            SortedBag<Card> cards = !(listView.getSelectionModel().getSelectedItems().isEmpty()) || stringContent
+                    ? listView.getSelectionModel().getSelectedItem()
+                    : SortedBag.of();
+            handler.onChooseCards(cards);
+        });
+    }
+
+    /**
+     * Vide les ObjectProperties contenant les handlers
+     */
     private void viderHandlers(){
         drawTicketsHandlerProperty.set(null);
         drawCardHandlerProperty.set(null);
         drawClaimRouteHandlerProperty.set(null);
     }
 
+    /**
+     * Class privée CardBagStringConverter
+     */
     private static class CardBagStringConverter extends StringConverter<SortedBag<Card>> {
 
         /**
