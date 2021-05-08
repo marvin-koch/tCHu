@@ -65,11 +65,15 @@ public interface Serde<T>{
         return new Serde<T>(){
             @Override
             public String serialize(T t) {
+                /*
                 if(t == null){
                     return "";
                 }else{
                     return String.valueOf(list.indexOf(t));
                 }
+
+                 */
+                return t != null ? String.valueOf(list.indexOf(t)) : "";
             }
 
             @Override
@@ -81,7 +85,6 @@ public interface Serde<T>{
                     Preconditions.checkArgument(pos < list.size());
                     return list.get(pos);
                 }
-
             }
         };
     }
@@ -96,7 +99,7 @@ public interface Serde<T>{
      */
     static<T> Serde<List<T>> listOf(Serde<T> serde, String delimiter){
         Preconditions.checkArgument(!delimiter.isEmpty());
-        return new Serde<List<T>>(){
+        return new Serde<>() {
             @Override
             public String serialize(List<T> t) {
                 return t.stream()
@@ -106,9 +109,9 @@ public interface Serde<T>{
 
             @Override
             public List<T> deserialize(String s) {
-                if(s.equals("")){
-                  return List.of();
-                }else{
+                if (s.equals("")) {
+                    return List.of();
+                } else {
                     List<String> array = Arrays.asList(s.split(Pattern.quote(delimiter), -1));
                     return array.stream()
                             .map(serde::deserialize)

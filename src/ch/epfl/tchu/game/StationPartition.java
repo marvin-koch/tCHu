@@ -2,6 +2,8 @@ package ch.epfl.tchu.game;
 
 import ch.epfl.tchu.Preconditions;
 
+import java.util.Arrays;
+
 /**
  * La classe StationPartition publique, finale et immuable, représente une partition (aplatie) de gares
  *
@@ -16,7 +18,7 @@ public final class StationPartition implements StationConnectivity {
      * @param array liste d'entier
      */
     private StationPartition(int[] array){
-        gares = array;
+        gares = Arrays.copyOf(array, array.length);
     }
 
 

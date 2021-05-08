@@ -1,5 +1,7 @@
 package ch.epfl.tchu.game;
 
+import ch.epfl.tchu.Preconditions;
+
 import java.util.List;
 
 /**
@@ -48,6 +50,7 @@ public enum Card {
      * @return la carte
      */
     public static Card of(Color color){
+        Preconditions.checkArgument(color != null);
        return ALL.stream()
                .filter(card -> color.equals(card.color()))
                .findAny()

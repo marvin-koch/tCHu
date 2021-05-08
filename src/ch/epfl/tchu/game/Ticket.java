@@ -42,7 +42,7 @@ public final class Ticket implements Comparable<Ticket>{
     public Ticket(List<Trip> trips){
         Preconditions.checkArgument(!trips.isEmpty());
         trips.forEach(trip -> Preconditions.checkArgument(trip.from().name().equals(trips.get(0).from().name())));
-        this.trips = new ArrayList<>(trips);
+        this.trips = List.copyOf(trips);
         text = computeText(trips);
     }
 

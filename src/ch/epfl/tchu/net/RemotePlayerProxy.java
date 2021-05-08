@@ -5,10 +5,10 @@ import ch.epfl.tchu.game.*;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static java.nio.charset.StandardCharsets.US_ASCII;
 import static ch.epfl.tchu.net.Serdes.*;
@@ -25,10 +25,10 @@ public final class RemotePlayerProxy implements Player {
 
     /**
      * Constructeur de socket
-     * @param socket
+     * @param socket socket
      */
     public RemotePlayerProxy(Socket socket){
-        this.socket = socket;
+        this.socket = Objects.requireNonNull(socket);
         try {
               w = new BufferedWriter(
                              new OutputStreamWriter(socket.getOutputStream(),
@@ -51,7 +51,7 @@ public final class RemotePlayerProxy implements Player {
     @Override
     public void initPlayers(PlayerId ownId, Map<PlayerId, String> playerNames) {
         write(MessageId.INIT_PLAYERS,
-                PLAYER_ID_SERDE.serialize(ownId) + " " + LIST_STRING_SERDE.serialize(new ArrayList<String>(playerNames.values())));
+                PLAYER_ID_SERDE.serialize(ownId) + " " + LIST_STRING_SERDE.serialize(new ArrayList<>(playerNames.values())));
     }
 
     /**
@@ -187,8 +187,7 @@ public final class RemotePlayerProxy implements Player {
 
     private String read(){
         try{
-            String string = r.readLine();
-            return string;
+            return r.readLine();
         }catch (IOException e) {
             throw new UncheckedIOException(e);
         }

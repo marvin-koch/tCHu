@@ -59,19 +59,19 @@ public final class Trail {
                         if ((trail.station2.equals(route.station1()) || trail.station2.equals(route.station2())) && !trail.routes.contains(route)) {
                             List<Route> newRoute = new ArrayList<>(trail.routes);
                             newRoute.add(route);
-                            Station station = (trail.station2.equals(route.station1())) ? route.station2() : route.station1();
-                            listeVide.add(new Trail(trail.station1, station, newRoute));
+                            listeVide.add(new Trail(trail.station1, route.stationOpposite(trail.station2), newRoute));
                         }
                     }
                 }
                 Trail finalLongestTrail = longestTrail;
-                longestTrail = listeVide.stream()
+                longestTrail = cs.stream()
                         .filter(trail -> trail.length() > finalLongestTrail.length())
                         .max(Comparator.comparingInt(Trail::length))
                         .orElse(longestTrail);
 
                 cs = new ArrayList<>(listeVide);
             }
+
             return longestTrail;
         }
     }
@@ -108,11 +108,24 @@ public final class Trail {
     public String toString() {
         StringBuilder string = new StringBuilder();
         if(!routes.isEmpty()){
+            /*
             string.append(station1.toString())
-                    .append(routes.stream()
-                            .map(route -> route.station1().equals(station1) ? route.station2() : route.station1())
+                    .append(EN_DASH_SEPARATOR)
+                    .append(routes.get(0).station1().equals(station2) ? routes.get(0).station2() : routes.get(0).station1())
+                    .append(EN_DASH_SEPARATOR)
+                    .append(routes.subList(1,5).stream()
+                            .map(route -> (route.station1().equals(routes.get(routes.indexOf(route) - 1).station2())  ? route.station2() : route.station1()))
                             .map(Station::toString)
                             .collect(Collectors.joining(EN_DASH_SEPARATOR)));
+
+             */
+            Station currentStation = station1;
+            for(Route route : routes){
+                string.append(currentStation)
+                        .append(EN_DASH_SEPARATOR);
+                currentStation = route.station1().equals(currentStation) ? route.station2() : route.station1();
+            }
+            string.append(currentStation);
         }else{
             string.append("Empty Trail");
         }

@@ -4,6 +4,7 @@ import ch.epfl.tchu.Preconditions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * La classe PublicGameState publique et immuable, représente la partie publique de l'état d'une partie de tCHu.
@@ -32,14 +33,11 @@ public class PublicGameState {
      * @throws  NullPointerException si l'un des autres arguments (lastPlayer excepté!) est nul
      */
     public PublicGameState(int ticketsCount, PublicCardState cardState, PlayerId currentPlayerId, Map<PlayerId, PublicPlayerState> playerState, PlayerId lastPlayer){
-        Preconditions.checkArgument(ticketsCount >= 0 && playerState.size() == 2);
-        if(cardState == null || currentPlayerId == null){
-            throw new NullPointerException();
-        }
+        Preconditions.checkArgument(ticketsCount >= 0 && playerState.size() == PlayerId.COUNT);
         this.ticketsCount = ticketsCount;
-        this.cardState = cardState;
-        this.currentPlayerId = currentPlayerId ;
-        this.playerState = playerState;
+        this.cardState = Objects.requireNonNull(cardState);
+        this.currentPlayerId = Objects.requireNonNull(currentPlayerId) ;
+        this.playerState = Map.copyOf(playerState);
         this.lastPlayer = lastPlayer;
     }
 

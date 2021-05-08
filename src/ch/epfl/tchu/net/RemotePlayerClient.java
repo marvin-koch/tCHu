@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
 import static ch.epfl.tchu.net.Serdes.*;
 
@@ -33,7 +34,7 @@ public final class RemotePlayerClient{
      */
     public RemotePlayerClient(Player player, String name, int port){
         this.player = player;
-        this.name = name;
+        this.name = Objects.requireNonNull(name);
         this.port = port;
     }
 
@@ -54,16 +55,16 @@ public final class RemotePlayerClient{
              BufferedWriter w =
                      new BufferedWriter(
                              new OutputStreamWriter(s.getOutputStream(),
-                                     US_ASCII));){
+                                     US_ASCII))){
             String line;
             while((line = r.readLine())!= null){
                 String[] strings = line.split(Pattern.quote(" "));
                 switch (MessageId.valueOf(strings[0])){
                     case INIT_PLAYERS:
-                        List<String> playernames = LIST_STRING_SERDE.deserialize(strings[2]);
+                        List<String> playerNames = LIST_STRING_SERDE.deserialize(strings[2]);
                         Map<PlayerId, String> map = new EnumMap<>(PlayerId.class);
-                        map.put(PlayerId.PLAYER_1, playernames.get(0));
-                        map.put(PlayerId.PLAYER_2, playernames.get(1));
+                        map.put(PlayerId.PLAYER_1, playerNames.get(0));
+                        map.put(PlayerId.PLAYER_2, playerNames.get(1));
                         player.initPlayers(PLAYER_ID_SERDE.deserialize(strings[1]), map);
                         break;
                     case RECEIVE_INFO:
@@ -73,41 +74,27 @@ public final class RemotePlayerClient{
                         player.updateState(PUBLIC_GAME_STATE_SERDE.deserialize(strings[1]),PLAYER_STATE_SERDE.deserialize(strings[2]));
                         break;
                     case CHOOSE_INITIAL_TICKETS:
-                        w.write(SORTEDBAG_TICKET_SERDE.serialize(player.chooseInitialTickets()));
-                        w.write('\n');
-                        w.flush();
+                        writeMessage(SORTEDBAG_TICKET_SERDE.serialize(player.chooseInitialTickets()), w);
                         break;
                     case NEXT_TURN:
-                        w.write(TURN_KIND_SERDE.serialize(player.nextTurn()));
-                        w.write('\n');
-                        w.flush();
+                        writeMessage(TURN_KIND_SERDE.serialize(player.nextTurn()), w);
                         break;
                     case CHOOSE_TICKETS:
                         SortedBag<Ticket> options = SORTEDBAG_TICKET_SERDE.deserialize(strings[1]);
-                        w.write(SORTEDBAG_TICKET_SERDE.serialize(player.chooseTickets(options)));
-                        w.write('\n');
-                        w.flush();
+                        writeMessage(SORTEDBAG_TICKET_SERDE.serialize(player.chooseTickets(options)), w);
                         break;
                     case DRAW_SLOT:
-                        w.write(INTEGER_SERDE.serialize(player.drawSlot()));
-                        w.write('\n');
-                        w.flush();
+                        writeMessage(INTEGER_SERDE.serialize(player.drawSlot()), w);
                         break;
                     case ROUTE:
-                        w.write(ROUTE_SERDE.serialize(player.claimedRoute()));
-                        w.write('\n');
-                        w.flush();
+                        writeMessage(ROUTE_SERDE.serialize(player.claimedRoute()), w);
                         break;
                     case CARDS:
-                        w.write(SORTEDBAG_CARD_SERDE.serialize(player.initialClaimCards()));
-                        w.write('\n');
-                        w.flush();
+                        writeMessage(SORTEDBAG_CARD_SERDE.serialize(player.initialClaimCards()), w);
                         break;
                     case CHOOSE_ADDITIONAL_CARDS:
                         List<SortedBag<Card>> list = LIST_SORTEDBAG_CARD_SERDE.deserialize(strings[1]);
-                        w.write(SORTEDBAG_CARD_SERDE.serialize(player.chooseAdditionalCards(list)));
-                        w.write('\n');
-                        w.flush();
+                        writeMessage(SORTEDBAG_CARD_SERDE.serialize(player.chooseAdditionalCards(list)), w);
                         break;
                     case SET_INITIAL_TICKETS:
                         player.setInitialTicketChoice(SORTEDBAG_TICKET_SERDE.deserialize(strings[1]));
@@ -116,6 +103,16 @@ public final class RemotePlayerClient{
             }
 
         } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    private void writeMessage(String s, BufferedWriter w){
+        try{
+            w.write(s);
+            w.write('\n');
+            w.flush();
+        }catch (IOException e){
             throw new UncheckedIOException(e);
         }
     }

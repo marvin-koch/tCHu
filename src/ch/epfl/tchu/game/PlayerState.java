@@ -37,7 +37,7 @@ public final class PlayerState extends PublicPlayerState{
      * @return PlayerState
      */
     public static PlayerState initial(SortedBag<Card> initialCards){
-        Preconditions.checkArgument(initialCards.size() == 4);
+        Preconditions.checkArgument(initialCards.size() == Constants.INITIAL_CARDS_COUNT);
         return new PlayerState(SortedBag.of(),initialCards, Collections.emptyList());
     }
 
@@ -94,6 +94,7 @@ public final class PlayerState extends PublicPlayerState{
         if(route.length()> carCount()) {return false;}
         return route.possibleClaimCards().stream()
                 .anyMatch(bag -> cards().contains(bag));
+
     }
 
     /**
@@ -121,7 +122,7 @@ public final class PlayerState extends PublicPlayerState{
      * @return List<SortedBag<Card>>
      */
     public List<SortedBag<Card>> possibleAdditionalCards(int additionalCardsCount, SortedBag<Card> initialCards, SortedBag<Card> drawnCards){
-        Preconditions.checkArgument(1<= additionalCardsCount && additionalCardsCount <= 3);
+        Preconditions.checkArgument(1<= additionalCardsCount && additionalCardsCount <= Constants.ADDITIONAL_TUNNEL_CARDS);
         Preconditions.checkArgument(!initialCards.isEmpty());
         Preconditions.checkArgument(initialCards.toSet().size() <=2);
         Preconditions.checkArgument(drawnCards.size() == Constants.ADDITIONAL_TUNNEL_CARDS);

@@ -30,7 +30,6 @@ public final class Trip {
         List<Trip> trip = new ArrayList<>();
         Preconditions.checkArgument(!from.isEmpty());
         Preconditions.checkArgument(!to.isEmpty());
-        Preconditions.checkArgument(points>0);
         for (Station stationfrom : from) {
             for (Station stationto : to) {
                 trip.add(new Trip(stationfrom,stationto,points));

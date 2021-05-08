@@ -2,6 +2,8 @@ package ch.epfl.tchu.game;
 
 import ch.epfl.tchu.Preconditions;
 
+import java.util.Objects;
+
 /**
  * La classe Station publique, finale et immuable, représente une gare
  *
@@ -20,7 +22,7 @@ public final class Station {
      */
     public Station(int id, String name){
         Preconditions.checkArgument(id >= 0);
-        this.name = name;
+        this.name = Objects.requireNonNull(name);
         this.id = id;
     }
 

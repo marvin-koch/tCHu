@@ -6,6 +6,7 @@ import ch.epfl.tchu.SortedBag;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -29,8 +30,8 @@ public final class GameState extends  PublicGameState{
      */
     private GameState(Deck<Ticket> tickets, CardState cardState, PlayerId currentPlayerId, Map<PlayerId, PlayerState> playerState, PlayerId lastPlayer) {
         super(tickets.size(), cardState, currentPlayerId, Map.copyOf(playerState), lastPlayer);
-        this.tickets = tickets;
-        this.cardState = cardState;
+        this.tickets = Objects.requireNonNull(tickets);
+        this.cardState = Objects.requireNonNull(cardState);
         this.playerState = playerState;
     }
 

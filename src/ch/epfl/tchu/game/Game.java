@@ -8,6 +8,10 @@ import ch.epfl.tchu.game.Constants;
 import java.util.*;
 
 import static ch.epfl.tchu.game.Constants.*;
+/**
+ * TODO Regles: Utiliser Constants (PlayerID), copyOf pour immuabilitié, utiliser Objects.requireNonNull, crééer constantes pour éviter la duplication, playerNames!!!
+ *
+ */
 
 /**
  * La classe Game publique, finale et non instanciable, représente une partie de tCHu.
@@ -21,18 +25,18 @@ public final class Game {
      * et le générateur aléatoire rng est utilisé pour créer l'état initial du jeu
      * et pour mélanger les cartes de la défausse pour en faire une nouvelle pioche quand cela est nécessaire
      * @param players map des 2 players
-     * @param playernames map des 2 noms des joueurs
+     * @param playerNames map des 2 noms des joueurs
      * @param tickets tas de billets
      * @param rng une instance de Random
      * @throws IllegalArgumentException si l'une des deux tables associatives a une taille différente de 2
      */
-    public static void play(Map<PlayerId, Player> players, Map<PlayerId, String> playernames, SortedBag<Ticket> tickets, Random rng) {
-        Preconditions.checkArgument(playernames.size() == 2 && players.size() == 2);
+    public static void play(Map<PlayerId, Player> players, Map<PlayerId, String> playerNames, SortedBag<Ticket> tickets, Random rng) {
+        Preconditions.checkArgument(playerNames.size() == 2 && players.size() == PlayerId.COUNT);
         GameState gameState = GameState.initial(tickets, rng);
         Map<PlayerId, Info> infos = new EnumMap<>(PlayerId.class);
-        PlayerId.ALL.forEach(id -> infos.put(id,new Info(playernames.get(id))));
+        PlayerId.ALL.forEach(id -> infos.put(id,new Info(playerNames.get(id))));
 
-        players.forEach((id, player) -> player.initPlayers(id, playernames));
+        players.forEach((id, player) -> player.initPlayers(id, playerNames));
         receiveInfoAll(players, infos.get(gameState.currentPlayerId()).willPlayFirst());
 
         for (PlayerId id: PlayerId.values() ) {
@@ -65,10 +69,11 @@ public final class Game {
 
             switch(turn){
                 case DRAW_TICKETS:
+                    SortedBag<Ticket> topTickets = gameState.topTickets(IN_GAME_TICKETS_COUNT);
                     receiveInfoAll(players, currentInfo.drewTickets(IN_GAME_TICKETS_COUNT));
-                    SortedBag<Ticket> chosen = currentPlayer.chooseTickets(gameState.topTickets(IN_GAME_TICKETS_COUNT));
+                    SortedBag<Ticket> chosen = currentPlayer.chooseTickets(topTickets);
                     receiveInfoAll(players, currentInfo.keptTickets(chosen.size()));
-                    gameState = gameState.withChosenAdditionalTickets(gameState.topTickets(IN_GAME_TICKETS_COUNT), chosen);
+                    gameState = gameState.withChosenAdditionalTickets(topTickets, chosen);
                     break;
 
                 case DRAW_CARDS:
@@ -178,9 +183,9 @@ public final class Game {
                 if(currentPlayerPoints > nextPlayerPoints){
                     receiveInfoAll(players, currentInfo.won(currentPlayerPoints, nextPlayerPoints));
                 }else if (currentPlayerPoints < nextPlayerPoints){
-                    receiveInfoAll(players, currentInfo.won(nextPlayerPoints, currentPlayerPoints));
+                    receiveInfoAll(players, nextInfo.won(nextPlayerPoints, currentPlayerPoints));
                 }else{
-                    receiveInfoAll(players, Info.draw(new ArrayList<>(playernames.values()), currentPlayerPoints));
+                    receiveInfoAll(players, Info.draw(new ArrayList<>(playerNames.values()), currentPlayerPoints));
                 }
                 gameHasEnded = true;
             }
@@ -188,6 +193,10 @@ public final class Game {
         }
     }
 
+    /**
+     * Constructuer privée
+     */
+    private Game(){}
     /**
      * Communique une information a tout les joueurs
      * @param players map des 2 players

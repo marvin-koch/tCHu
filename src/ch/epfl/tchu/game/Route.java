@@ -43,16 +43,13 @@ public final class Route {
      * @throws IllegalArgumentException si les deux gares sont égales ou si la longueur n'est pas comprise dans les limites acceptables
      */
     public Route(String id, Station station1, Station station2, int length, Level level, Color color) {
-        if(station1 == null || station2 == null || level == null || id == null){
-            throw new NullPointerException("Station ou Level est null");
-        }
         Preconditions.checkArgument(!station1.equals(station2));
         Preconditions.checkArgument(length <= Constants.MAX_ROUTE_LENGTH && length >= Constants.MIN_ROUTE_LENGTH);
-        this.id = id;
-        this.station1 = station1;
-        this.station2 = station2;
+        this.id = Objects.requireNonNull(id);
+        this.station1 = Objects.requireNonNull(station1);
+        this.station2 = Objects.requireNonNull(station2);
         this.length = length;
-        this.level = level;
+        this.level = Objects.requireNonNull(level);
         this.color = color;
     }
 
