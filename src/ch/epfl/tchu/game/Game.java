@@ -31,7 +31,7 @@ public final class Game {
      * @throws IllegalArgumentException si l'une des deux tables associatives a une taille différente de 2
      */
     public static void play(Map<PlayerId, Player> players, Map<PlayerId, String> playerNames, SortedBag<Ticket> tickets, Random rng) {
-        Preconditions.checkArgument(playerNames.size() == 2 && players.size() == PlayerId.COUNT);
+        Preconditions.checkArgument(playerNames.size() == PlayerId.COUNT && players.size() == PlayerId.COUNT);
         GameState gameState = GameState.initial(tickets, rng);
         Map<PlayerId, Info> infos = new EnumMap<>(PlayerId.class);
         PlayerId.ALL.forEach(id -> infos.put(id,new Info(playerNames.get(id))));
