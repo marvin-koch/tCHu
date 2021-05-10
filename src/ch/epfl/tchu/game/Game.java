@@ -64,9 +64,8 @@ public final class Game {
             PlayerState nextPlayerState = gameState.playerState(gameState.currentPlayerId().next());
 
             updateStateForPlayers(players,gameState);
-            Player.TurnKind turn = currentPlayer.nextTurn();
             receiveInfoAll(players, currentInfo.canPlay());
-
+            Player.TurnKind turn = currentPlayer.nextTurn();
             switch(turn){
                 case DRAW_TICKETS:
                     SortedBag<Ticket> topTickets = gameState.topTickets(IN_GAME_TICKETS_COUNT);
@@ -128,7 +127,7 @@ public final class Game {
                                 receiveInfoAll(players, currentInfo.claimedRoute(claimedRoute, initialCards));
                             }else{
                                 // cas ou il y a des cartes additionnels
-                                List<SortedBag<Card>> list = currentPlayerState.possibleAdditionalCards(additionalCardsCount, initialCards,cards);
+                                List<SortedBag<Card>> list = currentPlayerState.possibleAdditionalCards(additionalCardsCount, initialCards);
                                 if (!list.isEmpty()){
                                     // cas ou il possede les cartes additionnels necessaires
                                     SortedBag<Card> suite = currentPlayer.chooseAdditionalCards(list);

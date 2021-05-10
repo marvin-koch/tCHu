@@ -12,6 +12,7 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+
 public class PlayerStateTest {
     static SortedBag<Ticket> t = SortedBag.of(3, ChMap.tickets().get(0), 4, ChMap.tickets().get(2));
     static SortedBag<Card> s4 = SortedBag.of(2, Card.VIOLET, 3, Card.LOCOMOTIVE);
@@ -26,7 +27,6 @@ public class PlayerStateTest {
     @Test
     void withAddedCardsTest(){
         PlayerState playerState = PlayerState.initial(SortedBag.of(4,Card.BLACK));
-        playerState = playerState.withAddedCard(Card.BLUE);
         assertEquals(5,playerState.cards().size());
         playerState = playerState.withAddedCards(SortedBag.of(3,Card.ORANGE));
         assertEquals(8,playerState.cards().size());
@@ -62,6 +62,7 @@ public class PlayerStateTest {
 
         assertEquals(expected, playerState.possibleClaimCards(ChMap.routes().get(41)));
     }
+    /*
     @Test
     void possibleAdditionalCards() {
         assertEquals(List.of(SortedBag.of(Card.LOCOMOTIVE)), p4.possibleAdditionalCards(1, SortedBag.of(Card.LOCOMOTIVE), SortedBag.of(1, Card.LOCOMOTIVE, 2, Card.BLACK)));
@@ -74,5 +75,7 @@ public class PlayerStateTest {
 
         assertEquals(List.of(), p4.possibleAdditionalCards(3, SortedBag.of(2, Card.LOCOMOTIVE), SortedBag.of(3, Card.LOCOMOTIVE)));
     }
+
+     */
 
 }

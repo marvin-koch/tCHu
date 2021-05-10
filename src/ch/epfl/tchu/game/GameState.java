@@ -188,7 +188,6 @@ public final class GameState extends  PublicGameState{
      * @return GameState actualisé
      */
     public GameState withDrawnFaceUpCard(int slot){
-        Preconditions.checkArgument(canDrawCards());
         PlayerState state = currentPlayerState().withAddedCards(SortedBag.of(cardState.faceUpCard(slot)));
         return new GameState(tickets,cardState.withDrawnFaceUpCard(slot), currentPlayerId(), copyMap(currentPlayerId(),state), lastPlayer());
     }
@@ -200,7 +199,6 @@ public final class GameState extends  PublicGameState{
      * @return GameState actualisé
      */
     public GameState withBlindlyDrawnCard(){
-        Preconditions.checkArgument(canDrawCards());
         PlayerState state = currentPlayerState().withAddedCards(SortedBag.of(cardState.topDeckCard()));
         return new GameState(tickets,cardState.withoutTopDeckCard(), currentPlayerId(), copyMap(currentPlayerId(),state), lastPlayer());
     }

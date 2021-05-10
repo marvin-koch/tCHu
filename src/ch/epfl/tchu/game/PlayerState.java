@@ -67,21 +67,21 @@ public final class PlayerState extends PublicPlayerState{
     }
 
     /**
-     * Retourne un état identique au récepteur, si ce n'est que le joueur possède en plus la carte donnée
-     * @param card carte
-     * @return PlayerState
-     */
-    public PlayerState withAddedCard(Card card){
-        return new PlayerState(tickets(), cards().union(SortedBag.of(card)),routes());
-    }
-
-    /**
      * Retourne un état identique au récepteur, si ce n'est que le joueur possède en plus les cartes données
      * @param additionalCards carte additional
      * @return PlayerState
      */
     public PlayerState withAddedCards(SortedBag<Card> additionalCards){
         return new PlayerState(tickets(), cards().union(additionalCards),routes());
+    }
+
+    /**
+     * Retourne un état identique au récepteur, si ce n'est que le joueur possède en plus la carte donnée
+     * @param card carte
+     * @return PlayerState
+     */
+    public PlayerState withAddedCard(Card card){
+        return new PlayerState(tickets(), cards().union(SortedBag.of(card)),routes());
     }
 
     /**
@@ -115,17 +115,15 @@ public final class PlayerState extends PublicPlayerState{
      * trié par ordre croissant du nombre de cartes locomotives.
      * @param additionalCardsCount nombres de cartes à jouer en plus
      * @param initialCards cartes jouer par le joueur
-     * @param drawnCards cartes tirées du sommet
      * @throws IllegalArgumentException si le nombre de cartes additionnelles n'est pas compris entre 1 et 3 (inclus),
      * si l'ensemble des cartes initiales est vide ou contient plus de 2 types de cartes différents,
      * ou si l'ensemble des cartes tirées ne contient pas exactement 3 cartes
      * @return List<SortedBag<Card>>
      */
-    public List<SortedBag<Card>> possibleAdditionalCards(int additionalCardsCount, SortedBag<Card> initialCards, SortedBag<Card> drawnCards){
+    public List<SortedBag<Card>> possibleAdditionalCards(int additionalCardsCount, SortedBag<Card> initialCards){
         Preconditions.checkArgument(1<= additionalCardsCount && additionalCardsCount <= Constants.ADDITIONAL_TUNNEL_CARDS);
         Preconditions.checkArgument(!initialCards.isEmpty());
         Preconditions.checkArgument(initialCards.toSet().size() <=2);
-        Preconditions.checkArgument(drawnCards.size() == Constants.ADDITIONAL_TUNNEL_CARDS);
 
         SortedBag<Card> cardsWithoutInitialCards = cards().difference(initialCards);
         SortedBag<Card> usableCards = SortedBag.of(cardsWithoutInitialCards.countOf(Card.LOCOMOTIVE),Card.LOCOMOTIVE);

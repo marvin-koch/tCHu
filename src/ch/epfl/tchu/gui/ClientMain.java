@@ -1,0 +1,37 @@
+package ch.epfl.tchu.gui;
+
+import ch.epfl.tchu.game.PlayerId;
+import ch.epfl.tchu.net.RemotePlayerClient;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+
+import java.util.List;
+
+public class ClientMain extends Application {
+
+    /**
+     * The main entry point for all JavaFX applications.
+     * The start method is called after the init method has returned,
+     * and after the system is ready for the application to begin running.
+     *
+     * <p>
+     * NOTE: This method is called on the JavaFX Application Thread.
+     * </p>
+     *
+     * @param primaryStage the primary stage for this application, onto which
+     *                     the application scene can be set.
+     *                     Applications may create other stages, if needed, but they will not be
+     *                     primary stages.
+     * @throws Exception if something goes wrong
+     */
+    @Override
+    public void start( Stage primaryStage) {
+        List<String> list = getParameters().getRaw();
+        RemotePlayerClient remotePlayerClient = new RemotePlayerClient(new GraphicalPlayerAdapter(),list.get(0), Integer.parseInt(list.get(1)));
+        Thread thread = new Thread(remotePlayerClient::run);
+        thread.start();
+    }
+}

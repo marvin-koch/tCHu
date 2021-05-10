@@ -155,7 +155,7 @@ final class DecksViewCreator {
             vBox.getChildren().add(cartePane);
 
             cartePane.disableProperty().bind(drawCard.isNull());
-            cardProperty.addListener((l,oV, nV) -> cartePane.getStyleClass().set(0, nV.name()));
+            cardProperty.addListener((l,oV, nV) -> cartePane.getStyleClass().set(0, nV.color() == null ? "NEUTRAL" : nV.color().name()));
             cartePane.setOnMouseClicked(event -> drawCard.get().onDrawCard(slot));
         }
         vBox.getChildren().add(piocheCartes);

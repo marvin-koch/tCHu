@@ -121,6 +121,8 @@ public final class GraphicalPlayer{
             routeHandler.onClaimRoute(route, cards);
             viderHandlers();
         });
+
+
     }
 
     /**
@@ -194,6 +196,7 @@ public final class GraphicalPlayer{
      * @throws AssertionError si le fil d'éxecution s'arrête
      */
     public void chooseClaimCards(List<SortedBag<Card>> list, ChooseCardsHandler handler){
+
         /*
         assert Platform.isFxApplicationThread();
         Text text = new Text(StringsFr.CHOOSE_CARDS);
@@ -295,6 +298,7 @@ public final class GraphicalPlayer{
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setOnCloseRequest(Event::consume);
         stage.setScene(scene);
+        stage.show();
         return stage;
     }
 
