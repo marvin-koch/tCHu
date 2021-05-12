@@ -26,7 +26,7 @@ import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
 
 import static ch.epfl.tchu.gui.ActionHandlers.*;
-import static ch.epfl.tchu.gui.StringsFr.AND_SEPARATOR;
+import static ch.epfl.tchu.gui.StringsFr.*;
 import static javafx.application.Platform.isFxApplicationThread;
 
 import java.util.*;
@@ -121,8 +121,6 @@ public final class GraphicalPlayer{
             routeHandler.onClaimRoute(route, cards);
             viderHandlers();
         });
-
-
     }
 
     /**
@@ -135,15 +133,15 @@ public final class GraphicalPlayer{
      */
     public void chooseTickets(SortedBag<Ticket> bag, ChooseTicketsHandler handler){
         assert isFxApplicationThread();
-        Preconditions.checkArgument(bag.size() == 5 || bag.size() == 3);
+        Preconditions.checkArgument(bag.size() == Constants.INITIAL_TICKETS_COUNT || bag.size() == Constants.IN_GAME_TICKETS_COUNT);
 
-        Text text = new Text(String.format(StringsFr.CHOOSE_TICKETS, bag.size() - 2, StringsFr.plural(bag.size()-2)));
+        Text text = new Text(String.format(StringsFr.CHOOSE_TICKETS, bag.size() - 2, plural(bag.size()-2)));
         TextFlow textFlow = new TextFlow(text);
 
         ListView<Ticket> listView = new ListView<>(FXCollections.observableList(bag.toList()));
         listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);// todo: pour le moment tjrs à multiple est-ce juste ?
 
-        Button button = new Button(StringsFr.CHOOSE);
+        Button button = new Button(CHOOSE);
         button.disableProperty().bind(Bindings.size(listView.getSelectionModel().getSelectedItems()).lessThan((bag.size()-2)));
 
 
@@ -181,7 +179,6 @@ public final class GraphicalPlayer{
      */
     public void drawCard(DrawCardHandler handler){
         assert isFxApplicationThread();
-        //TODO
         drawCardHandlerProperty.set(slot -> {
             handler.onDrawCard(slot);
             viderHandlers();
@@ -230,7 +227,7 @@ public final class GraphicalPlayer{
             handler.onChooseCards(listView.getSelectionModel().getSelectedItem());
         });
         */
-        createCardWindow(StringsFr.CHOOSE_CARDS, list, handler);
+        createCardWindow(CHOOSE_CARDS, list, handler);
 
     }
 
@@ -279,7 +276,7 @@ public final class GraphicalPlayer{
         });
        */
 
-        createCardWindow(StringsFr.CHOOSE_ADDITIONAL_CARDS, list, handler);
+        createCardWindow(CHOOSE_ADDITIONAL_CARDS, list, handler);
 
     }
 
@@ -316,8 +313,8 @@ public final class GraphicalPlayer{
         ListView<SortedBag<Card>> listView = new ListView<>(FXCollections.observableList(list));
         listView.setCellFactory(v -> new TextFieldListCell<>(new CardBagStringConverter()));
 
-        Button button = new Button(StringsFr.CHOOSE);
-        Stage stage = createStage(StringsFr.CARDS_CHOICE,
+        Button button = new Button(CHOOSE);
+        Stage stage = createStage(CARDS_CHOICE,
                 new VBox(textFlow, listView, button));
 
         /*
@@ -339,13 +336,15 @@ public final class GraphicalPlayer{
         }
 
          */
-        boolean stringContent = string.equals(StringsFr.CHOOSE_CARDS);
+        boolean stringContent = string.equals(CHOOSE_CARDS);
+        ObservableList<SortedBag<Card>> selectedItems = listView.getSelectionModel().getSelectedItems();
+
         if (stringContent)
-            button.disableProperty().bind(Bindings.size(listView.getSelectionModel().getSelectedItems()).isEqualTo(0));
+            button.disableProperty().bind(Bindings.size(selectedItems).isEqualTo(0));
 
         button.setOnAction( c -> {
             stage.hide();
-            SortedBag<Card> cards = !(listView.getSelectionModel().getSelectedItems().isEmpty()) || stringContent
+            SortedBag<Card> cards = (!selectedItems.isEmpty()) || stringContent
                     ? listView.getSelectionModel().getSelectedItem()
                     : SortedBag.of();
             handler.onChooseCards(cards);

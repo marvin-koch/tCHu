@@ -9,6 +9,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -145,11 +146,12 @@ final class DecksViewCreator {
         for (int slot : Constants.FACE_UP_CARD_SLOTS) {
             ReadOnlyObjectProperty<Card> cardProperty = observableGameState.getFaceUpCards(slot);
             StackPane cartePane = new StackPane();
-            cartePane.getStyleClass().addAll(null, "card");
+            ObservableList<String> styleClass = cartePane.getStyleClass();
+            styleClass.addAll(null, "card");
             if(!(cardProperty.get() == null)){
                 Card card = cardProperty.get();
                 String color = card.color() == null ? "NEUTRAL" : card.color().name();
-                cartePane.getStyleClass().set(0, color);
+                styleClass.set(0, color);
             }
             cartePane.getChildren().addAll(createRectangles());
             vBox.getChildren().add(cartePane);

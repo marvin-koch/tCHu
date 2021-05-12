@@ -62,6 +62,7 @@ public final class ServerMain extends Application {
             player1Name = parameters.get(0);
             player2Name = parameters.get(1);
         }
+        //TODO Est-ce que la fenetre s'appele Player 1
 
         Map<PlayerId,String> playerNames = new EnumMap<>(PlayerId.class);
         Map<PlayerId,Player> playerIdPlayerMap = new EnumMap<>(PlayerId.class);
