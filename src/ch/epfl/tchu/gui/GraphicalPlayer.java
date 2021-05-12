@@ -60,7 +60,7 @@ public final class GraphicalPlayer{
         drawCardHandlerProperty = new SimpleObjectProperty<>();
         drawClaimRouteHandlerProperty = new SimpleObjectProperty<>();
         mainStage = new Stage();
-        mainStage.setTitle(String.format("%s \u2014 %s","tCHu", id.name()));
+        mainStage.setTitle(String.format("%s \u2014 %s","tCHu", namesMap.get(id)));
         BorderPane pane = new BorderPane(MapViewCreator.createMapView(observableGameState, drawClaimRouteHandlerProperty, this::chooseClaimCards),
                 null,
                 DecksViewCreator.createCardsView(observableGameState, drawTicketsHandlerProperty, drawCardHandlerProperty),

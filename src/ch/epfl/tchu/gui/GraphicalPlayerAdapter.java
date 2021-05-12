@@ -86,7 +86,7 @@ public final class GraphicalPlayerAdapter implements Player {
             try{
                 bQueueInitialTicket.put(bag);
             }catch (InterruptedException e){
-                throw new Error("setInitialTicketChoice interrupted");
+                throw new Error();
             }
         }));
     }
@@ -117,14 +117,14 @@ public final class GraphicalPlayerAdapter implements Player {
             try{
                 bQueueTurn.put(TurnKind.DRAW_TICKETS);
             }catch (InterruptedException e){
-                throw new Error("setInitialTicketChoice interrupted");
+                throw new Error();
             }
         }, slot -> {
             try{
                 bQueueTurn.put(TurnKind.DRAW_CARDS);
                 bQueueInt.put(slot);
             }catch (InterruptedException e){
-                throw new Error("setInitialTicketChoice interrupted");
+                throw new Error();
             }
         }, (route, cards) -> {
             try{
@@ -132,13 +132,13 @@ public final class GraphicalPlayerAdapter implements Player {
                 bQueueRoute.put(route);
                 bQueueCard.put(cards);
             }catch (InterruptedException e){
-                throw new Error("setInitialTicketChoice interrupted");
+                throw new Error();
             }
         }));
         try{
             return bQueueTurn.take();
         }catch (InterruptedException e){
-            throw new Error("chooseInitialTickets() interrupted");
+            throw new Error();
         }
     }
 
@@ -157,14 +157,14 @@ public final class GraphicalPlayerAdapter implements Player {
                 try{
                     bQueueChooseTicket.put(bag);
                 }catch (InterruptedException e){
-                    throw new Error("setInitialTicketChoice interrupted");
+                    throw new Error();
                 }
             }
         }));
         try{
             return bQueueChooseTicket.take();
         }catch (InterruptedException e){
-            throw new Error("chooseInitialTickets() interrupted");
+            throw new Error();
         }
     }
 

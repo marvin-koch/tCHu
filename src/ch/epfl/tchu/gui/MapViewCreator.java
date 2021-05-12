@@ -42,7 +42,7 @@ final class MapViewCreator{
      * @return Node mapview
      */
     public static Node createMapView(ObservableGameState observableGameState,
-                                     ObjectProperty<ActionHandlers.ClaimRouteHandler> claimRouteHandlerObjectProperty,
+                                     ObjectProperty<ClaimRouteHandler> claimRouteHandlerObjectProperty,
                                      CardChooser cardChooser){
         Pane mapPane = new Pane();
         Image imageMap = new Image("map.png");
@@ -65,8 +65,8 @@ final class MapViewCreator{
                 int RECTANGLE_HEIGHT = 12;
                 int CIRCLE_RADIUS = 3;
 
-                Group case_Group = new Group();
-                case_Group.setId(route.id() + "_" + (i + 1));
+                Group caseGroup = new Group();
+                caseGroup.setId(route.id() + "_" + (i + 1));
 
                 Rectangle voie = new Rectangle(RECTANGLE_WIDTH, RECTANGLE_HEIGHT);
                 voie.getStyleClass().addAll("track", "filled");
@@ -85,8 +85,8 @@ final class MapViewCreator{
                 wagonCircle2.setCenterX(24);
                 wagonCircle2.setCenterY(6);
 
-                routeGroup.getChildren().add(case_Group);
-                case_Group.getChildren().addAll(voie,wagon);
+                routeGroup.getChildren().add(caseGroup);
+                caseGroup.getChildren().addAll(voie,wagon);
                 wagon.getChildren().addAll(wagonRectangle,wagonCircle1,wagonCircle2);
             }
 

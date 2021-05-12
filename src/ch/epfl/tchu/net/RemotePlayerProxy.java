@@ -19,7 +19,6 @@ import static ch.epfl.tchu.net.Serdes.*;
  * @author Marvin Koch (324448)
  */
 public final class RemotePlayerProxy implements Player {
-    private final Socket socket;
     private final BufferedWriter w;
     private final BufferedReader r;
 
@@ -28,7 +27,6 @@ public final class RemotePlayerProxy implements Player {
      * @param socket socket
      */
     public RemotePlayerProxy(Socket socket){
-        this.socket = Objects.requireNonNull(socket);
         try {
               w = new BufferedWriter(
                              new OutputStreamWriter(socket.getOutputStream(),
@@ -181,6 +179,10 @@ public final class RemotePlayerProxy implements Player {
         }
     }
 
+    /**
+     * ecris un message sans argument
+     * @param id MessageId
+     */
     private void write(MessageId id){
         write(id,"");//todo attention double espace probleme ?
     }

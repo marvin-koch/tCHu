@@ -22,8 +22,6 @@ import java.util.Random;
  * @author Marvin Koch (324448)
  */
 public final class ServerMain extends Application {
-    //todo gere cas avec un nom
-
     /**
      * The main entry point for all JavaFX applications.
      * The start method is called after the init method has returned,
@@ -33,6 +31,14 @@ public final class ServerMain extends Application {
      * NOTE: This method is called on the JavaFX Application Thread.
      * </p>
      *
+     *
+     *
+     * La méthode start du serveur ignore son argument primaryStage et se charge de démarrer le serveur en:
+     * - analysant les arguments passés au programme afin de déterminer les noms des deux joueurs,
+     * - attendant une connexion de la part du client sur le port 5108,
+     * - créant les deux joueurs, le premier étant un joueur graphique, le second un mandataire du joueur distant qui se trouve sur le client,
+     * - démarrant le fil d'exécution gérant la partie, qui ne fait rien d'autre qu'exécuter la méthode play de Game.
+     *
      * @param primaryStage the primary stage for this application, onto which
      *                     the application scene can be set.
      *                     Applications may create other stages, if needed, but they will not be
@@ -41,8 +47,7 @@ public final class ServerMain extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        System.out.println("Starting server!");
-        List<String> list = getParameters().getRaw();
+        List<String> parameters = getParameters().getRaw();
         ServerSocket serverSocket = new ServerSocket(5108);
         Socket socket = serverSocket.accept();
         String player1Name;
@@ -50,9 +55,12 @@ public final class ServerMain extends Application {
         if(list.isEmpty()){
             player1Name = "Ada";
             player2Name = "Charles";
-        }else{
-            player1Name = list.get(0);
-            player2Name = list.get(1);
+        }else if(parameters.size() == 1) {
+            player1Name = parameters.get(0);
+            player2Name = "Anonymous";
+        }else {
+            player1Name = parameters.get(0);
+            player2Name = parameters.get(1);
         }
 
         Map<PlayerId,String> playerNames = new EnumMap<>(PlayerId.class);
@@ -68,7 +76,5 @@ public final class ServerMain extends Application {
         Thread thread = new Thread(() ->
                 Game.play(playerIdPlayerMap,playerNames, SortedBag.of(ChMap.tickets()), new Random()));
         thread.start();
-        System.out.println("Client done!");
-
     }
 }

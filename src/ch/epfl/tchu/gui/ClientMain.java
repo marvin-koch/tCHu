@@ -26,6 +26,13 @@ public final class ClientMain extends Application {
      * NOTE: This method is called on the JavaFX Application Thread.
      * </p>
      *
+     * la méthode start se charge de démarrer le client en:
+     * - analysant les arguments passés au programme afin de déterminer le nom de l'hôte et le numéro de port du serveur,
+     * - créant un client distant—une instance de RemotePlayerClient — associé à un joueur graphique—une instance de GraphicalPlayerAdapter,
+     * - démarrant le fil gérant l'accès au réseau, qui ne fait rien d'autre qu'exécuter la méthode run du client créé précédemment.
+     *
+     * la méthode n'utilise pas son argument primaryStage.
+     *
      * @param primaryStage the primary stage for this application, onto which
      *                     the application scene can be set.
      *                     Applications may create other stages, if needed, but they will not be

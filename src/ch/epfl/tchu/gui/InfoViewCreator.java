@@ -45,12 +45,15 @@ final class InfoViewCreator {
         VBox vBox = new VBox();
         vBox.getStylesheets().addAll("info.css", "colors.css");
         Separator separator = new Separator(Orientation.HORIZONTAL);
-        VBox vboxSon = new VBox();
-        vboxSon.setId("player-stats");
+
+        VBox vBoxSon = new VBox();
+        vBoxSon.setId("player-stats");
+
         TextFlow gameInfo = new TextFlow();
         gameInfo.setId("game-info");
         Bindings.bindContent(gameInfo.getChildren(), observableList);
-        vBox.getChildren().addAll(vboxSon, separator, gameInfo);
+
+        vBox.getChildren().addAll(vBoxSon, separator, gameInfo);
 
         for (PlayerId playerId: List.of(id, id.next())) {
             TextFlow textFlow = new TextFlow();
@@ -67,7 +70,7 @@ final class InfoViewCreator {
                     observableGameState.playerPointCountProperty(playerId)));
 
             textFlow.getChildren().addAll(circle,text);
-            vboxSon.getChildren().add(textFlow);
+            vBoxSon.getChildren().add(textFlow);
         }
         return vBox;
     }
