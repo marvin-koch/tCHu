@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 
 import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
+import static ch.epfl.tchu.gui.ActionHandlers.*;
 
 import java.util.List;
 
@@ -97,12 +98,11 @@ final class MapViewCreator{
 
             routeGroup.setOnMouseClicked(event -> {
                 List<SortedBag<Card>> possibleClaimCards = observableGameState.possibleClaimCards(route);
-                ActionHandlers.ClaimRouteHandler claimRouteH = claimRouteHandlerObjectProperty.get();
+                ClaimRouteHandler claimRouteH = claimRouteHandlerObjectProperty.get();
                 if(possibleClaimCards.size() == 1){
                     claimRouteH.onClaimRoute(route,possibleClaimCards.get(0));
                 }else {
-                    ActionHandlers.ChooseCardsHandler chooseCardsH = chosenCards -> claimRouteH.onClaimRoute(route, chosenCards);
-                    cardChooser.chooseCards(possibleClaimCards, chooseCardsH);
+                    cardChooser.chooseCards(possibleClaimCards, chosenCards -> claimRouteH.onClaimRoute(route, chosenCards));
                 }
             });
         }
@@ -120,7 +120,7 @@ final class MapViewCreator{
          * @param handler handler
          */
         void chooseCards(List<SortedBag<Card>> options,
-                         ActionHandlers.ChooseCardsHandler handler);
+                         ChooseCardsHandler handler);
     }
 
 }

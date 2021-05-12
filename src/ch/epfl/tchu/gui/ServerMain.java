@@ -52,7 +52,7 @@ public final class ServerMain extends Application {
         Socket socket = serverSocket.accept();
         String player1Name;
         String player2Name;
-        if(list.isEmpty()){
+        if(parameters.isEmpty()){
             player1Name = "Ada";
             player2Name = "Charles";
         }else if(parameters.size() == 1) {
@@ -70,9 +70,7 @@ public final class ServerMain extends Application {
 
         playerIdPlayerMap.put(PlayerId.PLAYER_1,new GraphicalPlayerAdapter());
         playerIdPlayerMap.put(PlayerId.PLAYER_2,new RemotePlayerProxy(socket));
-        //playerIdPlayerMap.get(PlayerId.PLAYER_2).initPlayers(PlayerId.PLAYER_2,playerNames);
-        //playerIdPlayerMap.get(PlayerId.PLAYER_1).initPlayers(PlayerId.PLAYER_1,playerNames);
-        //.forEach((id, player) -> player.initPlayers(id, playerNames));
+
         Thread thread = new Thread(() ->
                 Game.play(playerIdPlayerMap,playerNames, SortedBag.of(ChMap.tickets()), new Random()));
         thread.start();

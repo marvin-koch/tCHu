@@ -8,7 +8,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import static java.nio.charset.StandardCharsets.US_ASCII;
 import static ch.epfl.tchu.net.Serdes.*;
@@ -169,6 +168,11 @@ public final class RemotePlayerProxy implements Player {
         return SORTEDBAG_CARD_SERDE.deserialize(read());
     }
 
+    /**
+     * Ecrit un message
+     * @param id MessageId
+     * @param arguments string
+     */
     private void write(MessageId id, String arguments){
         try{
             w.write(id.name() + " " + arguments);
@@ -187,6 +191,10 @@ public final class RemotePlayerProxy implements Player {
         write(id,"");//todo attention double espace probleme ?
     }
 
+    /**
+     * Lit message
+     * @return String
+     */
     private String read(){
         try{
             return r.readLine();

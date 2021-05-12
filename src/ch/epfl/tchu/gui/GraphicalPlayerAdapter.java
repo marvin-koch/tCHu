@@ -82,6 +82,7 @@ public final class GraphicalPlayerAdapter implements Player {
     @Override
     public void setInitialTicketChoice(SortedBag<Ticket> tickets) {
 
+        /*
         runLater(()-> graphicalPlayer.chooseTickets(tickets, bag -> {
             try{
                 bQueueInitialTicket.put(bag);
@@ -89,6 +90,9 @@ public final class GraphicalPlayerAdapter implements Player {
                 throw new Error();
             }
         }));
+
+         */
+        setInitialTicketChoiceTemplate(bQueueInitialTicket, tickets);
     }
 
     /**
@@ -98,11 +102,15 @@ public final class GraphicalPlayerAdapter implements Player {
      */
     @Override
     public SortedBag<Ticket> chooseInitialTickets(){
+        /*
         try{
             return bQueueInitialTicket.take();
         }catch (InterruptedException e){
             throw new Error("chooseInitialTickets() interrupted");
         }
+
+         */
+        return chooseInitialTicketsTemplate(bQueueInitialTicket);
     }
 
     /**
@@ -151,21 +159,26 @@ public final class GraphicalPlayerAdapter implements Player {
      */
     @Override
     public SortedBag<Ticket> chooseTickets(SortedBag<Ticket> options) {
-        runLater(() -> graphicalPlayer.chooseTickets(options, new ActionHandlers.ChooseTicketsHandler() {
-            @Override
-            public void onChooseTickets(SortedBag<Ticket> bag) {
+        /*
+        runLater(() -> graphicalPlayer.chooseTickets(options, bag -> {
                 try{
                     bQueueChooseTicket.put(bag);
                 }catch (InterruptedException e){
                     throw new Error();
                 }
-            }
         }));
+
+         */
+        setInitialTicketChoiceTemplate(bQueueChooseTicket, options);
+        /*
         try{
             return bQueueChooseTicket.take();
         }catch (InterruptedException e){
             throw new Error();
         }
+
+         */
+        return chooseInitialTicketsTemplate(bQueueChooseTicket);
     }
 
     /**
@@ -252,5 +265,22 @@ public final class GraphicalPlayerAdapter implements Player {
             throw new Error();
         }
 
+    }
+    private void setInitialTicketChoiceTemplate(BlockingQueue<SortedBag<Ticket>> ticketQueue, SortedBag<Ticket> tickets){
+        runLater(()-> graphicalPlayer.chooseTickets(tickets, bag -> {
+            try{
+                ticketQueue.put(bag);
+            }catch (InterruptedException e){
+                throw new Error();
+            }
+        }));
+    }
+
+    private SortedBag<Ticket> chooseInitialTicketsTemplate(BlockingQueue<SortedBag<Ticket>> ticketQueue){
+        try{
+            return ticketQueue.take();
+        }catch (InterruptedException e){
+            throw new Error();
+        }
     }
 }

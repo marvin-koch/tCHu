@@ -65,14 +65,6 @@ public interface Serde<T>{
         return new Serde<T>(){
             @Override
             public String serialize(T t) {
-                /*
-                if(t == null){
-                    return "";
-                }else{
-                    return String.valueOf(list.indexOf(t));
-                }
-
-                 */
                 return t != null ? String.valueOf(list.indexOf(t)) : "";
             }
 
@@ -109,14 +101,21 @@ public interface Serde<T>{
 
             @Override
             public List<T> deserialize(String s) {
+                /*
                 if (s.equals("")) {
                     return List.of();
                 } else {
-                    List<String> array = Arrays.asList(s.split(Pattern.quote(delimiter), -1));
-                    return array.stream()
+                    //TODO remove comment
+                    /*
+                    List<String> stringAsList = Arrays.asList(s.split(Pattern.quote(delimiter), -1));
+                    return stringAsList.stream()
                             .map(serde::deserialize)
                             .collect(Collectors.toList());
+
+                    return Serde.deserializeStringToList(s, delimiter, serde);
                 }
+                */
+                return s.equals("") ? List.of() : Serde.deserializeStringToList(s, delimiter, serde);
             }
         };
     }
@@ -130,7 +129,7 @@ public interface Serde<T>{
      */
     static<T extends Comparable<T>> Serde<SortedBag<T>> bagOf(Serde<T> serde, String delimiter){
         Preconditions.checkArgument(!delimiter.isEmpty());
-        return new Serde<SortedBag<T>>(){
+        return new Serde<>(){
             @Override
             public String serialize(SortedBag<T> t) {
                 return t.stream()
@@ -140,18 +139,39 @@ public interface Serde<T>{
 
             @Override
             public SortedBag<T> deserialize(String s){
+                /*
                 if(s.equals("")){
                     return SortedBag.of();
                 }else{
-                    List<String> array = Arrays.asList(s.split(Pattern.quote(delimiter), -1));
-                    return SortedBag.of(array.stream()
+                    /*
+                    List<String> stringAsList = Arrays.asList(s.split(Pattern.quote(delimiter), -1));
+                    return SortedBag.of(stringAsList.stream()
                             .map(serde::deserialize)
                             .collect(Collectors.toList()));
+
+                    return SortedBag.of(Serde.deserializeStringToList(s, delimiter, serde));
                 }
+
+                 */
+                return s.equals("") ? SortedBag.of() : SortedBag.of(Serde.deserializeStringToList(s, delimiter, serde));
             }
         };
     }
 
+    /**
+     * Deseriallize un string en list
+     * @param s
+     * @param delimiter
+     * @param serde
+     * @param <T>
+     * @return List<T>
+     */
+    private static <T> List<T> deserializeStringToList(String s, String delimiter, Serde<T> serde){
+        List<String> stringAsList = Arrays.asList(s.split(Pattern.quote(delimiter), -1));
+        return stringAsList.stream()
+                .map(serde::deserialize)
+                .collect(Collectors.toList());
+    }
 
 
 }

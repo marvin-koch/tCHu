@@ -53,11 +53,11 @@ public final class ObservableGameState {
      * @return List de ObjectProperty
      */
     private static List<ObjectProperty<Card>> createFaceUpCards(){
-        List<ObjectProperty<Card>> list = new ArrayList<>();
+        List<ObjectProperty<Card>> faceUpCardProperties = new ArrayList<>();
         for(int slot : Constants.FACE_UP_CARD_SLOTS){
-            list.add(new SimpleObjectProperty<Card>());
+            faceUpCardProperties.add(new SimpleObjectProperty<Card>());
         }
-        return list;
+        return faceUpCardProperties;
     }
 
     /**
@@ -65,20 +65,20 @@ public final class ObservableGameState {
      * @return une map qui associe une paire de stations à une list de routes qui ont les mêmes stations
      */
     private static Map<List<Station>, List<Route>> createPairs(){
-        Map<List<Station>, List<Route>> map = new HashMap<>();
+        Map<List<Station>, List<Route>> stationRoutesMap = new HashMap<>();
         for(Station station1: ChMap.stations()){
             for(Station station2 : ChMap.stations()){
-                map.put(List.of(station1, station2), new ArrayList<>());
+                stationRoutesMap.put(List.of(station1, station2), new ArrayList<>());
             }
         }
         for (Route route: ChMap.routes()) {
-            for(List<Station> list : map.keySet()){
-                if(list.get(0) == route.station1() && list.get(1) == route.station2()){
-                    map.get(list).add(route);
+            for(List<Station> stations : stationRoutesMap.keySet()){
+                if(stations.get(0) == route.station1() && stations.get(1) == route.station2()){
+                    stationRoutesMap.get(stations).add(route);
                 }
             }
         }
-        return map;
+        return stationRoutesMap;
     }
 
     /**
@@ -123,6 +123,7 @@ public final class ObservableGameState {
 
         ticketPourcentage.set((int)(gs.ticketsCount() / (double)ChMap.tickets().size()*100));
         cartePourcentage.set((int)(gs.cardState().deckSize() / (double)Constants.TOTAL_CARDS_COUNT*100));
+
         for (int slot : Constants.FACE_UP_CARD_SLOTS) {
             Card newCard = gs.cardState().faceUpCard(slot);
             faceUpCards.get(slot).set(newCard);
@@ -145,10 +146,15 @@ public final class ObservableGameState {
 
         playerTicketsList.setAll(ps.tickets().toList());
 
+        //TODO remove comment
+        /*
         for (Card card : Card.values()) {
             cardsCountMap.get(card).set(ps.cards().countOf(card));
         }
 
+         */
+        Card.ALL.forEach(card -> cardsCountMap.get(card).set(ps.cards().countOf(card)));
+        //todo revoir l algo
         for (Route route: routeStatusMap.keySet()) {
             if(id == publicGameState.currentPlayerId() && routesProperties.get(route).get() == null && ps.canClaimRoute(route)){
                 for(List<Station> pairs : STATION_PAIRS.keySet()){
@@ -176,7 +182,7 @@ public final class ObservableGameState {
      * Retourne le pourcentage de cartes restants
      * @return carte Pourcentage Property
      */
-    public  ReadOnlyIntegerProperty cartePourcentageProperty() {
+    public ReadOnlyIntegerProperty cartePourcentageProperty() {
         return cartePourcentage;
     }
 

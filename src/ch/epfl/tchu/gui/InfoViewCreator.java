@@ -44,6 +44,7 @@ final class InfoViewCreator {
         Preconditions.checkArgument(observableList.size() <=5 );
         VBox vBox = new VBox();
         vBox.getStylesheets().addAll("info.css", "colors.css");
+
         Separator separator = new Separator(Orientation.HORIZONTAL);
 
         VBox vBoxSon = new VBox();
@@ -58,6 +59,7 @@ final class InfoViewCreator {
         for (PlayerId playerId: List.of(id, id.next())) {
             TextFlow textFlow = new TextFlow();
             textFlow.getStyleClass().add(playerId.name());
+
             Circle circle = new Circle(5);
             circle.getStyleClass().add("filled");
 

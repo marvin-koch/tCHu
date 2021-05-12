@@ -62,10 +62,10 @@ public final class RemotePlayerClient{
                 switch (MessageId.valueOf(strings[0])){
                     case INIT_PLAYERS:
                         List<String> playerNames = LIST_STRING_SERDE.deserialize(strings[2]);
-                        Map<PlayerId, String> map = new EnumMap<>(PlayerId.class);
-                        map.put(PlayerId.PLAYER_1, playerNames.get(0));
-                        map.put(PlayerId.PLAYER_2, playerNames.get(1));
-                        player.initPlayers(PLAYER_ID_SERDE.deserialize(strings[1]), map);
+                        Map<PlayerId, String> mapNames = new EnumMap<>(PlayerId.class);
+                        mapNames.put(PlayerId.PLAYER_1, playerNames.get(0));
+                        mapNames.put(PlayerId.PLAYER_2, playerNames.get(1));
+                        player.initPlayers(PLAYER_ID_SERDE.deserialize(strings[1]), mapNames);
                         break;
                     case RECEIVE_INFO:
                         player.receiveInfo(STRING_SERDE.deserialize(strings[1]));
@@ -93,8 +93,8 @@ public final class RemotePlayerClient{
                         writeMessage(SORTEDBAG_CARD_SERDE.serialize(player.initialClaimCards()), w);
                         break;
                     case CHOOSE_ADDITIONAL_CARDS:
-                        List<SortedBag<Card>> list = LIST_SORTEDBAG_CARD_SERDE.deserialize(strings[1]);
-                        writeMessage(SORTEDBAG_CARD_SERDE.serialize(player.chooseAdditionalCards(list)), w);
+                        List<SortedBag<Card>> listSortedBagCards = LIST_SORTEDBAG_CARD_SERDE.deserialize(strings[1]);
+                        writeMessage(SORTEDBAG_CARD_SERDE.serialize(player.chooseAdditionalCards(listSortedBagCards)), w);
                         break;
                     case SET_INITIAL_TICKETS:
                         player.setInitialTicketChoice(SORTEDBAG_TICKET_SERDE.deserialize(strings[1]));
@@ -107,6 +107,11 @@ public final class RemotePlayerClient{
         }
     }
 
+    /**
+     * Ecrit un message
+     * @param s String
+     * @param w BufferedWriter
+     */
     private void writeMessage(String s, BufferedWriter w){
         try{
             w.write(s);
