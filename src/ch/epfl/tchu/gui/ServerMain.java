@@ -22,6 +22,7 @@ import java.util.Random;
  * @author Marvin Koch (324448)
  */
 public final class ServerMain extends Application {
+    //todo gere cas avec un nom
 
     /**
      * The main entry point for all JavaFX applications.
@@ -40,6 +41,7 @@ public final class ServerMain extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
+        System.out.println("Starting server!");
         List<String> list = getParameters().getRaw();
         ServerSocket serverSocket = new ServerSocket(5108);
         Socket socket = serverSocket.accept();
@@ -66,7 +68,7 @@ public final class ServerMain extends Application {
         Thread thread = new Thread(() ->
                 Game.play(playerIdPlayerMap,playerNames, SortedBag.of(ChMap.tickets()), new Random()));
         thread.start();
-
+        System.out.println("Client done!");
 
     }
 }
