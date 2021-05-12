@@ -10,7 +10,12 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
-public class ClientMain extends Application {
+/**
+ * La classe ClientMain contient le programme principal du client tCHu.
+ * @author Shangeeth Poobalasingam (329307)
+ * @author Marvin Koch (324448)
+ */
+public final class ClientMain extends Application {
 
     /**
      * The main entry point for all JavaFX applications.

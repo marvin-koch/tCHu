@@ -16,7 +16,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class ServerMain extends Application {
+/**
+ * La classe ServerMain contient le programme principal du serveur tCHu.
+ * @author Shangeeth Poobalasingam (329307)
+ * @author Marvin Koch (324448)
+ */
+public final class ServerMain extends Application {
 
     /**
      * The main entry point for all JavaFX applications.

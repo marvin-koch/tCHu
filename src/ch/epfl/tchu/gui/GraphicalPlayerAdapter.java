@@ -10,7 +10,13 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 import static javafx.application.Platform.*;
-
+/**
+ * La classe instanciable GraphicalPlayerAdapter a pour but d'adapter (au sens du patron Adapter)
+ * une instance de GraphicalPlayer en une valeur de type Player
+ *
+ * @author Shangeeth Poobalasingam (329307)
+ * @author Marvin Koch (324448)
+ */
 public final class GraphicalPlayerAdapter implements Player {
     private GraphicalPlayer graphicalPlayer;
     private final BlockingQueue<SortedBag<Ticket>> bQueueInitialTicket;
@@ -22,6 +28,9 @@ public final class GraphicalPlayerAdapter implements Player {
     private final BlockingQueue<Integer> bQueueInt;
     private final BlockingQueue<Integer> bQueueIntSecondChance;
 
+    /**
+     * Constructeur de GraphicalPlayerAdapter
+     */
     public GraphicalPlayerAdapter(){
         bQueueInitialTicket= new ArrayBlockingQueue<>(1);
         bQueueChooseTicket= new ArrayBlockingQueue<>(1);;
