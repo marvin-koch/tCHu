@@ -110,7 +110,6 @@ public final class Game {
                             // cas si la route est un tunnel
                             receiveInfoAll(players,currentInfo.attemptsTunnelClaim(claimedRoute,initialCards));
                             SortedBag.Builder<Card> cardsBuilder = new SortedBag.Builder<>();
-
                             for(int i = 0; i < Constants.ADDITIONAL_TUNNEL_CARDS; i++){
                                 gameState = gameState.withCardsDeckRecreatedIfNeeded(rng);
                                 cardsBuilder.add(gameState.topCard());

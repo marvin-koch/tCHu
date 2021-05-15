@@ -182,7 +182,7 @@ public final class GraphicalPlayerAdapter implements Player {
         }));
 
          */
-        runLater(() -> graphicalPlayer.chooseTickets(options, bag -> putInQueue(bQueueChooseTicket, options)));
+        runLater(() -> graphicalPlayer.chooseTickets(options, bag -> putInQueue(bQueueChooseTicket, bag)));
         /*
         try{
             return bQueueChooseTicket.take();
