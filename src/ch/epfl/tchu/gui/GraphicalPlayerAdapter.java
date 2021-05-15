@@ -154,7 +154,7 @@ public final class GraphicalPlayerAdapter implements Player {
 
          */
         runLater(() -> graphicalPlayer.startTurn(() -> putInQueue(bQueueTurn, TurnKind.DRAW_TICKETS),
-                slot -> {putInQueue(bQueueTurn, TurnKind.DRAW_TICKETS);
+                slot -> {putInQueue(bQueueTurn, TurnKind.DRAW_CARDS);
                          putInQueue(bQueueInt, slot);},
                 (route, cards) -> {putInQueue(bQueueTurn, TurnKind.CLAIM_ROUTE);
                                    putInQueue(bQueueRoute, route);
