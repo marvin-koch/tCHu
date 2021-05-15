@@ -9,6 +9,7 @@ import ch.epfl.tchu.net.RemotePlayerProxy;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.EnumMap;
@@ -22,6 +23,13 @@ import java.util.Random;
  * @author Marvin Koch (324448)
  */
 public final class ServerMain extends Application {
+    /**
+     * Méthode main qui appelle launch
+     * @param args arguments
+     */
+    public static void main(String[] args){
+        launch(args);
+    }
     /**
      * The main entry point for all JavaFX applications.
      * The start method is called after the init method has returned,
@@ -46,7 +54,7 @@ public final class ServerMain extends Application {
      * @throws Exception if something goes wrong
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws IOException {
         List<String> parameters = getParameters().getRaw();
         ServerSocket serverSocket = new ServerSocket(5108);
         Socket socket = serverSocket.accept();

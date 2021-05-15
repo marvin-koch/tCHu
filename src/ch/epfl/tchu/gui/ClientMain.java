@@ -16,6 +16,13 @@ import java.util.List;
  * @author Marvin Koch (324448)
  */
 public final class ClientMain extends Application {
+    /**
+     * Méthode main qui appelle launch
+     * @param args arguments
+     */
+    public static void main(String[] args){
+        launch(args);
+    }
 
     /**
      * The main entry point for all JavaFX applications.
