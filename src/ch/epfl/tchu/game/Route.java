@@ -125,48 +125,21 @@ public final class Route {
      * @return liste de tous les ensembles de cartes stockés dans des SortedBag
      */
     public List<SortedBag<Card>> possibleClaimCards(){
-
-        List<SortedBag<Card>> list = new ArrayList<>();
-        /*
-        if(color == null){
-            list = Card.CARS.stream()
-                    .map(card -> SortedBag.of(length, card))
-                    .collect(Collectors.toList());
-
-        }else{
-            list.add(SortedBag.of(length, Card.of(color)));
-        }
-
-        if(level == Level.UNDERGROUND){
-            if(color == null){
-                for(int i = 1; i < length; i++){
-                    int finalI = i;
-                    list.addAll(Card.CARS.stream()
-                            .map(card -> SortedBag.of(length - finalI, card, finalI, Card.LOCOMOTIVE))
-                            .collect(Collectors.toList()));
-                }
-            }else{
-                for(int i = 1; i < length; i++){
-                    list.add(SortedBag.of(length - i, Card.of(color), i, Card.LOCOMOTIVE));
-                }
-            }
-            list.add(SortedBag.of(length, Card.LOCOMOTIVE));
-        }
-        */
+        List<SortedBag<Card>> possibleCards;
         List<Card> cards = color == null ? Card.CARS : List.of(Card.of(color));
-        list = cards.stream()
+        possibleCards = cards.stream()
                 .map(card -> SortedBag.of(length, card))
                 .collect(Collectors.toList());
         if(level == Level.UNDERGROUND){
             for(int i = 1; i < length; i++){
                 int finalI = i;
-                list.addAll(cards.stream()
+                possibleCards.addAll(cards.stream()
                         .map(card -> SortedBag.of(length - finalI, card, finalI, Card.LOCOMOTIVE))
                         .collect(Collectors.toList()));
             }
-            list.add(SortedBag.of(length, Card.LOCOMOTIVE));
+            possibleCards.add(SortedBag.of(length, Card.LOCOMOTIVE));
         }
-        return list;
+        return possibleCards;
     }
 
 

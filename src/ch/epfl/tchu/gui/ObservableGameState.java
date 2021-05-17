@@ -66,17 +66,11 @@ public final class ObservableGameState {
     private static Map<Route, Route> routeSister(){
         Map<Route, Route> routeMapToSister = new HashMap<>();
         for(Route route1 : ChMap.routes()){
-            for(Route route2 : ChMap.routes()){
-                if(route1.station1()==route2.station1()&& route1.station2()== route2.station2()){
-                    routeMapToSister.put(route1,route2);
-                    //routeMapToSister.put(route2,route1);
-                    break;
-                }
-            }
+            ChMap.routes().stream().filter(route2 -> route1.station1() == route2.station1() && route1.station2() == route2.station2() && (!route1.id().equals(route2.id())))
+                    .findAny()
+                    .ifPresent(sister -> routeMapToSister.put(route1, sister));
         }
-        routeMapToSister.forEach((route, route2) -> System.out.println(route.toString()+" "+ route2.toString()));
         return routeMapToSister;
-
     }
 
     /**
@@ -152,12 +146,7 @@ public final class ObservableGameState {
             //la route n'appartient à personne et, dans le cas d'une route double, sa voisine non plus,
             //le joueur a les wagons et les cartes nécessaires pour s'emparer de la route—ou en tout cas tenter de le faire s'il s'agit d'un tunnel.
             routeStatusMap.get(route).set(id == publicGameState.currentPlayerId() && routesProperties.get(route).get() == null && ps.canClaimRoute(route) && (!hasASister || routesProperties.get(ROUTE_PAIRS.get(route)).get() == null));
-
-
         }
-
-
-
     }
 
     /**

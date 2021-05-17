@@ -3,7 +3,6 @@ package ch.epfl.tchu.gui;
 import ch.epfl.tchu.Preconditions;
 import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.game.*;
-import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -16,7 +15,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -31,7 +29,6 @@ import static javafx.application.Platform.isFxApplicationThread;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import javafx.application.Platform;
 
 /**
  * La classe GraphicalPlayer, finale, représente l'interface graphique d'un joueur

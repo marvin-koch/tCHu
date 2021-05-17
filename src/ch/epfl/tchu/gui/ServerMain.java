@@ -73,6 +73,7 @@ public final class ServerMain extends Application {
 
         Map<PlayerId,String> playerNames = new EnumMap<>(PlayerId.class);
         Map<PlayerId,Player> playerIdPlayerMap = new EnumMap<>(PlayerId.class);
+
         playerNames.put(PlayerId.PLAYER_1,player1Name);
         playerNames.put(PlayerId.PLAYER_2, player2Name);
 
