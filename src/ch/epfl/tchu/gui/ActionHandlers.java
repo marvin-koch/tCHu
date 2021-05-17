@@ -4,17 +4,15 @@ import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.game.Card;
 import ch.epfl.tchu.game.Route;
 import ch.epfl.tchu.game.Ticket;
-import javafx.event.EventHandler;
 
 /**
  * L'interface ActionHandlers a pour unique but de contenir cinq interfaces
  * fonctionnelles imbriquées représentant différents «gestionnaires d'actions»
  */
 interface ActionHandlers {
-    //TODO COMMENTER les interfaces
 
     /**
-     * Gestionnaire de ?????? todo faire ça
+     * Gestionnaire pour tirer des tickets
      */
     @FunctionalInterface
     interface DrawTicketsHandler{
@@ -23,6 +21,10 @@ interface ActionHandlers {
          */
         void onDrawTickets();
     }
+
+    /**
+     * Gestionnaire pour tirer des cartes
+     */
     @FunctionalInterface
     interface DrawCardHandler{
         /**
@@ -31,6 +33,10 @@ interface ActionHandlers {
          */
         void onDrawCard(int slot);
     }
+
+    /**
+     * Gestionnaire des Routes
+     */
     @FunctionalInterface
     interface ClaimRouteHandler{
         /**
@@ -41,8 +47,12 @@ interface ActionHandlers {
         void onClaimRoute(Route route, SortedBag<Card> cards);
     }
 
+    /**
+     * Gestionnaire pour choisir des tickets
+     */
     @FunctionalInterface
     interface ChooseTicketsHandler{
+
         /**
          * Méthode appelée lorsque le joueur a choisi de garder les billets donnés suite à un tirage de billets
          * @param bag un multiensemble de billets
@@ -50,8 +60,13 @@ interface ActionHandlers {
         void onChooseTickets(SortedBag<Ticket> bag);
     }
 
+
+    /**
+     * Gestionnaire pour choisir des cartes
+     */
     @FunctionalInterface
     interface ChooseCardsHandler{
+
         /**
          *  Méthode appelée lorsque le joueur a choisi d'utiliser les cartes données comme cartes initiales
          *  ou additionnelles lors de la prise de possession d'une route;

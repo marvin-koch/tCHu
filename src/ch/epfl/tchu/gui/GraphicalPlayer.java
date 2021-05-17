@@ -139,26 +139,11 @@ public final class GraphicalPlayer{
         TextFlow textFlow = new TextFlow(text);
 
         ListView<Ticket> listView = new ListView<>(FXCollections.observableList(bag.toList()));
-        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);// todo: pour le moment tjrs à multiple est-ce juste ?
+        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         Button button = new Button(CHOOSE);
         button.disableProperty().bind(Bindings.size(listView.getSelectionModel().getSelectedItems()).lessThan((bag.size()-2)));
 
-
-        /*
-        Scene scene = new Scene(new VBox(textFlow,
-                listView,
-                button));
-
-
-        scene.getStylesheets().add("chooser.css");
-        Stage stage = new Stage(StageStyle.UTILITY);
-        stage.setTitle(StringsFr.TICKETS_CHOICE);
-        stage.initOwner(mainStage);
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.setOnCloseRequest(Event::consume);
-
-         */
         Stage stage = createStage(StringsFr.TICKETS_CHOICE,
                 new VBox(textFlow, listView, button));
 
@@ -193,42 +178,7 @@ public final class GraphicalPlayer{
      * @throws AssertionError si le fil d'éxecution s'arrête
      */
     public void chooseClaimCards(List<SortedBag<Card>> list, ChooseCardsHandler handler){
-
-        /*
-        assert Platform.isFxApplicationThread();
-        Text text = new Text(StringsFr.CHOOSE_CARDS);
-        TextFlow textFlow = new TextFlow(text);
-
-        ListView<SortedBag<Card>> listView = new ListView<>(FXCollections.observableList(list));
-        //listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        listView.setCellFactory(v -> new TextFieldListCell<>(new CardBagStringConverter()));
-
-        Button button = new Button(StringsFr.CHOOSE);
-        button.disableProperty().bind(Bindings.size(listView.getSelectionModel().getSelectedItems()).isEqualTo(0));
-
-        /*
-        Scene scene = new Scene(new VBox(textFlow,
-                listView,
-                button));
-
-
-        scene.getStylesheets().add("chooser.css");
-        Stage stage = new Stage(StageStyle.UTILITY);
-        stage.setTitle(StringsFr.CARDS_CHOICE);
-        stage.initOwner(mainStage);
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.setOnCloseRequest(Event::consume);
-
-        Stage stage = createStage(StringsFr.CARDS_CHOICE,
-                new VBox(textFlow, listView, button));
-
-        button.setOnAction( c -> {
-            stage.hide();
-            handler.onChooseCards(listView.getSelectionModel().getSelectedItem());
-        });
-        */
         createCardWindow(CHOOSE_CARDS, list, handler);
-
     }
 
 
@@ -241,43 +191,7 @@ public final class GraphicalPlayer{
      * @throws AssertionError si le fil d'éxecution s'arrête
      */
     public void chooseAdditionalCards(List<SortedBag<Card>> list, ChooseCardsHandler handler){
-        /*
-        assert Platform.isFxApplicationThread();
-        Text text = new Text(StringsFr.CHOOSE_ADDITIONAL_CARDS);
-        TextFlow textFlow = new TextFlow(text);
-
-        ListView<SortedBag<Card>> listView = new ListView<>(FXCollections.observableList(list));
-        //listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        listView.setCellFactory(v -> new TextFieldListCell<>(new CardBagStringConverter()));
-
-        Button button = new Button(StringsFr.CHOOSE);
-
-        /*
-        Scene scene = new Scene(new VBox(textFlow,
-                listView,
-                button));
-
-        scene.getStylesheets().add("chooser.css");
-        Stage stage = new Stage(StageStyle.UTILITY);
-        stage.setTitle(StringsFr.CARDS_CHOICE);
-        stage.initOwner(mainStage);
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.setOnCloseRequest(Event::consume);
-        Stage stage = createStage(StringsFr.CARDS_CHOICE,
-                new VBox(textFlow, listView, button));
-
-        button.setOnAction( c -> {
-            stage.hide();
-            if(listView.getSelectionModel().getSelectedItems().isEmpty()){
-                handler.onChooseCards(SortedBag.of());
-            }else {
-                handler.onChooseCards(listView.getSelectionModel().getSelectedItem());
-            }//todo test si faut vraiment mettre un if else
-        });
-       */
-
         createCardWindow(CHOOSE_ADDITIONAL_CARDS, list, handler);
-
     }
 
     /**
@@ -317,25 +231,6 @@ public final class GraphicalPlayer{
         Stage stage = createStage(CARDS_CHOICE,
                 new VBox(textFlow, listView, button));
 
-        /*
-        if(string.equals(StringsFr.CHOOSE_ADDITIONAL_CARDS)){
-            button.setOnAction( c -> {
-                stage.hide();
-                if(listView.getSelectionModel().getSelectedItems().isEmpty()){
-                    handler.onChooseCards(SortedBag.of());
-                }else {
-                    handler.onChooseCards(listView.getSelectionModel().getSelectedItem());
-                }//todo test si faut vraiment mettre un if else
-            });
-        }else{
-            button.disableProperty().bind(Bindings.size(listView.getSelectionModel().getSelectedItems()).isEqualTo(0));
-            button.setOnAction( c -> {
-                stage.hide();
-                handler.onChooseCards(listView.getSelectionModel().getSelectedItem());
-            });
-        }
-
-         */
         boolean stringContent = string.equals(CHOOSE_CARDS);
         ObservableList<SortedBag<Card>> selectedItems = listView.getSelectionModel().getSelectedItems();
 

@@ -46,8 +46,7 @@ public final class ObservableGameState {
     private final Map<Card, IntegerProperty> cardsCountMap = new HashMap<>();
     private final Map<Route, BooleanProperty> routeStatusMap = new HashMap<>();
 
-    private static final Map<List<Station>,List<Route>> STATION_PAIRS = createPairs();
-
+    private static final Map<Route,Route> ROUTE_PAIRS = routeSister();
     /**
      * Crée 5 propriétés vide
      * @return List de ObjectProperty
@@ -55,30 +54,29 @@ public final class ObservableGameState {
     private static List<ObjectProperty<Card>> createFaceUpCards(){
         List<ObjectProperty<Card>> faceUpCardProperties = new ArrayList<>();
         for(int slot : Constants.FACE_UP_CARD_SLOTS){
-            faceUpCardProperties.add(new SimpleObjectProperty<Card>());
+            faceUpCardProperties.add(new SimpleObjectProperty<>());
         }
         return faceUpCardProperties;
     }
 
     /**
-     * Crée toutes les paires de stations dans le jeu
-     * @return une map qui associe une paire de stations à une list de routes qui ont les mêmes stations
+     * Map toutes les route voisine dans le jeu
+     * @return
      */
-    private static Map<List<Station>, List<Route>> createPairs(){
-        Map<List<Station>, List<Route>> stationRoutesMap = new HashMap<>();
-        for(Station station1: ChMap.stations()){
-            for(Station station2 : ChMap.stations()){
-                stationRoutesMap.put(List.of(station1, station2), new ArrayList<>());
-            }
-        }
-        for (Route route: ChMap.routes()) {
-            for(List<Station> stations : stationRoutesMap.keySet()){
-                if(stations.get(0) == route.station1() && stations.get(1) == route.station2()){
-                    stationRoutesMap.get(stations).add(route);
+    private static Map<Route, Route> routeSister(){
+        Map<Route, Route> routeMapToSister = new HashMap<>();
+        for(Route route1 : ChMap.routes()){
+            for(Route route2 : ChMap.routes()){
+                if(route1.station1()==route2.station1()&& route1.station2()== route2.station2()){
+                    routeMapToSister.put(route1,route2);
+                    //routeMapToSister.put(route2,route1);
+                    break;
                 }
             }
         }
-        return stationRoutesMap;
+        routeMapToSister.forEach((route, route2) -> System.out.println(route.toString()+" "+ route2.toString()));
+        return routeMapToSister;
+
     }
 
     /**
@@ -146,28 +144,20 @@ public final class ObservableGameState {
 
         playerTicketsList.setAll(ps.tickets().toList());
 
-        //TODO remove comment
-        /*
-        for (Card card : Card.values()) {
-            cardsCountMap.get(card).set(ps.cards().countOf(card));
+        Card.ALL.forEach(card -> cardsCountMap.get(card).set(ps.cards().countOf(card)));
+
+        for (Route route: routeStatusMap.keySet()) {
+            boolean hasASister = ROUTE_PAIRS.containsKey(route);
+            //le joueur est le joueur courant,
+            //la route n'appartient à personne et, dans le cas d'une route double, sa voisine non plus,
+            //le joueur a les wagons et les cartes nécessaires pour s'emparer de la route—ou en tout cas tenter de le faire s'il s'agit d'un tunnel.
+            routeStatusMap.get(route).set(id == publicGameState.currentPlayerId() && routesProperties.get(route).get() == null && ps.canClaimRoute(route) && (!hasASister || routesProperties.get(ROUTE_PAIRS.get(route)).get() == null));
+
+
         }
 
-         */
-        Card.ALL.forEach(card -> cardsCountMap.get(card).set(ps.cards().countOf(card)));
-        //todo revoir l algo
-        for (Route route: routeStatusMap.keySet()) {
-            if(id == publicGameState.currentPlayerId() && routesProperties.get(route).get() == null && ps.canClaimRoute(route)){
-                for(List<Station> pairs : STATION_PAIRS.keySet()){
-                    List<Route> voisinage = STATION_PAIRS.get(pairs);
-                    if(pairs.get(0) == route.station1() && pairs.get(1) == route.station2()){
-                        routeStatusMap.get(route).set(voisinage.stream()
-                                .noneMatch(routeV -> routesProperties.get(routeV).get() != null));
-                    }
-                }
-            }else{
-                routeStatusMap.get(route).set(false);
-            }
-        }
+
+
     }
 
     /**

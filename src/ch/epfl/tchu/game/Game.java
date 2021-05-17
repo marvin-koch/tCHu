@@ -8,10 +8,6 @@ import ch.epfl.tchu.game.Constants;
 import java.util.*;
 
 import static ch.epfl.tchu.game.Constants.*;
-/**
- * TODO Regles: Utiliser Constants (PlayerID), copyOf pour immuabilitié, utiliser Objects.requireNonNull, crééer constantes pour éviter la duplication, playerNames!!!
- *
- */
 
 /**
  * La classe Game publique, finale et non instanciable, représente une partie de tCHu.
@@ -40,7 +36,7 @@ public final class Game {
         receiveInfoAll(players, infos.get(gameState.currentPlayerId()).willPlayFirst());
 
         for (PlayerId id: PlayerId.values() ) {
-            SortedBag<Ticket> ticketSortedBag = SortedBag.of(gameState.topTickets(INITIAL_TICKETS_COUNT));
+            SortedBag<Ticket> ticketSortedBag = gameState.topTickets(INITIAL_TICKETS_COUNT);
             gameState = gameState.withoutTopTickets(INITIAL_TICKETS_COUNT);
             players.get(id).setInitialTicketChoice(ticketSortedBag);
         }
@@ -50,10 +46,8 @@ public final class Game {
             gameState = gameState.withInitiallyChosenTickets(id,players.get(id).chooseInitialTickets());
         }
 
-        for (PlayerId id: PlayerId.values() ) {
-            players.get(id).receiveInfo(infos.get(id).keptTickets(gameState.playerState(id).ticketCount()));
-            players.get(id).receiveInfo(infos.get(id.next()).keptTickets(gameState.playerState(id.next()).ticketCount()));
-        }
+        GameState finalGameState = gameState;
+        players.forEach((id, player) -> receiveInfoAll(players, infos.get(id).keptTickets(finalGameState.playerState(id).ticketCount())));
 
         boolean gameHasEnded = false;
         while(!gameHasEnded){

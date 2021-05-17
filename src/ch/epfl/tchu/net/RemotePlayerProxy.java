@@ -188,7 +188,7 @@ public final class RemotePlayerProxy implements Player {
      * @param id MessageId
      */
     private void write(MessageId id){
-        write(id,"");//todo attention double espace probleme ?
+        write(id,"");
     }
 
     /**

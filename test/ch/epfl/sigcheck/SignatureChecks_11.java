@@ -5,6 +5,7 @@ package ch.epfl.sigcheck;
 // possible, que les noms et les types des différentes entités à définir
 // pour cette étape du projet sont corrects.
 
+/*
 final class SignatureChecks_11 {
     private SignatureChecks_11() {}
 
@@ -25,3 +26,5 @@ final class SignatureChecks_11 {
     javafx.stage.Stage v03;
     ch.epfl.tchu.gui.ServerMain v04;
 }
+
+ */

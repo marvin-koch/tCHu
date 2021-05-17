@@ -13,6 +13,7 @@ import java.util.Objects;
  */
 
 public class PublicGameState {
+    private final int MINIMUM_CARDS_COUNT = 5;
     final private int ticketsCount;
     final private PublicCardState cardState;
     final private PlayerId currentPlayerId;
@@ -71,7 +72,7 @@ public class PublicGameState {
      * @return pioche + defausse >= 5
      */
     public boolean canDrawCards(){
-        return cardState().deckSize() + cardState().discardsSize() >= 5;
+        return cardState().deckSize() + cardState().discardsSize() >= MINIMUM_CARDS_COUNT;
     }
 
     /**

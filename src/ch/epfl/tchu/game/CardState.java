@@ -49,7 +49,7 @@ public final class CardState extends PublicCardState{
      */
     public CardState withDrawnFaceUpCard(int slot){
         Objects.checkIndex(slot,Constants.FACE_UP_CARDS_COUNT);
-        Preconditions.checkArgument(!pioche.isEmpty());
+        Preconditions.checkArgument(!isDeckEmpty());
         List<Card> faceUp = faceUpCards();
         faceUp.set(slot,pioche.topCard());
         return new CardState(faceUp,pioche.withoutTopCard(),discards);
@@ -61,7 +61,7 @@ public final class CardState extends PublicCardState{
      * @return Card
      */
     public Card topDeckCard(){
-        Preconditions.checkArgument(!pioche.isEmpty());
+        Preconditions.checkArgument(!isDeckEmpty());
         return pioche.topCard();
     }
 
@@ -70,7 +70,7 @@ public final class CardState extends PublicCardState{
      * @return CardState
      */
     public CardState withoutTopDeckCard(){
-        Preconditions.checkArgument(!pioche.isEmpty());
+        Preconditions.checkArgument(!isDeckEmpty());
         return new CardState(faceUpCards(),pioche.withoutTopCard(),discards);
 
     }
@@ -84,7 +84,7 @@ public final class CardState extends PublicCardState{
      * @return CardState
      */
     public CardState withDeckRecreatedFromDiscards(Random rng){
-        Preconditions.checkArgument(pioche.isEmpty());
+        Preconditions.checkArgument(isDeckEmpty());
         return new CardState(faceUpCards(),Deck.of(discards, rng),SortedBag.of());
     }
 

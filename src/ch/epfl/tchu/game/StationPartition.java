@@ -41,7 +41,7 @@ public final class StationPartition implements StationConnectivity {
      * @author Marvin Koch (324448)
      */
     public final static class Builder{
-        private int[] gares;
+        private final int[] gares;
 
         /**
          * Calcule le représentant de la partition d'une station

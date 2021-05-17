@@ -66,14 +66,17 @@ public final class PlayerState extends PublicPlayerState{
         return cards;
     }
 
+    /*
     /**
      * Retourne un état identique au récepteur, si ce n'est que le joueur possède en plus les cartes données
      * @param additionalCards carte additional
      * @return PlayerState
-     */
     public PlayerState withAddedCards(SortedBag<Card> additionalCards){
-        return new PlayerState(tickets(), cards().union(additionalCards),routes());
+        return new PlayerState(tickets(), cards().union(additionalCards), routes());
     }
+    */
+
+
 
     /**
      * Retourne un état identique au récepteur, si ce n'est que le joueur possède en plus la carte donnée
@@ -92,8 +95,11 @@ public final class PlayerState extends PublicPlayerState{
      */
     public boolean canClaimRoute(Route route){
         if(route.length()> carCount()) {return false;}
+        /*
         return route.possibleClaimCards().stream()
                 .anyMatch(bag -> cards().contains(bag));
+         */
+        return !possibleClaimCards(route).isEmpty();
 
     }
 
@@ -174,8 +180,8 @@ public final class PlayerState extends PublicPlayerState{
         routes().forEach(route -> builder.connect(route.station1(), route.station2()));
 
         return tickets().stream()
-                .map(billet -> billet.points(builder.build()))
-                .reduce(0, Integer::sum);
+                .mapToInt(billet -> billet.points(builder.build()))
+                .sum();
     }
 
     /**

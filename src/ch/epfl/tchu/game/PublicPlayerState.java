@@ -28,12 +28,12 @@ public class PublicPlayerState {
         this.routes = List.copyOf(routes);
 
         wagonCount = Constants.INITIAL_CAR_COUNT - routes.stream()
-                .map(Route::length)
-                .reduce(0, Integer::sum);
+                .mapToInt(Route::length)
+                .sum();
 
         claimPoint = routes.stream()
-                .map(Route::claimPoints)
-                .reduce(0, Integer::sum);
+                .mapToInt(Route::claimPoints)
+                .sum();
     }
 
     /**

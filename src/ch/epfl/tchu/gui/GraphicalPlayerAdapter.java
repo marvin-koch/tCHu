@@ -46,7 +46,7 @@ public final class GraphicalPlayerAdapter implements Player {
     /**
      * Communique au joueur sa propre identité et les noms des autres
      *
-     * @param ownId       identité au joueur
+     * @param ownId identité au joueur
      * @param playerNames noms des joueurs
      */
     @Override
@@ -82,18 +82,6 @@ public final class GraphicalPlayerAdapter implements Player {
      */
     @Override
     public void setInitialTicketChoice(SortedBag<Ticket> tickets) {
-
-        //TODO remove comments
-        /*
-        runLater(()-> graphicalPlayer.chooseTickets(tickets, bag -> {
-            try{
-                bQueueInitialTicket.put(bag);
-            }catch (InterruptedException e){
-                throw new Error();
-            }
-        }));
-
-         */
         runLater(() -> graphicalPlayer.chooseTickets(tickets, bag -> putInQueue(bQueueInitialTicket, bag)));
     }
 
@@ -104,14 +92,6 @@ public final class GraphicalPlayerAdapter implements Player {
      */
     @Override
     public SortedBag<Ticket> chooseInitialTickets(){
-        /*
-        try{
-            return bQueueInitialTicket.take();
-        }catch (InterruptedException e){
-            throw new Error("chooseInitialTickets() interrupted");
-        }
-
-         */
         return takeFromQueue(bQueueInitialTicket);
     }
 
@@ -122,37 +102,6 @@ public final class GraphicalPlayerAdapter implements Player {
      */
     @Override
     public TurnKind nextTurn() {
-        /*
-        runLater(() -> graphicalPlayer.startTurn(() -> {
-
-            try{
-                bQueueTurn.put(TurnKind.DRAW_TICKETS);
-            }catch (InterruptedException e){
-                throw new Error();
-            }
-        }, slot -> {
-            try{
-                bQueueTurn.put(TurnKind.DRAW_CARDS);
-                bQueueInt.put(slot);
-            }catch (InterruptedException e){
-                throw new Error();
-            }
-        }, (route, cards) -> {
-            try{
-                bQueueTurn.put(TurnKind.CLAIM_ROUTE);
-                bQueueRoute.put(route);
-                bQueueCard.put(cards);
-            }catch (InterruptedException e){
-                throw new Error();
-            }
-        }));
-        try{
-            return bQueueTurn.take();
-        }catch (InterruptedException e){
-            throw new Error();
-        }
-
-         */
         runLater(() -> graphicalPlayer.startTurn(() -> putInQueue(bQueueTurn, TurnKind.DRAW_TICKETS),
                 slot -> {putInQueue(bQueueTurn, TurnKind.DRAW_CARDS);
                          putInQueue(bQueueInt, slot);},
@@ -172,25 +121,7 @@ public final class GraphicalPlayerAdapter implements Player {
      */
     @Override
     public SortedBag<Ticket> chooseTickets(SortedBag<Ticket> options) {
-        /*
-        runLater(() -> graphicalPlayer.chooseTickets(options, bag -> {
-                try{
-                    bQueueChooseTicket.put(bag);
-                }catch (InterruptedException e){
-                    throw new Error();
-                }
-        }));
-
-         */
         runLater(() -> graphicalPlayer.chooseTickets(options, bag -> putInQueue(bQueueChooseTicket, bag)));
-        /*
-        try{
-            return bQueueChooseTicket.take();
-        }catch (InterruptedException e){
-            throw new Error();
-        }
-
-         */
         return takeFromQueue(bQueueChooseTicket);
     }
 
@@ -204,31 +135,8 @@ public final class GraphicalPlayerAdapter implements Player {
     @Override
     public int drawSlot() {
         if(!bQueueInt.isEmpty()){
-            /*
-            try{
-                return bQueueInt.take();
-            }catch (InterruptedException e){
-                throw new Error();
-            }
-
-             */
             return takeFromQueue(bQueueInt);
         }else {
-            /*
-            runLater(() -> graphicalPlayer.drawCard((slot -> {
-                try{
-                    bQueueIntSecondChance.put(slot);
-                }catch (InterruptedException e){
-                    throw new Error();
-                }
-            })));
-            try{
-                return bQueueIntSecondChance.take();
-            }catch (InterruptedException e){
-                throw new Error();
-            }
-
-             */
             runLater(() -> graphicalPlayer.drawCard(slot -> putInQueue(bQueueIntSecondChance, slot)));
             return takeFromQueue(bQueueIntSecondChance);
         }
@@ -241,16 +149,7 @@ public final class GraphicalPlayerAdapter implements Player {
      */
     @Override
     public Route claimedRoute() {
-        /*
-        try{
-            return bQueueRoute.take();
-        }catch (InterruptedException e){
-            throw new Error();
-        }
-
-         */
         return takeFromQueue(bQueueRoute);
-
     }
 
     /**
@@ -261,14 +160,6 @@ public final class GraphicalPlayerAdapter implements Player {
      */
     @Override
     public SortedBag<Card> initialClaimCards() {
-        /*
-        try{
-            return bQueueCard.take();
-        }catch (InterruptedException e){
-            throw new Error();
-        }
-
-         */
         return takeFromQueue(bQueueCard);
     }
 
@@ -282,20 +173,6 @@ public final class GraphicalPlayerAdapter implements Player {
      */
     @Override
     public SortedBag<Card> chooseAdditionalCards(List<SortedBag<Card>> options) {
-        /*
-        runLater(()-> graphicalPlayer.chooseAdditionalCards(options, cards -> {
-            try{
-                bQueueAdditionalCard.put(cards);
-            }catch (InterruptedException e){
-                throw new Error();
-            }
-        }));
-        try{
-            return bQueueAdditionalCard.take();
-        }catch (InterruptedException e){
-            throw new Error();
-        }
-         */
         runLater(() -> graphicalPlayer.chooseAdditionalCards(options, cards -> putInQueue(bQueueAdditionalCard, cards)));
         return takeFromQueue(bQueueAdditionalCard);
 
@@ -319,7 +196,7 @@ public final class GraphicalPlayerAdapter implements Player {
      * Méthode privée pour prendre un élément dans une BlockingQueue
      * @param queue Queue
      * @param <T> class
-     * @return
+     * @return T
      */
     private <T> T takeFromQueue(BlockingQueue<T> queue){
         try{

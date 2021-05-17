@@ -51,7 +51,6 @@ public final class Trail {
                             new Trail(route.station2(), route.station1(), List.of(route))))
                     .collect(Collectors.toList());
             Trail longestTrail = Collections.max(cs, Comparator.comparingInt(t -> t.length));
-
             while(!cs.isEmpty()){
                 List<Trail> listeVide = new ArrayList<>();
                 for(Trail trail : cs) {
@@ -62,15 +61,15 @@ public final class Trail {
                             listeVide.add(new Trail(trail.station1, route.stationOpposite(trail.station2), newRoute));
                         }
                     }
+                    if(trail.length > longestTrail.length()){
+                        longestTrail = trail;
+                    }
                 }
-                Trail finalLongestTrail = longestTrail;
-                longestTrail = cs.stream()
-                        .filter(trail -> trail.length() > finalLongestTrail.length())
-                        .max(Comparator.comparingInt(Trail::length))
-                        .orElse(longestTrail);
 
                 cs = new ArrayList<>(listeVide);
+
             }
+
 
             return longestTrail;
         }
@@ -108,17 +107,6 @@ public final class Trail {
     public String toString() {
         StringBuilder string = new StringBuilder();
         if(!routes.isEmpty()){
-            /*
-            string.append(station1.toString())
-                    .append(EN_DASH_SEPARATOR)
-                    .append(routes.get(0).station1().equals(station2) ? routes.get(0).station2() : routes.get(0).station1())
-                    .append(EN_DASH_SEPARATOR)
-                    .append(routes.subList(1,5).stream()
-                            .map(route -> (route.station1().equals(routes.get(routes.indexOf(route) - 1).station2())  ? route.station2() : route.station1()))
-                            .map(Station::toString)
-                            .collect(Collectors.joining(EN_DASH_SEPARATOR)));
-
-             */
             Station currentStation = station1;
             for(Route route : routes){
                 string.append(currentStation)
