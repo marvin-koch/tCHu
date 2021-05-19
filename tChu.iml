@@ -12,6 +12,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="javaFX.base" level="application" />
+    <orderEntry type="library" name="JavaFX" level="application" />
   </component>
 </module>

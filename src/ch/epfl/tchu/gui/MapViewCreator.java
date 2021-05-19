@@ -5,7 +5,6 @@ import ch.epfl.tchu.game.Card;
 import ch.epfl.tchu.game.ChMap;
 import ch.epfl.tchu.game.PlayerId;
 import ch.epfl.tchu.game.Route;
-import com.sun.javafx.scene.shape.RectangleHelper;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.EventHandler;

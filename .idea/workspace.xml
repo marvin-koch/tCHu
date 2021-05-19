@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bc3ec769-81a6-4341-9a1a-4d5977bca92f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/tChu/ch/epfl/tchu/game/PlayerStateTestProf$ChMap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/tChu/ch/epfl/tchu/game/PlayerStateTestProf.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/MapViewCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/MapViewCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tChu.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tChu.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1slAe1qzt68FeKTjoxxYKG1EI1T" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager">
+    <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ch.epfl.tchu.gui.ServerMain" />
+      <module name="tChu" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ch.epfl.tchu.gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ServerMain" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bc3ec769-81a6-4341-9a1a-4d5977bca92f" name="Default Changelist" comment="" />
+      <created>1621436900711</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1621436900711</updated>
+      <workItem from="1621436907484" duration="81000" />
+      <workItem from="1621441747713" duration="175000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
