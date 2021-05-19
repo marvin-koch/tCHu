@@ -7,7 +7,11 @@ import ch.epfl.tchu.game.Player;
 import ch.epfl.tchu.game.PlayerId;
 import ch.epfl.tchu.net.RemotePlayerProxy;
 import javafx.application.Application;
-import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.*;
+import javafx.event.Event;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -60,20 +65,20 @@ public final class ServerMain extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
-        List<String> parameters = getParameters().getRaw();
         ServerSocket serverSocket = new ServerSocket(5108);
         Socket socket = serverSocket.accept();
+        /*
+        StringProperty text1Property = new SimpleStringProperty();
+        StringProperty text2Property = new SimpleStringProperty();
 
+        Stage menu = new Stage();
+        menu.setTitle("Bienvenue dans tCHu!");
+        menu.setOnCloseRequest(Event::consume);
 
-        Stage menu = new Stage(StageStyle.UTILITY);
-        menu.setTitle("Welcome to tCHu");
-        TextField text = new TextField();
-        Button button = new Button("Play");
-        VBox vbox = new VBox();
-        vbox.getChildren().addAll(text, button);
-        Scene scene = new Scene(vbox, 500, 500);
-        menu.setScene(scene);
-        menu.show();
+        TextField player1Text = new TextField();
+        TextField player2Text = new TextField();
+        Bindings.bindBidirectional(player1Text.textProperty(), text1Property);
+        Bindings.bindBidirectional(player2Text.textProperty(), text2Property);
 
         GridPane pane = new GridPane();
         pane.setAlignment(Pos.CENTER);

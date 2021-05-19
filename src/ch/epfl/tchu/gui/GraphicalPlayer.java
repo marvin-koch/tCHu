@@ -16,7 +16,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
@@ -181,7 +185,6 @@ public final class GraphicalPlayer{
     }
 
 
-
     /**
      * Ouvre une fenêtre permettant au joueur de faire son choix.
      * Une fois celui-ci confirmé, le gestionnaire de choix est appelé avec ce choix en argument
@@ -193,10 +196,47 @@ public final class GraphicalPlayer{
         createCardWindow(CHOOSE_ADDITIONAL_CARDS, list, handler);
     }
 
+    public void showWinner(String winner, int points, RestartHandler handler){
+        assert isFxApplicationThread();
+        Pane pane = new VBox();
+        Stage stage = createStage("Fin de la Partie", pane);
+        stage.setHeight(300);
+        stage.setWidth(500);
+        stage.setOnCloseRequest(v -> stage.close());
+        String winnerString = winner == null
+                ? String.format("Vous êtes à égalité avec %s points", points)
+                : String.format("Bravo à %s qui a gagné la partie avec %s points!", winner, points);
+
+        Text winnerText = new Text(10,20, winnerString);
+        winnerText.setFont(Font.font("Calibri", 20));
+
+
+        Text rejouer = new Text("Voulez vous rejouer?");
+        rejouer.setFont(Font.font("Calibri", 15));
+        Button ouiButton = new Button("Oui");
+        Button nonButton = new Button("Non");
+
+        pane.getChildren().addAll(winnerText, rejouer, ouiButton,nonButton);
+        ouiButton.setOnAction(e ->{
+                    ouiButton.disableProperty().set(true);
+                    mainStage.close();
+                    handler.onClick(1);
+                });
+        nonButton.setOnAction(e -> {
+            nonButton.disableProperty().set(true);
+            mainStage.close();
+            handler.onClick(0);
+        });
+
+        //nonButton.setOnAction(e ->
+                //handler.onClick(0));
+
+    }
+
     /**
      * Crée le Stage
      * @param title
-     * @param vbox
+     * @param pane
      * @return Stage
      */
     private Stage createStage(String title, Pane pane){
@@ -253,6 +293,10 @@ public final class GraphicalPlayer{
         drawCardHandlerProperty.set(null);
         drawClaimRouteHandlerProperty.set(null);
     }
+
+
+
+
 
     /**
      * Class privée CardBagStringConverter

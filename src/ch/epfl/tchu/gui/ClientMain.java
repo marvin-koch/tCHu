@@ -67,9 +67,52 @@ public final class ClientMain extends Application {
      */
     @Override
     public void start( Stage primaryStage) {
-        List<String> list = getParameters().getRaw();
-        RemotePlayerClient remotePlayerClient = new RemotePlayerClient(new GraphicalPlayerAdapter(),list.get(0), Integer.parseInt(list.get(1)));
-        Thread thread = new Thread(remotePlayerClient::run);
-        thread.start();
+
+        /*
+        StringProperty text1Property = new SimpleStringProperty();
+        StringProperty text2Property = new SimpleStringProperty();
+
+        Stage menu = new Stage();
+        menu.setTitle("Bienvenue dans tCHu!");
+        menu.setOnCloseRequest(Event::consume);
+
+        TextField player1Text = new TextField();
+        TextField player2Text = new TextField();
+        Bindings.bindBidirectional(player1Text.textProperty(), text1Property);
+        Bindings.bindBidirectional(player2Text.textProperty(), text2Property);
+
+        GridPane pane = new GridPane();
+        pane.setAlignment(Pos.CENTER);
+        pane.setHgap(5.5);
+        pane.setVgap(5.5);
+        pane.add(new Label("Adresse:"), 0, 0);
+        pane.add(player1Text, 1, 0);
+        pane.add(new Label("Port:"), 0, 1);
+        pane.add(player2Text, 1, 1);
+        Button playButton = new Button("Connect");
+        pane.add(playButton, 1, 3);
+        GridPane.setHalignment(playButton, HPos.RIGHT);
+
+        Scene scene = new Scene(pane);
+        menu.setScene(scene);
+        menu.show();
+
+         */
+        Button playButton = new Button("Connecter");
+        GameMenu.createMenuStage("IP", "Port", playButton);
+
+        playButton.setOnAction(e -> {
+            playButton.disableProperty().set(true);
+            Thread thread = new Thread(() -> {
+                String adresse = GameMenu.getText1() == null ? "localhost" : GameMenu.getText1();
+                String port = GameMenu.getText2() == null ? "5108" : GameMenu.getText2();
+                RemotePlayerClient remotePlayerClient = new RemotePlayerClient(new GraphicalPlayerAdapter(), adresse, Integer.parseInt(port));
+                remotePlayerClient.run();
+                //menu.hide();
+            });
+            thread.start();
+            //((Node)(e.getSource())).getScene().getWindow().hide();
+        });
+
     }
 }

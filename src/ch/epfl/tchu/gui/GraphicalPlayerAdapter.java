@@ -28,6 +28,7 @@ public final class GraphicalPlayerAdapter implements Player {
     private final BlockingQueue<SortedBag<Card>> bQueueAdditionalCard;
     private final BlockingQueue<Integer> bQueueInt;
     private final BlockingQueue<Integer> bQueueIntSecondChance;
+    private final BlockingQueue<Integer> bQueueIntRestart;
 
     /**
      * Constructeur de GraphicalPlayerAdapter
@@ -41,6 +42,8 @@ public final class GraphicalPlayerAdapter implements Player {
         bQueueAdditionalCard = new ArrayBlockingQueue<>(1);
         bQueueInt = new ArrayBlockingQueue<>(1);
         bQueueIntSecondChance = new ArrayBlockingQueue<>(1);
+        bQueueIntRestart = new ArrayBlockingQueue<>(1);
+
 
     }
 

@@ -11,6 +11,12 @@ import ch.epfl.tchu.game.Ticket;
  */
 interface ActionHandlers {
 
+    //TODO commenter
+    @FunctionalInterface
+    interface RestartHandler{
+        void onClick(int choice);
+    }
+
     /**
      * Gestionnaire pour tirer des tickets
      */

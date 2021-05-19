@@ -168,6 +168,13 @@ public final class RemotePlayerProxy implements Player {
         return SORTEDBAG_CARD_SERDE.deserialize(read());
     }
 
+    //TDOO commenter
+    @Override
+    public int endMenu(String name, int points){
+        write(MessageId.END, STRING_SERDE.serialize(name) + " " + INTEGER_SERDE.serialize(points));
+        return INTEGER_SERDE.deserialize(read());
+    }
+
     /**
      * Ecrit un message
      * @param id MessageId
