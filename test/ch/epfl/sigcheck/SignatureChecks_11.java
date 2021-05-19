@@ -18,7 +18,7 @@ final class SignatureChecks_11 {
     void checkServerMain() {
         v04 = new ch.epfl.tchu.gui.ServerMain();
         ch.epfl.tchu.gui.ServerMain.main(v02);
-        v04.start(v03);
+        //v04.start(v03);
     }
 
     ch.epfl.tchu.gui.ClientMain v01;

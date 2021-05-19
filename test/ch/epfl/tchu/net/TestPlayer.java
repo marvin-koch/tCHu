@@ -79,6 +79,11 @@ public final class TestPlayer implements Player {
     }
 
     @Override
+    public int endMenu(String name, int point) {
+        return 0;
+    }
+
+    @Override
     public void initPlayers(PlayerId ownId, Map<PlayerId, String> playerNames) {
         registerCall(PlayerMethod.INIT_PLAYERS);
         System.out.println(ownId +" "+"Players Initialised" + " " + ownId + " " + playerNames.get(0) + " " + playerNames.get(1));

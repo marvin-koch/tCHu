@@ -99,6 +99,9 @@ public final class RemotePlayerClient{
                     case SET_INITIAL_TICKETS:
                         player.setInitialTicketChoice(SORTEDBAG_TICKET_SERDE.deserialize(strings[1]));
                         break;
+                    case END:
+                        writeMessage(INTEGER_SERDE.serialize(player.endMenu(STRING_SERDE.deserialize(strings[1]), INTEGER_SERDE.deserialize(strings[2]))), w);
+                        break;
                 }
             }
 

@@ -13,6 +13,7 @@ import java.util.Map;
  */
 public interface Player {
 
+
     /**
      * Type énuméré imbriquée TurnKind
      *
@@ -30,6 +31,10 @@ public interface Player {
         public static final List<TurnKind> ALL = List.of(TurnKind.values());
     }
 
+
+
+    //TODO commenter
+    int endMenu(String name , int point );
     /**
      * Communique au joueur sa propre identité et les noms des autres
      * @param ownId identité au joueur

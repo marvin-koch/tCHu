@@ -27,6 +27,12 @@ final class TestPlayer2 implements Player {
         this.turnCounter = 0;
     }
 
+
+    @Override
+    public int endMenu(String name, int point) {
+        return 0;
+    }
+
     @Override
     public void initPlayers(PlayerId ownId, Map<PlayerId, String> playerNames) {
         System.out.println(ownId.toString()+" = "+ playerNames.get(ownId));

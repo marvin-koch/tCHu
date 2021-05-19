@@ -43,6 +43,13 @@ public final class GraphicalPlayerAdapter implements Player {
         bQueueIntSecondChance = new ArrayBlockingQueue<>(1);
 
     }
+
+    //TODO commenter
+    public int endMenu(String winner, int points){
+        runLater(() -> graphicalPlayer.showWinner(winner, points, choice -> putInQueue(bQueueIntRestart, choice)));
+        return takeFromQueue(bQueueIntRestart);
+    }
+
     /**
      * Communique au joueur sa propre identité et les noms des autres
      *

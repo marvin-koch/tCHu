@@ -10,13 +10,14 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
@@ -74,39 +75,45 @@ public final class ServerMain extends Application {
         menu.setScene(scene);
         menu.show();
 
+        GridPane pane = new GridPane();
+        pane.setAlignment(Pos.CENTER);
+        pane.setHgap(5.5);
+        pane.setVgap(5.5);
+        pane.add(new Label("Joueur 1:"), 0, 0);
+        pane.add(player1Text, 1, 0);
+        pane.add(new Label("Joueur 2:"), 0, 1);
+        pane.add(player2Text, 1, 1);
+        Button playButton = new Button("Play");
+        pane.add(playButton, 1, 3);
+        GridPane.setHalignment(playButton, HPos.RIGHT);
 
-        String player1Name;
-        String player2Name;
-        if(parameters.isEmpty()){
-            player1Name = "Ada";
-            player2Name = "Charles";
-        }else if(parameters.size() == 1) {
-            player1Name = parameters.get(0);
-            player2Name = "Anonymous";
-        }else {
-            player1Name = parameters.get(0);
-            player2Name = parameters.get(1);
-        }
+        Scene scene = new Scene(pane );
+        menu.setScene(scene);
+        menu.show();
 
-        Map<PlayerId,String> playerNames = new EnumMap<>(PlayerId.class);
-        Map<PlayerId,Player> playerIdPlayerMap = new EnumMap<>(PlayerId.class);
+         */
+        Button playButton = new Button("Jouer");
+        GameMenu.createMenuStage("Joueur 1", "Joueur 2", playButton);
 
-        playerNames.put(PlayerId.PLAYER_1,player1Name);
-        playerNames.put(PlayerId.PLAYER_2, player2Name);
+        playButton.setOnAction(e -> {
+            playButton.disableProperty().set(true);
+            Thread thread = new Thread(() ->{
+                String player1Name = GameMenu.getText1() == null ? "Ada" : GameMenu.getText1();
+                String player2Name = GameMenu.getText2() == null ? "Charles" : GameMenu.getText2();
 
-        playerIdPlayerMap.put(PlayerId.PLAYER_1,new GraphicalPlayerAdapter());
-        playerIdPlayerMap.put(PlayerId.PLAYER_2,new RemotePlayerProxy(socket));
-        button.setOnAction(e -> {
-            Thread thread = new Thread(() -> Platform.runLater(() ->
-                    Game.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random())));
+                Map<PlayerId,String> playerNames = new EnumMap<>(PlayerId.class);
+                Map<PlayerId,Player> playerIdPlayerMap = new EnumMap<>(PlayerId.class);
+
+                playerNames.put(PlayerId.PLAYER_1,player1Name);
+                playerNames.put(PlayerId.PLAYER_2, player2Name);
+                playerIdPlayerMap.put(PlayerId.PLAYER_1,new GraphicalPlayerAdapter());
+                playerIdPlayerMap.put(PlayerId.PLAYER_2,new RemotePlayerProxy(socket));
+                Game.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random());
+                //menu.hide();
+            });
             thread.start();
+            //((Node)(e.getSource())).getScene().getWindow().hide();
         });
-        /*
-        Thread thread = new Thread(() -> Platform.runLater(() ->
-                button.setOnAction(e -> {
-                    menu.close();
-                    Game.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random());
-                })));
-        */
+
     }
 }

@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -26,6 +27,7 @@ import javafx.util.StringConverter;
 import static ch.epfl.tchu.gui.ActionHandlers.*;
 import static ch.epfl.tchu.gui.StringsFr.*;
 import static javafx.application.Platform.isFxApplicationThread;
+import static javafx.application.Platform.runLater;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -197,8 +199,8 @@ public final class GraphicalPlayer{
      * @param vbox
      * @return Stage
      */
-    private Stage createStage(String title, VBox vbox){
-        Scene scene = new Scene(vbox);
+    private Stage createStage(String title, Pane pane){
+        Scene scene = new Scene(pane);
         scene.getStylesheets().add("chooser.css");
         Stage stage = new Stage(StageStyle.UTILITY);
         stage.setTitle(title);
@@ -291,5 +293,8 @@ public final class GraphicalPlayer{
         public SortedBag<Card> fromString(String string) {
             throw new UnsupportedOperationException();
         }
+
     }
+
+
 }

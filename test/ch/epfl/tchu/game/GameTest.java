@@ -43,6 +43,11 @@ public class GameTest {
         }
 
         @Override
+        public int endMenu(String name, int point) {
+            return 0;
+        }
+
+        @Override
         public void initPlayers(PlayerId ownId, Map<PlayerId, String> playerNames) {
             System.out.println(ownId.toString()+" = "+ playerNames.get(ownId));
             System.out.println(ownId.next().toString()+" = "+ playerNames.get(ownId.next()));
