@@ -7,15 +7,19 @@ import ch.epfl.tchu.game.Player;
 import ch.epfl.tchu.game.PlayerId;
 import ch.epfl.tchu.net.RemotePlayerProxy;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 /**
  * La classe ServerMain contient le programme principal du serveur tCHu.
@@ -58,6 +62,19 @@ public final class ServerMain extends Application {
         List<String> parameters = getParameters().getRaw();
         ServerSocket serverSocket = new ServerSocket(5108);
         Socket socket = serverSocket.accept();
+
+
+        Stage menu = new Stage(StageStyle.UTILITY);
+        menu.setTitle("Welcome to tCHu");
+        TextField text = new TextField();
+        Button button = new Button("Play");
+        VBox vbox = new VBox();
+        vbox.getChildren().addAll(text, button);
+        Scene scene = new Scene(vbox, 500, 500);
+        menu.setScene(scene);
+        menu.show();
+
+
         String player1Name;
         String player2Name;
         if(parameters.isEmpty()){
@@ -79,9 +96,17 @@ public final class ServerMain extends Application {
 
         playerIdPlayerMap.put(PlayerId.PLAYER_1,new GraphicalPlayerAdapter());
         playerIdPlayerMap.put(PlayerId.PLAYER_2,new RemotePlayerProxy(socket));
-
-        Thread thread = new Thread(() ->
-                Game.play(playerIdPlayerMap,playerNames, SortedBag.of(ChMap.tickets()), new Random()));
-        thread.start();
+        button.setOnAction(e -> {
+            Thread thread = new Thread(() -> Platform.runLater(() ->
+                    Game.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random())));
+            thread.start();
+        });
+        /*
+        Thread thread = new Thread(() -> Platform.runLater(() ->
+                button.setOnAction(e -> {
+                    menu.close();
+                    Game.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random());
+                })));
+        */
     }
 }
