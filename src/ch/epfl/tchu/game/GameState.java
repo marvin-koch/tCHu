@@ -4,10 +4,7 @@ package ch.epfl.tchu.game;
 import ch.epfl.tchu.Preconditions;
 import ch.epfl.tchu.SortedBag;
 
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 /**
  * La classe GameState publique, finale et immuable, représente l'état d'une partie de tCHu.
@@ -42,9 +39,19 @@ public final class GameState extends  PublicGameState{
      * @return copy de la Map
      */
     private Map<PlayerId, PlayerState> copyMap(PlayerId playerId, PlayerState state){
-        Map<PlayerId, PlayerState> copy = new EnumMap<>(PlayerId.class);
+        Map<PlayerId, PlayerState> copy = new HashMap<>();
+        /*
         copy.put(playerId, state);
         copy.put(playerId.next(), playerState(playerId.next()));
+        copy.put(playerId.next().next(),playerState(playerId.next().next()));//todo 3 player
+        */
+        for(PlayerId id : PlayerId.ALL){
+            if(id != playerId){
+                copy.put(id,playerState(id));
+            }else {
+                copy.put(playerId,state);
+            }
+        }
         return copy;
     }
 
@@ -58,9 +65,9 @@ public final class GameState extends  PublicGameState{
      */
     public static GameState initial(SortedBag<Ticket> tickets, Random rng){
         Deck<Card> pioche = Deck.of(Constants.ALL_CARDS,rng);
-        Map<PlayerId, PlayerState> m = new EnumMap<>(PlayerId.class);
+        Map<PlayerId, PlayerState> m = new HashMap<>();
 
-        for(PlayerId id : PlayerId.values()){
+        for(PlayerId id : PlayerId.ALL){
             m.put(id,PlayerState.initial(pioche.topCards(Constants.INITIAL_CARDS_COUNT)));
             pioche = pioche.withoutTopCards(Constants.INITIAL_CARDS_COUNT);
         }

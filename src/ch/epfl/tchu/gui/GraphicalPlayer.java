@@ -73,6 +73,7 @@ public final class GraphicalPlayer{
         mainStage.setScene(scene);
         mainStage.show();
     }
+    
 
     /**
      * Méthode prenant les mêmes arguments que la méthode setState de ObservableGameState

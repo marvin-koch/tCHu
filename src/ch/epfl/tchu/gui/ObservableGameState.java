@@ -112,7 +112,6 @@ public final class ObservableGameState {
     public void setState(PublicGameState gs, PlayerState ps){
         publicGameState = gs;
         playerState = ps;
-
         ticketPourcentage.set((int)(gs.ticketsCount() / (double)ChMap.tickets().size()*100));
         cartePourcentage.set((int)(gs.cardState().deckSize() / (double)Constants.TOTAL_CARDS_COUNT*100));
 

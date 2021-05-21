@@ -55,7 +55,8 @@ public final class RemotePlayerClient{
              BufferedWriter w =
                      new BufferedWriter(
                              new OutputStreamWriter(s.getOutputStream(),
-                                     US_ASCII))){
+                                     US_ASCII))) {
+
             String line;
             while((line = r.readLine())!= null){
                 String[] strings = line.split(Pattern.quote(" "));
