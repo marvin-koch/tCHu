@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc3ec769-81a6-4341-9a1a-4d5977bca92f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/tChu/ch/epfl/tchu/game/PlayerStateTestProf$ChMap.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/tChu/ch/epfl/tchu/game/PlayerStateTestProf.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/MapViewCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/MapViewCreator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/MapViewCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/MapViewCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tChu.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tChu.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,9 +31,14 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
     <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -71,6 +70,12 @@
       <updated>1621436900711</updated>
       <workItem from="1621436907484" duration="81000" />
       <workItem from="1621441747713" duration="175000" />
+      <workItem from="1621508519443" duration="58000" />
+      <workItem from="1621601161540" duration="83000" />
+      <workItem from="1621601269563" duration="29000" />
+      <workItem from="1621601342019" duration="66000" />
+      <workItem from="1621684366056" duration="633000" />
+      <workItem from="1621695184367" duration="80000" />
     </task>
     <servers />
   </component>
