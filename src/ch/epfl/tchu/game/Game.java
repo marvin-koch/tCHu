@@ -4,6 +4,7 @@ import ch.epfl.tchu.Preconditions;
 import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.gui.Info;
 import ch.epfl.tchu.game.Constants;
+import ch.epfl.tchu.gui.ServerMain;
 
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -30,9 +31,10 @@ public final class Game {
      * @throws IllegalArgumentException si l'une des deux tables associatives a une taille différente de 2
      */
     public static void play(Map<PlayerId, Player> players, Map<PlayerId, String> playerNames, SortedBag<Ticket> tickets, Random rng) {
+        players.forEach((id, p) -> p.setNbrOfPlayer(ServerMain.is3Player));
         boolean play = false;
         do {
-            Preconditions.checkArgument(playerNames.size() == PlayerId.COUNT && players.size() == PlayerId.COUNT);
+            //Preconditions.checkArgument(playerNames.size() == PlayerId.COUNT && players.size() == PlayerId.COUNT);todo : j ai enlever ça
             GameState gameState = GameState.initial(tickets, rng);
             Map<PlayerId, Info> infos = new HashMap<>();
             PlayerId.ALL.forEach(id -> infos.put(id, new Info(playerNames.get(id))));
@@ -40,14 +42,14 @@ public final class Game {
             players.forEach((id, player) -> player.initPlayers(id, playerNames));
             receiveInfoAll(players, infos.get(gameState.currentPlayerId()).willPlayFirst());
 
-            for (PlayerId id : PlayerId.values()) {
+            for (PlayerId id : PlayerId.ALL) {
                 SortedBag<Ticket> ticketSortedBag = gameState.topTickets(INITIAL_TICKETS_COUNT);
                 gameState = gameState.withoutTopTickets(INITIAL_TICKETS_COUNT);
                 players.get(id).setInitialTicketChoice(ticketSortedBag);
             }
 
             updateStateForPlayers(players, gameState);
-            for (PlayerId id : PlayerId.values()) {
+            for (PlayerId id : PlayerId.ALL) {
                 gameState = gameState.withInitiallyChosenTickets(id, players.get(id).chooseInitialTickets());
             }
 

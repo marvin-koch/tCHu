@@ -11,8 +11,10 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -118,6 +120,7 @@ public final class ServerMain extends Application {
             });
             thread.start();
             //((Node)(e.getSource())).getScene().getWindow().hide();
-        });
+
+
     }
 }

@@ -1,6 +1,8 @@
 package ch.epfl.tchu.game;
 
 import ch.epfl.tchu.Preconditions;
+import ch.epfl.tchu.gui.ServerMain;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

@@ -3,6 +3,7 @@ package ch.epfl.tchu.game;
 
 import ch.epfl.tchu.Preconditions;
 import ch.epfl.tchu.SortedBag;
+import ch.epfl.tchu.gui.ServerMain;
 
 import java.util.*;
 

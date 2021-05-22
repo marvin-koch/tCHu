@@ -5,6 +5,7 @@ import ch.epfl.tchu.Preconditions;
 import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.gui.Info;
 import ch.epfl.tchu.game.Constants;
+import ch.epfl.tchu.gui.ServerMain;
 
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -31,6 +32,7 @@ public final class ThreePlayerGame {
      * @throws IllegalArgumentException si l'une des deux tables associatives a une taille différente de 2
      */
     public static void play(Map<PlayerId, Player> players, Map<PlayerId, String> playerNames, SortedBag<Ticket> tickets, Random rng) {
+        players.forEach((id, p) -> p.setNbrOfPlayer(ServerMain.is3Player));
         boolean play = false;
         do {
             Preconditions.checkArgument(playerNames.size() == PlayerId.COUNT && players.size() == PlayerId.COUNT);
@@ -157,7 +159,7 @@ public final class ThreePlayerGame {
                     receiveInfoAll(players, currentInfo.lastTurnBegins(currentPlayerState.carCount()));
                 }
                 // todo  changer ça
-                if (count == 2) {
+                if (count == 3) {
                     //if(!(gameState.lastPlayer() == null) && (gameState.lastPlayer().equals(gameState.currentPlayerId()))){
                     updateStateForPlayers(players, gameState);
                     int currentPlayerPoints = currentPlayerState.finalPoints();

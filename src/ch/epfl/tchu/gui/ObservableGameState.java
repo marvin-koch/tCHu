@@ -120,8 +120,8 @@ public final class ObservableGameState {
             faceUpCards.get(slot).set(newCard);
         }
 
-        ps.routes().forEach(route -> routesProperties.get(route).set(id));
-        gs.playerState(id.next()).routes().forEach(route -> routesProperties.get(route).set(id.next()));
+        PlayerId.ALL.forEach(id -> gs.playerState(id).routes().forEach(route -> routesProperties.get(route).set(id)));
+
 
         player1TicketCount.set(ps.ticketCount());
         player2TicketCount.set(gs.playerState(id.next()).ticketCount());
@@ -207,7 +207,7 @@ public final class ObservableGameState {
      * @return Integer Property
      */
     public ReadOnlyIntegerProperty playerWagonCountProperty(PlayerId id){
-        return id == PlayerId.PLAYER_1 ? player1WagonCount : player2WagonCount;
+        return playerWagonCount.get(id);
     }
 
     /**
@@ -216,7 +216,8 @@ public final class ObservableGameState {
      * @return Integer Property
      */
     public ReadOnlyIntegerProperty playerPointCountProperty(PlayerId id){
-       return id == PlayerId.PLAYER_1 ? player1PointsCount : player2PointsCount;
+       return playerPointsCount.get(id);
+
     }
 
     /**
