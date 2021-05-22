@@ -37,7 +37,7 @@ public final class ThreePlayerGame {
         do {
             Preconditions.checkArgument(playerNames.size() == PlayerId.COUNT && players.size() == PlayerId.COUNT);
             GameState gameState = GameState.initial(tickets, rng);
-            Map<PlayerId, Info> infos = new EnumMap<>(PlayerId.class);
+            Map<PlayerId, Info> infos = new HashMap<>();
             PlayerId.ALL.forEach(id -> infos.put(id, new Info(playerNames.get(id))));
 
             players.forEach((id, player) -> player.initPlayers(id, playerNames));

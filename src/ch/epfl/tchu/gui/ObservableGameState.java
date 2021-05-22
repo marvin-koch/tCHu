@@ -32,14 +32,10 @@ public final class ObservableGameState {
     private final Map<Route, ObjectProperty<PlayerId>> routesProperties = new HashMap<>();
 
     //Propriétés publics des PlayerStates
-    private final IntegerProperty player1TicketCount;
-    private final IntegerProperty player2TicketCount;
-    private final IntegerProperty player1CardCount;
-    private final IntegerProperty player2CardCount;
-    private final IntegerProperty player1WagonCount;
-    private final IntegerProperty player2WagonCount;
-    private final IntegerProperty player1PointsCount;
-    private final IntegerProperty player2PointsCount;
+    private final Map<PlayerId, IntegerProperty> playerTicketCount = new HashMap<>();
+    private final Map<PlayerId, IntegerProperty> playerCardCount = new HashMap<>();
+    private final Map<PlayerId, IntegerProperty> playerWagonCount = new HashMap<>();
+    private final Map<PlayerId, IntegerProperty> playerPointsCount = new HashMap<>();
 
     //Propriétés de privées de PlayerState
     private final ObservableList<Ticket> playerTicketsList;
@@ -87,6 +83,7 @@ public final class ObservableGameState {
         faceUpCards = createFaceUpCards();
         ChMap.routes().forEach(route -> routesProperties.put(route, new SimpleObjectProperty<>(null)));
 
+        /*
         player1TicketCount = new SimpleIntegerProperty(0);
         player2TicketCount = new SimpleIntegerProperty(0);
         player1CardCount = new SimpleIntegerProperty(0);
@@ -95,6 +92,12 @@ public final class ObservableGameState {
         player2WagonCount = new SimpleIntegerProperty(0);
         player1PointsCount = new SimpleIntegerProperty(0);
         player2PointsCount = new SimpleIntegerProperty(0);
+
+         */
+        PlayerId.ALL.forEach(playerId -> playerTicketCount.put(playerId, new SimpleIntegerProperty(0)));
+        PlayerId.ALL.forEach(playerId -> playerCardCount.put(playerId, new SimpleIntegerProperty(0)));
+        PlayerId.ALL.forEach(playerId -> playerWagonCount.put(playerId, new SimpleIntegerProperty(0)));
+        PlayerId.ALL.forEach(playerId -> playerPointsCount.put(playerId, new SimpleIntegerProperty(0)));
 
         playerTicketsList = FXCollections.observableList(new ArrayList<>());
         Card.ALL.forEach(card -> cardsCountMap.put(card, new SimpleIntegerProperty(0)));
@@ -123,17 +126,32 @@ public final class ObservableGameState {
         PlayerId.ALL.forEach(id -> gs.playerState(id).routes().forEach(route -> routesProperties.get(route).set(id)));
 
 
+        /*
         player1TicketCount.set(ps.ticketCount());
         player2TicketCount.set(gs.playerState(id.next()).ticketCount());
+         */
+        playerTicketCount.forEach((playerId, integerProperty) -> integerProperty.set(gs.playerState(id).ticketCount()));
 
+        /*
         player1CardCount.set(ps.cardCount());
         player2CardCount.set(gs.playerState(id.next()).cardCount());
 
+         */
+        playerCardCount.forEach((playerId, integerProperty) -> integerProperty.set(gs.playerState(id).cardCount()));
+
+        /*
         player1WagonCount.set(ps.carCount());
         player2WagonCount.set(gs.playerState(id.next()).carCount());
 
+         */
+        playerWagonCount.forEach((playerId, integerProperty) -> integerProperty.set(gs.playerState(id).carCount()));
+
+        /*
         player1PointsCount.set(ps.claimPoints());
         player2PointsCount.set(gs.playerState(id.next()).claimPoints());
+
+         */
+        playerPointsCount.forEach((playerId, integerProperty) -> integerProperty.set(gs.playerState(id).claimPoints()));
 
         playerTicketsList.setAll(ps.tickets().toList());
 
@@ -188,7 +206,7 @@ public final class ObservableGameState {
      * @return Integer Property
      */
     public ReadOnlyIntegerProperty playerTicketCountProperty(PlayerId id){
-        return id == PlayerId.PLAYER_1 ? player1TicketCount : player2TicketCount;
+        return playerTicketCount.get(id);
     }
 
     /**
@@ -198,7 +216,7 @@ public final class ObservableGameState {
      */
 
     public ReadOnlyIntegerProperty playerCardCountProperty(PlayerId id){
-        return id == PlayerId.PLAYER_1 ? player1CardCount : player2CardCount;
+        return playerCardCount.get(id);
     }
 
     /**

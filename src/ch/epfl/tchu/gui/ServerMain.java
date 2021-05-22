@@ -66,8 +66,88 @@ public final class ServerMain extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         ServerSocket serverSocket = new ServerSocket(5108);
+
+
+        List<String> choices = new ArrayList<>();
+        choices.add("2");
+        choices.add("3");
+
+        ChoiceDialog<String> dialog = new ChoiceDialog<>("3", choices);
+        ImageView image = new ImageView("train-chelou.png");
+        image.setPreserveRatio(true);
+        image.setFitHeight(80);
+        //image.setFitWidth(100);
+        dialog.setGraphic(image);
+        dialog.setTitle("tChu!");
+        dialog.setHeaderText("Bienvenue dans tChu!");
+        dialog.setContentText("Choisisez le nombre de joueur  :");
+
+// Traditional way to get the response value.
+        Optional<String> result = dialog.showAndWait();
+
+        result.ifPresent(letter -> {
+                is3Player = Integer.parseInt(letter) != 2;
+        });
+        //TODO 2 sockets
+
         Socket socket = serverSocket.accept();
-        Socket socket2 = serverSocket.accept();
+        if(is3Player){
+            System.out.println("game à 3 joueur");
+            Socket socket2 = serverSocket.accept();
+            Button playButton = new Button("Jouer");
+            GameMenu.createMenuStageFor3Player("Joueur 1", "Joueur 2","Joueur 3", playButton);
+
+            playButton.setOnAction(e -> {
+                playButton.disableProperty().set(true);
+                Thread thread = new Thread(() ->{
+                    String player1Name = GameMenu.getText1() == null ? "Ada" : GameMenu.getText1();
+                    String player2Name = GameMenu.getText2() == null ? "Charles" : GameMenu.getText2();
+                    String player3Name = GameMenu.getText3() == null ? "Zora" : GameMenu.getText3();;
+
+                    Map<PlayerId,String> playerNames = new EnumMap<>(PlayerId.class);
+                    Map<PlayerId,Player> playerIdPlayerMap = new EnumMap<>(PlayerId.class);
+
+                    playerNames.put(PlayerId.PLAYER_1,player1Name);
+                    playerNames.put(PlayerId.PLAYER_2, player2Name);
+                    playerNames.put(PlayerId.PLAYER_3, player3Name);
+                    playerIdPlayerMap.put(PlayerId.PLAYER_1,new GraphicalPlayerAdapter());
+                    playerIdPlayerMap.put(PlayerId.PLAYER_2,new RemotePlayerProxy(socket));
+                    playerIdPlayerMap.put(PlayerId.PLAYER_3, new RemotePlayerProxy(socket2));
+                    ThreePlayerGame.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random());
+                    //menu.hide();
+                });
+                thread.start();
+                //((Node)(e.getSource())).getScene().getWindow().hide();
+            });
+        }else {
+            Button playButton = new Button("Jouer");
+
+            GameMenu.createMenuStage("Joueur 1", "Joueur 2", playButton);
+
+            playButton.setOnAction(e -> {
+                System.out.println("clicked");
+                playButton.disableProperty().set(true);
+                Thread thread = new Thread(() ->{
+                    String player1Name = GameMenu.getText1() == null ? "Ada" : GameMenu.getText1();
+                    String player2Name = GameMenu.getText2() == null ? "Charles" : GameMenu.getText2();
+
+                    Map<PlayerId,String> playerNames = new HashMap<>();
+                    Map<PlayerId,Player> playerIdPlayerMap = new HashMap<>();
+
+                    playerNames.put(PlayerId.PLAYER_1,player1Name);
+                    playerNames.put(PlayerId.PLAYER_2, player2Name);
+
+                    playerIdPlayerMap.put(PlayerId.PLAYER_1,new GraphicalPlayerAdapter());
+                    playerIdPlayerMap.put(PlayerId.PLAYER_2,new RemotePlayerProxy(socket));
+                    Game.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random());
+                    //menu.hide();
+                });
+                thread.start();
+                //((Node)(e.getSource())).getScene().getWindow().hide();
+            });
+        }
+
+
 
         /*
         StringProperty text1Property = new SimpleStringProperty();
@@ -99,26 +179,7 @@ public final class ServerMain extends Application {
         menu.show();
 
          */
-        Button playButton = new Button("Jouer");
-        GameMenu.createMenuStage("Joueur 1", "Joueur 2", playButton);
 
-        playButton.setOnAction(e -> {
-            playButton.disableProperty().set(true);
-            Thread thread = new Thread(() ->{
-                String player1Name = GameMenu.getText1() == null ? "Ada" : GameMenu.getText1();
-                String player2Name = GameMenu.getText2() == null ? "Charles" : GameMenu.getText2();
-
-                Map<PlayerId,String> playerNames = new EnumMap<>(PlayerId.class);
-                Map<PlayerId,Player> playerIdPlayerMap = new EnumMap<>(PlayerId.class);
-
-                playerNames.put(PlayerId.PLAYER_1,player1Name);
-                playerNames.put(PlayerId.PLAYER_2, player2Name);
-                playerIdPlayerMap.put(PlayerId.PLAYER_1,new GraphicalPlayerAdapter());
-                playerIdPlayerMap.put(PlayerId.PLAYER_2,new RemotePlayerProxy(socket));
-                Game.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random());
-                //menu.hide();
-            });
-            thread.start();
             //((Node)(e.getSource())).getScene().getWindow().hide();
 
 

@@ -13,7 +13,7 @@ import java.util.*;
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
  */
-public final class GameState extends  PublicGameState{
+public final class GameState extends PublicGameState{
     private final Deck<Ticket> tickets;
     private final CardState cardState;
     private final Map<PlayerId, PlayerState> playerState;
