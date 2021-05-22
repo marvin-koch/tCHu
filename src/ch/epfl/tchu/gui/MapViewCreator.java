@@ -17,6 +17,8 @@ import javafx.scene.shape.*;
 import javafx.scene.shape.Rectangle;
 import static ch.epfl.tchu.gui.ActionHandlers.*;
 
+
+
 import java.util.List;
 
 /**
