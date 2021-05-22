@@ -1,5 +1,6 @@
 package ch.epfl.tchu.game;
 
+
 import ch.epfl.tchu.Preconditions;
 import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.gui.Info;
@@ -18,7 +19,7 @@ import static ch.epfl.tchu.game.Constants.*;
  * @author Shangeeth Poobalasingam (329307)
  * @author Marvin Koch (324448)
  */
-public final class Game {
+public final class ThreePlayerGame {
     /**
      * Fait jouer une partie de tCHu aux joueurs donnés, dont les noms figurent dans la table playerNames,
      * les billets disponibles pour cette partie sont ceux de tickets,
@@ -34,7 +35,7 @@ public final class Game {
         players.forEach((id, p) -> p.setNbrOfPlayer(ServerMain.is3Player));
         boolean play = false;
         do {
-            //Preconditions.checkArgument(playerNames.size() == PlayerId.COUNT && players.size() == PlayerId.COUNT);todo : j ai enlever ça
+            Preconditions.checkArgument(playerNames.size() == PlayerId.COUNT && players.size() == PlayerId.COUNT);
             GameState gameState = GameState.initial(tickets, rng);
             Map<PlayerId, Info> infos = new HashMap<>();
             PlayerId.ALL.forEach(id -> infos.put(id, new Info(playerNames.get(id))));
@@ -42,14 +43,14 @@ public final class Game {
             players.forEach((id, player) -> player.initPlayers(id, playerNames));
             receiveInfoAll(players, infos.get(gameState.currentPlayerId()).willPlayFirst());
 
-            for (PlayerId id : PlayerId.ALL) {
+            for (PlayerId id : PlayerId.values()) {
                 SortedBag<Ticket> ticketSortedBag = gameState.topTickets(INITIAL_TICKETS_COUNT);
                 gameState = gameState.withoutTopTickets(INITIAL_TICKETS_COUNT);
                 players.get(id).setInitialTicketChoice(ticketSortedBag);
             }
 
             updateStateForPlayers(players, gameState);
-            for (PlayerId id : PlayerId.ALL) {
+            for (PlayerId id : PlayerId.values()) {
                 gameState = gameState.withInitiallyChosenTickets(id, players.get(id).chooseInitialTickets());
             }
 
@@ -61,8 +62,11 @@ public final class Game {
                 Player currentPlayer = players.get(gameState.currentPlayerId());
                 Info currentInfo = infos.get(gameState.currentPlayerId());
                 Info nextInfo = infos.get(gameState.currentPlayerId().next());
+                Info doubleNextInfo = infos.get(gameState.currentPlayerId().doubleNext());
                 PlayerState currentPlayerState = gameState.currentPlayerState();
                 PlayerState nextPlayerState = gameState.playerState(gameState.currentPlayerId().next());
+                PlayerState doubleNextPlayerState = gameState.playerState(gameState.currentPlayerId().doubleNext());
+
 
                 updateStateForPlayers(players, gameState);
                 receiveInfoAll(players, currentInfo.canPlay());
@@ -160,10 +164,13 @@ public final class Game {
                     updateStateForPlayers(players, gameState);
                     int currentPlayerPoints = currentPlayerState.finalPoints();
                     int nextPlayerPoints = nextPlayerState.finalPoints();
+                    int doubleNextPlayerPoints = doubleNextPlayerState.finalPoints();
                     Trail currentPlayerTrail = Trail.longest(currentPlayerState.routes());
                     Trail nextPlayerTrail = Trail.longest(nextPlayerState.routes());
+                    Trail doubleNextPlayerTrail = Trail.longest(doubleNextPlayerState.routes());
                     String currentPlayerBonus = currentInfo.getsLongestTrailBonus(currentPlayerTrail);
                     String nextPlayerBonus = nextInfo.getsLongestTrailBonus(nextPlayerTrail);
+                    String doubleNextPlayerBonus = nextInfo.getsLongestTrailBonus(doubleNextPlayerTrail);
 
                     //Calcul du trail le plus long
                     if (currentPlayerTrail.length() > nextPlayerTrail.length()) {
@@ -200,25 +207,25 @@ public final class Game {
 
                     receiveInfoAll(players, info);
                     //TODO
-                    BlockingQueue<Boolean> firstQ = new ArrayBlockingQueue<>(1);
-                    BlockingQueue<Boolean> secondQ = new ArrayBlockingQueue<>(1);
-                    new Thread(() -> {
-                        try {
-                            firstQ.put(players.get(PlayerId.PLAYER_1).endMenu(winnerName, points) == 1);
-                        } catch (InterruptedException e) {
-                            throw new Error();
-                        }
-                    }).start();
-                    new Thread(() -> {
-                        try {
-                            secondQ.put(players.get(PlayerId.PLAYER_2).endMenu(winnerName, points) == 1);
-                        } catch (InterruptedException e) {
-                            throw new Error();
-                        }
-                    }).start();
-
+                    ArrayList<BlockingQueue<Boolean>> Qlist = new ArrayList<>();
+                    
+                    for (PlayerId id: PlayerId.ALL) {
+                        BlockingQueue<Boolean> Q = new ArrayBlockingQueue<>(1);
+                        Qlist.add(Q);
+                        new Thread(() -> {
+                            try {
+                                Q.put(players.get(id).endMenu(winnerName, points) == 1);
+                            } catch (InterruptedException e) {
+                                throw new Error();
+                            }
+                        }).start();
+                        
+                    }
                     try {
-                        play = firstQ.take() && secondQ.take();
+                        play = true;
+                        for (BlockingQueue<Boolean> Q :Qlist) {
+                            play = play && Q.take();
+                        }
                     } catch (InterruptedException e) {
                         throw new Error();
                     }
@@ -234,7 +241,7 @@ public final class Game {
     /**
      * Constructuer privée
      */
-    private Game(){}
+    private ThreePlayerGame(){}
     /**
      * Communique une information a tout les joueurs
      * @param players map des 2 players

@@ -3,6 +3,7 @@ package ch.epfl.tchu.net;
 import ch.epfl.tchu.Preconditions;
 import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.game.*;
+import ch.epfl.tchu.gui.ServerMain;
 
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -154,26 +155,44 @@ public final class Serdes {
     public static final Serde<PublicGameState> PUBLIC_GAME_STATE_SERDE = new Serde<PublicGameState>() {
         @Override
         public String serialize(PublicGameState publicGameState) {
-            return String.join(":", INTEGER_SERDE.serialize(publicGameState.ticketsCount()),
-                    PUBLIC_CARD_STATE_SERDE.serialize(publicGameState.cardState()),
-                    PLAYER_ID_SERDE.serialize(publicGameState.currentPlayerId()),
-                    PUBLIC_PLAYER_STATE_SERDE.serialize(publicGameState.playerState(PlayerId.PLAYER_1)),
-                    PUBLIC_PLAYER_STATE_SERDE.serialize(publicGameState.playerState(PlayerId.PLAYER_2)),
-                    PLAYER_ID_SERDE.serialize(publicGameState.lastPlayer()));
+            if(ServerMain.is3Player){
+                return String.join(":", INTEGER_SERDE.serialize(publicGameState.ticketsCount()),
+                        PUBLIC_CARD_STATE_SERDE.serialize(publicGameState.cardState()),
+                        PLAYER_ID_SERDE.serialize(publicGameState.currentPlayerId()),
+                        PUBLIC_PLAYER_STATE_SERDE.serialize(publicGameState.playerState(PlayerId.PLAYER_1)),
+                        PUBLIC_PLAYER_STATE_SERDE.serialize(publicGameState.playerState(PlayerId.PLAYER_2)),
+                        PUBLIC_PLAYER_STATE_SERDE.serialize(publicGameState.playerState(PlayerId.PLAYER_3)),
+                        PLAYER_ID_SERDE.serialize(publicGameState.lastPlayer()));
+            }else{
+                return String.join(":", INTEGER_SERDE.serialize(publicGameState.ticketsCount()),
+                        PUBLIC_CARD_STATE_SERDE.serialize(publicGameState.cardState()),
+                        PLAYER_ID_SERDE.serialize(publicGameState.currentPlayerId()),
+                        PUBLIC_PLAYER_STATE_SERDE.serialize(publicGameState.playerState(PlayerId.PLAYER_1)),
+                        PUBLIC_PLAYER_STATE_SERDE.serialize(publicGameState.playerState(PlayerId.PLAYER_2)),
+                        PLAYER_ID_SERDE.serialize(publicGameState.lastPlayer()));
+            }
+
         }
 
         @Override
         public PublicGameState deserialize(String s) {
             String[] splitString = s.split(Pattern.quote(":"), -1);
-            Preconditions.checkArgument(splitString.length == 6);
+            //Preconditions.checkArgument(splitString.length == 6);
             Map<PlayerId, PublicPlayerState> map = new HashMap<>();
             map.put(PlayerId.PLAYER_1, PUBLIC_PLAYER_STATE_SERDE.deserialize(splitString[3]));
-            map.put(PlayerId.PLAYER_2,PUBLIC_PLAYER_STATE_SERDE.deserialize(splitString[4]));
+            map.put(PlayerId.PLAYER_2, PUBLIC_PLAYER_STATE_SERDE.deserialize(splitString[4]));
+            int index;
+            if(ServerMain.is3Player) {
+                map.put(PlayerId.PLAYER_3, PUBLIC_PLAYER_STATE_SERDE.deserialize(splitString[5]));
+                index = 6;
+            }else {
+                index = 5;
+            }
             return new PublicGameState(INTEGER_SERDE.deserialize(splitString[0]),
                     PUBLIC_CARD_STATE_SERDE.deserialize(splitString[1]),
                     PLAYER_ID_SERDE.deserialize(splitString[2]),
                     map,
-                    PLAYER_ID_SERDE.deserialize(splitString[5]));
+                    PLAYER_ID_SERDE.deserialize(splitString[index]));
         }
     };
 

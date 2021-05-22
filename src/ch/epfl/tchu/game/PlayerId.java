@@ -1,5 +1,7 @@
 package ch.epfl.tchu.game;
 
+import ch.epfl.tchu.gui.ServerMain;
+
 import java.util.List;
 
 /**
@@ -10,24 +12,39 @@ import java.util.List;
  */
 public enum PlayerId {
     PLAYER_1,
-    PLAYER_2;
+    PLAYER_2,
+    PLAYER_3;
 
     /**
      * Retourne une liste de tout les joueurs
      */
-    public static final List<PlayerId> ALL = List.of(PlayerId.values());
-
+    public static List<PlayerId> ALL = ServerMain.is3Player ? List.of(PlayerId.values()) : List.of(PlayerId.values()).subList(0,2);
+    public static List<PlayerId> twoALL = List.of(PlayerId.values()).subList(0,2);
+//todo j ai enlevé final
     /**
      * Retourne le nombre de joueur
      */
-    public static final int COUNT = ALL.size();
+    public static int COUNT = ALL.size();
 
     /**
      * retourne l'identité du joueur qui suit celui auquel on l'applique, c-à-d PLAYER_2 pour PLAYER_1, et PLAYER_1 pour PLAYER_2
      * @return PlayerId
      */
     public PlayerId next(){
-        return this.equals(PLAYER_1) ? PLAYER_2 : PLAYER_1;
+        switch (this){
+            case PLAYER_1:
+                return PLAYER_2;
+            case PLAYER_2:
+                return ServerMain.is3Player? PLAYER_3: PLAYER_1;
+            case PLAYER_3:
+                return PLAYER_1;
+            default:
+                throw new Error();
+        }
+    }
+
+    public PlayerId doubleNext() {
+        return next().next();
     }
 }
 

@@ -2,13 +2,11 @@ package ch.epfl.tchu.net;
 
 import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.game.*;
+import ch.epfl.tchu.gui.ServerMain;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Pattern;
 import static ch.epfl.tchu.net.Serdes.*;
 
@@ -55,16 +53,18 @@ public final class RemotePlayerClient{
              BufferedWriter w =
                      new BufferedWriter(
                              new OutputStreamWriter(s.getOutputStream(),
-                                     US_ASCII))){
+                                     US_ASCII))) {
+
             String line;
             while((line = r.readLine())!= null){
                 String[] strings = line.split(Pattern.quote(" "));
                 switch (MessageId.valueOf(strings[0])){
                     case INIT_PLAYERS:
                         List<String> playerNames = LIST_STRING_SERDE.deserialize(strings[2]);
-                        Map<PlayerId, String> mapNames = new EnumMap<>(PlayerId.class);
-                        mapNames.put(PlayerId.PLAYER_1, playerNames.get(0));
-                        mapNames.put(PlayerId.PLAYER_2, playerNames.get(1));
+                        Map<PlayerId, String> mapNames = new HashMap<>();
+                        for(int i = 0; i < PlayerId.COUNT; ++i){
+                            mapNames.put(PlayerId.ALL.get(i), playerNames.get(i));
+                        }
                         player.initPlayers(PLAYER_ID_SERDE.deserialize(strings[1]), mapNames);
                         break;
                     case RECEIVE_INFO:
