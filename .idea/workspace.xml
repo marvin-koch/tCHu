@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="bc3ec769-81a6-4341-9a1a-4d5977bca92f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/MapViewCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/MapViewCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/MapViewCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/MapViewCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rendu/projet-cs108.zip" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/rendu/projet-cs108.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/DecksViewCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/DecksViewCreator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +76,7 @@
       <workItem from="1621601342019" duration="66000" />
       <workItem from="1621684366056" duration="633000" />
       <workItem from="1621695184367" duration="80000" />
+      <workItem from="1621794798332" duration="1836000" />
     </task>
     <servers />
   </component>

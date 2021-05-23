@@ -1,8 +1,6 @@
 package ch.epfl.tchu.gui;
 
-import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.game.Card;
-import ch.epfl.tchu.game.ChMap;
 import ch.epfl.tchu.game.Constants;
 import ch.epfl.tchu.game.Ticket;
 import javafx.beans.binding.Bindings;
@@ -21,9 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * La classe DecksViewCreator, finale, représante la vue du Deck du joueur
@@ -36,8 +32,7 @@ final class DecksViewCreator {
     /**
      * Constructeur privée
      */
-    private DecksViewCreator() {
-    }
+    private DecksViewCreator() {}
 
     /**
      * Crée les rectangles
@@ -63,19 +58,18 @@ final class DecksViewCreator {
 
     /**
      * Crée un button
-     * @param observableGameState game state
-     * @param prct pourcentage
+     * @param pourcent pourcentage
      * @param string nom du button
      * @return Button
      */
-    private static Button createButton(ObservableGameState observableGameState, ReadOnlyIntegerProperty prct, String string){
+    private static Button createButton(ReadOnlyIntegerProperty pourcent, String string){
         int BUTTON_RECTANGLE_WIDTH = 50;
         int BUTTON_RECTANGLE_HEIGHT = 5;
         Rectangle fg = new Rectangle(BUTTON_RECTANGLE_WIDTH, BUTTON_RECTANGLE_HEIGHT);
         Rectangle bg = new Rectangle(BUTTON_RECTANGLE_WIDTH, BUTTON_RECTANGLE_HEIGHT);
         fg.getStyleClass().add("foreground");
         bg.getStyleClass().add("background");
-        fg.widthProperty().bind(prct.multiply(50).divide(100));
+        fg.widthProperty().bind(pourcent.multiply(BUTTON_RECTANGLE_WIDTH).divide(100));
         Group jauge = new Group(bg, fg);
         Button button = new Button(string);
         button.getStyleClass().add("gauged");
@@ -133,13 +127,13 @@ final class DecksViewCreator {
         vBox.getStylesheets().addAll("decks.css", "colors.css");
         vBox.setId("card-pane");
 
-        Button piocheBillets = createButton(observableGameState, observableGameState.ticketPourcentageProperty(), StringsFr.TICKETS);
+        Button piocheBillets = createButton(observableGameState.ticketPourcentageProperty(), StringsFr.TICKETS);
         piocheBillets.disableProperty().bind(drawTicket.isNull());
         piocheBillets.setOnMouseClicked(event -> drawTicket.get().onDrawTickets());
 
-        Button piocheCartes = createButton(observableGameState, observableGameState.cartePourcentageProperty(), StringsFr.CARDS);
+        Button piocheCartes = createButton(observableGameState.cartePourcentageProperty(), StringsFr.CARDS);
         piocheCartes.disableProperty().bind(drawCard.isNull());
-        piocheCartes.setOnMouseClicked(event -> drawCard.get().onDrawCard(-1));
+        piocheCartes.setOnMouseClicked(event -> drawCard.get().onDrawCard(Constants.DECK_SLOT));
 
         vBox.getChildren().addAll(piocheBillets);
 
