@@ -44,12 +44,17 @@ public final class GraphicalPlayerAdapter implements Player {
         bQueueIntSecondChance = new ArrayBlockingQueue<>(1);
         bQueueIntRestart = new ArrayBlockingQueue<>(1);
 
+    }
+
+
+    @Override
+    public void initNbrOfPlayer(boolean is3Player) {
 
     }
 
     //TODO commenter
-    public int endMenu(String winner, int points){
-        runLater(() -> graphicalPlayer.showWinner(winner, points, choice -> putInQueue(bQueueIntRestart, choice)));
+    public int endMenu(String s){
+        runLater(() -> graphicalPlayer.showWinner( s,choice -> putInQueue(bQueueIntRestart, choice)));
         return takeFromQueue(bQueueIntRestart);
     }
 

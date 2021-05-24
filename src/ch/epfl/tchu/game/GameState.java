@@ -46,7 +46,7 @@ public final class GameState extends PublicGameState{
         copy.put(playerId.next(), playerState(playerId.next()));
         copy.put(playerId.next().next(),playerState(playerId.next().next()));//todo 3 player
         */
-        for(PlayerId id : PlayerId.ALL){
+        for(PlayerId id : PlayerId.ALL()){
             if(id != playerId){
                 copy.put(id,playerState(id));
             }else {
@@ -68,12 +68,12 @@ public final class GameState extends PublicGameState{
         Deck<Card> pioche = Deck.of(Constants.ALL_CARDS,rng);
         Map<PlayerId, PlayerState> m = new HashMap<>();
 
-        for(PlayerId id : PlayerId.ALL){
+        for(PlayerId id : PlayerId.ALL()){
             m.put(id,PlayerState.initial(pioche.topCards(Constants.INITIAL_CARDS_COUNT)));
             pioche = pioche.withoutTopCards(Constants.INITIAL_CARDS_COUNT);
         }
 
-        return new GameState(Deck.of(tickets, rng),CardState.of(pioche), PlayerId.ALL.get(rng.nextInt(2)),m,null);
+        return new GameState(Deck.of(tickets, rng),CardState.of(pioche), PlayerId.ALL().get(rng.nextInt(2)),m,null);
     }
 
     /**

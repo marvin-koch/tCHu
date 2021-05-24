@@ -184,10 +184,29 @@ public final class PlayerState extends PublicPlayerState{
                 .sum();
     }
 
+    //TODO copie de code
+    public int oneTicketPoint(Ticket ticket){
+        int max = 0;
+        if(!routes().isEmpty()){
+            max = routes().stream()
+                    .flatMap(route -> Stream.of(route.station1().id(), route.station2().id()))
+                    .max(Integer::compare)
+                    .orElse(0);
+        }
+        StationPartition.Builder builder = new StationPartition.Builder(max + 1);
+        routes().forEach(route -> builder.connect(route.station1(), route.station2()));
+
+        return ticket.points(builder.build());
+
+    }
+
+
+
     /**
      * retourne la totalité des points obtenus par le joueur à la fin de la partie, à savoir la somme des points retournés par les méthodes claimPoints et ticketPoints
      * @return int
      */
     public int finalPoints(){ return ticketPoints() + claimPoints();}
+
 
 }

@@ -94,10 +94,10 @@ public final class ObservableGameState {
         player2PointsCount = new SimpleIntegerProperty(0);
 
          */
-        PlayerId.ALL.forEach(playerId -> playerTicketCount.put(playerId, new SimpleIntegerProperty(0)));
-        PlayerId.ALL.forEach(playerId -> playerCardCount.put(playerId, new SimpleIntegerProperty(0)));
-        PlayerId.ALL.forEach(playerId -> playerWagonCount.put(playerId, new SimpleIntegerProperty(0)));
-        PlayerId.ALL.forEach(playerId -> playerPointsCount.put(playerId, new SimpleIntegerProperty(0)));
+        PlayerId.ALL().forEach(playerId -> playerTicketCount.put(playerId, new SimpleIntegerProperty(0)));
+        PlayerId.ALL().forEach(playerId -> playerCardCount.put(playerId, new SimpleIntegerProperty(0)));
+        PlayerId.ALL().forEach(playerId -> playerWagonCount.put(playerId, new SimpleIntegerProperty(0)));
+        PlayerId.ALL().forEach(playerId -> playerPointsCount.put(playerId, new SimpleIntegerProperty(0)));
 
         playerTicketsList = FXCollections.observableList(new ArrayList<>());
         Card.ALL.forEach(card -> cardsCountMap.put(card, new SimpleIntegerProperty(0)));
@@ -123,35 +123,35 @@ public final class ObservableGameState {
             faceUpCards.get(slot).set(newCard);
         }
 
-        PlayerId.ALL.forEach(id -> gs.playerState(id).routes().forEach(route -> routesProperties.get(route).set(id)));
+        PlayerId.ALL().forEach(playerId -> gs.playerState(playerId).routes().forEach(route -> routesProperties.get(route).set(playerId)));
 
 
         /*
         player1TicketCount.set(ps.ticketCount());
         player2TicketCount.set(gs.playerState(id.next()).ticketCount());
          */
-        playerTicketCount.forEach((playerId, integerProperty) -> integerProperty.set(gs.playerState(id).ticketCount()));
+        playerTicketCount.forEach((playerId, integerProperty) -> integerProperty.set(gs.playerState(playerId).ticketCount()));
 
         /*
         player1CardCount.set(ps.cardCount());
         player2CardCount.set(gs.playerState(id.next()).cardCount());
 
          */
-        playerCardCount.forEach((playerId, integerProperty) -> integerProperty.set(gs.playerState(id).cardCount()));
+        playerCardCount.forEach((playerId, integerProperty) -> integerProperty.set(gs.playerState(playerId).cardCount()));
 
         /*
         player1WagonCount.set(ps.carCount());
         player2WagonCount.set(gs.playerState(id.next()).carCount());
 
          */
-        playerWagonCount.forEach((playerId, integerProperty) -> integerProperty.set(gs.playerState(id).carCount()));
+        playerWagonCount.forEach((playerId, integerProperty) -> integerProperty.set(gs.playerState(playerId).carCount()));
 
         /*
         player1PointsCount.set(ps.claimPoints());
         player2PointsCount.set(gs.playerState(id.next()).claimPoints());
 
          */
-        playerPointsCount.forEach((playerId, integerProperty) -> integerProperty.set(gs.playerState(id).claimPoints()));
+        playerPointsCount.forEach((playerId, integerProperty) -> integerProperty.set(gs.playerState(playerId).claimPoints()));
 
         playerTicketsList.setAll(ps.tickets().toList());
 
@@ -162,7 +162,8 @@ public final class ObservableGameState {
             //le joueur est le joueur courant,
             //la route n'appartient à personne et, dans le cas d'une route double, sa voisine non plus,
             //le joueur a les wagons et les cartes nécessaires pour s'emparer de la route—ou en tout cas tenter de le faire s'il s'agit d'un tunnel.
-            routeStatusMap.get(route).set(id == publicGameState.currentPlayerId() && routesProperties.get(route).get() == null && ps.canClaimRoute(route) && (!hasASister || routesProperties.get(ROUTE_PAIRS.get(route)).get() == null));
+            routeStatusMap.get(route).set(id == publicGameState.currentPlayerId() && routesProperties.get(route).get() == null && ps.canClaimRoute(route)
+                    && (!hasASister || (ServerMain.is3Players ? routesProperties.get(ROUTE_PAIRS.get(route)).get() != id : routesProperties.get(ROUTE_PAIRS.get(route)).get() == null)));
         }
     }
 
@@ -287,6 +288,15 @@ public final class ObservableGameState {
      */
     public List<SortedBag<Card>> possibleClaimCards(Route route){
         return List.copyOf(playerState.possibleClaimCards(route));
+    }
+
+    /**
+     * regarde si il gagne des points postive avec ce billets
+     * @param ticket
+     * @return
+     */
+    public boolean greenTickets(Ticket ticket){
+        return playerState.tickets().contains(ticket)&& playerState.oneTicketPoint(ticket)>= 0;//todo change
     }
 
 }

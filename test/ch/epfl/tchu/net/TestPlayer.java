@@ -78,8 +78,15 @@ public final class TestPlayer implements Player {
         this.allRoutes = List.copyOf(allRoutes);
     }
 
+
+
     @Override
-    public int endMenu(String name, int point) {
+    public void initNbrOfPlayer(boolean is3Player) {
+
+    }
+
+    @Override
+    public int endMenu(String name) {
         return 0;
     }
 

@@ -28,8 +28,14 @@ final class TestPlayer2 implements Player {
     }
 
 
+
     @Override
-    public int endMenu(String name, int point) {
+    public void initNbrOfPlayer(boolean is3Player) {
+
+    }
+
+    @Override
+    public int endMenu(String name) {
         return 0;
     }
 

@@ -39,6 +39,8 @@ public final class RemotePlayerProxy implements Player {
 
     }
 
+    //todo créé une fonction set2player car c est 3 de base
+
     /**
      * Communique au joueur sa propre identité et les noms des autres
      *
@@ -168,10 +170,16 @@ public final class RemotePlayerProxy implements Player {
         return SORTEDBAG_CARD_SERDE.deserialize(read());
     }
 
+    //TODO commenter
+    @Override
+    public void initNbrOfPlayer(boolean is3Player) {
+        write(MessageId.NBR_OF_PLAYER,INTEGER_SERDE.serialize(is3Player? 1 : 0));
+    }
+
     //TDOO commenter
     @Override
-    public int endMenu(String name, int points){
-        write(MessageId.END, STRING_SERDE.serialize(name) + " " + INTEGER_SERDE.serialize(points));
+    public int endMenu(String name){
+        write(MessageId.END, STRING_SERDE.serialize(name));
         return INTEGER_SERDE.deserialize(read());
     }
 

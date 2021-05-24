@@ -74,7 +74,7 @@ public interface Serde<T>{
                     return null;
                 }else{
                     int pos = Integer.parseInt(s);
-                    Preconditions.checkArgument(pos < list.size());
+                    //Preconditions.checkArgument(pos < list.size());
                     return list.get(pos);
                 }
             }

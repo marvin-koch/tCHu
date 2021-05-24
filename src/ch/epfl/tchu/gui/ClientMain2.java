@@ -106,7 +106,6 @@ public final class ClientMain2 extends Application {
             Thread thread = new Thread(() -> {
                 String adresse = GameMenu.getText1() == null ? "localhost" : GameMenu.getText1();
                 String port = GameMenu.getText2() == null ? "5108" : GameMenu.getText2();
-                ServerMain.is3Player = false;
                 RemotePlayerClient remotePlayerClient = new RemotePlayerClient(new GraphicalPlayerAdapter(), adresse, Integer.parseInt(port));
                 remotePlayerClient.run();
                 //menu.hide();

@@ -36,7 +36,7 @@ public class PublicGameState {
      * @throws  NullPointerException si l'un des autres arguments (lastPlayer excepté!) est nul
      */
     public PublicGameState(int ticketsCount, PublicCardState cardState, PlayerId currentPlayerId, Map<PlayerId, PublicPlayerState> playerState, PlayerId lastPlayer){
-        Preconditions.checkArgument(ticketsCount >= 0 && playerState.size() == PlayerId.COUNT);
+        Preconditions.checkArgument(ticketsCount >= 0 && playerState.size() == PlayerId.COUNT());
         this.ticketsCount = ticketsCount;
         this.cardState = Objects.requireNonNull(cardState);
         this.currentPlayerId = Objects.requireNonNull(currentPlayerId) ;
@@ -108,7 +108,7 @@ public class PublicGameState {
      */
     public List<Route> claimedRoutes(){
         List<Route> routeList = new ArrayList<>();
-        PlayerId.ALL.forEach(id -> routeList.addAll(playerState(id).routes()));
+        PlayerId.ALL().forEach(id -> routeList.addAll(playerState(id).routes()));
         return routeList;
     }
 

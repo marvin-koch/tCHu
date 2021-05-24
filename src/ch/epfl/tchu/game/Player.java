@@ -1,6 +1,7 @@
 package ch.epfl.tchu.game;
 
 import ch.epfl.tchu.SortedBag;
+import ch.epfl.tchu.gui.GraphicalPlayerAdapter;
 import ch.epfl.tchu.gui.ObservableGameState;
 import ch.epfl.tchu.gui.ServerMain;
 
@@ -14,11 +15,6 @@ import java.util.Map;
  * @author Marvin Koch (324448)
  */
 public interface Player {
-
-
-    default void setNbrOfPlayer(boolean b){
-        ServerMain.is3Player = b;
-    };
 
     /**
      * Type énuméré imbriquée TurnKind
@@ -37,10 +33,10 @@ public interface Player {
         public static final List<TurnKind> ALL = List.of(TurnKind.values());
     }
 
-
+    void initNbrOfPlayer(boolean is3Player);
 
     //TODO commenter
-    int endMenu(String name , int point );
+    int endMenu(String name);
     /**
      * Communique au joueur sa propre identité et les noms des autres
      * @param ownId identité au joueur

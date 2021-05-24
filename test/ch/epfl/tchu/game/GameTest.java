@@ -42,8 +42,14 @@ public class GameTest {
             this.turnCounter = 0;
         }
 
+
         @Override
-        public int endMenu(String name, int point) {
+        public void initNbrOfPlayer(boolean is3Player) {
+
+        }
+
+        @Override
+        public int endMenu(String name) {
             return 0;
         }
 

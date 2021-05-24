@@ -1,0 +1,29 @@
+<changelist name="Uncommitted_changes_before_Update_at_22_05_2021_16_55_[Default_Changelist]" date="1621695323702" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_05_2021_16_55_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 22.05.2021 16:55 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/PlayerStateTestProf$ChMap.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/tChu/ch/epfl/tchu/game/Game$1.class" />
+    <option name="AFTER_PATH" value="out/production/tChu/ch/epfl/tchu/game/Game$1.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_05_2021_16_55_[Default_Changelist]/Game$1.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/tChu/ch/epfl/tchu/game/Player.class" />
+    <option name="AFTER_PATH" value="out/production/tChu/ch/epfl/tchu/game/Player.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_05_2021_16_55_[Default_Changelist]/Player.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/tChu/ch/epfl/tchu/game/Player$TurnKind.class" />
+    <option name="AFTER_PATH" value="out/production/tChu/ch/epfl/tchu/game/Player$TurnKind.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_05_2021_16_55_[Default_Changelist]/Player$TurnKind.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/PlayerStateTestProf.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+</changelist>

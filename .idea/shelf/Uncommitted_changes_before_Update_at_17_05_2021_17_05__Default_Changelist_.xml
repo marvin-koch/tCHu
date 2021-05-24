@@ -1,0 +1,139 @@
+<changelist name="Uncommitted_changes_before_Update_at_17_05_2021_17_05_[Default_Changelist]" date="1621263954882" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_17_05_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 17.05.2021 17:05 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/TripTestProf.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/TrailTestProf.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/gui/InfoTestProf.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/tChu/ch/epfl/tchu/gui/ClientMain.class" />
+    <option name="AFTER_PATH" value="out/production/tChu/ch/epfl/tchu/gui/ClientMain.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_17_05_[Default_Changelist]/ClientMain.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/GameTestProf$ChMap.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/GameStateTestProf.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/TripTestProf$NoConnectivity.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/TicketTestProf$TestConnectivity.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/TicketTestProf$TestMap.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/TrailTestProf$ChRoutes.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/GameTestProf$PlayerMethod.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/GameTestProf.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/PublicPlayerStateTestProf$ChRoutes.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/RouteTestProf.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/tChu/ch/epfl/tchu/gui/ServerMain.class" />
+    <option name="AFTER_PATH" value="out/production/tChu/ch/epfl/tchu/gui/ServerMain.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_17_05_[Default_Changelist]/ServerMain.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/StationPartitionTestProf$ChMap.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/GameStateTestProf$ChMap.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/TicketTestProf$FullConnectivity.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/TripTestProf$FullConnectivity.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/TicketTestProf.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/CardStateTestProf.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/GameTestProf$TooManyCallsError.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/StationTestProf.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/GameTestProf$TestPlayer.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/StationPartitionTestProf.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/PublicPlayerStateTestProf.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/test/tChu/ch/epfl/tchu/game/PlayerIdTestProf.class" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+</changelist>

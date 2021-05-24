@@ -32,7 +32,8 @@ import java.util.*;
  * @author Marvin Koch (324448)
  */
 public final class ServerMain extends Application {
-    public static Boolean is3Player = true;
+    public static boolean is3Players = true;//attention ne pas changer
+
     /**
      * Méthode main qui appelle launch
      * @param args arguments
@@ -86,23 +87,23 @@ public final class ServerMain extends Application {
         Optional<String> result = dialog.showAndWait();
 
         result.ifPresent(letter -> {
-                is3Player = Integer.parseInt(letter) != 2;
+                is3Players = (Integer.parseInt(letter) != 2);
         });
         //TODO 2 sockets
 
         Socket socket = serverSocket.accept();
-        if(is3Player){
+        if(is3Players){
             System.out.println("game à 3 joueur");
             Socket socket2 = serverSocket.accept();
             Button playButton = new Button("Jouer");
-            GameMenu.createMenuStageFor3Player("Joueur 1", "Joueur 2","Joueur 3", playButton);
+            GameMenu2.createMenuStageFor3Player("Joueur 1", "Joueur 2","Joueur 3", playButton);
 
             playButton.setOnAction(e -> {
                 playButton.disableProperty().set(true);
                 Thread thread = new Thread(() ->{
-                    String player1Name = GameMenu.getText1() == null ? "Ada" : GameMenu.getText1();
-                    String player2Name = GameMenu.getText2() == null ? "Charles" : GameMenu.getText2();
-                    String player3Name = GameMenu.getText3() == null ? "Zora" : GameMenu.getText3();;
+                    String player1Name = GameMenu2.getText1() == null ? "Ada" : GameMenu2.getText1();
+                    String player2Name = GameMenu2.getText2() == null ? "Charles" : GameMenu2.getText2();
+                    String player3Name = GameMenu2.getText3() == null ? "Zora" : GameMenu2.getText3();;
 
                     Map<PlayerId,String> playerNames = new EnumMap<>(PlayerId.class);
                     Map<PlayerId,Player> playerIdPlayerMap = new EnumMap<>(PlayerId.class);
@@ -113,7 +114,7 @@ public final class ServerMain extends Application {
                     playerIdPlayerMap.put(PlayerId.PLAYER_1,new GraphicalPlayerAdapter());
                     playerIdPlayerMap.put(PlayerId.PLAYER_2,new RemotePlayerProxy(socket));
                     playerIdPlayerMap.put(PlayerId.PLAYER_3, new RemotePlayerProxy(socket2));
-                    ThreePlayerGame.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random());
+                    ThreePlayerGame.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random(),is3Players);
                     //menu.hide();
                 });
                 thread.start();
@@ -122,24 +123,23 @@ public final class ServerMain extends Application {
         }else {
             Button playButton = new Button("Jouer");
 
-            GameMenu.createMenuStage("Joueur 1", "Joueur 2", playButton);
+            GameMenu2.createMenuStage("Joueur 1", "Joueur 2", playButton);
 
             playButton.setOnAction(e -> {
                 System.out.println("clicked");
                 playButton.disableProperty().set(true);
                 Thread thread = new Thread(() ->{
-                    String player1Name = GameMenu.getText1() == null ? "Ada" : GameMenu.getText1();
-                    String player2Name = GameMenu.getText2() == null ? "Charles" : GameMenu.getText2();
+                    String player1Name = GameMenu2.getText1() == null ? "Ada" : GameMenu2.getText1();
+                    String player2Name = GameMenu2.getText2() == null ? "Charles" : GameMenu2.getText2();
 
                     Map<PlayerId,String> playerNames = new HashMap<>();
                     Map<PlayerId,Player> playerIdPlayerMap = new HashMap<>();
 
                     playerNames.put(PlayerId.PLAYER_1,player1Name);
                     playerNames.put(PlayerId.PLAYER_2, player2Name);
-
                     playerIdPlayerMap.put(PlayerId.PLAYER_1,new GraphicalPlayerAdapter());
                     playerIdPlayerMap.put(PlayerId.PLAYER_2,new RemotePlayerProxy(socket));
-                    Game.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random());
+                    ThreePlayerGame.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random(),is3Players);
                     //menu.hide();
                 });
                 thread.start();

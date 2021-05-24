@@ -19,8 +19,8 @@ final class SignatureChecks_4 {
     }
 
     void checkPlayerId() {
-        v06 = ch.epfl.tchu.game.PlayerId.ALL;
-        v05 = ch.epfl.tchu.game.PlayerId.COUNT;
+        v06 = ch.epfl.tchu.game.PlayerId.ALL();
+        v05 = ch.epfl.tchu.game.PlayerId.COUNT();//todo changed
         v07 = ch.epfl.tchu.game.PlayerId.PLAYER_1;
         v07 = ch.epfl.tchu.game.PlayerId.PLAYER_2;
         v07 = ch.epfl.tchu.game.PlayerId.valueOf(v08);

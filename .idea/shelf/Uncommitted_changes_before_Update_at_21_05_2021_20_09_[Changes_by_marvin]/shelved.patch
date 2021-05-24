@@ -1,0 +1,126 @@
+Index: src/ch/epfl/tchu/gui/ServerMain.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ch.epfl.tchu.gui;\r\n\r\nimport ch.epfl.tchu.SortedBag;\r\nimport ch.epfl.tchu.game.*;\r\nimport ch.epfl.tchu.net.RemotePlayerProxy;\r\nimport javafx.application.Application;\r\nimport javafx.beans.binding.Bindings;\r\nimport javafx.beans.property.*;\r\nimport javafx.event.Event;\r\nimport javafx.geometry.HPos;\r\nimport javafx.geometry.Pos;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.Label;\r\nimport javafx.scene.control.TextField;\r\nimport javafx.scene.layout.GridPane;\r\nimport javafx.stage.Stage;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.IOException;\r\nimport java.io.InputStreamReader;\r\nimport java.io.PrintWriter;\r\nimport java.net.ServerSocket;\r\nimport java.net.Socket;\r\nimport java.util.*;\r\n\r\n/**\r\n * La classe ServerMain contient le programme principal du serveur tCHu.\r\n * @author Shangeeth Poobalasingam (329307)\r\n * @author Marvin Koch (324448)\r\n */\r\npublic final class ServerMain extends Application {\r\n    public static Boolean is3Player = true;\r\n    /**\r\n     * Méthode main qui appelle launch\r\n     * @param args arguments\r\n     */\r\n    public static void main(String[] args){\r\n        launch(args);\r\n    }\r\n    /**\r\n     * The main entry point for all JavaFX applications.\r\n     * The start method is called after the init method has returned,\r\n     * and after the system is ready for the application to begin running.\r\n     *\r\n     * <p>\r\n     * NOTE: This method is called on the JavaFX Application Thread.\r\n     * </p>\r\n     *\r\n     *\r\n     *\r\n     * La méthode start du serveur ignore son argument primaryStage et se charge de démarrer le serveur en:\r\n     * - analysant les arguments passés au programme afin de déterminer les noms des deux joueurs,\r\n     * - attendant une connexion de la part du client sur le port 5108,\r\n     * - créant les deux joueurs, le premier étant un joueur graphique, le second un mandataire du joueur distant qui se trouve sur le client,\r\n     * - démarrant le fil d'exécution gérant la partie, qui ne fait rien d'autre qu'exécuter la méthode play de Game.\r\n     *\r\n     * @param primaryStage the primary stage for this application, onto which\r\n     *                     the application scene can be set.\r\n     *                     Applications may create other stages, if needed, but they will not be\r\n     *                     primary stages.\r\n     * @throws Exception if something goes wrong\r\n     */\r\n    @Override\r\n    public void start(Stage primaryStage) throws IOException {\r\n        ServerSocket serverSocket = new ServerSocket(5108);\r\n        Socket socket = serverSocket.accept();\r\n        Socket socket2 = serverSocket.accept();\r\n\r\n        /*\r\n        StringProperty text1Property = new SimpleStringProperty();\r\n        StringProperty text2Property = new SimpleStringProperty();\r\n\r\n        Stage menu = new Stage();\r\n        menu.setTitle(\"Bienvenue dans tCHu!\");\r\n        menu.setOnCloseRequest(Event::consume);\r\n\r\n        TextField player1Text = new TextField();\r\n        TextField player2Text = new TextField();\r\n        Bindings.bindBidirectional(player1Text.textProperty(), text1Property);\r\n        Bindings.bindBidirectional(player2Text.textProperty(), text2Property);\r\n\r\n        GridPane pane = new GridPane();\r\n        pane.setAlignment(Pos.CENTER);\r\n        pane.setHgap(5.5);\r\n        pane.setVgap(5.5);\r\n        pane.add(new Label(\"Joueur 1:\"), 0, 0);\r\n        pane.add(player1Text, 1, 0);\r\n        pane.add(new Label(\"Joueur 2:\"), 0, 1);\r\n        pane.add(player2Text, 1, 1);\r\n        Button playButton = new Button(\"Play\");\r\n        pane.add(playButton, 1, 3);\r\n        GridPane.setHalignment(playButton, HPos.RIGHT);\r\n\r\n        Scene scene = new Scene(pane );\r\n        menu.setScene(scene);\r\n        menu.show();\r\n\r\n         */\r\n        Button playButton = new Button(\"Jouer\");\r\n        GameMenu.createMenuStage(\"Joueur 1\", \"Joueur 2\", playButton);\r\n\r\n        playButton.setOnAction(e -> {\r\n            playButton.disableProperty().set(true);\r\n            Thread thread = new Thread(() ->{\r\n                String player1Name = GameMenu.getText1() == null ? \"Ada\" : GameMenu.getText1();\r\n                String player2Name = GameMenu.getText2() == null ? \"Charles\" : GameMenu.getText2();\r\n\r\n                Map<PlayerId,String> playerNames = new EnumMap<>(PlayerId.class);\r\n                Map<PlayerId,Player> playerIdPlayerMap = new EnumMap<>(PlayerId.class);\r\n\r\n                playerNames.put(PlayerId.PLAYER_1,player1Name);\r\n                playerNames.put(PlayerId.PLAYER_2, player2Name);\r\n                playerIdPlayerMap.put(PlayerId.PLAYER_1,new GraphicalPlayerAdapter());\r\n                playerIdPlayerMap.put(PlayerId.PLAYER_2,new RemotePlayerProxy(socket));\r\n                Game.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random());\r\n                //menu.hide();\r\n            });\r\n            thread.start();\r\n            //((Node)(e.getSource())).getScene().getWindow().hide();\r\n        });\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ch/epfl/tchu/gui/ServerMain.java b/src/ch/epfl/tchu/gui/ServerMain.java
+--- a/src/ch/epfl/tchu/gui/ServerMain.java	(revision 39692f47bf3d5f4bad8b0c09ed47c6feaa8b3b7d)
++++ b/src/ch/epfl/tchu/gui/ServerMain.java	(date 1621620035252)
+@@ -64,8 +64,86 @@
+     @Override
+     public void start(Stage primaryStage) throws IOException {
+         ServerSocket serverSocket = new ServerSocket(5108);
+-        Socket socket = serverSocket.accept();
+-        Socket socket2 = serverSocket.accept();
++
++
++        List<String> choices = new ArrayList<>();
++        choices.add("2");
++        choices.add("3");
++
++
++        ChoiceDialog<String> dialog = new ChoiceDialog<>("b", choices);
++        dialog.setTitle("tChu!");
++        dialog.setHeaderText("Choisisez le nombre de joueur  :");
++        dialog.setContentText("Choose your letter:");
++
++// Traditional way to get the response value.
++        Optional<String> result = dialog.showAndWait();
++
++        result.ifPresent(letter -> {
++            if(Integer.parseInt(letter)== 2){
++                is3Player = false;
++            }else {
++                is3Player= true;
++            }
++        });
++        //TODO 2 sockets
++
++        if(is3Player){
++            Socket socket = serverSocket.accept();
++            Socket socket2 = serverSocket.accept();
++            Button playButton = new Button("Jouer");
++            GameMenu.createMenuStage("Joueur 1", "Joueur 2", playButton);
++
++            playButton.setOnAction(e -> {
++                playButton.disableProperty().set(true);
++                Thread thread = new Thread(() ->{
++                    String player1Name = GameMenu.getText1() == null ? "Ada" : GameMenu.getText1();
++                    String player2Name = GameMenu.getText2() == null ? "Charles" : GameMenu.getText2();
++                    String player3Name = "Joueur 3";
++
++                    Map<PlayerId,String> playerNames = new EnumMap<>(PlayerId.class);
++                    Map<PlayerId,Player> playerIdPlayerMap = new EnumMap<>(PlayerId.class);
++
++                    playerNames.put(PlayerId.PLAYER_1,player1Name);
++                    playerNames.put(PlayerId.PLAYER_2, player2Name);
++                    playerNames.put(PlayerId.PLAYER_3, player3Name);
++                    playerIdPlayerMap.put(PlayerId.PLAYER_1,new GraphicalPlayerAdapter());
++                    playerIdPlayerMap.put(PlayerId.PLAYER_2,new RemotePlayerProxy(socket));
++                    playerIdPlayerMap.put(PlayerId.PLAYER_3, new RemotePlayerProxy(socket2));
++                    ThreePlayerGame.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random());
++                    //menu.hide();
++                });
++                thread.start();
++                //((Node)(e.getSource())).getScene().getWindow().hide();
++            });
++        }else {
++            Socket socket = serverSocket.accept();
++            Button playButton = new Button("Jouer");
++            GameMenu.createMenuStage("Joueur 1", "Joueur 2", playButton);
++
++            playButton.setOnAction(e -> {
++                playButton.disableProperty().set(true);
++                Thread thread = new Thread(() ->{
++                    String player1Name = GameMenu.getText1() == null ? "Ada" : GameMenu.getText1();
++                    String player2Name = GameMenu.getText2() == null ? "Charles" : GameMenu.getText2();
++                    String player3Name = "Joueur 3";
++
++                    Map<PlayerId,String> playerNames = new EnumMap<>(PlayerId.class);
++                    Map<PlayerId,Player> playerIdPlayerMap = new EnumMap<>(PlayerId.class);
++
++                    playerNames.put(PlayerId.PLAYER_1,player1Name);
++                    playerNames.put(PlayerId.PLAYER_2, player2Name);
++                    playerIdPlayerMap.put(PlayerId.PLAYER_1,new GraphicalPlayerAdapter());
++                    playerIdPlayerMap.put(PlayerId.PLAYER_2,new RemotePlayerProxy(socket));
++                    ThreePlayerGame.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random());
++                    //menu.hide();
++                });
++                thread.start();
++                //((Node)(e.getSource())).getScene().getWindow().hide();
++            });
++        }
++
++
+ 
+         /*
+         StringProperty text1Property = new SimpleStringProperty();
+@@ -97,26 +175,7 @@
+         menu.show();
+ 
+          */
+-        Button playButton = new Button("Jouer");
+-        GameMenu.createMenuStage("Joueur 1", "Joueur 2", playButton);
+-
+-        playButton.setOnAction(e -> {
+-            playButton.disableProperty().set(true);
+-            Thread thread = new Thread(() ->{
+-                String player1Name = GameMenu.getText1() == null ? "Ada" : GameMenu.getText1();
+-                String player2Name = GameMenu.getText2() == null ? "Charles" : GameMenu.getText2();
+ 
+-                Map<PlayerId,String> playerNames = new EnumMap<>(PlayerId.class);
+-                Map<PlayerId,Player> playerIdPlayerMap = new EnumMap<>(PlayerId.class);
+-
+-                playerNames.put(PlayerId.PLAYER_1,player1Name);
+-                playerNames.put(PlayerId.PLAYER_2, player2Name);
+-                playerIdPlayerMap.put(PlayerId.PLAYER_1,new GraphicalPlayerAdapter());
+-                playerIdPlayerMap.put(PlayerId.PLAYER_2,new RemotePlayerProxy(socket));
+-                Game.play(playerIdPlayerMap, playerNames, SortedBag.of(ChMap.tickets()), new Random());
+-                //menu.hide();
+-            });
+-            thread.start();
+             //((Node)(e.getSource())).getScene().getWindow().hide();
+         });
+     }

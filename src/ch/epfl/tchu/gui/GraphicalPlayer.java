@@ -9,9 +9,11 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.cell.TextFieldListCell;
@@ -49,6 +51,7 @@ public final class GraphicalPlayer{
     private final ObjectProperty<DrawCardHandler> drawCardHandlerProperty;
     private final ObjectProperty<ClaimRouteHandler> drawClaimRouteHandlerProperty;
     private final Stage mainStage;
+    private PlayerState ps;
 
     /**
      * Constructeur de GraphicalPlayer
@@ -84,6 +87,8 @@ public final class GraphicalPlayer{
     public void setState(PublicGameState gs, PlayerState ps){
         assert isFxApplicationThread();
         observableGameState.setState(gs, ps);
+        this.ps = ps;
+
     }
 
     /**
@@ -142,7 +147,11 @@ public final class GraphicalPlayer{
         Text text = new Text(String.format(StringsFr.CHOOSE_TICKETS, bag.size() - 2, plural(bag.size()-2)));
         TextFlow textFlow = new TextFlow(text);
 
+
         ListView<Ticket> listView = new ListView<>(FXCollections.observableList(bag.toList()));
+
+
+
         listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         Button button = new Button(CHOOSE);
@@ -197,18 +206,15 @@ public final class GraphicalPlayer{
         createCardWindow(CHOOSE_ADDITIONAL_CARDS, list, handler);
     }
 
-    public void showWinner(String winner, int points, RestartHandler handler){
+    public void showWinner(String s, RestartHandler handler){
         assert isFxApplicationThread();
         Pane pane = new VBox();
         Stage stage = createStage("Fin de la Partie", pane);
         stage.setHeight(300);
         stage.setWidth(500);
         stage.setOnCloseRequest(v -> stage.close());
-        String winnerString = winner == null
-                ? String.format("Vous êtes à égalité avec %s points", points)
-                : String.format("Bravo à %s qui a gagné la partie avec %s points!", winner, points);
 
-        Text winnerText = new Text(10,20, winnerString);
+        Text winnerText = new Text(10,20, s);
         winnerText.setFont(Font.font("Calibri", 20));
 
 

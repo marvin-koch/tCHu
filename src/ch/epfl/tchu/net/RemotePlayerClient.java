@@ -59,11 +59,17 @@ public final class RemotePlayerClient{
             while((line = r.readLine())!= null){
                 String[] strings = line.split(Pattern.quote(" "));
                 switch (MessageId.valueOf(strings[0])){
+                    case NBR_OF_PLAYER:
+                        ServerMain.is3Players = INTEGER_SERDE.deserialize(strings[1]) == 1;
+                        System.out.println(ServerMain.is3Players);
+                        break;
+                    //todo on mets u message type qui viens avant tout le reste et qui change is3player
                     case INIT_PLAYERS:
                         List<String> playerNames = LIST_STRING_SERDE.deserialize(strings[2]);
                         Map<PlayerId, String> mapNames = new HashMap<>();
-                        for(int i = 0; i < PlayerId.COUNT; ++i){
-                            mapNames.put(PlayerId.ALL.get(i), playerNames.get(i));
+                        System.out.println(PlayerId.COUNT());
+                        for(int i = 0; i < PlayerId.COUNT(); ++i){
+                            mapNames.put(PlayerId.ALL().get(i), playerNames.get(i));
                         }
                         player.initPlayers(PLAYER_ID_SERDE.deserialize(strings[1]), mapNames);
                         break;
@@ -100,7 +106,7 @@ public final class RemotePlayerClient{
                         player.setInitialTicketChoice(SORTEDBAG_TICKET_SERDE.deserialize(strings[1]));
                         break;
                     case END:
-                        writeMessage(INTEGER_SERDE.serialize(player.endMenu(STRING_SERDE.deserialize(strings[1]), INTEGER_SERDE.deserialize(strings[2]))), w);
+                        writeMessage(INTEGER_SERDE.serialize(player.endMenu(STRING_SERDE.deserialize(strings[1]))), w);
                         break;
                 }
             }

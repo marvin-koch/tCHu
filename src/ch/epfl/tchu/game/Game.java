@@ -31,25 +31,26 @@ public final class Game {
      * @throws IllegalArgumentException si l'une des deux tables associatives a une taille différente de 2
      */
     public static void play(Map<PlayerId, Player> players, Map<PlayerId, String> playerNames, SortedBag<Ticket> tickets, Random rng) {
-        players.forEach((id, p) -> p.setNbrOfPlayer(ServerMain.is3Player));
+        players.forEach((id, p) -> p.initNbrOfPlayer(false));
+        System.out.println(ServerMain.is3Players);
         boolean play = false;
         do {
             //Preconditions.checkArgument(playerNames.size() == PlayerId.COUNT && players.size() == PlayerId.COUNT);todo : j ai enlever ça
             GameState gameState = GameState.initial(tickets, rng);
             Map<PlayerId, Info> infos = new HashMap<>();
-            PlayerId.ALL.forEach(id -> infos.put(id, new Info(playerNames.get(id))));
+            PlayerId.ALL().forEach(id -> infos.put(id, new Info(playerNames.get(id))));
 
             players.forEach((id, player) -> player.initPlayers(id, playerNames));
             receiveInfoAll(players, infos.get(gameState.currentPlayerId()).willPlayFirst());
 
-            for (PlayerId id : PlayerId.ALL) {
+            for (PlayerId id : PlayerId.ALL()) {
                 SortedBag<Ticket> ticketSortedBag = gameState.topTickets(INITIAL_TICKETS_COUNT);
                 gameState = gameState.withoutTopTickets(INITIAL_TICKETS_COUNT);
                 players.get(id).setInitialTicketChoice(ticketSortedBag);
             }
 
             updateStateForPlayers(players, gameState);
-            for (PlayerId id : PlayerId.ALL) {
+            for (PlayerId id : PlayerId.ALL()) {
                 gameState = gameState.withInitiallyChosenTickets(id, players.get(id).chooseInitialTickets());
             }
 
@@ -204,14 +205,14 @@ public final class Game {
                     BlockingQueue<Boolean> secondQ = new ArrayBlockingQueue<>(1);
                     new Thread(() -> {
                         try {
-                            firstQ.put(players.get(PlayerId.PLAYER_1).endMenu(winnerName, points) == 1);
+                            firstQ.put(players.get(PlayerId.PLAYER_1).endMenu(winnerName) == 1);
                         } catch (InterruptedException e) {
                             throw new Error();
                         }
                     }).start();
                     new Thread(() -> {
                         try {
-                            secondQ.put(players.get(PlayerId.PLAYER_2).endMenu(winnerName, points) == 1);
+                            secondQ.put(players.get(PlayerId.PLAYER_2).endMenu(winnerName) == 1);
                         } catch (InterruptedException e) {
                             throw new Error();
                         }
@@ -241,7 +242,7 @@ public final class Game {
      * @param info String à communiquer
      */
     private static void receiveInfoAll(Map<PlayerId, Player> players, String info){
-        PlayerId.ALL.forEach(id -> players.get(id).receiveInfo(info));
+        PlayerId.ALL().forEach(id -> players.get(id).receiveInfo(info));
     }
 
     /**
@@ -250,7 +251,7 @@ public final class Game {
      * @param gameState l'etat du jeu
      */
     private static void updateStateForPlayers(Map<PlayerId, Player> players,GameState gameState){
-        PlayerId.ALL.forEach(id -> players.get(id).updateState(gameState, gameState.playerState(id)));
+        PlayerId.ALL().forEach(id -> players.get(id).updateState(gameState, gameState.playerState(id)));
     }
 
 }

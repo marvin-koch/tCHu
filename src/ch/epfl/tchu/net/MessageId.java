@@ -11,6 +11,7 @@ import java.util.List;
  * @author Marvin Koch (324448)
  */
 public enum MessageId {
+    NBR_OF_PLAYER,
     INIT_PLAYERS,
     RECEIVE_INFO,
     UPDATE_STATE,

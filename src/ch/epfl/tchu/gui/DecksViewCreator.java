@@ -2,6 +2,7 @@ package ch.epfl.tchu.gui;
 
 import ch.epfl.tchu.game.Card;
 import ch.epfl.tchu.game.Constants;
+import ch.epfl.tchu.game.PlayerState;
 import ch.epfl.tchu.game.Ticket;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 
@@ -87,6 +89,23 @@ final class DecksViewCreator {
         hBox.getStylesheets().addAll("decks.css", "colors.css");
 
         ListView<Ticket> billets = new ListView<>(observableGameState.getPlayerTicketsList());
+        billets.setCellFactory(param -> new ListCell<Ticket>() {
+            @Override
+            protected void updateItem(Ticket item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle(null);
+                } else {
+                    setText(item.text());
+                    if(observableGameState.greenTickets(item)){
+                        setStyle("-fx-background-color: lightgreen;");
+                    }
+
+                }
+            }
+        });
         billets.setId("tickets");
         HBox hBoxSon = new HBox();
         hBoxSon.setId("hand-pane");
