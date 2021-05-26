@@ -47,9 +47,13 @@ public final class GraphicalPlayerAdapter implements Player {
     }
 
 
+    /**
+     * Iniitialise le nombre de joueurs
+     * @param is3Player vrai si il y a 3 joueurs
+     */
     @Override
     public void initNbrOfPlayer(boolean is3Player) {
-
+        PlayerId.initNbrPlayers(is3Player);
     }
 
     //TODO commenter

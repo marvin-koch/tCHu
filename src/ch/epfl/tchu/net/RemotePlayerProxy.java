@@ -49,8 +49,11 @@ public final class RemotePlayerProxy implements Player {
      */
     @Override
     public void initPlayers(PlayerId ownId, Map<PlayerId, String> playerNames) {
+        List<String> list = new ArrayList<>();
+        PlayerId.ALL().forEach(id -> list.add(playerNames.get(id)));
+
         write(MessageId.INIT_PLAYERS,
-                PLAYER_ID_SERDE.serialize(ownId) + " " + LIST_STRING_SERDE.serialize(new ArrayList<>(playerNames.values())));
+                PLAYER_ID_SERDE.serialize(ownId) + " " + LIST_STRING_SERDE.serialize(list));
     }
 
     /**
@@ -170,7 +173,10 @@ public final class RemotePlayerProxy implements Player {
         return SORTEDBAG_CARD_SERDE.deserialize(read());
     }
 
-    //TODO commenter
+    /**
+     * Iniitialise le nombre de joueurs
+     * @param is3Player vrai si il y a 3 joueurs
+     */
     @Override
     public void initNbrOfPlayer(boolean is3Player) {
         write(MessageId.NBR_OF_PLAYER,INTEGER_SERDE.serialize(is3Player? 1 : 0));

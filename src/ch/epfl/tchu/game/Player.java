@@ -33,6 +33,10 @@ public interface Player {
         public static final List<TurnKind> ALL = List.of(TurnKind.values());
     }
 
+    /**
+     * Iniitialise le nombre de joueurs
+     * @param is3Player vrai si il y a 3 joueurs
+     */
     void initNbrOfPlayer(boolean is3Player);
 
     //TODO commenter

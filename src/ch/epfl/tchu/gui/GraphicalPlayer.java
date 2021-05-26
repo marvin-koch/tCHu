@@ -21,6 +21,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -29,13 +31,17 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.StringConverter;
+import jdk.jshell.spi.ExecutionControlProvider;
 
 import static ch.epfl.tchu.gui.ActionHandlers.*;
 import static ch.epfl.tchu.gui.StringsFr.*;
 import static javafx.application.Platform.isFxApplicationThread;
 import static javafx.application.Platform.runLater;
 
+import java.io.File;
+import java.net.URL;
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -144,6 +150,9 @@ public final class GraphicalPlayer{
         assert isFxApplicationThread();
         Preconditions.checkArgument(bag.size() == Constants.INITIAL_TICKETS_COUNT || bag.size() == Constants.IN_GAME_TICKETS_COUNT);
 
+
+
+
         Text text = new Text(String.format(StringsFr.CHOOSE_TICKETS, bag.size() - 2, plural(bag.size()-2)));
         TextFlow textFlow = new TextFlow(text);
 
@@ -206,6 +215,11 @@ public final class GraphicalPlayer{
         createCardWindow(CHOOSE_ADDITIONAL_CARDS, list, handler);
     }
 
+    /**
+     * Affiche le gagnant
+     * @param s string
+     * @param handler restarthandler
+     */
     public void showWinner(String s, RestartHandler handler){
         assert isFxApplicationThread();
         Pane pane = new VBox();
@@ -214,16 +228,31 @@ public final class GraphicalPlayer{
         stage.setWidth(500);
         stage.setOnCloseRequest(v -> stage.close());
 
-        Text winnerText = new Text(10,20, s);
-        winnerText.setFont(Font.font("Calibri", 20));
-
-
         Text rejouer = new Text("Voulez vous rejouer?");
         rejouer.setFont(Font.font("Calibri", 15));
         Button ouiButton = new Button("Oui");
         Button nonButton = new Button("Non");
+        Text winnerName;
 
-        pane.getChildren().addAll(winnerText, rejouer, ouiButton,nonButton);
+        String[] splitString = s.split(Pattern.quote(";"), -1);
+        switch (splitString.length){
+            case(2):
+                winnerName = new Text(10,20, String.format("Bravo à %s!", splitString[0]));
+                break;
+            case(3):
+                winnerName = new Text(10,20, String.format("Bravo à %s et %s!", splitString[0], splitString[1]));
+                break;
+            case (4):
+                winnerName = new Text(10, 20, String.format("Bravo à %s, %s et %s!", splitString[0], splitString[1], splitString[2]));
+                break;
+            default:
+                throw new Error("pleure");
+        }
+        winnerName.setFont(Font.font("Calibri", 20));
+        Text winnerPoint = new Text(10,20, "pour avoir gagné avec "+splitString[splitString.length-1]+" points");
+        winnerPoint.setFont(Font.font("Calibri", 18));
+        pane.getChildren().addAll(winnerName ,winnerPoint , rejouer, ouiButton,nonButton);
+
         ouiButton.setOnAction(e ->{
                     ouiButton.disableProperty().set(true);
                     mainStage.close();
@@ -234,9 +263,6 @@ public final class GraphicalPlayer{
             mainStage.close();
             handler.onClick(0);
         });
-
-        //nonButton.setOnAction(e ->
-                //handler.onClick(0));
 
     }
 
@@ -300,9 +326,6 @@ public final class GraphicalPlayer{
         drawCardHandlerProperty.set(null);
         drawClaimRouteHandlerProperty.set(null);
     }
-
-
-
 
 
     /**

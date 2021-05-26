@@ -1,10 +1,12 @@
 package ch.epfl.tchu.game;
 
+
 import ch.epfl.tchu.Preconditions;
 import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.gui.Info;
 import ch.epfl.tchu.game.Constants;
 import ch.epfl.tchu.gui.ServerMain;
+import ch.epfl.tchu.gui.StringsFr;
 
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -19,6 +21,7 @@ import static ch.epfl.tchu.game.Constants.*;
  * @author Marvin Koch (324448)
  */
 public final class Game {
+
     /**
      * Fait jouer une partie de tCHu aux joueurs donnés, dont les noms figurent dans la table playerNames,
      * les billets disponibles pour cette partie sont ceux de tickets,
@@ -30,12 +33,12 @@ public final class Game {
      * @param rng une instance de Random
      * @throws IllegalArgumentException si l'une des deux tables associatives a une taille différente de 2
      */
-    public static void play(Map<PlayerId, Player> players, Map<PlayerId, String> playerNames, SortedBag<Ticket> tickets, Random rng) {
-        players.forEach((id, p) -> p.initNbrOfPlayer(false));
-        System.out.println(ServerMain.is3Players);
+    public static void play(Map<PlayerId, Player> players, Map<PlayerId, String> playerNames, SortedBag<Ticket> tickets, Random rng, boolean is3Players) {
+        players.forEach((id, p) -> p.initNbrOfPlayer(is3Players));
+        //TODO
         boolean play = false;
         do {
-            //Preconditions.checkArgument(playerNames.size() == PlayerId.COUNT && players.size() == PlayerId.COUNT);todo : j ai enlever ça
+            Preconditions.checkArgument(playerNames.size() == PlayerId.COUNT() && players.size() == PlayerId.COUNT());
             GameState gameState = GameState.initial(tickets, rng);
             Map<PlayerId, Info> infos = new HashMap<>();
             PlayerId.ALL().forEach(id -> infos.put(id, new Info(playerNames.get(id))));
@@ -62,8 +65,11 @@ public final class Game {
                 Player currentPlayer = players.get(gameState.currentPlayerId());
                 Info currentInfo = infos.get(gameState.currentPlayerId());
                 Info nextInfo = infos.get(gameState.currentPlayerId().next());
+
                 PlayerState currentPlayerState = gameState.currentPlayerState();
                 PlayerState nextPlayerState = gameState.playerState(gameState.currentPlayerId().next());
+                PlayerState doubleNextPlayerState = gameState.playerState(gameState.currentPlayerId().doubleNext());
+
 
                 updateStateForPlayers(players, gameState);
                 receiveInfoAll(players, currentInfo.canPlay());
@@ -156,70 +162,114 @@ public final class Game {
                     receiveInfoAll(players, currentInfo.lastTurnBegins(currentPlayerState.carCount()));
                 }
                 // todo  changer ça
-                if (count == 3) {
-                    //if(!(gameState.lastPlayer() == null) && (gameState.lastPlayer().equals(gameState.currentPlayerId()))){
+                if(!(gameState.lastPlayer() == null) && (gameState.lastPlayer().equals(gameState.currentPlayerId()))){
+                //if (count == 3) {
+                    Info doubleNextInfo = infos.get(gameState.currentPlayerId().doubleNext());
                     updateStateForPlayers(players, gameState);
                     int currentPlayerPoints = currentPlayerState.finalPoints();
                     int nextPlayerPoints = nextPlayerState.finalPoints();
+                    int doubleNextPlayerPoints = doubleNextPlayerState.finalPoints();
                     Trail currentPlayerTrail = Trail.longest(currentPlayerState.routes());
                     Trail nextPlayerTrail = Trail.longest(nextPlayerState.routes());
+                    Trail doubleNextPlayerTrail = Trail.longest(doubleNextPlayerState.routes());
                     String currentPlayerBonus = currentInfo.getsLongestTrailBonus(currentPlayerTrail);
                     String nextPlayerBonus = nextInfo.getsLongestTrailBonus(nextPlayerTrail);
+                    String doubleNextPlayerBonus = nextInfo.getsLongestTrailBonus(doubleNextPlayerTrail);
+                    String winnerText;
+                    Map<PlayerId, Integer> pointsMap = new HashMap<>();
+                    Map<PlayerId, Integer> longestTrailMap = new HashMap<>();
+                    List<String> winners = new ArrayList<>();
 
-                    //Calcul du trail le plus long
-                    if (currentPlayerTrail.length() > nextPlayerTrail.length()) {
-                        currentPlayerPoints += LONGEST_TRAIL_BONUS_POINTS;
-                        receiveInfoAll(players, currentPlayerBonus);
-                    } else if (currentPlayerTrail.length() < nextPlayerTrail.length()) {
-                        nextPlayerPoints += LONGEST_TRAIL_BONUS_POINTS;
-                        receiveInfoAll(players, nextPlayerBonus);
-                    } else {
-                        currentPlayerPoints += LONGEST_TRAIL_BONUS_POINTS;
-                        nextPlayerPoints += LONGEST_TRAIL_BONUS_POINTS;
-                        receiveInfoAll(players, currentPlayerBonus);
-                        receiveInfoAll(players, nextPlayerBonus);
+                    for (PlayerId id: PlayerId.ALL()) {
+                        pointsMap.put(id,gameState.playerState(id).finalPoints());
+                        longestTrailMap.put(id,Trail.longest(gameState.playerState(id).routes()).length());
+                    }
+                    longestTrailMap.values().stream()
+                            .max(Integer::compare)
+                            .ifPresent(max -> pointsMap.forEach((id, playerPoints) -> {if(playerPoints.equals(max)) pointsMap.replace(id, playerPoints + LONGEST_TRAIL_BONUS_POINTS);}));
+                    for(PlayerId id : PlayerId.ALL()){
+                        if(pointsMap.get(id).equals(Collections.max(pointsMap.values()))){
+                            winners.add(playerNames.get(id));
+                        }
                     }
 
-                    //Calcul du gagnant
-                    String info;
-                    String winnerName;
-                    int points;
+                    String winner = String.format("%s;%s", String.join(";", winners), Collections.max(pointsMap.values()));
+                    //TODO winner
+                    winnerText = String.format(StringsFr.THREE_PLAYERS_WINNER, String.join(", ", winners), Collections.max(pointsMap.values()));
 
+
+
+
+                    /**
+                    if(!ServerMain.is3Players){
+                        if (currentPlayerTrail.length() > nextPlayerTrail.length()) {
+                            currentPlayerPoints += LONGEST_TRAIL_BONUS_POINTS;
+                            receiveInfoAll(players, currentPlayerBonus);
+                        } else if (currentPlayerTrail.length() < nextPlayerTrail.length()) {
+                            nextPlayerPoints += LONGEST_TRAIL_BONUS_POINTS;
+                            receiveInfoAll(players, nextPlayerBonus);
+                        } else {
+                            currentPlayerPoints += LONGEST_TRAIL_BONUS_POINTS;
+                            nextPlayerPoints += LONGEST_TRAIL_BONUS_POINTS;
+                            receiveInfoAll(players, currentPlayerBonus);
+                            receiveInfoAll(players, nextPlayerBonus);
+                        }
+
+                        //Calcul du gagnant
+
+                        if (currentPlayerPoints > nextPlayerPoints) {
+                            info = currentInfo.won(currentPlayerPoints, nextPlayerPoints);
+                            winnerName = playerNames.get(gameState.currentPlayerId());
+                            points = currentPlayerPoints;
+                        } else if (currentPlayerPoints < nextPlayerPoints) {
+                            info = nextInfo.won(nextPlayerPoints, currentPlayerPoints);
+                            winnerName = playerNames.get(gameState.currentPlayerId().next());
+                            points = nextPlayerPoints;
+                        } else {
+                            info = Info.draw(new ArrayList<>(playerNames.values()), currentPlayerPoints);
+                            winnerName = null;
+                            points = currentPlayerPoints;
+                        }
+
+                    }else{
+
+
+                    }
+                     */
+
+                    String info;
                     if (currentPlayerPoints > nextPlayerPoints) {
                         info = currentInfo.won(currentPlayerPoints, nextPlayerPoints);
-                        winnerName = playerNames.get(gameState.currentPlayerId());
-                        points = currentPlayerPoints;
                     } else if (currentPlayerPoints < nextPlayerPoints) {
                         info = nextInfo.won(nextPlayerPoints, currentPlayerPoints);
-                        winnerName = playerNames.get(gameState.currentPlayerId().next());
-                        points = nextPlayerPoints;
                     } else {
                         info = Info.draw(new ArrayList<>(playerNames.values()), currentPlayerPoints);
-                        winnerName = null;
-                        points = currentPlayerPoints;
                     }
 
-                    receiveInfoAll(players, info);
-                    //TODO
-                    BlockingQueue<Boolean> firstQ = new ArrayBlockingQueue<>(1);
-                    BlockingQueue<Boolean> secondQ = new ArrayBlockingQueue<>(1);
-                    new Thread(() -> {
-                        try {
-                            firstQ.put(players.get(PlayerId.PLAYER_1).endMenu(winnerName) == 1);
-                        } catch (InterruptedException e) {
-                            throw new Error();
-                        }
-                    }).start();
-                    new Thread(() -> {
-                        try {
-                            secondQ.put(players.get(PlayerId.PLAYER_2).endMenu(winnerName) == 1);
-                        } catch (InterruptedException e) {
-                            throw new Error();
-                        }
-                    }).start();
+                    //Calcul du trail le plus long
 
+                    receiveInfoAll(players, PlayerId.is3Players() ? winner : info);
+
+                    //TODO
+                    ArrayList<BlockingQueue<Boolean>> Qlist = new ArrayList<>();
+                    
+                    for (PlayerId id: PlayerId.ALL()) {
+                        BlockingQueue<Boolean> Q = new ArrayBlockingQueue<>(1);
+                        Qlist.add(Q);
+                        new Thread(() -> {
+                            try {
+                                Q.put(players.get(id).endMenu(winner) == 1);
+                            } catch (InterruptedException e) {
+                                throw new Error();
+                            }
+                        }).start();
+                        
+                    }
                     try {
-                        play = firstQ.take() && secondQ.take();
+                        play = true;
+                        for (BlockingQueue<Boolean> Q :Qlist) {
+                            play = play && Q.take();
+                        }
                     } catch (InterruptedException e) {
                         throw new Error();
                     }
@@ -252,6 +302,9 @@ public final class Game {
      */
     private static void updateStateForPlayers(Map<PlayerId, Player> players,GameState gameState){
         PlayerId.ALL().forEach(id -> players.get(id).updateState(gameState, gameState.playerState(id)));
+    }
+    public static void play(Map<PlayerId, Player> players, Map<PlayerId, String> playerNames, SortedBag<Ticket> tickets, Random rng){
+        play(players,playerNames,tickets,rng,false);
     }
 
 }

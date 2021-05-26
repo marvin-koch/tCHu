@@ -17,15 +17,37 @@ public enum PlayerId {
     PLAYER_2,
     PLAYER_3;
 
-    /**
-     * Retourne une liste de tout les joueurs
-     */
-    public static List<PlayerId> ALL() {
-        return ServerMain.is3Players ? List.of(PlayerId.values()) : List.of(PlayerId.values()).subList(0, 2);
+
+    private static boolean is3Players = true;
+
+    public static boolean is3Players(){
+        return is3Players;
+    }
+    public static void initNbrPlayers(boolean b){
+        is3Players = b;
     }
 
     /**
-     * Retourne le nombre de joueur
+     * Retourne une liste de tout les joueurs
+     */
+    public static List<PlayerId> ALL = List.of(PlayerId.values());
+
+
+    /**
+     * Retourne une liste de tout les joueurs pouvant jouer
+     */
+    public static List<PlayerId> ALL() {
+        return is3Players ? List.of(PlayerId.values()) : List.of(PlayerId.values()).subList(0, 2);
+    }
+
+    /**
+     * Retourne le nombre de joueur pouvant jouer
+     */
+    public static int COUNT =  ALL.size();
+
+
+    /**
+     * Retourne le nombre de joueur pouvant jouer
      */
     public static int COUNT(){
         return ALL().size();
@@ -40,7 +62,7 @@ public enum PlayerId {
             case PLAYER_1:
                 return PLAYER_2;
             case PLAYER_2:
-                return ServerMain.is3Players ? PLAYER_3: PLAYER_1;
+                return is3Players ? PLAYER_3: PLAYER_1;
             case PLAYER_3:
                 return PLAYER_1;
             default:

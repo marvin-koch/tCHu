@@ -32,7 +32,7 @@ public final class Serdes {
     /**
      * Serde de PlayerID
      */
-    public static final Serde<PlayerId> PLAYER_ID_SERDE= Serde.oneOf(PlayerId.ALL());
+    public static final Serde<PlayerId> PLAYER_ID_SERDE= Serde.oneOf(PlayerId.ALL);
 
     /**
      * Serde de TurnKind
@@ -155,7 +155,7 @@ public final class Serdes {
     public static final Serde<PublicGameState> PUBLIC_GAME_STATE_SERDE = new Serde<PublicGameState>() {
         @Override
         public String serialize(PublicGameState publicGameState) {
-            if(ServerMain.is3Players){
+            if(PlayerId.is3Players()){
                 return String.join(":", INTEGER_SERDE.serialize(publicGameState.ticketsCount()),
                         PUBLIC_CARD_STATE_SERDE.serialize(publicGameState.cardState()),
                         PLAYER_ID_SERDE.serialize(publicGameState.currentPlayerId()),
@@ -182,7 +182,7 @@ public final class Serdes {
             map.put(PlayerId.PLAYER_1, PUBLIC_PLAYER_STATE_SERDE.deserialize(splitString[3]));
             map.put(PlayerId.PLAYER_2, PUBLIC_PLAYER_STATE_SERDE.deserialize(splitString[4]));
             int index;
-            if(ServerMain.is3Players) {
+            if(PlayerId.is3Players()) {
                 map.put(PlayerId.PLAYER_3, PUBLIC_PLAYER_STATE_SERDE.deserialize(splitString[5]));
                 index = 6;
             }else {

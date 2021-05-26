@@ -60,14 +60,18 @@ public final class RemotePlayerClient{
                 String[] strings = line.split(Pattern.quote(" "));
                 switch (MessageId.valueOf(strings[0])){
                     case NBR_OF_PLAYER:
+                        /*
                         ServerMain.is3Players = INTEGER_SERDE.deserialize(strings[1]) == 1;
                         System.out.println(ServerMain.is3Players);
+
+                         */
+                        //PlayerId.initNbrPlayers(INTEGER_SERDE.deserialize(strings[1]) == 1);
+                        player.initNbrOfPlayer(INTEGER_SERDE.deserialize(strings[1]) == 1);
                         break;
                     //todo on mets u message type qui viens avant tout le reste et qui change is3player
                     case INIT_PLAYERS:
                         List<String> playerNames = LIST_STRING_SERDE.deserialize(strings[2]);
                         Map<PlayerId, String> mapNames = new HashMap<>();
-                        System.out.println(PlayerId.COUNT());
                         for(int i = 0; i < PlayerId.COUNT(); ++i){
                             mapNames.put(PlayerId.ALL().get(i), playerNames.get(i));
                         }
