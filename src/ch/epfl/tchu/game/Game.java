@@ -75,9 +75,11 @@ public final class Game {
                 receiveInfoAll(players, currentInfo.canPlay());
                 Player.TurnKind turn = currentPlayer.nextTurn();
                 switch (turn) {
+                    //TODO mettre dans version finale
                     case DRAW_TICKETS:
-                        SortedBag<Ticket> topTickets = gameState.topTickets(IN_GAME_TICKETS_COUNT);
-                        receiveInfoAll(players, currentInfo.drewTickets(IN_GAME_TICKETS_COUNT));
+                        int ticketsDrawCount = Math.min(IN_GAME_TICKETS_COUNT, gameState.ticketsCount());
+                        SortedBag<Ticket> topTickets = gameState.topTickets(ticketsDrawCount);
+                        receiveInfoAll(players, currentInfo.drewTickets(ticketsDrawCount));
                         SortedBag<Ticket> chosen = currentPlayer.chooseTickets(topTickets);
                         receiveInfoAll(players, currentInfo.keptTickets(chosen.size()));
                         gameState = gameState.withChosenAdditionalTickets(topTickets, chosen);
@@ -184,9 +186,17 @@ public final class Game {
                         pointsMap.put(id,gameState.playerState(id).finalPoints());
                         longestTrailMap.put(id,Trail.longest(gameState.playerState(id).routes()).length());
                     }
+                    //TODO MARCHE PAS
                     longestTrailMap.values().stream()
                             .max(Integer::compare)
-                            .ifPresent(max -> pointsMap.forEach((id, playerPoints) -> {if(playerPoints.equals(max)) pointsMap.replace(id, playerPoints + LONGEST_TRAIL_BONUS_POINTS);}));
+                            .ifPresent(max -> pointsMap.forEach((id, playerPoints) -> {
+                                if(longestTrailMap.get(id).equals(max)) {
+                                    System.out.println("Calcule");
+                                    pointsMap.replace(id, playerPoints + LONGEST_TRAIL_BONUS_POINTS);
+                                    receiveInfoAll(players, String.format(StringsFr.GETS_BONUS, playerNames.get(id), max));
+                                }
+                            }));
+
                     for(PlayerId id : PlayerId.ALL()){
                         if(pointsMap.get(id).equals(Collections.max(pointsMap.values()))){
                             winners.add(playerNames.get(id));
@@ -248,7 +258,9 @@ public final class Game {
 
                     //Calcul du trail le plus long
 
-                    receiveInfoAll(players, PlayerId.is3Players() ? winner : info);
+                    PlayerId.ALL().forEach(id -> receiveInfoAll(players, String.format("\n%s a eu %s points\n", playerNames.get(id), pointsMap.get(id))));
+                    receiveInfoAll(players, PlayerId.is3Players() ? winnerText : info);
+
 
                     //TODO
                     ArrayList<BlockingQueue<Boolean>> Qlist = new ArrayList<>();

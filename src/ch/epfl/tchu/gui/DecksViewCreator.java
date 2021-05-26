@@ -89,7 +89,7 @@ final class DecksViewCreator {
         hBox.getStylesheets().addAll("decks.css", "colors.css");
 
         ListView<Ticket> billets = new ListView<>(observableGameState.getPlayerTicketsList());
-        billets.setCellFactory(param -> new ListCell<Ticket>() {
+        billets.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(Ticket item, boolean empty) {
                 super.updateItem(item, empty);
@@ -99,8 +99,10 @@ final class DecksViewCreator {
                     setStyle(null);
                 } else {
                     setText(item.text());
-                    if(observableGameState.greenTickets(item)){
+                    if (observableGameState.greenTickets(item)) {
                         setStyle("-fx-background-color: lightgreen;");
+                    }else{
+                        setStyle(null);
                     }
 
                 }

@@ -1,0 +1,355 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" name=\"Default Changelist\" comment=\"\">\n      <change afterPath=\"$PROJECT_DIR$/.idea/uiDesigner.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_16_11_[Default_Changelist]/shelved.patch\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_16_11__Default_Changelist_.xml\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_17_05_[Default_Changelist]/ClientMain.class\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_17_05_[Default_Changelist]/ServerMain.class\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_17_05_[Default_Changelist]/shelved.patch\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_17_05__Default_Changelist_.xml\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2021_09_38_[Default_Changelist]/shelved.patch\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2021_09_38__Default_Changelist_.xml\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game$1.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game$1.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/PlayerId$1.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/PlayerId$1.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/PlayerId.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/PlayerId.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/PlayerState.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/PlayerState.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/ThreePlayerGame.class\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ClientMain.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ClientMain.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GameMenu.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GameMenu.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GameMenu2.class\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayer$CardBagStringConverter.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayer$CardBagStringConverter.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayer.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayer.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayerAdapter.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayerAdapter.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/InfoViewCreator.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/InfoViewCreator.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ObservableGameState.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ObservableGameState.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ServerMain.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ServerMain.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/RemotePlayerClient.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/RemotePlayerClient.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/RemotePlayerProxy.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/RemotePlayerProxy.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/Serdes$4.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/Serdes$4.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/Serdes.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/Serdes.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerId.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerId.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerState.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerState.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/ThreePlayerGame.java\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/ClientMain.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/ClientMain.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/ClientMain2.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/ClientMain2.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/GameMenu.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/GameMenu.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/GameMenu2.java\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayer.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayer.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/InfoViewCreator.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/InfoViewCreator.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/ObservableGameState.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/ObservableGameState.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerClient.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerClient.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerProxy.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerProxy.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/net/Serdes.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/net/Serdes.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/test/ch/epfl/sigcheck/SignatureChecks_4.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/test/ch/epfl/sigcheck/SignatureChecks_4.java\" afterDir=\"false\" />\n    </list>\n    <list id=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" name=\"Changes by marvin\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/Player.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/Player.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerState.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerState.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/GameMenu.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/GameMenu.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayer.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayer.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayerAdapter.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayerAdapter.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/StringsFr.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/StringsFr.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerClient.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerClient.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerProxy.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerProxy.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"CodeStyleSettingsInfer\">\n    <option name=\"done\" value=\"true\" />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitSEFilterConfiguration\">\n    <file-type-list>\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\n      <filtered-out-file-type name=\"TAG\" />\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\n    </file-type-list>\n  </component>\n  <component name=\"LineStatusTrackerManager\">\n    <file path=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java\">\n      <ranges>\n        <range start1=\"6\" end1=\"8\" start2=\"6\" end2=\"6\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"9\" end1=\"12\" start2=\"7\" end2=\"7\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"14\" end1=\"16\" start2=\"9\" end2=\"9\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"17\" end1=\"18\" start2=\"10\" end2=\"10\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"20\" end1=\"24\" start2=\"12\" end2=\"13\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"34\" end1=\"35\" start2=\"23\" end2=\"24\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"69\" end1=\"71\" start2=\"58\" end2=\"58\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"84\" end1=\"85\" start2=\"71\" end2=\"71\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"89\" end1=\"90\" start2=\"75\" end2=\"76\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"93\" end1=\"93\" start2=\"79\" end2=\"80\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"94\" end1=\"96\" start2=\"81\" end2=\"85\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"98\" end1=\"99\" start2=\"87\" end2=\"88\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"102\" end1=\"102\" start2=\"91\" end2=\"92\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"103\" end1=\"112\" start2=\"93\" end2=\"95\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"113\" end1=\"115\" start2=\"96\" end2=\"96\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"116\" end1=\"118\" start2=\"97\" end2=\"98\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"120\" end1=\"121\" start2=\"100\" end2=\"100\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"125\" end1=\"126\" start2=\"104\" end2=\"106\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"128\" end1=\"129\" start2=\"108\" end2=\"109\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"131\" end1=\"143\" start2=\"111\" end2=\"113\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"145\" end1=\"146\" start2=\"115\" end2=\"115\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"149\" end1=\"185\" start2=\"118\" end2=\"118\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"186\" end1=\"186\" start2=\"119\" end2=\"127\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n      </ranges>\n    </file>\n    <file path=\"$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerProxy.java\">\n      <ranges>\n        <range start1=\"51\" end1=\"51\" start2=\"51\" end2=\"54\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"52\" end1=\"53\" start2=\"55\" end2=\"56\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"172\" end1=\"173\" start2=\"175\" end2=\"179\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n      </ranges>\n    </file>\n    <file path=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayer.java\">\n      <ranges>\n        <range start1=\"23\" end1=\"23\" start2=\"23\" end2=\"25\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"31\" end1=\"31\" start2=\"33\" end2=\"34\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"37\" end1=\"37\" start2=\"40\" end2=\"42\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"38\" end1=\"38\" start2=\"43\" end2=\"44\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"146\" end1=\"146\" start2=\"152\" end2=\"155\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"208\" end1=\"208\" start2=\"217\" end2=\"222\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"216\" end1=\"220\" start2=\"230\" end2=\"230\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"224\" end1=\"224\" start2=\"234\" end2=\"235\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"225\" end1=\"226\" start2=\"236\" end2=\"255\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"237\" end1=\"240\" start2=\"266\" end2=\"266\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"303\" end1=\"306\" start2=\"329\" end2=\"329\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n      </ranges>\n    </file>\n    <file path=\"$PROJECT_DIR$/src/ch/epfl/tchu/gui/GameMenu.java\">\n      <ranges>\n        <range start1=\"3\" end1=\"4\" start2=\"3\" end2=\"3\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"10\" end1=\"13\" start2=\"9\" end2=\"10\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"14\" end1=\"15\" start2=\"11\" end2=\"12\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"18\" end1=\"18\" start2=\"15\" end2=\"21\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"25\" end1=\"30\" start2=\"28\" end2=\"29\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"44\" end1=\"44\" start2=\"43\" end2=\"65\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"45\" end1=\"50\" start2=\"66\" end2=\"67\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"51\" end1=\"55\" start2=\"68\" end2=\"68\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"56\" end1=\"58\" start2=\"69\" end2=\"79\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"59\" end1=\"61\" start2=\"80\" end2=\"81\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"63\" end1=\"71\" start2=\"83\" end2=\"84\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"73\" end1=\"74\" start2=\"86\" end2=\"87\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"76\" end1=\"80\" start2=\"89\" end2=\"90\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"83\" end1=\"83\" start2=\"93\" end2=\"97\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"87\" end1=\"87\" start2=\"101\" end2=\"106\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"91\" end1=\"91\" start2=\"110\" end2=\"114\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n      </ranges>\n    </file>\n    <file path=\"$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerClient.java\">\n      <ranges>\n        <range start1=\"62\" end1=\"62\" start2=\"62\" end2=\"63\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"64\" end1=\"64\" start2=\"65\" end2=\"69\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"69\" end1=\"70\" start2=\"74\" end2=\"74\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n      </ranges>\n    </file>\n    <file path=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerState.java\">\n      <ranges>\n        <range start1=\"170\" end1=\"170\" start2=\"170\" end2=\"171\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"180\" end1=\"180\" start2=\"181\" end2=\"183\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"182\" end1=\"183\" start2=\"185\" end2=\"186\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"186\" end1=\"186\" start2=\"189\" end2=\"194\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n      </ranges>\n    </file>\n    <file path=\"$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java\">\n      <ranges>\n        <range start1=\"22\" end1=\"23\" start2=\"22\" end2=\"24\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"47\" end1=\"48\" start2=\"48\" end2=\"48\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"177\" end1=\"178\" start2=\"177\" end2=\"178\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"194\" end1=\"194\" start2=\"194\" end2=\"196\" changelist=\"13f567fb-da44-4cff-8a48-92e3a5aa68d9\" />\n        <range start1=\"195\" end1=\"197\" start2=\"197\" end2=\"198\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"249\" end1=\"250\" start2=\"250\" end2=\"251\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"286\" end1=\"287\" start2=\"287\" end2=\"288\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n        <range start1=\"304\" end1=\"304\" start2=\"305\" end2=\"308\" changelist=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" />\n      </ranges>\n    </file>\n  </component>\n  <component name=\"ProjectCodeStyleSettingsMigration\">\n    <option name=\"version\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"1slAe1qzt68FeKTjoxxYKG1EI1T\" />\n  <component name=\"ProjectLevelVcsManager\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\n    <property name=\"node.js.path.for.package.eslint\" value=\"project\" />\n    <property name=\"node.js.path.for.package.tslint\" value=\"project\" />\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\n    <property name=\"project.structure.last.edited\" value=\"Modules\" />\n    <property name=\"project.structure.proportion\" value=\"0.0\" />\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\n    <property name=\"settings.editor.selected.configurable\" value=\"preferences.lookFeel\" />\n  </component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\n      <recent name=\"ch.epfl.tchu.gui\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Application.ClientMain\">\n    <configuration name=\"ClientMain\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"ch.epfl.tchu.gui.ClientMain\" />\n      <module name=\"tChu\" />\n      <option name=\"VM_PARAMETERS\" value=\"--module-path &quot;C:\\Users\\shan2\\EPFL\\BA2\\Prog POO\\openjfx-11.0.2_windows-x64_bin-sdk\\javafx-sdk-11.0.2\\lib&quot; --add-modules javafx.controls\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"ch.epfl.tchu.gui.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"ClientMain2\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"ch.epfl.tchu.gui.ClientMain2\" />\n      <module name=\"tChu\" />\n      <option name=\"VM_PARAMETERS\" value=\"--module-path &quot;C:\\Users\\shan2\\EPFL\\BA2\\Prog POO\\openjfx-11.0.2_windows-x64_bin-sdk\\javafx-sdk-11.0.2\\lib&quot; --add-modules javafx.controls\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"ch.epfl.tchu.gui.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"GraphicalPlayerTest\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"ch.epfl.tchu.gui.GraphicalPlayerTest\" />\n      <module name=\"tChu\" />\n      <option name=\"VM_PARAMETERS\" value=\"--module-path &quot;C:\\Users\\shan2\\EPFL\\BA2\\Prog POO\\openjfx-11.0.2_windows-x64_bin-sdk\\javafx-sdk-11.0.2\\lib&quot; --add-modules javafx.controls\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"ch.epfl.tchu.gui.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"ServerMain\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"ch.epfl.tchu.gui.ServerMain\" />\n      <module name=\"tChu\" />\n      <option name=\"VM_PARAMETERS\" value=\"--module-path &quot;C:\\Users\\shan2\\EPFL\\BA2\\Prog POO\\openjfx-11.0.2_windows-x64_bin-sdk\\javafx-sdk-11.0.2\\lib&quot; --add-modules javafx.controls\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"ch.epfl.tchu.gui.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration default=\"true\" type=\"ArquillianTestNG\" factoryName=\"\" nameIsGenerated=\"true\">\n      <option name=\"arquillianRunConfiguration\">\n        <value>\n          <option name=\"containerStateName\" value=\"\" />\n        </value>\n      </option>\n      <option name=\"TEST_OBJECT\" value=\"CLASS\" />\n      <properties />\n      <listeners />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"PlayerStateTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"tChu\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"ch.epfl.tchu.game.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <option name=\"PACKAGE_NAME\" value=\"ch.epfl.tchu.game\" />\n      <option name=\"MAIN_CLASS_NAME\" value=\"ch.epfl.tchu.game.PlayerStateTest\" />\n      <option name=\"TEST_OBJECT\" value=\"class\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.ClientMain\" />\n        <item itemvalue=\"Application.ServerMain\" />\n        <item itemvalue=\"JUnit.PlayerStateTest\" />\n        <item itemvalue=\"Application.ClientMain2\" />\n        <item itemvalue=\"Application.GraphicalPlayerTest\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"bc3ec769-81a6-4341-9a1a-4d5977bca92f\" name=\"Default Changelist\" comment=\"\" />\n      <created>1621436900711</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1621436900711</updated>\n      <workItem from=\"1621436907484\" duration=\"81000\" />\n      <workItem from=\"1621441747713\" duration=\"175000\" />\n      <workItem from=\"1621508519443\" duration=\"58000\" />\n      <workItem from=\"1621601161540\" duration=\"83000\" />\n      <workItem from=\"1621601269563\" duration=\"29000\" />\n      <workItem from=\"1621601342019\" duration=\"66000\" />\n      <workItem from=\"1621684366056\" duration=\"633000\" />\n      <workItem from=\"1621695184367\" duration=\"80000\" />\n      <workItem from=\"1621794798332\" duration=\"1836000\" />\n      <workItem from=\"1621859909699\" duration=\"15102000\" />\n      <workItem from=\"1621875353509\" duration=\"2000\" />\n      <workItem from=\"1621933725337\" duration=\"4712000\" />\n      <workItem from=\"1622017007691\" duration=\"12435000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"yes\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"yes\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 95ec3c9bdd973da19d29a4d683e977f5b60260fb)
++++ b/.idea/workspace.xml	(date 1622032190261)
+@@ -2,63 +2,8 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="bc3ec769-81a6-4341-9a1a-4d5977bca92f" name="Default Changelist" comment="">
+-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_16_11_[Default_Changelist]/shelved.patch" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_16_11__Default_Changelist_.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_17_05_[Default_Changelist]/ClientMain.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_17_05_[Default_Changelist]/ServerMain.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_17_05_[Default_Changelist]/shelved.patch" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_05_2021_17_05__Default_Changelist_.xml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2021_09_38_[Default_Changelist]/shelved.patch" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_05_2021_09_38__Default_Changelist_.xml" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game$1.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/Game.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/PlayerId$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/PlayerId$1.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/PlayerId.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/PlayerId.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/PlayerState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/PlayerState.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/game/ThreePlayerGame.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ClientMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ClientMain.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GameMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GameMenu.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GameMenu2.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayer$CardBagStringConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayer$CardBagStringConverter.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayer.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayerAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/GraphicalPlayerAdapter.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/InfoViewCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/InfoViewCreator.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ObservableGameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ObservableGameState.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ServerMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ServerMain.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/RemotePlayerClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/RemotePlayerClient.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/RemotePlayerProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/RemotePlayerProxy.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/Serdes$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/Serdes$4.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/Serdes.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/net/Serdes.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerId.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerState.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/ThreePlayerGame.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ClientMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ClientMain.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ClientMain2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ClientMain2.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GameMenu.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GameMenu2.java" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayer.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/InfoViewCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/InfoViewCreator.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ObservableGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ObservableGameState.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerClient.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerProxy.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/net/Serdes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/net/Serdes.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/test/ch/epfl/sigcheck/SignatureChecks_4.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ch/epfl/sigcheck/SignatureChecks_4.java" afterDir="false" />
+-    </list>
+-    <list id="13f567fb-da44-4cff-8a48-92e3a5aa68d9" name="Changes by marvin" comment="">
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Player.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerState.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GameMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GameMenu.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayer.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayerAdapter.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/StringsFr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/StringsFr.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerClient.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerProxy.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/tChu.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tChu.iml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -70,120 +15,11 @@
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-  </component>
+-  <component name="GitSEFilterConfiguration">
+-    <file-type-list>
+-      <filtered-out-file-type name="LOCAL_BRANCH" />
+-      <filtered-out-file-type name="REMOTE_BRANCH" />
+-      <filtered-out-file-type name="TAG" />
+-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+-    </file-type-list>
+-  </component>
+-  <component name="LineStatusTrackerManager">
+-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java">
+-      <ranges>
+-        <range start1="6" end1="8" start2="6" end2="6" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="9" end1="12" start2="7" end2="7" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="14" end1="16" start2="9" end2="9" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="17" end1="18" start2="10" end2="10" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="20" end1="24" start2="12" end2="13" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="34" end1="35" start2="23" end2="24" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="69" end1="71" start2="58" end2="58" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="84" end1="85" start2="71" end2="71" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="89" end1="90" start2="75" end2="76" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="93" end1="93" start2="79" end2="80" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="94" end1="96" start2="81" end2="85" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="98" end1="99" start2="87" end2="88" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="102" end1="102" start2="91" end2="92" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="103" end1="112" start2="93" end2="95" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="113" end1="115" start2="96" end2="96" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="116" end1="118" start2="97" end2="98" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="120" end1="121" start2="100" end2="100" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="125" end1="126" start2="104" end2="106" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="128" end1="129" start2="108" end2="109" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="131" end1="143" start2="111" end2="113" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="145" end1="146" start2="115" end2="115" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="149" end1="185" start2="118" end2="118" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="186" end1="186" start2="119" end2="127" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-      </ranges>
+-    </file>
+-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerProxy.java">
+-      <ranges>
+-        <range start1="51" end1="51" start2="51" end2="54" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="52" end1="53" start2="55" end2="56" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="172" end1="173" start2="175" end2="179" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-      </ranges>
+-    </file>
+-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayer.java">
+-      <ranges>
+-        <range start1="23" end1="23" start2="23" end2="25" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="31" end1="31" start2="33" end2="34" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="37" end1="37" start2="40" end2="42" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="38" end1="38" start2="43" end2="44" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="146" end1="146" start2="152" end2="155" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="208" end1="208" start2="217" end2="222" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="216" end1="220" start2="230" end2="230" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="224" end1="224" start2="234" end2="235" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="225" end1="226" start2="236" end2="255" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="237" end1="240" start2="266" end2="266" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="303" end1="306" start2="329" end2="329" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-      </ranges>
+-    </file>
+-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GameMenu.java">
+-      <ranges>
+-        <range start1="3" end1="4" start2="3" end2="3" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="10" end1="13" start2="9" end2="10" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="14" end1="15" start2="11" end2="12" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="18" end1="18" start2="15" end2="21" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="25" end1="30" start2="28" end2="29" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="44" end1="44" start2="43" end2="65" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="45" end1="50" start2="66" end2="67" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="51" end1="55" start2="68" end2="68" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="56" end1="58" start2="69" end2="79" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="59" end1="61" start2="80" end2="81" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="63" end1="71" start2="83" end2="84" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="73" end1="74" start2="86" end2="87" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="76" end1="80" start2="89" end2="90" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="83" end1="83" start2="93" end2="97" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="87" end1="87" start2="101" end2="106" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="91" end1="91" start2="110" end2="114" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-      </ranges>
+-    </file>
+-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerClient.java">
+-      <ranges>
+-        <range start1="62" end1="62" start2="62" end2="63" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="64" end1="64" start2="65" end2="69" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="69" end1="70" start2="74" end2="74" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-      </ranges>
+-    </file>
+-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerState.java">
+-      <ranges>
+-        <range start1="170" end1="170" start2="170" end2="171" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="180" end1="180" start2="181" end2="183" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="182" end1="183" start2="185" end2="186" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="186" end1="186" start2="189" end2="194" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-      </ranges>
+-    </file>
+-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java">
+-      <ranges>
+-        <range start1="22" end1="23" start2="22" end2="24" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="47" end1="48" start2="48" end2="48" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="177" end1="178" start2="177" end2="178" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="194" end1="194" start2="194" end2="196" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
+-        <range start1="195" end1="197" start2="197" end2="198" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="249" end1="250" start2="250" end2="251" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="286" end1="287" start2="287" end2="288" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-        <range start1="304" end1="304" start2="305" end2="308" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+-      </ranges>
+-    </file>
+   </component>
+   <component name="ProjectCodeStyleSettingsMigration">
+     <option name="version" value="1" />
+   </component>
+   <component name="ProjectId" id="1slAe1qzt68FeKTjoxxYKG1EI1T" />
+-  <component name="ProjectLevelVcsManager">
+-    <ConfirmationsSetting value="2" id="Add" />
+-  </component>
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+@@ -196,8 +32,6 @@
+     <property name="aspect.path.notification.shown" value="true" />
+     <property name="node.js.detected.package.eslint" value="true" />
+     <property name="node.js.detected.package.tslint" value="true" />
+-    <property name="node.js.path.for.package.eslint" value="project" />
+-    <property name="node.js.path.for.package.tslint" value="project" />
+     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+     <property name="project.structure.last.edited" value="Modules" />
+@@ -205,44 +39,11 @@
+     <property name="project.structure.side.proportion" value="0.2" />
+     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+   </component>
+-  <component name="RecentsManager">
+-    <key name="CopyClassDialog.RECENTS_KEY">
+-      <recent name="ch.epfl.tchu.gui" />
+-    </key>
+-  </component>
+   <component name="RunManager" selected="Application.ClientMain">
+-    <configuration name="ClientMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++    <configuration name="ClientMain" type="Application" factoryName="Application" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="ch.epfl.tchu.gui.ClientMain" />
+       <module name="tChu" />
+-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\shan2\EPFL\BA2\Prog POO\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="ch.epfl.tchu.gui.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration name="ClientMain2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="ch.epfl.tchu.gui.ClientMain2" />
+-      <module name="tChu" />
+-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\shan2\EPFL\BA2\Prog POO\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="ch.epfl.tchu.gui.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration name="GraphicalPlayerTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+-      <option name="MAIN_CLASS_NAME" value="ch.epfl.tchu.gui.GraphicalPlayerTest" />
+-      <module name="tChu" />
+-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\shan2\EPFL\BA2\Prog POO\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls" />
++      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/../javafx-sdk-11.0.2/lib --add-modules javafx.controls -ea" />
+       <extension name="coverage">
+         <pattern>
+           <option name="PATTERN" value="ch.epfl.tchu.gui.*" />
+@@ -256,7 +57,7 @@
+     <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="ch.epfl.tchu.gui.ServerMain" />
+       <module name="tChu" />
+-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\shan2\EPFL\BA2\Prog POO\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls" />
++      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/../javafx-sdk-11.0.2/lib --add-modules javafx.controls -ea" />
+       <extension name="coverage">
+         <pattern>
+           <option name="PATTERN" value="ch.epfl.tchu.gui.*" />
+@@ -267,29 +68,12 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
++    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+       <option name="arquillianRunConfiguration">
+         <value>
+           <option name="containerStateName" value="" />
+         </value>
+       </option>
+-      <option name="TEST_OBJECT" value="CLASS" />
+-      <properties />
+-      <listeners />
+-      <method v="2">
+-        <option name="Make" enabled="true" />
+-      </method>
+-    </configuration>
+-    <configuration name="PlayerStateTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+-      <module name="tChu" />
+-      <extension name="coverage">
+-        <pattern>
+-          <option name="PATTERN" value="ch.epfl.tchu.game.*" />
+-          <option name="ENABLED" value="true" />
+-        </pattern>
+-      </extension>
+-      <option name="PACKAGE_NAME" value="ch.epfl.tchu.game" />
+-      <option name="MAIN_CLASS_NAME" value="ch.epfl.tchu.game.PlayerStateTest" />
+       <option name="TEST_OBJECT" value="class" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+@@ -297,11 +81,7 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Application.ClientMain" />
+         <item itemvalue="Application.ServerMain" />
+-        <item itemvalue="JUnit.PlayerStateTest" />
+-        <item itemvalue="Application.ClientMain2" />
+-        <item itemvalue="Application.GraphicalPlayerTest" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -322,30 +102,10 @@
+       <workItem from="1621684366056" duration="633000" />
+       <workItem from="1621695184367" duration="80000" />
+       <workItem from="1621794798332" duration="1836000" />
+-      <workItem from="1621859909699" duration="15102000" />
+-      <workItem from="1621875353509" duration="2000" />
+-      <workItem from="1621933725337" duration="4712000" />
+-      <workItem from="1622017007691" duration="12435000" />
+     </task>
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
+-  <component name="Vcs.Log.Tabs.Properties">
+-    <option name="TAB_STATES">
+-      <map>
+-        <entry key="MAIN">
+-          <value>
+-            <State />
+-          </value>
+-        </entry>
+-      </map>
+-    </option>
+-    <option name="oldMeFiltersMigrated" value="true" />
+-  </component>
+-  <component name="VcsManagerConfiguration">
+-    <MESSAGE value="yes" />
+-    <option name="LAST_COMMIT_MESSAGE" value="yes" />
+-  </component>
+ </project>
+\ No newline at end of file
+Index: tChu.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<module type=\"JAVA_MODULE\" version=\"4\">\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\n    <exclude-output />\n    <content url=\"file://$MODULE_DIR$\">\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\n      <sourceFolder url=\"file://$MODULE_DIR$/test\" isTestSource=\"true\" />\n      <sourceFolder url=\"file://$MODULE_DIR$/testProf\" isTestSource=\"false\" />\n      <sourceFolder url=\"file://$MODULE_DIR$/res\" type=\"java-resource\" />\n    </content>\n    <orderEntry type=\"inheritedJdk\" />\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\n    <orderEntry type=\"library\" name=\"lib\" level=\"project\" />\n    <orderEntry type=\"library\" name=\"lib\" level=\"project\" />\n    <orderEntry type=\"library\" name=\"javaFX.base\" level=\"application\" />\n  </component>\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/tChu.iml b/tChu.iml
+--- a/tChu.iml	(revision 95ec3c9bdd973da19d29a4d683e977f5b60260fb)
++++ b/tChu.iml	(date 1622032120892)
+@@ -12,6 +12,6 @@
+     <orderEntry type="sourceFolder" forTests="false" />
+     <orderEntry type="library" name="lib" level="project" />
+     <orderEntry type="library" name="lib" level="project" />
+-    <orderEntry type="library" name="javaFX.base" level="application" />
++    <orderEntry type="library" name="JavaFX" level="application" />
+   </component>
+ </module>
+\ No newline at end of file

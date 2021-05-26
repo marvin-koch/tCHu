@@ -57,7 +57,7 @@ public class PublicGameState {
      * @return si poche non vide
      */
     public boolean canDrawTickets(){
-        return ticketsCount()!= 0;
+        return ticketsCount() != 0;
     }
 
 

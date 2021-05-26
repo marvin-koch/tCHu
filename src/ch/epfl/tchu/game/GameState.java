@@ -103,6 +103,7 @@ public final class GameState extends PublicGameState{
      * @return SortedBag des billets du sommet
      */
     public SortedBag<Ticket> topTickets(int count){
+        //TODO billetsdd
         Preconditions.checkArgument(count >= 0 && count <= tickets.size());
         return tickets.topCards(count);
     }

@@ -3,11 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="bc3ec769-81a6-4341-9a1a-4d5977bca92f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/DecksViewCreator$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/DecksViewCreator$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/DecksViewCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/DecksViewCreator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ObservableGameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ObservableGameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ServerMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ServerMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/StringsFr.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/StringsFr.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/PublicGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/PublicGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/DecksViewCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/DecksViewCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ObservableGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ObservableGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/StringsFr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/StringsFr.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tChu.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tChu.iml" afterDir="false" />
     </list>
-    <list id="13f567fb-da44-4cff-8a48-92e3a5aa68d9" name="Changes by marvin" comment="">
-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java" afterDir="false" />
-    </list>
+    <list id="13f567fb-da44-4cff-8a48-92e3a5aa68d9" name="Changes by marvin" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,84 +35,6 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java">
-      <ranges>
-        <range start1="87" end1="88" start2="87" end2="88" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="118" end1="126" start2="118" end2="118" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="127" end1="127" start2="119" end2="127" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerProxy.java">
-      <ranges>
-        <range start1="51" end1="51" start2="51" end2="54" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="52" end1="53" start2="55" end2="56" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="172" end1="173" start2="175" end2="179" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayer.java">
-      <ranges>
-        <range start1="23" end1="23" start2="23" end2="25" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="31" end1="31" start2="33" end2="34" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="37" end1="37" start2="40" end2="42" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="38" end1="38" start2="43" end2="44" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="146" end1="146" start2="152" end2="155" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="208" end1="208" start2="217" end2="222" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-        <range start1="216" end1="220" start2="230" end2="230" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="224" end1="224" start2="234" end2="235" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="225" end1="226" start2="236" end2="255" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="237" end1="240" start2="266" end2="266" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="303" end1="306" start2="329" end2="329" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GameMenu.java">
-      <ranges>
-        <range start1="3" end1="4" start2="3" end2="3" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="10" end1="13" start2="9" end2="10" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="14" end1="15" start2="11" end2="12" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="18" end1="18" start2="15" end2="21" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-        <range start1="25" end1="30" start2="28" end2="29" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="44" end1="44" start2="43" end2="65" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="45" end1="50" start2="66" end2="67" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="51" end1="55" start2="68" end2="68" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="56" end1="58" start2="69" end2="79" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="59" end1="61" start2="80" end2="81" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="63" end1="71" start2="83" end2="84" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="73" end1="74" start2="86" end2="87" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="76" end1="80" start2="89" end2="90" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="83" end1="83" start2="93" end2="97" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-        <range start1="87" end1="87" start2="101" end2="106" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-        <range start1="91" end1="91" start2="110" end2="114" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerClient.java">
-      <ranges>
-        <range start1="62" end1="62" start2="62" end2="63" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-        <range start1="64" end1="64" start2="65" end2="69" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-        <range start1="69" end1="70" start2="74" end2="74" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerState.java">
-      <ranges>
-        <range start1="170" end1="170" start2="170" end2="171" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-        <range start1="180" end1="180" start2="181" end2="183" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-        <range start1="182" end1="183" start2="185" end2="186" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-        <range start1="186" end1="186" start2="189" end2="194" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java">
-      <ranges>
-        <range start1="22" end1="23" start2="22" end2="24" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="47" end1="48" start2="48" end2="48" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="177" end1="178" start2="177" end2="178" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-        <range start1="194" end1="194" start2="194" end2="196" changelist="13f567fb-da44-4cff-8a48-92e3a5aa68d9" />
-        <range start1="195" end1="197" start2="197" end2="198" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="249" end1="250" start2="250" end2="251" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="286" end1="287" start2="287" end2="288" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-        <range start1="304" end1="304" start2="305" end2="308" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
-      </ranges>
-    </file>
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
@@ -128,8 +59,8 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Global Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
@@ -142,7 +73,7 @@
     <configuration name="ClientMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ch.epfl.tchu.gui.ClientMain" />
       <module name="tChu" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\shan2\EPFL\BA2\Prog POO\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls" />
+      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/../javafx-sdk-11.0.2/lib --add-modules javafx.controls -ea" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ch.epfl.tchu.gui.*" />
@@ -184,7 +115,7 @@
     <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ch.epfl.tchu.gui.ServerMain" />
       <module name="tChu" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\shan2\EPFL\BA2\Prog POO\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib&quot; --add-modules javafx.controls" />
+      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/../javafx-sdk-11.0.2/lib --add-modules javafx.controls -ea" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="ch.epfl.tchu.gui.*" />
@@ -253,7 +184,8 @@
       <workItem from="1621859909699" duration="15102000" />
       <workItem from="1621875353509" duration="2000" />
       <workItem from="1621933725337" duration="4712000" />
-      <workItem from="1622017007691" duration="13504000" />
+      <workItem from="1622017007691" duration="12435000" />
+      <workItem from="1622033693696" duration="8195000" />
     </task>
     <servers />
   </component>
