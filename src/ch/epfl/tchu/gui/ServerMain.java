@@ -85,7 +85,7 @@ public final class ServerMain extends Application {
         if(PlayerId.is3Players()){
             Socket socket2 = serverSocket.accept();
             Button playButton = new Button("Jouer");
-            Stage menu = GameMenu.createMenuStageWithThreeEntry("Joueur 1", "Joueur 2","Joueur 3", playButton);
+            Stage menu = GameMenu.createMenuStageWithThreeEntry("Joueur 1", "Joueur 2\n"+socket.getInetAddress().getHostName(),"Joueur 3\n"+ socket2.getInetAddress().getHostName(), playButton);
 
             playButton.setOnAction(e -> {
                 playButton.disableProperty().set(true);
