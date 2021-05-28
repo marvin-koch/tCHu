@@ -2,7 +2,6 @@ package ch.epfl.tchu.gui;
 
 import ch.epfl.tchu.game.Card;
 import ch.epfl.tchu.game.Constants;
-import ch.epfl.tchu.game.PlayerState;
 import ch.epfl.tchu.game.Ticket;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
@@ -99,7 +98,7 @@ final class DecksViewCreator {
                     setStyle(null);
                 } else {
                     setText(item.text());
-                    if (observableGameState.greenTickets(item)) {
+                    if (observableGameState.isTicketValid(item)) {
                         setStyle("-fx-background-color: lightgreen;");
                     }else{
                         setStyle(null);

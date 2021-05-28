@@ -220,7 +220,7 @@ public final class GraphicalPlayer{
      * @param s string
      * @param handler restarthandler
      */
-    public void showWinner(String s, RestartHandler handler){
+    public void showEndMenu(String s, RestartHandler handler){
         assert isFxApplicationThread();
         Pane pane = new VBox();
         Stage stage = createStage("Fin de la Partie", pane);

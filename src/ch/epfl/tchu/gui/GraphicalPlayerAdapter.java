@@ -2,11 +2,9 @@ package ch.epfl.tchu.gui;
 
 import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.game.*;
-import javafx.application.Platform;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -57,8 +55,8 @@ public final class GraphicalPlayerAdapter implements Player {
     }
 
     //TODO commenter
-    public int endMenu(String s){
-        runLater(() -> graphicalPlayer.showWinner( s,choice -> putInQueue(bQueueIntRestart, choice)));
+    public int showEndMenu(String s){
+        runLater(() -> graphicalPlayer.showEndMenu( s, choice -> putInQueue(bQueueIntRestart, choice)));
         return takeFromQueue(bQueueIntRestart);
     }
 

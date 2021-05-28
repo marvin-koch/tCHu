@@ -4,13 +4,10 @@ package ch.epfl.tchu.game;
 import ch.epfl.tchu.Preconditions;
 import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.gui.Info;
-import ch.epfl.tchu.game.Constants;
-import ch.epfl.tchu.gui.ServerMain;
 import ch.epfl.tchu.gui.StringsFr;
 
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
 
 import static ch.epfl.tchu.game.Constants.*;
@@ -166,17 +163,9 @@ public final class Game {
                 // todo  changer ça
                 if(!(gameState.lastPlayer() == null) && (gameState.lastPlayer().equals(gameState.currentPlayerId()))){
                 //if (count == 3) {
-                    Info doubleNextInfo = infos.get(gameState.currentPlayerId().doubleNext());
                     updateStateForPlayers(players, gameState);
                     int currentPlayerPoints = currentPlayerState.finalPoints();
                     int nextPlayerPoints = nextPlayerState.finalPoints();
-                    int doubleNextPlayerPoints = doubleNextPlayerState.finalPoints();
-                    Trail currentPlayerTrail = Trail.longest(currentPlayerState.routes());
-                    Trail nextPlayerTrail = Trail.longest(nextPlayerState.routes());
-                    Trail doubleNextPlayerTrail = Trail.longest(doubleNextPlayerState.routes());
-                    String currentPlayerBonus = currentInfo.getsLongestTrailBonus(currentPlayerTrail);
-                    String nextPlayerBonus = nextInfo.getsLongestTrailBonus(nextPlayerTrail);
-                    String doubleNextPlayerBonus = nextInfo.getsLongestTrailBonus(doubleNextPlayerTrail);
                     String winnerText;
                     Map<PlayerId, Integer> pointsMap = new HashMap<>();
                     Map<PlayerId, Integer> longestTrailMap = new HashMap<>();
@@ -186,12 +175,10 @@ public final class Game {
                         pointsMap.put(id,gameState.playerState(id).finalPoints());
                         longestTrailMap.put(id,Trail.longest(gameState.playerState(id).routes()).length());
                     }
-                    //TODO MARCHE PAS
                     longestTrailMap.values().stream()
                             .max(Integer::compare)
                             .ifPresent(max -> pointsMap.forEach((id, playerPoints) -> {
                                 if(longestTrailMap.get(id).equals(max)) {
-                                    System.out.println("Calcule");
                                     pointsMap.replace(id, playerPoints + LONGEST_TRAIL_BONUS_POINTS);
                                     receiveInfoAll(players, String.format(StringsFr.GETS_BONUS, playerNames.get(id), max));
                                 }
@@ -270,13 +257,14 @@ public final class Game {
                         Qlist.add(Q);
                         new Thread(() -> {
                             try {
-                                Q.put(players.get(id).endMenu(winner) == 1);
+                                Q.put(players.get(id).showEndMenu(winner) == 1);
                             } catch (InterruptedException e) {
                                 throw new Error();
                             }
                         }).start();
                         
                     }
+
                     try {
                         play = true;
                         for (BlockingQueue<Boolean> Q :Qlist) {

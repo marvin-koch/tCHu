@@ -86,7 +86,7 @@ public final class TestPlayer implements Player {
     }
 
     @Override
-    public int endMenu(String name) {
+    public int showEndMenu(String name) {
         return 0;
     }
 

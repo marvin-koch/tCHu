@@ -2,7 +2,6 @@ package ch.epfl.tchu.net;
 
 import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.game.*;
-import ch.epfl.tchu.gui.ServerMain;
 
 import java.io.*;
 import java.net.Socket;
@@ -110,7 +109,7 @@ public final class RemotePlayerClient{
                         player.setInitialTicketChoice(SORTEDBAG_TICKET_SERDE.deserialize(strings[1]));
                         break;
                     case END:
-                        writeMessage(INTEGER_SERDE.serialize(player.endMenu(STRING_SERDE.deserialize(strings[1]))), w);
+                        writeMessage(INTEGER_SERDE.serialize(player.showEndMenu(STRING_SERDE.deserialize(strings[1]))), w);
                         break;
                 }
             }

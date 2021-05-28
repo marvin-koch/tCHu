@@ -4,7 +4,6 @@ import ch.epfl.tchu.SortedBag;
 import ch.epfl.tchu.game.*;
 import ch.epfl.tchu.net.RemotePlayerProxy;
 import javafx.application.Application;
-import javafx.event.Event;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.image.ImageView;
@@ -69,11 +68,11 @@ public final class ServerMain extends Application {
         dialog.setTitle("tChu!");
         dialog.setHeaderText("Bienvenue dans tChu!");
         dialog.setContentText("Choisisez le nombre de joueur  :");
-// Traditional way to get the response value.
         Optional<String> result = dialog.showAndWait();
 
+        //TODO peut pas changer car lambda = final
         result.ifPresent(letter -> {
-                PlayerId.initNbrPlayers((Integer.parseInt(letter) != 2));
+            PlayerId.initNbrPlayers((Integer.parseInt(letter) != 2));
         });
         //TODO 2 sockets
 

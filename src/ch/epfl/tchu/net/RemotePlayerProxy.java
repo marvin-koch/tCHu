@@ -184,7 +184,7 @@ public final class RemotePlayerProxy implements Player {
 
     //TDOO commenter
     @Override
-    public int endMenu(String name){
+    public int showEndMenu(String name){
         write(MessageId.END, STRING_SERDE.serialize(name));
         return INTEGER_SERDE.deserialize(read());
     }

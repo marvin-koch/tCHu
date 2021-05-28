@@ -35,7 +35,7 @@ final class TestPlayer2 implements Player {
     }
 
     @Override
-    public int endMenu(String name) {
+    public int showEndMenu(String name) {
         return 0;
     }
 

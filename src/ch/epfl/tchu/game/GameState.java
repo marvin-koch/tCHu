@@ -41,11 +41,6 @@ public final class GameState extends PublicGameState{
      */
     private Map<PlayerId, PlayerState> copyMap(PlayerId playerId, PlayerState state){
         Map<PlayerId, PlayerState> copy = new HashMap<>();
-        /*
-        copy.put(playerId, state);
-        copy.put(playerId.next(), playerState(playerId.next()));
-        copy.put(playerId.next().next(),playerState(playerId.next().next()));//todo 3 player
-        */
         for(PlayerId id : PlayerId.ALL()){
             if(id != playerId){
                 copy.put(id,playerState(id));
@@ -103,7 +98,6 @@ public final class GameState extends PublicGameState{
      * @return SortedBag des billets du sommet
      */
     public SortedBag<Ticket> topTickets(int count){
-        //TODO billetsdd
         Preconditions.checkArgument(count >= 0 && count <= tickets.size());
         return tickets.topCards(count);
     }

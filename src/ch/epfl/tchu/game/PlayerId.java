@@ -17,34 +17,40 @@ public enum PlayerId {
     PLAYER_2,
     PLAYER_3;
 
-
     private static boolean is3Players = true;
-
-    public static boolean is3Players(){
-        return is3Players;
-    }
-    public static void initNbrPlayers(boolean b){
-        is3Players = b;
-    }
 
     /**
      * Retourne une liste de tout les joueurs
      */
     public static List<PlayerId> ALL = List.of(PlayerId.values());
 
-
-    /**
-     * Retourne une liste de tout les joueurs pouvant jouer
-     */
-    public static List<PlayerId> ALL() {
-        return is3Players ? List.of(PlayerId.values()) : List.of(PlayerId.values()).subList(0, 2);
-    }
-
     /**
      * Retourne le nombre de joueur pouvant jouer
      */
     public static int COUNT =  ALL.size();
 
+    /**
+     * Retourne si la partie est à 3 joueurs
+     * @return vrai si la partie est à 3 joueurs
+     */
+    public static boolean is3Players(){
+        return is3Players;
+    }
+
+    /**
+     * Setter de is3Players
+     * @param b boolean
+     */
+    public static void initNbrPlayers(boolean b){
+        is3Players = b;
+    }
+
+    /**
+     * Retourne une liste de tout les joueurs pouvant jouer
+     */
+    public static List<PlayerId> ALL() {
+        return is3Players ? ALL : ALL.subList(0, 2);
+    }
 
     /**
      * Retourne le nombre de joueur pouvant jouer

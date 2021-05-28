@@ -3,20 +3,26 @@
   <component name="ChangeListManager">
     <list default="true" id="bc3ec769-81a6-4341-9a1a-4d5977bca92f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/DecksViewCreator$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/DecksViewCreator$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/DecksViewCreator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/DecksViewCreator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ObservableGameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ObservableGameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ServerMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/ServerMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/StringsFr.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/tChu/ch/epfl/tchu/gui/StringsFr.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/PublicGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/PublicGameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/DecksViewCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/DecksViewCreator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ObservableGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ObservableGameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/StringsFr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/StringsFr.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tChu.iml" beforeDir="false" afterPath="$PROJECT_DIR$/tChu.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/PlayerId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ActionHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ActionHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ServerMain.java" afterDir="false" />
     </list>
     <list id="13f567fb-da44-4cff-8a48-92e3a5aa68d9" name="Changes by marvin" comment="" />
+    <list id="70dfb613-a240-4e2e-8cdb-6cfc86df8209" name="Changes by shan2" comment="">
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/DecksViewCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/DecksViewCreator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/GraphicalPlayerAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ObservableGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/gui/ObservableGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ch/epfl/tchu/net/RemotePlayerProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ch/epfl/tchu/game/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ch/epfl/tchu/game/GameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ch/epfl/tchu/net/TestPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ch/epfl/tchu/net/TestPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ch/epfl/tchu/net/TestPlayer2.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ch/epfl/tchu/net/TestPlayer2.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +42,20 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/ch/epfl/tchu/game/Game.java">
+      <ranges>
+        <range start1="6" end1="8" start2="6" end2="6" changelist="70dfb613-a240-4e2e-8cdb-6cfc86df8209" />
+        <range start1="12" end1="13" start2="10" end2="10" changelist="70dfb613-a240-4e2e-8cdb-6cfc86df8209" />
+        <range start1="168" end1="169" start2="165" end2="165" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+        <range start1="172" end1="179" start2="168" end2="168" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+        <range start1="188" end1="189" start2="177" end2="177" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+        <range start1="193" end1="194" start2="181" end2="181" changelist="bc3ec769-81a6-4341-9a1a-4d5977bca92f" />
+        <range start1="272" end1="273" start2="259" end2="260" changelist="70dfb613-a240-4e2e-8cdb-6cfc86df8209" />
+        <range start1="279" end1="279" start2="266" end2="267" changelist="70dfb613-a240-4e2e-8cdb-6cfc86df8209" />
+      </ranges>
+    </file>
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
@@ -51,8 +71,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="/media/marvin/Disk/EPFL/BA2/Pratique de la POO/Saves/projet-cs108-23-05-21/MonProjet" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -126,15 +148,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -185,7 +205,9 @@
       <workItem from="1621875353509" duration="2000" />
       <workItem from="1621933725337" duration="4712000" />
       <workItem from="1622017007691" duration="12435000" />
-      <workItem from="1622033693696" duration="8195000" />
+      <workItem from="1622033693696" duration="8219000" />
+      <workItem from="1622114720517" duration="78000" />
+      <workItem from="1622207323821" duration="8161000" />
     </task>
     <servers />
   </component>

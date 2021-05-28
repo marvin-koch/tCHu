@@ -40,7 +40,14 @@ public interface Player {
     void initNbrOfPlayer(boolean is3Player);
 
     //TODO commenter
-    int endMenu(String name);
+
+    /**
+     * Communique le gagnant et les points
+     * @param name gagnants et points
+     * @return si le joueur veut rejouer
+     */
+    int showEndMenu(String name);
+
     /**
      * Communique au joueur sa propre identité et les noms des autres
      * @param ownId identité au joueur

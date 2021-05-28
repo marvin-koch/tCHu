@@ -12,6 +12,10 @@ import ch.epfl.tchu.game.Ticket;
 interface ActionHandlers {
 
     //TODO commenter
+
+    /**
+     * Gestionnaire pour rejouer une partie
+     */
     @FunctionalInterface
     interface RestartHandler{
         void onClick(int choice);
