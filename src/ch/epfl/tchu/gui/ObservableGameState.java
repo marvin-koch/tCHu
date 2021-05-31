@@ -296,7 +296,7 @@ public final class ObservableGameState {
      * @return
      */
     public boolean isTicketValid(Ticket ticket){
-        return playerState.tickets().contains(ticket) && playerState.oneTicketPoint(ticket) > 0;//todo change
+        return playerState.tickets().contains(ticket) && playerState.oneTicketPoint(ticket) > 0;
     }
 
 }

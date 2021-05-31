@@ -57,7 +57,7 @@ final class InfoViewCreator {
         vBox.getChildren().addAll(vBoxSon, separator, gameInfo);
 
         List<PlayerId> idList = PlayerId.is3Players() ? List.of(id, id.next(),id.doubleNext()) : List.of(id, id.next());
-        for (PlayerId playerId: idList) {//todo 3 player
+        for (PlayerId playerId: idList) {
             TextFlow textFlow = new TextFlow();
             textFlow.getStyleClass().add(playerId.name());
 

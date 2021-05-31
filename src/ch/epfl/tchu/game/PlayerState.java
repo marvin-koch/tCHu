@@ -168,20 +168,6 @@ public final class PlayerState extends PublicPlayerState{
      * @return int
      */
     public int ticketPoints(){
-        /*
-        int max = 0;
-        if(!routes().isEmpty()){
-            max = routes().stream()
-                    .flatMap(route -> Stream.of(route.station1().id(), route.station2().id()))
-                    .max(Integer::compare)
-                    .orElse(0);
-        }
-
-        StationPartition.Builder builder = new StationPartition.Builder(max + 1);
-        routes().forEach(route -> builder.connect(route.station1(), route.station2()));
-
-         */
-
         return tickets().stream()
                 .mapToInt(this::oneTicketPoint)
                 .sum();
@@ -192,7 +178,6 @@ public final class PlayerState extends PublicPlayerState{
      * Retourne le nombre de points—éventuellement négatif—obtenus par le joueur grâce à un billet
      * @return int
      */
-    //TODO copie de code
     public int oneTicketPoint(Ticket ticket){
         int max = 0;
         if(!routes().isEmpty()){

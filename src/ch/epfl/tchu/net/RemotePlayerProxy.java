@@ -39,7 +39,6 @@ public final class RemotePlayerProxy implements Player {
 
     }
 
-    //todo créé une fonction set2player car c est 3 de base
 
     /**
      * Communique au joueur sa propre identité et les noms des autres

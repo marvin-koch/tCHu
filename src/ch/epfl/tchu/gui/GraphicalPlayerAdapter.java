@@ -54,7 +54,11 @@ public final class GraphicalPlayerAdapter implements Player {
         PlayerId.initNbrPlayers(is3Player);
     }
 
-    //TODO commenter
+    /**
+     * Communique au joueur les informations de la fin de la partie
+     * @param s
+     * @return
+     */
     public int showEndMenu(String s){
         runLater(() -> graphicalPlayer.showEndMenu( s, choice -> putInQueue(bQueueIntRestart, choice)));
         return takeFromQueue(bQueueIntRestart);

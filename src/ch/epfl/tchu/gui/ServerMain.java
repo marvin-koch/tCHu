@@ -70,12 +70,7 @@ public final class ServerMain extends Application {
         dialog.setContentText("Choisisez le nombre de joueur  :");
         Optional<String> result = dialog.showAndWait();
 
-        //TODO peut pas changer car lambda = final
-        result.ifPresent(letter -> {
-            PlayerId.initNbrPlayers((Integer.parseInt(letter) != 2));
-        });
-        //TODO 2 sockets
-
+        result.ifPresent(letter -> PlayerId.initNbrPlayers((Integer.parseInt(letter) != 2)));
 
         Socket socket = serverSocket.accept();
         Map<PlayerId,String> playerNames = new HashMap<>();
@@ -102,7 +97,6 @@ public final class ServerMain extends Application {
             Button playButton = new Button("Jouer");
 
             Stage menu = GameMenu.createMenuStageWithTwoEntry("Joueur 1", "Joueur 2", playButton);
-
 
             playButton.setOnAction(e -> {
                 menu.setOnCloseRequest(Event-> menu.hide());

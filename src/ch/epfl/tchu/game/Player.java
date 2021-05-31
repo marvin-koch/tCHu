@@ -39,7 +39,6 @@ public interface Player {
      */
     void initNbrOfPlayer(boolean is3Player);
 
-    //TODO commenter
 
     /**
      * Communique le gagnant et les points
